@@ -15,13 +15,26 @@
 
         <activity
             android:name=".activity.WelcomeActivity"
-            android:label="@string/title_activity_welcome_screen">
+            android:label="@string/label_activity_welcome_screen"
+            android:theme="@style/Theme.EMarket.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activity.SignInActivity"
+            android:label="@string/label_activity_sign_in"
+            android:theme="@style/Theme.EMarket.NoActionBar2">
+        </activity>
+
+        <activity
+            android:name=".activity.SignInPhoneActivity"
+            android:label="@string/label_activity_sign_in_with_phone_number">
+        </activity>
+
     </application>
 
 </manifest>

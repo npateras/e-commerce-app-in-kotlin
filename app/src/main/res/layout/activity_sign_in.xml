@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".activity.SignInActivity"
+    tools:ignore="ContentDescription" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_container_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/txt_SignInPhone_Header_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/coresans_cr_regular"
+            android:text="@string/sign_in_act_header"
+            android:textStyle="bold"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/text_font_size_header_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_Sign_In" />
+
+        <TextView
+            android:id="@+id/txt_SignInPhone_Header_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/coresans_cr_regular"
+            android:text="@string/sign_in_act_header_2"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorText2"
+            android:textSize="@dimen/text_font_size_header_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_SignInPhone_Header_1" />
+
+        <TextView
+            android:id="@+id/txt_Sign_In_Or"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/coresans_cr_regular"
+            android:text="@string/sign_in_act_or"
+            android:textAlignment="center"
+            android:textColor="@color/colorSecondary2"
+            android:textSize="@dimen/text_font_size_header_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_SignIn_With_Phone" />
+
+        <TextView
+            android:id="@+id/txt_Sign_In"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height_small_flat"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="19dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/coresans_cr_medium"
+            android:text="@string/button_sign_in"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/button_font_size_small_flat"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_SignIn_With_Phone"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height_medium"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="62dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/btn_small_2_selector"
+            android:fontFamily="@font/coresans_cr_extrabold"
+            android:gravity="center"
+            android:text="@string/button_sign_in_phone"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/button_font_size_small_flat"
+            app:backgroundTint="@null"
+            app:icon="@drawable/ic_phone"
+            app:iconGravity="textStart"
+            app:iconPadding="10dp"
+            app:iconSize="@dimen/button_icon_size_medium"
+            app:iconTint="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_SignInPhone_Header_2" />
+
+        <View
+            android:id="@+id/divider_Sign_In_Or_Left"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/colorSecondary3"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_Sign_In_Or"
+            app:layout_constraintEnd_toStartOf="@+id/txt_Sign_In_Or"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txt_Sign_In_Or" />
+
+        <View
+            android:id="@+id/divider_Sign_In_Or_Right"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/colorSecondary3"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_Sign_In_Or"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txt_Sign_In_Or"
+            app:layout_constraintTop_toTopOf="@+id/txt_Sign_In_Or" />
+
+        <ImageButton
+            android:id="@+id/imgBtn_SignIn_Google"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="@dimen/image_button_width_medium"
+            android:layout_height="@dimen/image_button_height_medium"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="36dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/btn_small_1_selector"
+            android:clickable="true"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_google_logo"
+            app:iconGravity="textStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_Sign_In_Or"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
