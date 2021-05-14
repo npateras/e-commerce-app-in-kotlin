@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.EMarket" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.EMarket" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryLight</item>
@@ -10,7 +10,18 @@
         <item name="colorSecondaryVariant">@color/colorPrimaryLight</item>
         <item name="colorOnSecondary">@color/colorBlack</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/colorStatusBar</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/colorStatusBar</item>
+    </style>
+
+    <style name="Theme.EMarket.NoActionBar2">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/colorBackground</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

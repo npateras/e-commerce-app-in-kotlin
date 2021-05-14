@@ -1,20 +1,27 @@
 <resources>
-    <dimen name="text_font_size_header_1">32sp</dimen>
-    <dimen name="text_font_size_header_2">24sp</dimen>
-    <dimen name="text_font_size_header_3">16sp</dimen>
-    <dimen name="text_font_size_action_bar">20sp</dimen>
+    <!-- Text View Sizes -->
+    <dimen name="txt_font_size_header_1_32">32sp</dimen>
+    <dimen name="txt_font_size_header_2_24">24sp</dimen>
+    <dimen name="txt_font_size_header_3_16">16sp</dimen>
+    <dimen name="txt_font_size_header_4_14">14sp</dimen>
+    <dimen name="txt_font_size_header_5_12">12sp</dimen>
+    <dimen name="txt_font_size_action_bar_20">20sp</dimen>
+    <dimen name="txt_font_size_card_weight_8">8sp</dimen>
 
-    <dimen name="button_font_size_small_flat">14sp</dimen>
+    <!-- Button Sizes -->
+    <dimen name="btn_font_size_small_flat_14">14sp</dimen>
 
-    <dimen name="button_width_small_flat">134dp</dimen>
-    <dimen name="button_height_small_flat">36dp</dimen>
+    <dimen name="btn_width_small_flat_134">134dp</dimen>
+    <dimen name="btn_height_small_flat_36">36dp</dimen>
 
-    <dimen name="button_width_small">94dp</dimen>
-    <dimen name="button_height_small">36dp</dimen>
+    <dimen name="btn_width_small_94">94dp</dimen>
+    <dimen name="btn_height_small_36">36dp</dimen>
 
-    <dimen name="button_height_medium">45dp</dimen>
-    <dimen name="button_icon_size_medium">16dp</dimen>
+    <dimen name="btn_height_medium_45">45dp</dimen>
+    <dimen name="btn_icon_size_medium_16">16dp</dimen>
 
-    <dimen name="image_button_height_medium">45dp</dimen>
-    <dimen name="image_button_width_medium">45dp</dimen>
+    <!-- Img Button Sizes -->
+    <dimen name="img_btn_height_medium_45">45dp</dimen>
+    <dimen name="img_btn_width_medium_45">45dp</dimen>
+    <dimen name="img_btn_width_large_70">70dp</dimen>
 </resources>

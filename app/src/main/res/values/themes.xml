@@ -14,17 +14,29 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/colorStatusBar</item>
         <!-- Customize your theme here. -->
+        <item name="android:navigationBarColor">@color/colorNavigationBar</item>
     </style>
 
     <style name="Theme.EMarket.NoActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/colorStatusBar</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
     </style>
 
     <style name="Theme.EMarket.NoActionBar2">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <item name="android:statusBarColor" tools:targetApi="l">@color/colorStatusBar2</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/colorBackground</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/colorNavigationBar</item>
+    </style>
+
+    <style name="Theme.EMarket.NoActionBar3">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/colorStatusBar</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:navigationBarColor">@color/colorSecondary3</item>
     </style>
 </resources>

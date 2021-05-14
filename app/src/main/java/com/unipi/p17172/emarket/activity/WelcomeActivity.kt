@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.unipi.p17172.emarket.databinding.ActivityWelcomeBinding
 
 class WelcomeActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityWelcomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

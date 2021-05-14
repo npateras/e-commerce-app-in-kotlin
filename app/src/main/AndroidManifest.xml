@@ -11,12 +11,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.EMarket">
 
+        <!-- Home/Main Activity -->
         <activity
-            android:name=".activity.WelcomeActivity"
-            android:label="@string/label_activity_welcome_screen"
-            android:theme="@style/Theme.EMarket.NoActionBar">
+            android:name=".activity.MainActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.EMarket.NoActionBar3">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,17 +27,59 @@
             </intent-filter>
         </activity>
 
+        <!-- Product Details Activity -->
+        <activity
+            android:name=".activity.ProductDetailsActivity"
+            android:label=""
+            android:theme="@style/Theme.EMarket.NoActionBar3">
+        </activity>
+
+        <!-- Create an account activity -->
+        <activity
+            android:name=".activity.WelcomeActivity"
+            android:theme="@style/Theme.EMarket.NoActionBar">
+        </activity>
+
+        <!-- Sign in activity -->
         <activity
             android:name=".activity.SignInActivity"
             android:label="@string/label_activity_sign_in"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.EMarket.NoActionBar2">
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.WelcomeActivity" />
         </activity>
 
+        <!-- Sign in with phone number activity -->
         <activity
             android:name=".activity.SignInPhoneActivity"
-            android:label="@string/label_activity_sign_in_with_phone_number">
+            android:label="@string/label_activity_sign_in_with_phone_number"
+            android:launchMode="singleTask">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.SignInActivity" />
         </activity>
 
+        <!-- Phone number registration activity -->
+        <activity
+            android:name=".activity.SignInPhoneVerificationActivity"
+            android:label="@string/label_activity_sign_in_with_phone_number_verification">
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.SignInPhoneActivity" />
+        </activity>
+
+        <!-- Fill your account information after phone number verification activity -->
+        <activity
+            android:name=".activity.FillAccInfoActivity"
+            android:label="@string/label_activity_fill_acc_info"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.EMarket.NoActionBar2"/>
     </application>
 
 </manifest>

@@ -31,3 +31,7 @@
 -keepclassmembers class com.unipi.p17172.emarket.* {
     public *;
 }
+
+-keep class kotlin.Metadata { *; }
+
+-keepattributes RuntimeVisibleAnnotations

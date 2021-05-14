@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhiteLight"
-    tools:context=".activity.SignInPhoneActivity"
+    tools:context=".activity.SignInPhoneVerificationActivity"
     tools:ignore="ContentDescription" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,115 +16,167 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_SignInPhone_Send"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="@dimen/button_width_small"
-            android:layout_height="@dimen/button_height_small"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="36dp"
-            android:background="@drawable/btn_small_2_selector"
-            android:fontFamily="@font/coresans_cr_medium"
-            android:text="@string/button_verify"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/button_font_size_small_flat"
-            app:backgroundTint="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/inputTxtLayout_SignInPhoneVerification_Code_1"
-            app:layout_constraintTop_toBottomOf="@+id/inputTxtLayout_SignInPhoneVerification_Code_1"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/txt_SignInPhone_Header_1"
+        <ImageView
+            android:id="@+id/imageView_Progress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="@font/coresans_cr_regular"
-            android:text="@string/sign_in_phone_act_header"
-            android:textAlignment="textStart"
-            android:textColor="@color/colorSecondary"
-            android:textSize="@dimen/text_font_size_header_2"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Step_1"
+            app:srcCompat="@drawable/ic_step_2" />
+
+        <TextView
+            android:id="@+id/textView_Step_1"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="29dp"
+            android:fontFamily="@font/core_sans_cr_regular"
+            android:text="@string/txt_Step_1"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/txt_font_size_header_3_16"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/imageView_Progress"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txt_SignInPhone_Header_2"
+            android:id="@+id/textView_Step_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:fontFamily="@font/core_sans_cr_regular"
+            android:gravity="center"
+            android:text="@string/txt_Step_2"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/txt_font_size_header_3_16"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_Step_1"
+            app:layout_constraintEnd_toStartOf="@+id/textView_Step_3"
+            app:layout_constraintStart_toEndOf="@+id/textView_Step_1"
+            app:layout_constraintTop_toTopOf="@+id/textView_Step_1"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/textView_Step_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:fontFamily="@font/core_sans_cr_regular"
+            android:text="@string/txt_Step_3"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorSecondary2"
+            android:textSize="@dimen/txt_font_size_header_3_16"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_Step_2"
+            app:layout_constraintEnd_toEndOf="@+id/imageView_Progress"
+            app:layout_constraintStart_toEndOf="@+id/textView_Step_2"
+            app:layout_constraintTop_toTopOf="@+id/textView_Step_2"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/txt_SignInPhoneVerification_Header_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="29dp"
+            android:fontFamily="@font/core_sans_cr_regular"
+            android:text="@string/sign_in_phone_verification_act_header"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorSecondary"
+            android:textSize="@dimen/txt_font_size_header_2_24"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/imageView_Progress"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/imageView_Progress"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_Progress" />
+
+        <TextView
+            android:id="@+id/txt_SignInPhoneVerification_Header_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="@font/coresans_cr_regular"
-            android:text="@string/sign_in_phone_act_header_2"
+            android:fontFamily="@font/core_sans_cr_regular"
+            android:text="@string/sign_in_phone_verification_act_header_2"
             android:textAlignment="textStart"
             android:textColor="@color/colorSecondary2"
-            android:textSize="@dimen/text_font_size_header_3"
+            android:textSize="@dimen/txt_font_size_header_3_16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_SignInPhone_Header_1" />
-
+            app:layout_constraintTop_toBottomOf="@+id/txt_SignInPhoneVerification_Header_1" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="39dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_SignInPhone_Send"
+            android:layout_marginBottom="36dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/txt_SignInPhone_Header_2"
-            app:layout_constraintTop_toBottomOf="@+id/txt_SignInPhone_Header_2">
+            app:layout_constraintStart_toStartOf="@+id/txt_SignInPhoneVerification_Header_2"
+            app:layout_constraintTop_toBottomOf="@+id/txt_SignInPhoneVerification_Header_2">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputTxtLayout_SignInPhoneVerification_Code_1"
+                android:id="@+id/inputTxtLayout_Code_1"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="33dp"
-                app:boxStrokeColor="@color/colorSecondary3"
+                app:boxStrokeColor="@color/colorPrimary"
                 app:hintEnabled="false"
-                app:layout_constraintEnd_toStartOf="@+id/inputTxtLayout_SignInPhoneVerification_Code_2">
+                app:counterEnabled="true"
+                app:counterMaxLength="1"
+                app:layout_constraintEnd_toStartOf="@+id/inputTxtLayout_Code_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputTxt_SignInPhoneVerification_Code_1"
+                    android:id="@+id/inputTxt_Code_1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/coresans_cr_medium"
-                    android:gravity="start"
-                    android:inputType="phone"
-                    android:textAlignment="textStart"
+                    android:fontFamily="@font/core_sans_cr_medium"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:hint="@string/input_txt_hint_dash"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/inputTxt_Code_2"
                     android:textColor="@color/colorSecondary"
                     android:textColorHint="@color/colorSecondary4" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputTxtLayout_SignInPhoneVerification_Code_2"
+                android:id="@+id/inputTxtLayout_Code_2"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="33dp"
-                app:boxStrokeColor="@color/colorSecondary3"
+                app:boxStrokeColor="@color/colorPrimary"
                 app:hintEnabled="false"
-                app:layout_constraintEnd_toStartOf="@+id/inputTxtLayout_SignInPhoneVerification_Code_3">
+                app:counterEnabled="true"
+                app:counterMaxLength="1"
+                app:layout_constraintEnd_toStartOf="@+id/inputTxtLayout_SignInPhoneVerification_Code_3"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputTxt_SignInPhoneVerification_Code_2"
+                    android:id="@+id/inputTxt_Code_2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/coresans_cr_medium"
-                    android:gravity="start"
-                    android:inputType="phone"
-                    android:textAlignment="textStart"
+                    android:fontFamily="@font/core_sans_cr_medium"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:hint="@string/input_txt_hint_dash"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/inputTxt_Code_3"
                     android:textColor="@color/colorSecondary"
                     android:textColorHint="@color/colorSecondary4" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -135,18 +187,25 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="33dp"
-                app:boxStrokeColor="@color/colorSecondary3"
+                app:boxStrokeColor="@color/colorPrimary"
                 app:hintEnabled="false"
-                app:layout_constraintEnd_toStartOf="@+id/inputTxtLayout_SignInPhoneVerification_Code_4">
+                app:counterEnabled="true"
+                app:counterMaxLength="1"
+                app:layout_constraintEnd_toStartOf="@+id/inputTxtLayout_SignInPhoneVerification_Code_4"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputTxt_SignInPhoneVerification_Code_3"
+                    android:id="@+id/inputTxt_Code_3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/coresans_cr_medium"
-                    android:gravity="start"
-                    android:inputType="phone"
-                    android:textAlignment="textStart"
+                    android:fontFamily="@font/core_sans_cr_medium"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:hint="@string/input_txt_hint_dash"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/inputTxt_Code_4"
                     android:textColor="@color/colorSecondary"
                     android:textColorHint="@color/colorSecondary4" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -156,25 +215,62 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
-                app:boxStrokeColor="@color/colorSecondary3"
+                app:boxStrokeColor="@color/colorPrimary"
                 app:hintEnabled="false"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:counterEnabled="true"
+                app:counterMaxLength="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputTxt_SignInPhoneVerification_Code_4"
+                    android:id="@+id/inputTxt_Code_4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/coresans_cr_medium"
-                    android:gravity="start"
-                    android:inputType="phone"
-                    android:textAlignment="textStart"
+                    android:fontFamily="@font/core_sans_cr_medium"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:hint="@string/input_txt_hint_dash"
                     android:textColor="@color/colorSecondary"
                     android:textColorHint="@color/colorSecondary4" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/btn_SignInPhoneVerification_Resend"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/btn_height_small_flat_36"
+                android:layout_marginTop="24dp"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/core_sans_cr_medium"
+                android:gravity="start|center_vertical"
+                android:text="@string/button_resend"
+                android:textAllCaps="false"
+                android:textColor="@color/colorSecondary2"
+                android:textSize="@dimen/btn_font_size_small_flat_14"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputTxtLayout_Code_1"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_SignInPhoneVerification_Verify"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="@dimen/btn_width_small_94"
+                android:layout_height="@dimen/btn_height_small_36"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/btn_small_2_selector"
+                android:fontFamily="@font/core_sans_cr_medium"
+                android:text="@string/button_verify"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/btn_font_size_small_flat_14"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputTxtLayout_SignInPhoneVerification_Code_4" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

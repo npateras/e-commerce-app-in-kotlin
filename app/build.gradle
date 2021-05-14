@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -79,6 +80,7 @@ dependencies {
     // Declare the dependency for the Realtime Database library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-database'
+    implementation 'com.google.firebase:firebase-firestore:23.0.0'
 
     // Declare the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
@@ -86,10 +88,7 @@ dependencies {
 
     /* <---- Extra Libraries ----> */
     implementation 'com.orhanobut:hawk:2.0.1'
-    implementation 'com.permissionx.guolindev:permissionx:1.4.0'
-    implementation 'com.hbb20:ccp:2.4.7'
-
-}
-repositories {
-    mavenCentral()
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.github.pwittchen:reactivenetwork-rx2:3.0.8'
+    implementation 'com.hbb20:ccp:2.5.0'
 }

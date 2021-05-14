@@ -1,5 +1,6 @@
 package com.unipi.p17172.emarket.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.unipi.p17172.emarket.databinding.ActivitySignInPhoneBinding
@@ -21,10 +22,10 @@ class SignInPhoneActivity : AppCompatActivity() {
         actionbar!!.setDisplayHomeAsUpEnabled(true)
         actionbar.setDisplayHomeAsUpEnabled(true)
 
-        /*binding.btnSignIn.setOnClickListener{
-            val intent = Intent(this, SignInActivity::class.java)
+        binding.btnSignInPhoneSend.setOnClickListener{
+            val intent = Intent(this, SignInPhoneVerificationActivity::class.java)
             startActivity(intent)
-        }*/
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

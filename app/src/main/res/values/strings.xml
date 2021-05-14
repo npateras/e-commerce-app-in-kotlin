@@ -5,8 +5,9 @@
     <string name="label_activity_welcome_screen">Activity Welcome Screen</string>
     <string name="label_activity_sign_in">Activity Sign In</string>
     <string name="label_activity_sign_in_with_phone_number">Add a number</string>
-    <string name="label_activity_sign_in_with_phone_number_verification">Activity Sign In With Phone Number Confirmation</string>
+    <string name="label_activity_sign_in_with_phone_number_verification">Verify number</string>
     <string name="label_activity_home">Activity Home</string>
+    <string name="label_activity_fill_acc_info">Activity Fill Account Info</string>
 
     <!-- Buttons -->
     <string name="button_sign_in">Sign In</string>
@@ -15,9 +16,31 @@
     <string name="button_sign_in_google">Continue with google account</string>
     <string name="button_send">Send</string>
     <string name="button_verify">Verify</string>
+    <string name="button_resend">Resend</string>
+    <string name="button_dismiss">Dismiss</string>
+    <string name="button_try_again">Try Again</string>
+    <string name="button_resend_in">Resend in %1$ss</string>
+
+    <!-- Text Views -->
+    <string name="txt_congratulations">Congratulations!</string>
+    <string name="txt_congratulations_2">Your mobile number has been
+        verified successfully! You can now
+        continue using eMarket.</string>
+    <string name="txt_you_are_offline">You\'re Offline!</string>
+    <string name="txt_you_are_offline_2">Check your internet connection and try again.</string>
+    <string name="txt_Step_1">Add
+        your number</string>
+    <string name="txt_Step_2">Verify
+        your number</string>
+    <string name="txt_Step_3">Enter your
+        personal details</string>
 
     <!-- Input Texts -->
     <string name="input_txt_hint_phone_number">Your mobile number</string>
+    <string name="input_txt_hint_first_name">Your first name</string>
+    <string name="input_txt_hint_last_name">Your last name</string>
+    <string name="input_txt_hint_address">Your address</string>
+    <string name="input_txt_hint_zip_code">Your zip code</string>
 
     <!-- Welcome Activity -->
     <string name="welcome_act_header">Welcome to\n<b>eMarket</b> shopping</string>
@@ -25,11 +48,52 @@
     <!-- Sign In Activity -->
     <string name="sign_in_act_header">Welcome to eMarket app</string>
     <string name="sign_in_act_header_2">Let\&apos;s get started</string>
-    <string name="sign_in_act_or">OR</string>
+    <string name="sign_in_act_or">Or login with</string>
 
     <!-- Sign In With Phone Activity -->
     <string name="sign_in_phone_act_header">What\&apos;s your phone number?</string>
     <string name="sign_in_phone_act_header_2">Enter your phone number to continue</string>
+    <string name="sign_in_phone_verification_act_header">Verify your number</string>
+    <string name="sign_in_phone_verification_act_header_2">4 digit code sent to <b>+%1$s</b></string>
 
+    <!-- Fill Account Info Activity -->
+    <string name="fill_acc_info_act_header">Fill your details</string>
+    <string name="fill_acc_info_act_header_2">Enter your personal details to continue</string>
+    <string name="fill_acc_info_act_or">OR</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <!-- Fragment Home -->
+    <string name="txt_categories">Categories</string>
+    <string name="txt_deals">Deals</string>
+    <string name="txt_popular">Popular</string>
+    <string name="txt_view_all">View all</string>
+
+    <!-- Categories-->
+    <string name="txt_household">Household</string>
+    <string name="txt_grocery">Grocery</string>
+    <string name="txt_liquor">Liquor</string>
+    <string name="txt_chilled">Chilled</string>
+
+    <!-- Main Action Bar -->
+    <string name="txt_store">Store</string>
+    <string name="txt_my_cart">My Cart</string>
+    <string name="txt_favorites">Favorites</string>
+    <string name="txt_my_account">My Account</string>
+
+    <!-- ~~~~~~~NAV BAR~~~~~~~ -->
+    <string name="nav_drawer_open">Open</string>
+    <string name="nav_drawer_close">Close</string>
+    <string name="drawer_nav_bar_category_general">General</string>
+    <string name="drawer_nav_bar_item_products">Products</string>
+    <string name="drawer_nav_bar_item_cart">My Cart</string>
+    <string name="drawer_nav_bar_category_account">Account</string>
+    <string name="drawer_nav_bar_item_login">Login</string>
+    <string name="drawer_nav_bar_item_my_account">My Account</string>
+    <string name="drawer_nav_bar_item_orders">Orders</string>
+    <string name="drawer_nav_bar_category_other">Other</string>
+    <string name="drawer_nav_bar_item_settings">Settings</string>
+    <string name="drawer_nav_bar_item_exit">Exit</string>
+    <string name="input_txt_hint_dash">-</string>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 </resources>

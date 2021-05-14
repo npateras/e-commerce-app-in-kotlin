@@ -5,8 +5,8 @@
     <color name="colorPrimaryLight">#54CD98</color>
     <color name="colorAccent">#29C17E</color>
 
-    <color name="colorContainer">#161618</color>
-    <color name="colorBackground">#0F1012</color>
+    <color name="colorContainer">#1E1E1E</color>
+    <color name="colorBackground">#121212</color>
     <color name="colorText">#F3F4F6</color>
     <color name="colorText2">#6E7989</color>
 
