@@ -10,6 +10,7 @@
     <color name="colorText">#F3F4F6</color>
     <color name="colorText2">#6E7989</color>
 
+    <color name="colorPrimaryLightLowOpacity">#4D5D51</color>
     <color name="colorSecondary">#272A3F</color>
     <color name="colorSecondary2">#6E7989</color>
     <color name="colorSecondary3">#D8DAE0</color>

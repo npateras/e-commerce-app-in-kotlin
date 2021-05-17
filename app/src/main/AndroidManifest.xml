@@ -11,15 +11,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:theme="@style/Theme.EMarket"
         android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.EMarket">
+        android:fullBackupContent="@xml/backup_descriptor">
 
-        <!-- Home/Main Activity -->
+        <!-- Splash Screen Activity -->
         <activity
-            android:name=".activity.MainActivity"
-            android:label="@string/title_activity_home"
-            android:theme="@style/Theme.EMarket.NoActionBar3">
-
+            android:name=".activity.SplashActivity"
+            android:theme="@style/Theme.EMarket.NoActionBar"
+            android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,37 +27,50 @@
             </intent-filter>
         </activity>
 
+        <!-- Home/Main Activity -->
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.EMarket.NoActionBar3">
+        </activity>
+
         <!-- Product Details Activity -->
         <activity
             android:name=".activity.ProductDetailsActivity"
             android:label=""
-            android:theme="@style/Theme.EMarket.NoActionBar3">
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:parentActivityName=".activity.MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
         </activity>
 
-        <!-- Create an account activity -->
+        <!-- Notifications Activity -->
         <activity
-            android:name=".activity.WelcomeActivity"
-            android:theme="@style/Theme.EMarket.NoActionBar">
+            android:name=".activity.NotificationsActivity"
+            android:label="@string/label_activity_notifications"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:parentActivityName=".activity.MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
         </activity>
 
         <!-- Sign in activity -->
         <activity
             android:name=".activity.SignInActivity"
-            android:label="@string/label_activity_sign_in"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.EMarket.NoActionBar2">
-
-            <!-- The meta-data tag is required if you support API level 15 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.WelcomeActivity" />
-        </activity>
+            android:theme="@style/Theme.EMarket.NoActionBar2"/>
 
         <!-- Sign in with phone number activity -->
         <activity
             android:name=".activity.SignInPhoneActivity"
             android:label="@string/label_activity_sign_in_with_phone_number"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:parentActivityName=".activity.SignInActivity">
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.SignInActivity" />
@@ -66,9 +79,9 @@
         <!-- Phone number registration activity -->
         <activity
             android:name=".activity.SignInPhoneVerificationActivity"
-            android:label="@string/label_activity_sign_in_with_phone_number_verification">
+            android:label="@string/label_activity_sign_in_with_phone_number_verification"
+            android:parentActivityName=".activity.SignInPhoneActivity">
 
-            <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.SignInPhoneActivity" />
@@ -77,9 +90,8 @@
         <!-- Fill your account information after phone number verification activity -->
         <activity
             android:name=".activity.FillAccInfoActivity"
-            android:label="@string/label_activity_fill_acc_info"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.EMarket.NoActionBar2"/>
+            android:theme="@style/Theme.EMarket.NoActionBar2" />
     </application>
 
 </manifest>

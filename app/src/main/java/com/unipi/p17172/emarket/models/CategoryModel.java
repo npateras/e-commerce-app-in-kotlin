@@ -7,6 +7,8 @@ public class CategoryModel {
 
     private String id, name;
 
+    public CategoryModel() {} // Needed for Firebase
+
     public CategoryModel(String id, String name) {
         this.id = id;
         this.name = name;

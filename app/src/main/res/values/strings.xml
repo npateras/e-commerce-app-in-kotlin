@@ -2,12 +2,13 @@
     <string name="app_name">eMarket</string>
 
     <!-- Activity/Fragment Labels -->
-    <string name="label_activity_welcome_screen">Activity Welcome Screen</string>
-    <string name="label_activity_sign_in">Activity Sign In</string>
     <string name="label_activity_sign_in_with_phone_number">Add a number</string>
     <string name="label_activity_sign_in_with_phone_number_verification">Verify number</string>
-    <string name="label_activity_home">Activity Home</string>
-    <string name="label_activity_fill_acc_info">Activity Fill Account Info</string>
+    <string name="label_activity_notifications">Notifications</string>
+
+    <!-- Tabs -->
+    <string name="tab_pending">Pending</string>
+    <string name="tab_completed">Completed</string>
 
     <!-- Buttons -->
     <string name="button_sign_in">Sign In</string>
@@ -20,8 +21,12 @@
     <string name="button_dismiss">Dismiss</string>
     <string name="button_try_again">Try Again</string>
     <string name="button_resend_in">Resend in %1$ss</string>
+    <string name="button_add_to_cart">Add to cart</string>
+
 
     <!-- Text Views -->
+    <string name="txt_welcome">Welcome</string>
+    <string name="txt_nav_header_sign_in">Sign in or create a new account.</string>
     <string name="txt_congratulations">Congratulations!</string>
     <string name="txt_congratulations_2">Your mobile number has been
         verified successfully! You can now
@@ -34,6 +39,39 @@
         your number</string>
     <string name="txt_Step_3">Enter your
         personal details</string>
+    <string name="txt_no_notifications">No notifications!</string>
+    <string name="txt_no_notifications_2">New notifications will appear here.</string>
+    <string name="txt_no_orders">No orders found!</string>
+    <string name="txt_no_orders_2">You have no pending or previous orders.</string>
+    <string name="txt_no_orders_pending">You have no pending or previous orders.</string>
+    <string name="txt_no_orders_previous">You have no previous orders.</string>
+    <string name="txt_search_not_found">No search result found!</string>
+    <string name="txt_search_not_found_2">Try again with another entry or contact us if you think this is an error.</string>
+    <string name="txt_clear_all">Clear all</string>
+    <string name="txt_clear">Clear</string>
+    <string name="txt_today">Today</string>
+    <string name="txt_yesterday">Yesterday</string>
+    <string name="txt_last_week">Last week</string>
+    <string name="txt_sec_ago">sec ago</string>
+    <string name="txt_min_ago">min ago</string>
+    <string name="txt_day_ago">day ago</string>
+    <string name="txt_days_ago">days ago</string>
+    <string name="txt_item_or_items"> item(s)</string>
+    <string name="txt_arriving">Arriving: </string>
+    <string name="txt_total">Total: </string>
+    <string name="txt_order_num_sign">Order# </string>
+    <string name="txt_items">Items</string>
+    <string name="txt_address">Address</string>
+    <string name="txt_payment_method">Payment Method</string>
+    <string name="txt_delivery_time">Delivery Time</string>
+    <string name="txt_total_amount">Total Amount</string>
+    <string name="txt_order_status">Order Status</string>
+    <string name="txt_pending">Pending</string>
+    <string name="txt_processing">Processing</string>
+    <string name="txt_completed">Completed</string>
+    <string name="txt_loading">Loading…</string>
+    <string name="txt_empty_cart">Cart is empty!</string>
+    <string name="txt_empty_cart_2">Looks like you haven\'t made your choice yet 😢</string>
 
     <!-- Input Texts -->
     <string name="input_txt_hint_phone_number">Your mobile number</string>
@@ -87,9 +125,8 @@
     <string name="drawer_nav_bar_item_products">Products</string>
     <string name="drawer_nav_bar_item_cart">My Cart</string>
     <string name="drawer_nav_bar_category_account">Account</string>
-    <string name="drawer_nav_bar_item_login">Login</string>
     <string name="drawer_nav_bar_item_my_account">My Account</string>
-    <string name="drawer_nav_bar_item_orders">Orders</string>
+    <string name="drawer_nav_bar_item_orders">My Orders</string>
     <string name="drawer_nav_bar_category_other">Other</string>
     <string name="drawer_nav_bar_item_settings">Settings</string>
     <string name="drawer_nav_bar_item_exit">Exit</string>

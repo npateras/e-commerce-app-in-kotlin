@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.unipi.p17172.emarket"
-        minSdkVersion 29
+        minSdkVersion 27
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -81,7 +81,11 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.firebase:firebase-firestore:23.0.0'
-
+    implementation 'com.firebaseui:firebase-ui-firestore:7.1.1'
+    // FirebaseUI for Firebase Auth
+    implementation 'com.firebaseui:firebase-ui-auth:7.1.1'
+    // FirebaseUI for Cloud Storage
+    implementation 'com.firebaseui:firebase-ui-storage:7.1.1'
     // Declare the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-auth-ktx'
@@ -90,5 +94,9 @@ dependencies {
     implementation 'com.orhanobut:hawk:2.0.1'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.github.pwittchen:reactivenetwork-rx2:3.0.8'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.22'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation "com.github.skydoves:androidveil:1.1.1"
+    implementation 'com.github.andremion:counterfab:1.2.2'
     implementation 'com.hbb20:ccp:2.5.0'
 }

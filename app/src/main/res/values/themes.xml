@@ -10,10 +10,9 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/colorPrimary</item>
         <item name="colorSecondaryVariant">@color/colorPrimaryLight</item>
-        <item name="colorOnSecondary">@color/colorBlack</item>
+        <item name="colorOnSecondary">@color/colorSecondary</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/colorStatusBar</item>
-        <!-- Customize your theme here. -->
         <item name="android:navigationBarColor">@color/colorNavigationBar</item>
     </style>
 

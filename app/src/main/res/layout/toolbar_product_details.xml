@@ -30,7 +30,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/imgBtn_Favorite"
+                    android:id="@+id/checkbox_Favorite"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:focusable="true"

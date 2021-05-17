@@ -1,18 +1,20 @@
 package com.unipi.p17172.emarket.activity
 
 import android.app.ActionBar.DISPLAY_SHOW_CUSTOM
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.unipi.p17172.emarket.R
-import com.unipi.p17172.emarket.adapter.ViewPagerAdapter
+import com.unipi.p17172.emarket.adapter.ViewPagerMainAdapter
 import com.unipi.p17172.emarket.databinding.ActivityMainBinding
 import com.unipi.p17172.emarket.fragment.FavoritesFragment
 import com.unipi.p17172.emarket.fragment.HomeFragment
@@ -62,6 +64,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             it.setCustomView(R.layout.toolbar_activity_main)
         }
 
+        setupNavDrawer()
+    }
+
+    private fun setupNavDrawer() {
         val toggle = ActionBarDrawerToggle(
             this, binding.drawerLayout, binding.toolbar.root,
             R.string.nav_drawer_close, R.string.nav_drawer_close
@@ -69,11 +75,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding.drawerLayout.addDrawerListener(toggle)
         // Change drawer arrow icon
         toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.colorTabSelected)
+        // Set navigation arrow icon
         toggle.setHomeAsUpIndicator(R.drawable.ic_list)
         toggle.syncState()
 
         binding.navView.setNavigationItemSelectedListener(this)
-        binding.navView.setCheckedItem(R.id.nav_item_products)
+        binding.navView.setCheckedItem(R.id.nav_drawer_item_products)
     }
 
     private fun init() {
@@ -81,7 +88,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun setUpTabs() {
-        val adapter = ViewPagerAdapter(supportFragmentManager)
+        val adapter = ViewPagerMainAdapter(supportFragmentManager)
         adapter.addFragment(HomeFragment())
         adapter.addFragment(MyCartFragment())
         adapter.addFragment(FavoritesFragment())
@@ -98,11 +105,35 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
-        val id = item.itemId
 
-        if (id == R.id.nav_item_products) {
-            binding.tabs.getTabAt(0)?.select()
+        when (item.itemId) {
+            R.id.nav_drawer_item_products -> {
+                binding.tabs.getTabAt(0)?.select()
+            }
+            R.id.nav_drawer_item_favorites -> {
+                binding.tabs.getTabAt(2)?.select()
+            }
+            R.id.nav_drawer_item_cart -> {
+                binding.tabs.getTabAt(1)?.select()
+            }
+            R.id.nav_drawer_item_profile -> {
+                binding.tabs.getTabAt(3)?.select()
+            }
+            R.id.nav_drawer_item_orders -> {
+                val intent = Intent(this@MainActivity, MyOrdersActivity::class.java)
+                startActivity(intent)
+                return false
+            }
+            R.id.nav_drawer_item_settings -> {
+                /*val intent = Intent(this@MainActivity, Settings::class.java)
+                startActivity(intent)*/
+                return false
+            }
+            R.id.nav_drawer_item_exit -> {
+                ActivityCompat.finishAffinity(this)
+            }
         }
+
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         drawer.closeDrawer(GravityCompat.START)
         return true

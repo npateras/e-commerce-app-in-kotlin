@@ -16,42 +16,69 @@
         android:layout_height="match_parent"
         android:background="@drawable/shape_container_recycler_view_horizontal">
 
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/gifImg_Loading"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/gif_loading"
+            android:scaleType="fitCenter"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:src="@drawable/gif_loading"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
-            android:id="@+id/textView_ActionBar_Header2"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView_Product_Name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/core_sans_cr_45_regular"
+            android:maxLines="1"
+            android:text="@string/txt_loading"
+            android:textColor="@color/colorSecondary2"
+            android:textSize="@dimen/txt_font_size_header_12"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            android:textAlignment="textStart"
+            android:gravity="start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imgView_Icon"
+            app:layout_constraintTop_toBottomOf="@+id/imgView_Icon" />
+
+        <TextView
+            android:id="@+id/textView_Product_Price"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="10dp"
-            android:fontFamily="@font/core_sans_cr_regular"
-            android:text="0.00"
+            android:fontFamily="@font/core_sans_cr_45_regular"
+            android:text="@string/txt_loading"
             android:textColor="@color/colorSecondary"
-            android:textSize="@dimen/txt_font_size_header_5_12"
+            android:textSize="@dimen/txt_font_size_header_12"
             android:textStyle="bold"
+            android:visibility="invisible"
+            android:textAlignment="textStart"
+            android:gravity="start"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView_ActionBar_Header3"
-            app:layout_constraintTop_toBottomOf="@+id/textView_ActionBar_Header3" />
-
-        <TextView
-            android:id="@+id/textView_ActionBar_Header3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:fontFamily="@font/core_sans_cr_regular"
-            android:text="Ginger"
-            android:textColor="@color/colorSecondary2"
-            android:textSize="@dimen/txt_font_size_header_5_12"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/imgView_Recycler_Horizontal_"
-            app:layout_constraintTop_toBottomOf="@+id/imgView_Recycler_Horizontal_" />
+            app:layout_constraintEnd_toEndOf="@+id/textView_Product_Name"
+            app:layout_constraintStart_toStartOf="@+id/textView_Product_Name"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Product_Name" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_ItemProd_Weight"
+            android:id="@+id/cardView_Weight"
+            android:visibility="invisible"
             android:layout_width="28dp"
             android:layout_height="15dp"
             android:layout_marginTop="8dp"
             app:cardBackgroundColor="@color/colorTransparent"
             app:cardElevation="0dp"
-            app:layout_constraintStart_toStartOf="@+id/imgView_Recycler_Horizontal_"
+            app:layout_constraintStart_toStartOf="@+id/imgView_Icon"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,9 +94,9 @@
                     android:layout_marginTop="1dp"
                     android:layout_marginEnd="1dp"
                     android:layout_marginBottom="1dp"
-                    android:fontFamily="@font/core_sans_cr_regular"
+                    android:fontFamily="@font/core_sans_cr_45_regular"
                     android:gravity="center"
-                    android:text="100G"
+                    android:text="@string/txt_loading"
                     android:textColor="@color/colorSecondary2"
                     android:textSize="@dimen/txt_font_size_card_weight_8"
                     android:textStyle="bold"
@@ -82,25 +109,29 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkbox_Favorite"
+            android:layout_width="15dp"
+            android:visibility="invisible"
+            android:layout_height="15dp"
+            android:button="@drawable/selector_img_btn_favorite"
+            android:focusable="true"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@+id/cardView_Weight"
+            app:layout_constraintEnd_toEndOf="@+id/imgView_Icon"
+            app:layout_constraintTop_toTopOf="@+id/cardView_Weight" />
+
         <ImageView
-            android:id="@+id/imgView_Recycler_Horizontal_"
+            android:id="@+id/imgView_Icon"
             android:layout_width="88dp"
             android:layout_height="67dp"
             android:layout_marginTop="5dp"
+            android:visibility="invisible"
+            android:src="@drawable/png_empty_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_ItemProd_Weight" />
+            app:layout_constraintTop_toBottomOf="@+id/cardView_Weight" />
 
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/imgBtn_Favorite"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:focusable="true"
-            android:gravity="center"
-            android:button="@drawable/selector_img_btn_favorite"
-            app:layout_constraintBottom_toBottomOf="@+id/card_ItemProd_Weight"
-            app:layout_constraintEnd_toEndOf="@+id/imgView_Recycler_Horizontal_"
-            app:layout_constraintTop_toTopOf="@+id/card_ItemProd_Weight" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
