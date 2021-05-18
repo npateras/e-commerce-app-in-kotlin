@@ -1,4 +1,4 @@
-package com.unipi.p17172.emarket.components
+package com.unipi.p17172.emarket.util
 
 import android.content.Context
 import android.graphics.Color

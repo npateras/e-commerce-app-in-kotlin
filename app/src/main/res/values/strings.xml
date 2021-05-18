@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">eMarket</string>
 
+    <!-- System Strings-->
+    <string name="db_field_date_created">dateCreated</string>
+    <string name="db_field_date_completed">categoryId</string>
+    <string name="db_field_date_delivery">dateDelivery</string>-
+
     <!-- Activity/Fragment Labels -->
     <string name="label_activity_sign_in_with_phone_number">Add a number</string>
     <string name="label_activity_sign_in_with_phone_number_verification">Verify number</string>

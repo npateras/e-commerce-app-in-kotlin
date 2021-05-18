@@ -81,11 +81,9 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.firebase:firebase-firestore:23.0.0'
-    implementation 'com.firebaseui:firebase-ui-firestore:7.1.1'
-    // FirebaseUI for Firebase Auth
-    implementation 'com.firebaseui:firebase-ui-auth:7.1.1'
-    // FirebaseUI for Cloud Storage
-    implementation 'com.firebaseui:firebase-ui-storage:7.1.1'
+    implementation 'com.firebaseui:firebase-ui-firestore:7.1.1'  // FirebaseUI for Cloud Firestore
+    implementation 'com.firebaseui:firebase-ui-auth:7.1.1'  // FirebaseUI for Firebase Auth
+    implementation 'com.firebaseui:firebase-ui-storage:7.1.1'  // FirebaseUI for Cloud Storage
     // Declare the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-auth-ktx'

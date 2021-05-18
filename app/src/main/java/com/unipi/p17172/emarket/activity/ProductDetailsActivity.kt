@@ -2,8 +2,8 @@ package com.unipi.p17172.emarket.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.unipi.p17172.emarket.components.CustomDialog
 import com.unipi.p17172.emarket.databinding.ActivityAccFillInfoBinding
+import com.unipi.p17172.emarket.util.CustomDialog
 
 class ProductDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAccFillInfoBinding
