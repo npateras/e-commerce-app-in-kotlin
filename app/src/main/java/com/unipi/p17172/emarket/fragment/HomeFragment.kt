@@ -12,6 +12,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.*
+import com.unipi.p17172.emarket.adapter.ProductRecyclerViewAdapter
 import com.unipi.p17172.emarket.database.getProducts
 import com.unipi.p17172.emarket.databinding.FragmentHomeBinding
 import com.unipi.p17172.emarket.holders.ProductViewHolder
@@ -24,7 +25,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null  // Scoped to the lifecycle of the fragment's view (between onCreateView and onDestroyView)
     private val binding get() = _binding!!
 
-    private var rootRef: FirebaseFirestore? = null
+    private var db: FirebaseFirestore? = null
     private val productsListRef: CollectionReference? = null
 
     private val firestoreDealsAdapter: FirestoreRecyclerAdapter<ProductModel, ProductViewHolder>? = null
@@ -41,14 +42,18 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        rootRef = FirebaseFirestore.getInstance()
+        db = FirebaseFirestore.getInstance()
 
-        val query: Query = getProducts()
+        val queryDeals: Query = getProducts()
 
-        val firestoreRecyclerOptions: FirestoreRecyclerOptions<ShoppingListModel> =
-            FirestoreRecyclerOptions.Builder<ShoppingListModel>()
-                .setQuery(query, ShoppingListModel::class.java)
+        val firestoreRecyclerOptions: FirestoreRecyclerOptions<ProductModel> =
+            FirestoreRecyclerOptions.Builder<ProductModel>()
+                .setQuery(queryDeals, ProductModel::class.java)
                 .build()
+
+        val productsList = mutableListOf<ProductModel>()
+
+        firestoreDealsAdapter = ProductRecyclerViewAdapter(productsList, requireContext(), db!!)
 
         firestoreListener = firestoreDB!!
             .collection(COLLECTION_NAME)
@@ -103,7 +108,7 @@ class HomeFragment : Fragment() {
         binding.veilRecyclerViewDeals.setLayoutManager(linearLayoutManagerDeals)
         binding.veilRecyclerViewPopular.setLayoutManager(linearLayoutManagerPopular)
 
-        rootRef = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
     }
 
     private fun loadDeals() {

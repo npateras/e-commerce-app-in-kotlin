@@ -10,28 +10,34 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.unipi.p17172.emarket.R;
 import com.unipi.p17172.emarket.databinding.RecyclerItemProductBinding;
+import com.unipi.p17172.emarket.models.NotificationModel;
 import com.unipi.p17172.emarket.models.ProductModel;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ProductViewHolder extends RecyclerView.ViewHolder {
+    private final RecyclerItemProductBinding recyclerItemProductBinding;
 
     private TextView productNameTextView;
 
     public ProductViewHolder(RecyclerItemProductBinding recyclerItemProductBinding) {
         super(recyclerItemProductBinding.getRoot());
-        productNameTextView = itemView.findViewById(R.id.product_name_text_view);
+        this.recyclerItemProductBinding = recyclerItemProductBinding;
     }
 
-    public void setProduct(Context context, View shoppingListViewFragment, String userEmail, String userName, ShoppingListModel shoppingListModel, ProductModel productModel) {
-        String shoppingListId = shoppingListModel.getShoppingListId();
-        String shoppingListName = shoppingListModel.getShoppingListName();
+    public void setProduct(Context context, View shoppingListViewFragment,
+                           ProductModel productModel) {
+        Glide.with(context)
+                .load(productModel.getIconUrl())
+                .into(holder.itemCartProductBinding.imageViewCartProductImage);
+        String shoppingListId = productModel.getIconUrl();
+        String shoppingListName = productModel.getShoppingListName();
         String productId = productModel.getProductId();
         String productName = productModel.getProductName();
         Boolean izInShoppingList = productModel.getIzInShoppingList();

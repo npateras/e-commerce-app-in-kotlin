@@ -2,17 +2,19 @@ package com.unipi.p17172.emarket.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.Target
 import com.google.firebase.firestore.FirebaseFirestore
-import com.unipi.p17172.emarket.R
 import com.unipi.p17172.emarket.databinding.RecyclerItemProductBinding
+import com.unipi.p17172.emarket.holders.ProductViewHolder
 import com.unipi.p17172.emarket.models.ProductModel
+import java.util.*
 
 
 class ProductRecyclerViewAdapter(
@@ -20,43 +22,28 @@ class ProductRecyclerViewAdapter(
     private val context: Context,
     private val db: FirebaseFirestore) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val note = productsList[position]
-
-        holder!!.title.text = note.title
-        holder.content.text = note.content
-
-        holder.edit.setOnClickListener { updateNote(note) }
-        holder.delete.setOnClickListener { deleteNote(note.id!!, position) }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val view: RecyclerItemProductBinding =
             RecyclerItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(view)
+        return ProductViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+
+        var recyclerItemProductBinding: RecyclerItemProductBinding
+
+        val product = productsList[position]
+
+        Glide.with(context)
+            .load(Objects.requireNonNull<Map<String, Any>>(documentProduct.getData())["imgUrl"].toString())
+            .into<Target<Drawable>>(holder.itemCartProductBinding.imageViewCartProductImage)
+
+        holder.edit.setOnClickListener { updateNote(product) }
+        holder.delete.setOnClickListener { deleteNote(product.id!!, position) }
     }
 
     override fun getItemCount(): Int {
         return productsList.size
-    }
-
-    inner class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view) {
-        internal var title: TextView
-        internal var content: TextView
-        internal var edit: ImageView
-        internal var delete: ImageView
-
-        init {
-            title = view.findViewById(R.id.tvTitle)
-            content = view.findViewById(R.id.tvContent)
-
-            edit = view.findViewById(R.id.ivEdit)
-            delete = view.findViewById(R.id.ivDelete)
-        }
     }
 
     private fun updateNote(note: ContactsContract.CommonDataKinds.Note) {
