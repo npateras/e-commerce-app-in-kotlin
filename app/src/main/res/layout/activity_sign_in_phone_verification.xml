@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhiteLight"
-    tools:context=".activity.SignInPhoneVerificationActivity"
+    tools:context=".ui.activities.SignInPhoneVerificationActivity"
     tools:ignore="ContentDescription" >
 
     <androidx.constraintlayout.widget.ConstraintLayout

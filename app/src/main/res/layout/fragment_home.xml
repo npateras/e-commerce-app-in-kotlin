@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorBackground"
     android:fillViewport="true"
-    tools:context=".fragment.HomeFragment"
+    tools:context=".ui.fragments.HomeFragment"
     tools:ignore="contentDescription">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout_FragHome_Categories"
+            android:id="@+id/constraintLayout_Categories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_container_top"
@@ -24,37 +24,29 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/textView_FragHome_Categories"
+                style="@style/TextView_Header_14"
+                android:id="@+id/txtView_Categories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="17dp"
-                android:fontFamily="@font/core_sans_cr_55_medium"
                 android:text="@string/txt_categories"
-                android:textColor="@color/colorText"
-                android:textSize="@dimen/txt_font_size_header_14"
-                app:layout_constraintStart_toStartOf="@+id/imgBtn_FragHome_Category_Household"
+                app:layout_constraintStart_toStartOf="@+id/imgBtn_Category_Household"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView_FragHome_Categories_ViewAll"
+                style="@style/TextView_16.Secondary_4_12"
+                android:id="@+id/txtView_Categories_ViewAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
-                android:fontFamily="@font/core_sans_cr_55_medium"
-                android:gravity="center"
                 android:text="@string/txt_view_all"
-                android:textAlignment="center"
-                android:textColor="@color/colorSecondary4"
-                android:textSize="@dimen/txt_font_size_header_12"
                 app:drawableEndCompat="@drawable/ic_chevron_right"
-                app:drawableTint="@color/colorSecondary4"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_FragHome_Categories"
-                app:layout_constraintEnd_toEndOf="@+id/imgBtn_FragHome_Category_Chilled"
-                app:layout_constraintTop_toTopOf="@+id/textView_FragHome_Categories"
+                app:layout_constraintBottom_toBottomOf="@+id/txtView_Categories"
+                app:layout_constraintEnd_toEndOf="@+id/imgBtn_Category_Chilled"
+                app:layout_constraintTop_toTopOf="@+id/txtView_Categories"
                 app:layout_constraintVertical_bias="0.0" />
 
             <ImageButton
-                android:id="@+id/imgBtn_FragHome_Category_Household"
+                android:id="@+id/imgBtn_Category_Household"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="@dimen/img_btn_width_large_70"
                 android:layout_height="@dimen/img_btn_width_large_70"
@@ -67,13 +59,13 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_house"
                 app:iconGravity="textStart"
-                app:layout_constraintEnd_toStartOf="@+id/imgBtn_FragHome_Category_Grocery"
+                app:layout_constraintEnd_toStartOf="@+id/imgBtn_Category_Grocery"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_FragHome_Categories" />
+                app:layout_constraintTop_toBottomOf="@+id/txtView_Categories" />
 
             <ImageButton
-                android:id="@+id/imgBtn_FragHome_Category_Grocery"
+                android:id="@+id/imgBtn_Category_Grocery"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="@dimen/img_btn_width_large_70"
                 android:layout_height="@dimen/img_btn_width_large_70"
@@ -85,14 +77,14 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_shopping_cart_filled"
                 app:iconGravity="textStart"
-                app:layout_constraintBottom_toBottomOf="@+id/imgBtn_FragHome_Category_Household"
-                app:layout_constraintEnd_toStartOf="@+id/imgBtn_FragHome_Category_Liquor"
+                app:layout_constraintBottom_toBottomOf="@+id/imgBtn_Category_Household"
+                app:layout_constraintEnd_toStartOf="@+id/imgBtn_Category_Liquor"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imgBtn_FragHome_Category_Household"
-                app:layout_constraintTop_toTopOf="@+id/imgBtn_FragHome_Category_Household" />
+                app:layout_constraintStart_toEndOf="@+id/imgBtn_Category_Household"
+                app:layout_constraintTop_toTopOf="@+id/imgBtn_Category_Household" />
 
             <ImageButton
-                android:id="@+id/imgBtn_FragHome_Category_Liquor"
+                android:id="@+id/imgBtn_Category_Liquor"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="@dimen/img_btn_width_large_70"
                 android:layout_height="@dimen/img_btn_width_large_70"
@@ -104,14 +96,14 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_wine_glass"
                 app:iconGravity="textStart"
-                app:layout_constraintBottom_toBottomOf="@+id/imgBtn_FragHome_Category_Grocery"
-                app:layout_constraintEnd_toStartOf="@+id/imgBtn_FragHome_Category_Chilled"
+                app:layout_constraintBottom_toBottomOf="@+id/imgBtn_Category_Grocery"
+                app:layout_constraintEnd_toStartOf="@+id/imgBtn_Category_Chilled"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imgBtn_FragHome_Category_Grocery"
-                app:layout_constraintTop_toTopOf="@+id/imgBtn_FragHome_Category_Grocery" />
+                app:layout_constraintStart_toEndOf="@+id/imgBtn_Category_Grocery"
+                app:layout_constraintTop_toTopOf="@+id/imgBtn_Category_Grocery" />
 
             <ImageButton
-                android:id="@+id/imgBtn_FragHome_Category_Chilled"
+                android:id="@+id/imgBtn_Category_Chilled"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="@dimen/img_btn_width_large_70"
                 android:layout_height="@dimen/img_btn_width_large_70"
@@ -124,32 +116,28 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_burger_meal"
                 app:iconGravity="textStart"
-                app:layout_constraintBottom_toBottomOf="@+id/imgBtn_FragHome_Category_Liquor"
+                app:layout_constraintBottom_toBottomOf="@+id/imgBtn_Category_Liquor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imgBtn_FragHome_Category_Liquor"
-                app:layout_constraintTop_toTopOf="@+id/imgBtn_FragHome_Category_Liquor" />
+                app:layout_constraintStart_toEndOf="@+id/imgBtn_Category_Liquor"
+                app:layout_constraintTop_toTopOf="@+id/imgBtn_Category_Liquor" />
 
             <TextView
-                android:id="@+id/textView_FragHome_Category_Household"
+                style="@style/TextView_16.Secondary_2_12"
+                android:id="@+id/textView_Category_Household"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:layout_marginBottom="20dp"
-                android:fontFamily="@font/core_sans_cr_55_medium"
-                android:gravity="center"
                 android:text="@string/txt_household"
-                android:textAlignment="center"
-                android:textColor="@color/colorSecondary2"
-                android:textSize="@dimen/txt_font_size_header_12"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/imgBtn_FragHome_Category_Household"
-                app:layout_constraintStart_toStartOf="@+id/imgBtn_FragHome_Category_Household"
-                app:layout_constraintTop_toBottomOf="@+id/imgBtn_FragHome_Category_Household"
+                app:layout_constraintEnd_toEndOf="@+id/imgBtn_Category_Household"
+                app:layout_constraintStart_toStartOf="@+id/imgBtn_Category_Household"
+                app:layout_constraintTop_toBottomOf="@+id/imgBtn_Category_Household"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/textView_FragHome_Category_Grocery"
+                android:id="@+id/textView_Category_Grocery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
@@ -159,13 +147,13 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorSecondary2"
                 android:textSize="@dimen/txt_font_size_header_12"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_FragHome_Category_Household"
-                app:layout_constraintEnd_toEndOf="@+id/imgBtn_FragHome_Category_Grocery"
-                app:layout_constraintStart_toStartOf="@+id/imgBtn_FragHome_Category_Grocery"
-                app:layout_constraintTop_toBottomOf="@+id/imgBtn_FragHome_Category_Grocery" />
+                app:layout_constraintBottom_toBottomOf="@+id/textView_Category_Household"
+                app:layout_constraintEnd_toEndOf="@+id/imgBtn_Category_Grocery"
+                app:layout_constraintStart_toStartOf="@+id/imgBtn_Category_Grocery"
+                app:layout_constraintTop_toBottomOf="@+id/imgBtn_Category_Grocery" />
 
             <TextView
-                android:id="@+id/textView_FragHome_Category_Liquor"
+                android:id="@+id/textView_Category_Liquor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
@@ -175,13 +163,13 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorSecondary2"
                 android:textSize="@dimen/txt_font_size_header_12"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_FragHome_Category_Household"
-                app:layout_constraintEnd_toEndOf="@+id/imgBtn_FragHome_Category_Liquor"
-                app:layout_constraintStart_toStartOf="@+id/imgBtn_FragHome_Category_Liquor"
-                app:layout_constraintTop_toBottomOf="@+id/imgBtn_FragHome_Category_Liquor" />
+                app:layout_constraintBottom_toBottomOf="@+id/textView_Category_Household"
+                app:layout_constraintEnd_toEndOf="@+id/imgBtn_Category_Liquor"
+                app:layout_constraintStart_toStartOf="@+id/imgBtn_Category_Liquor"
+                app:layout_constraintTop_toBottomOf="@+id/imgBtn_Category_Liquor" />
 
             <TextView
-                android:id="@+id/textView_FragHome_Category_Chilled"
+                android:id="@+id/textView_Category_Chilled"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
@@ -191,61 +179,48 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorSecondary2"
                 android:textSize="@dimen/txt_font_size_header_12"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_FragHome_Category_Household"
-                app:layout_constraintEnd_toEndOf="@+id/imgBtn_FragHome_Category_Chilled"
-                app:layout_constraintStart_toStartOf="@+id/imgBtn_FragHome_Category_Chilled"
-                app:layout_constraintTop_toBottomOf="@+id/imgBtn_FragHome_Category_Chilled" />
+                app:layout_constraintBottom_toBottomOf="@+id/textView_Category_Household"
+                app:layout_constraintEnd_toEndOf="@+id/imgBtn_Category_Chilled"
+                app:layout_constraintStart_toStartOf="@+id/imgBtn_Category_Chilled"
+                app:layout_constraintTop_toBottomOf="@+id/imgBtn_Category_Chilled" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/textView_FragHome_Deals"
+            style="@style/TextView_Header_14"
+            android:id="@+id/txtView_Deals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="29dp"
             android:layout_marginStart="16dp"
-            android:fontFamily="@font/core_sans_cr_55_medium"
             android:text="@string/txt_deals"
-            android:textColor="@color/colorText"
-            android:textSize="@dimen/txt_font_size_header_14"
             app:layout_constraintStart_toStartOf="@+id/veilRecyclerView_Deals"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout_FragHome_Categories" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout_Categories" />
 
         <TextView
-            android:id="@+id/textView_FragHome_Deals_ViewAll"
+            style="@style/TextView_16.Secondary_4_12"
+            android:id="@+id/txtView_Deals_ViewAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:drawablePadding="8dp"
-            android:fontFamily="@font/core_sans_cr_55_medium"
-            android:gravity="center"
             android:text="@string/txt_view_all"
-            android:textAlignment="center"
-            android:textColor="@color/colorSecondary4"
-            android:textSize="@dimen/txt_font_size_header_12"
             app:drawableEndCompat="@drawable/ic_chevron_right"
-            app:drawableTint="@color/colorSecondary4"
-            app:layout_constraintBottom_toBottomOf="@+id/textView_FragHome_Deals"
+            app:layout_constraintBottom_toBottomOf="@+id/txtView_Deals"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView_FragHome_Deals"
+            app:layout_constraintTop_toTopOf="@+id/txtView_Deals"
             app:layout_constraintVertical_bias="0.0" />
 
         <com.skydoves.androidveil.VeilRecyclerFrameView
             android:id="@+id/veilRecyclerView_Deals"
             android:layout_width="0dp"
-            android:layout_height="160dp"
+            android:layout_height="180dp"
+            app:veilFrame_defaultChildVisible="false"
             android:layout_marginTop="12dp"
-            android:clipToPadding = "false"
             android:paddingStart="16dp"
             android:paddingEnd="0dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_FragHome_Deals"
-            app:veilFrame_layout="@layout/recycler_item_product"
+            app:layout_constraintTop_toBottomOf="@+id/txtView_Deals"
             app:veilFrame_veiled="true"
             app:veilFrame_shimmerEnable="true"
             app:veilFrame_baseColor="@color/colorSecondary2"
@@ -254,44 +229,50 @@
             app:veilFrame_highlightAlpha="1.0"
             app:veilFrame_radius="8dp"/>
 
+        <include
+            android:visibility="gone"
+            android:id="@+id/layout_Empty_State_Deals"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="12dp"
+            layout="@layout/recycler_empty_state_deals"
+            android:clipToPadding = "false"
+            android:paddingStart="16dp"
+            android:paddingEnd="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtView_Deals"/>
+
         <TextView
-            android:id="@+id/textView_FragHome_Popular"
+            style="@style/TextView_Header_14"
+            android:id="@+id/txtView_Popular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="19dp"
-            android:fontFamily="@font/core_sans_cr_55_medium"
             android:text="@string/txt_popular"
-            android:textColor="@color/colorText"
-            android:textSize="@dimen/txt_font_size_header_14"
-            app:layout_constraintStart_toStartOf="@+id/textView_FragHome_Deals"
+            app:layout_constraintStart_toStartOf="@+id/txtView_Deals"
             app:layout_constraintTop_toBottomOf="@+id/veilRecyclerView_Deals" />
 
         <TextView
-            android:id="@+id/textView_FragHome_Popular_ViewAll"
+            style="@style/TextView_16.Secondary_4_12"
+            android:id="@+id/txtView_Popular_ViewAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:drawablePadding="8dp"
-            android:fontFamily="@font/core_sans_cr_55_medium"
-            android:gravity="center"
             android:text="@string/txt_view_all"
-            android:textAlignment="center"
-            android:textColor="@color/colorSecondary4"
-            android:textSize="@dimen/txt_font_size_header_12"
             app:drawableEndCompat="@drawable/ic_chevron_right"
-            app:drawableTint="@color/colorSecondary4"
-            app:layout_constraintBottom_toBottomOf="@+id/textView_FragHome_Popular"
+            app:layout_constraintBottom_toBottomOf="@+id/txtView_Popular"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView_FragHome_Popular" />
+            app:layout_constraintTop_toTopOf="@+id/txtView_Popular" />
 
         <com.skydoves.androidveil.VeilRecyclerFrameView
             android:id="@+id/veilRecyclerView_Popular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/veilRecyclerView_Deals"
-            app:layout_constraintTop_toBottomOf="@+id/textView_FragHome_Popular"
+            app:layout_constraintTop_toBottomOf="@+id/txtView_Popular"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_width="0dp"
-            android:layout_height="160dp"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
             android:layout_marginTop="12dp"
             android:orientation="horizontal"
             android:clipToPadding = "false"

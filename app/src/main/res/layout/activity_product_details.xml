@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorBackground"
     android:fillViewport="true"
-    tools:context=".fragment.HomeFragment"
+    tools:context=".ui.fragments.HomeFragment"
     tools:ignore="contentDescription">
 
 

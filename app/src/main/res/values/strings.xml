@@ -77,6 +77,20 @@
     <string name="txt_loading">Loading…</string>
     <string name="txt_empty_cart">Cart is empty!</string>
     <string name="txt_empty_cart_2">Looks like you haven\'t made your choice yet 😢</string>
+    <string name="txt_profile">Profile</string>
+    <string name="txt_first_name">First name</string>
+    <string name="txt_last_name">Last name</string>
+    <string name="txt_phone_number">Phone number</string>
+    <string name="txt_street_address">Street address</string>
+    <string name="txt_zip_code">Zip code</string>
+    <string name="txt_country">Country</string>
+    <string name="txt_street_number">Street Number</string>
+    <string name="txt_type">Type</string>
+    <string name="txt_house_">House</string>
+    <string name="txt_apartment">Apartment</string>
+    <string name="txt_other">Other</string>
+    <string name="txt_format_price" translatable="false">%1$,.2f</string>
+    <string name="txt_format_weight" translatable="false">%1$d %1$s</string>
 
     <!-- Input Texts -->
     <string name="input_txt_hint_phone_number">Your mobile number</string>
@@ -136,6 +150,10 @@
     <string name="drawer_nav_bar_item_settings">Settings</string>
     <string name="drawer_nav_bar_item_exit">Exit</string>
     <string name="input_txt_hint_dash">-</string>
+    <string name="txt_account_info">Account Info</string>
+    <string name="txt_edit_profile">Edit Profile</string>
+    <string name="txt_no_deals_available">No deals available!</string>
+    <string name="txt_check_again_another_time">Check again another time.</string>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 </resources>

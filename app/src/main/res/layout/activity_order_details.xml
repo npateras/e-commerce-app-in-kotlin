@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorBackground"
     android:fillViewport="true"
-    tools:context=".activity."
+    tools:context=".ui.activities."
     tools:ignore="contentDescription">
 
     <include

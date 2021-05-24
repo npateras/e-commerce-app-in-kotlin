@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".activity.SplashActivity"
+    tools:context=".ui.activities.SplashActivity"
     tools:ignore="ContentDescription" >
 
     <ImageView
@@ -34,4 +34,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
+    <TextView
+        android:id="@+id/textView_Header_"
+        style="@style/TextView_Header_Main_Dark_24"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:text="@string/txt_loading"
+        android:textAlignment="center"
+        android:textColor="@color/colorSecondary3"
+        app:layout_constraintEnd_toEndOf="@+id/textView_Header_1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView_Header_1"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Header_1" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/gif_dual_ring_progress_circle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Header_" />
 </androidx.constraintlayout.widget.ConstraintLayout>

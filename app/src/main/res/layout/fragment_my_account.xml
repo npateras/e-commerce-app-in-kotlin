@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorBackground"
-    tools:context=".fragment.MyAccountFragment">
+    tools:context=".ui.fragments.MyAccountFragment">
     
     <TableLayout
         android:layout_width="match_parent"

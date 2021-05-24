@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,7 +18,7 @@
 
         <!-- Splash Screen Activity -->
         <activity
-            android:name=".activity.SplashActivity"
+            android:name="com.unipi.p17172.emarket.ui.activities.SplashActivity"
             android:theme="@style/Theme.EMarket.NoActionBar"
             android:screenOrientation="fullSensor">
             <intent-filter>
@@ -29,67 +30,67 @@
 
         <!-- Home/Main Activity -->
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.unipi.p17172.emarket.ui.activities.MainActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.EMarket.NoActionBar3">
         </activity>
 
         <!-- Product Details Activity -->
         <activity
-            android:name=".activity.ProductDetailsActivity"
+            android:name="com.unipi.p17172.emarket.ui.activities.ProductDetailsActivity"
             android:label=""
             android:theme="@style/Theme.EMarket.NoActionBar3"
-            android:parentActivityName=".activity.MainActivity">
+            android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity" />
+                android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
         </activity>
 
         <!-- Notifications Activity -->
         <activity
-            android:name=".activity.NotificationsActivity"
+            android:name="com.unipi.p17172.emarket.ui.activities.NotificationsActivity"
             android:label="@string/label_activity_notifications"
             android:theme="@style/Theme.EMarket.NoActionBar3"
-            android:parentActivityName=".activity.MainActivity">
+            android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity" />
+                android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
         </activity>
 
         <!-- Sign in activity -->
         <activity
-            android:name=".activity.SignInActivity"
+            android:name="com.unipi.p17172.emarket.ui.activities.SignInActivity"
             android:launchMode="singleTask"
             android:theme="@style/Theme.EMarket.NoActionBar2"/>
 
         <!-- Sign in with phone number activity -->
         <activity
-            android:name=".activity.SignInPhoneActivity"
+            android:name="com.unipi.p17172.emarket.ui.activities.SignInPhoneActivity"
             android:label="@string/label_activity_sign_in_with_phone_number"
             android:launchMode="singleTask"
-            android:parentActivityName=".activity.SignInActivity">
+            android:parentActivityName="com.unipi.p17172.emarket.ui.activities.SignInActivity">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.SignInActivity" />
+                android:value="com.unipi.p17172.emarket.ui.activities.SignInActivity" />
         </activity>
 
         <!-- Phone number registration activity -->
         <activity
-            android:name=".activity.SignInPhoneVerificationActivity"
+            android:name="com.unipi.p17172.emarket.ui.activities.SignInPhoneVerificationActivity"
             android:label="@string/label_activity_sign_in_with_phone_number_verification"
-            android:parentActivityName=".activity.SignInPhoneActivity">
+            android:parentActivityName="com.unipi.p17172.emarket.ui.activities.SignInPhoneActivity">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.SignInPhoneActivity" />
+                android:value="com.unipi.p17172.emarket.ui.activities.SignInPhoneActivity" />
         </activity>
 
         <!-- Fill your account information after phone number verification activity -->
         <activity
-            android:name=".activity.FillAccInfoActivity"
+            android:name="com.unipi.p17172.emarket.ui.activities.FillAccInfoActivity"
             android:launchMode="singleTask"
             android:theme="@style/Theme.EMarket.NoActionBar2" />
     </application>

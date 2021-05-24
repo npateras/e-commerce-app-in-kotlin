@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView_Main"
     android:layout_width="120dp"
-    android:layout_height="159dp"
-    android:clipToPadding="true"
-    app:cardElevation="0dp"
+    android:layout_height="180dp"
     android:layout_marginStart="0dp"
     android:layout_marginEnd="8dp"
+    android:clickable="true"
     app:cardBackgroundColor="@color/colorTransparent"
+    app:cardElevation="0dp"
     tools:ignore="ContentDescription">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,49 +18,47 @@
         android:background="@drawable/shape_container_recycler_view_horizontal">
 
         <TextView
-            android:id="@+id/textView_Product_Name"
+            android:id="@+id/txtView_Name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:fontFamily="@font/core_sans_cr_45_regular"
+            android:gravity="start"
             android:maxLines="1"
             android:text="@string/txt_loading"
+            android:textAlignment="textStart"
             android:textColor="@color/colorSecondary2"
             android:textSize="@dimen/txt_font_size_header_12"
             android:textStyle="bold"
-            android:visibility="visible"
-            android:textAlignment="textStart"
-            android:gravity="start"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imgView_Icon"
             app:layout_constraintTop_toBottomOf="@+id/imgView_Icon" />
 
         <TextView
-            android:id="@+id/textView_Product_Price"
+            android:id="@+id/txtView_Price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="24dp"
             android:fontFamily="@font/core_sans_cr_45_regular"
+            android:gravity="start"
             android:text="@string/txt_loading"
+            android:textAlignment="textStart"
             android:textColor="@color/colorSecondary"
             android:textSize="@dimen/txt_font_size_header_12"
             android:textStyle="bold"
-            android:visibility="visible"
-            android:textAlignment="textStart"
-            android:gravity="start"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/textView_Product_Name"
-            app:layout_constraintStart_toStartOf="@+id/textView_Product_Name"
-            app:layout_constraintTop_toBottomOf="@+id/textView_Product_Name" />
+            app:layout_constraintEnd_toEndOf="@+id/txtView_Name"
+            app:layout_constraintStart_toStartOf="@+id/txtView_Name"
+            app:layout_constraintTop_toBottomOf="@+id/txtView_Name"
+            app:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardView_Weight"
-            android:visibility="visible"
-            android:layout_width="28dp"
-            android:layout_height="15dp"
+            android:layout_width="32dp"
+            android:layout_height="18dp"
             android:layout_marginTop="8dp"
             app:cardBackgroundColor="@color/colorTransparent"
             app:cardElevation="0dp"
@@ -73,6 +71,7 @@
                 android:background="@drawable/shape_container_weight">
 
                 <TextView
+                    android:id="@+id/txtView_Weight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -82,7 +81,6 @@
                     android:layout_marginBottom="1dp"
                     android:fontFamily="@font/core_sans_cr_45_regular"
                     android:gravity="center"
-                    android:text="@string/txt_loading"
                     android:textColor="@color/colorSecondary2"
                     android:textSize="@dimen/txt_font_size_card_weight_8"
                     android:textStyle="bold"
@@ -97,9 +95,8 @@
 
         <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/checkbox_Favorite"
-            android:layout_width="15dp"
-            android:visibility="visible"
-            android:layout_height="15dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:button="@drawable/selector_img_btn_favorite"
             android:focusable="true"
             android:gravity="center"
@@ -111,12 +108,11 @@
             android:id="@+id/imgView_Icon"
             android:layout_width="88dp"
             android:layout_height="67dp"
-            android:layout_marginTop="5dp"
-            android:visibility="visible"
-            android:scaleType="fitCenter"
+            android:layout_marginTop="7dp"
             android:foregroundGravity="center"
-            android:scaleY="1.28"
+            android:scaleType="fitCenter"
             android:scaleX="1.29"
+            android:scaleY="1.28"
             android:src="@drawable/ic_picture_wide"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
