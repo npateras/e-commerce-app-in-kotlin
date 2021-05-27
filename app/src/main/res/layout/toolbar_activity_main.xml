@@ -14,7 +14,7 @@
             android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/actionBar_My_Cart"
+                    android:id="@+id/actionBar_ImgBtn_My_Cart"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
@@ -29,7 +29,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/checkbox_Favorite"
+                    android:id="@+id/actionBar_Checkbox_Favorite"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
@@ -40,7 +40,7 @@
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_search"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/actionBar_My_Cart"
+                    app:layout_constraintEnd_toStartOf="@+id/actionBar_ImgBtn_My_Cart"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
 

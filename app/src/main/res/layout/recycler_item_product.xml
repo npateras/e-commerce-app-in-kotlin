@@ -7,7 +7,6 @@
     android:layout_height="180dp"
     android:layout_marginStart="0dp"
     android:layout_marginEnd="8dp"
-    android:clickable="true"
     app:cardBackgroundColor="@color/colorTransparent"
     app:cardElevation="0dp"
     tools:ignore="ContentDescription">
@@ -56,7 +55,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardView_Weight"
+            android:id="@+id/cardView_Stock"
             android:layout_width="32dp"
             android:layout_height="18dp"
             android:layout_marginTop="8dp"
@@ -100,23 +99,23 @@
             android:button="@drawable/selector_img_btn_favorite"
             android:focusable="true"
             android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="@+id/cardView_Weight"
+            app:layout_constraintBottom_toBottomOf="@+id/cardView_Stock"
             app:layout_constraintEnd_toEndOf="@+id/imgView_Icon"
-            app:layout_constraintTop_toTopOf="@+id/cardView_Weight" />
+            app:layout_constraintTop_toTopOf="@+id/cardView_Stock" />
 
         <ImageView
             android:id="@+id/imgView_Icon"
             android:layout_width="88dp"
             android:layout_height="67dp"
             android:layout_marginTop="7dp"
-            android:foregroundGravity="center"
+            android:maxWidth="88dp"
             android:scaleType="fitCenter"
-            android:scaleX="1.29"
-            android:scaleY="1.28"
+            android:adjustViewBounds="true"
+            android:layout_centerInParent="true"
             android:src="@drawable/ic_picture_wide"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView_Weight" />
+            app:layout_constraintTop_toBottomOf="@+id/cardView_Stock" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

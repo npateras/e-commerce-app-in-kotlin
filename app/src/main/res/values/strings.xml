@@ -90,7 +90,7 @@
     <string name="txt_apartment">Apartment</string>
     <string name="txt_other">Other</string>
     <string name="txt_format_price" translatable="false">%1$,.2f</string>
-    <string name="txt_format_weight" translatable="false">%1$d %1$s</string>
+    <string name="txt_format_weight" translatable="false">%1$d %2$s</string>
 
     <!-- Input Texts -->
     <string name="input_txt_hint_phone_number">Your mobile number</string>
@@ -154,6 +154,7 @@
     <string name="txt_edit_profile">Edit Profile</string>
     <string name="txt_no_deals_available">No deals available!</string>
     <string name="txt_check_again_another_time">Check again another time.</string>
+    <string name="txt_remove_from_cart">Remove from cart</string>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 </resources>

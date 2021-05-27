@@ -29,9 +29,29 @@
 # the package com.yourcompany.models. Modify to fit the structure
 # of your app.
 -keepclassmembers class com.unipi.p17172.emarket.* {
-    public *;
+    *;
 }
 
 -keep class kotlin.Metadata { *; }
 
 -keepattributes RuntimeVisibleAnnotations
+
+# Keep custom model classes
+-keep class com.google.firebase.example.fireeats.java.model.** { *; }
+-keep class com.google.firebase.example.fireeats.kotlin.model.** { *; }
+
+# https://github.com/firebase/FirebaseUI-Android/issues/1175
+-dontwarn okio.**
+-dontwarn retrofit2.Call
+
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep class * extends com.bumptech.glide.module.AppGlideModule {
+ <init>(...);
+}
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+-keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
+  *** rewind();
+}

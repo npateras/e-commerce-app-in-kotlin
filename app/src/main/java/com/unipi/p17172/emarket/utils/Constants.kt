@@ -14,12 +14,13 @@ object Constants {
 
     // General Constants
     const val TAG: String = "[eMarket]"
+    const val EMARKET_PREFERENCES: String = "eMarketPrefs"
 
     // Firebase Constants
     // This is used for the collection name for USERS.
     const val COLLECTION_USERS: String = "Users"
     const val COLLECTION_PRODUCTS: String = "Products"
-    const val COLLECTION_FAVORITES: String = "Favorites"
+    const val COLLECTION_FAVORITES: String = "favorites"
     const val COLLECTION_NOTIFICATIONS: String = "Notifications"
     const val COLLECTION_CARTS: String = "Carts"
 
@@ -42,10 +43,15 @@ object Constants {
     const val FIELD_PRICE: String = "price"
     const val FIELD_PROFILE_COMPLETED: String = "profileCompleted"
     const val FIELD_SALE: String = "sale"
+    const val FIELD_USER_ID: String = "userId"
+    const val FIELD_PRODUCT_ID: String = "productId"
     const val FIELD_STOCK: String = "stock"
     const val FIELD_WEIGHT: String = "weight"
     const val FIELD_WEIGHT_UNIT: String = "weightUnit"
     const val FIELD_ZIP_CODE: String = "zipCode"
+
+    // Intent Extras
+    const val EXTRA_PRODUCT_ID: String = "extraProductId"
 
     // A unique code of image selection from Phone Storage.
     const val PICK_IMAGE_REQUEST_CODE = 2

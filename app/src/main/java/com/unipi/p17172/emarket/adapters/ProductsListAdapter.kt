@@ -1,14 +1,20 @@
 package com.unipi.p17172.emarket.adapters
 
 import android.content.Context
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.unipi.p17172.emarket.R
+import com.unipi.p17172.emarket.database.FirestoreHelper
+import com.unipi.p17172.emarket.database.FirestoreHelper.IsFavoriteCallback
 import com.unipi.p17172.emarket.databinding.RecyclerItemProductBinding
 import com.unipi.p17172.emarket.models.Product
+import com.unipi.p17172.emarket.ui.activities.ProductDetailsActivity
+import com.unipi.p17172.emarket.utils.Constants
+import com.unipi.p17172.emarket.utils.GlideLoader
+
 
 /**
  * A adapter class for products list items.
@@ -26,9 +32,12 @@ open class ProductsListAdapter(
      * {@link ProductsViewHolder} and initializes some private fields to be used by RecyclerView.
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsViewHolder {
-        val view: RecyclerItemProductBinding =
-            RecyclerItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ProductsViewHolder(view)
+        return ProductsViewHolder(
+            RecyclerItemProductBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false)
+        )
     }
 
     /**
@@ -44,26 +53,33 @@ open class ProductsListAdapter(
     override fun onBindViewHolder(holder: ProductsViewHolder, position: Int) {
         val model = list[position]
 
-        Log.e("test", model.price.toString())
-
         holder.binding.apply {
+            // Check if user has this item in their favorites
+            FirestoreHelper().isFavorite(model.id, "test", object : IsFavoriteCallback {
+                override fun onCallback(isFavorite: Boolean) {
+                    if (isFavorite)
+                        checkboxFavorite.isChecked = true
+                }
+            })
+            GlideLoader(context).loadProductPictureWide(model.iconUrl, imgViewIcon)
             txtViewName.text = model.name
             txtViewPrice.text = String.format(
                 context.getString(R.string.txt_format_price),
                 model.price
             )
-            holder.binding.txtViewWeight.text = String.format(
+            txtViewWeight.text = String.format(
                 context.getString(R.string.txt_format_weight),
                 model.weight,
                 model.weightUnit
             )
         }
+        holder.itemView.setOnClickListener {
+            // Launch Product details screen.
+            val intent = Intent(context, ProductDetailsActivity::class.java)
+            intent.putExtra(Constants.EXTRA_PRODUCT_ID, model.id)
+            context.startActivity(intent)
+        }
     }
-
-    /* fun addProfiles(products: List<Product>) {
-        this.model.addAll(profiles)
-        notifyDataSetChanged()
-    }*/
 
     /**
      * Gets the number of items in the list

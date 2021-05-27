@@ -63,7 +63,7 @@ class HomeFragment : Fragment() {
             binding.veilRecyclerViewDeals.run {
                 setVeilLayout(R.layout.shimmer_item_product)
                 setAdapter(ProductsListAdapter(requireActivity(), productsList, this@HomeFragment))
-                setLayoutManager(LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false))
+                setLayoutManager(LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false))
                 getRecyclerView().setHasFixedSize(true)
                 addVeiledItems(15)
                 // delay-auto-unveil
