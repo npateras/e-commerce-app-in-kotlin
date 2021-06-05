@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.unipi.p17172.emarket.R
+import java.util.*
 
 /**
  * A base activity class is used to define the functions and members which we will use in all the activities.
@@ -98,5 +99,9 @@ open class BaseActivity : AppCompatActivity() {
 
     fun goToCartActivity(context: Context) {
         startActivity(Intent(context, MyCartActivity::class.java))
+    }
+
+    fun goToSignInActivity(context: Context) {
+        startActivity(Intent(context, SignInActivity::class.java))
     }
 }

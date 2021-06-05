@@ -12,17 +12,24 @@ import android.webkit.MimeTypeMap
  */
 object Constants {
 
+    // Default Constants
+    const val DEFAULT_CURRENCY: String = "€"
+    const val DEFAULT_VEILED_ITEMS_HORIZONTAL: Int = 4
+    const val DEFAULT_VEILED_ITEMS_VERTICAL: Int = 15
+    const val DEFAULT_CART_QUANTITY: Int = 1
+    const val DEFAULT_MAX_ITEM_CART_QUANTITY: Int = 99
+
     // General Constants
     const val TAG: String = "[eMarket]"
     const val EMARKET_PREFERENCES: String = "eMarketPrefs"
 
     // Firebase Constants
     // This is used for the collection name for USERS.
-    const val COLLECTION_USERS: String = "Users"
+    const val COLLECTION_USERS: String = "users"
     const val COLLECTION_PRODUCTS: String = "Products"
     const val COLLECTION_FAVORITES: String = "favorites"
-    const val COLLECTION_NOTIFICATIONS: String = "Notifications"
-    const val COLLECTION_CARTS: String = "Carts"
+    const val COLLECTION_NOTIFICATIONS: String = "notifications"
+    const val COLLECTION_CART_ITEMS: String = "cart_items"
 
     // Fields
     const val FIELD_ADDED_BY_USER: String = "addedByUser"
@@ -49,9 +56,14 @@ object Constants {
     const val FIELD_WEIGHT: String = "weight"
     const val FIELD_WEIGHT_UNIT: String = "weightUnit"
     const val FIELD_ZIP_CODE: String = "zipCode"
+    const val FIELD_CART_QUANTITY: String = "cartQuantity"
+    const val FIELD_CART_ID: String = "cartId"
+    const val FIELD_CURRENCY: String = "curr"
 
     // Intent Extras
     const val EXTRA_PRODUCT_ID: String = "extraProductId"
+    const val EXTRA_PRODUCT_PRICE: String = "extraProductPrice"
+    const val EXTRA_IS_IN_FAVORITES: String = "extraIsInFavorites"
 
     // A unique code of image selection from Phone Storage.
     const val PICK_IMAGE_REQUEST_CODE = 2

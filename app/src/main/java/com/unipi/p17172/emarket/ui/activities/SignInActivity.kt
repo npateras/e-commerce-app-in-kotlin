@@ -13,13 +13,27 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        init()
+
+        setupClickListeners()
     }
 
-    private fun init() {
-        binding.btnSignInWithPhone.setOnClickListener{
-            val intent = Intent(this, SignInPhoneActivity::class.java)
-            startActivity(intent)
+    private fun setupClickListeners() {
+        binding.apply {
+            txtViewSignUp.setOnClickListener {
+                // Launch the sign up screen when the user clicks on the sign up text.
+                val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
+                startActivity(intent)
+            }
+            txtViewForgotPassword.setOnClickListener{
+                // Launch the forgot password screen when the user clicks on the forgot password text.
+                val intent = Intent(this@SignInActivity, ForgotPasswordActivity::class.java)
+                startActivity(intent)
+            }
+            btnSignIn.setOnClickListener{ signInUser() }
         }
+    }
+
+    private fun signInUser() {
+
     }
 }

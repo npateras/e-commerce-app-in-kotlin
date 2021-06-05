@@ -14,24 +14,36 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar_product_details" />
 
-    <androidx.core.widget.NestedScrollView
+
+    <ScrollView
         android:id="@+id/scrollView_Body"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_below="@+id/toolbar"
         android:fillViewport="true"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout_Bottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/constraintLayout_Bottom"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <com.skydoves.androidveil.VeilLayout
+                android:id="@+id/vLayout_Head"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:veilLayout_radius="8dp"
+                app:veilLayout_baseColor="@color/colorSecondary2"
+                app:veilLayout_highlightColor="@color/colorWhite"
+                app:veilLayout_baseAlpha="0.6"
+                app:veilLayout_highlightAlpha="1.0"
+                app:veilLayout_shimmerEnable="true"
+                app:veilLayout_veiled="false">
 
             <ImageView
                 android:id="@+id/imgView_Picture"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -39,146 +51,161 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_picture_wide" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@drawable/shape_container_dialog_bottom"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgView_Picture">
+            </com.skydoves.androidveil.VeilLayout>
 
+            <com.skydoves.androidveil.VeilLayout
+                android:id="@+id/vLayout_body"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:veilLayout_radius="8dp"
+                app:veilLayout_baseColor="@color/colorSecondary2"
+                app:veilLayout_highlightColor="@color/colorWhite"
+                app:veilLayout_baseAlpha="0.6"
+                app:veilLayout_highlightAlpha="1.0"
+                app:veilLayout_shimmerEnable="true"
+                app:veilLayout_veiled="false">
 
-                <TextView
-                    android:id="@+id/txtView_Price"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:fontFamily="@font/core_sans_cr_55_medium"
-                    android:gravity="end"
-                    android:text="@string/txt_loading"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/txt_font_size_header_24"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_container_dialog_bottom"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/txtView_Name" />
-
-                <TextView
-                    android:id="@+id/txtView_Name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="20dp"
-                    android:fontFamily="@font/core_sans_cr_55_medium"
-                    android:gravity="start"
-                    android:text="@string/txt_loading"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/colorSecondary"
-                    android:textSize="@dimen/txt_font_size_header_24"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/txtView_Price"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/imgView_Picture">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardView_Stock"
-                    android:layout_width="wrap_content"
-                    android:layout_height="18dp"
-                    android:layout_marginTop="9dp"
-                    app:cardBackgroundColor="@color/colorTransparent"
-                    app:cardElevation="0dp"
-                    app:layout_constraintStart_toStartOf="@+id/txtView_Name"
-                    app:layout_constraintTop_toBottomOf="@+id/txtView_Name">
+                    <TextView
+                        android:id="@+id/txtView_Price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:fontFamily="@font/core_sans_cr_55_medium"
+                        android:text="0.00"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/txt_font_size_header_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/txtView_Name" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/shape_container_weight">
+                    <TextView
+                        android:id="@+id/txtView_Name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="20dp"
+                        android:fontFamily="@font/core_sans_cr_55_medium"
+                        android:gravity="start"
+                        android:text="@string/txt_loading"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorText"
+                        android:textSize="@dimen/txt_font_size_header_24"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@+id/txtView_Price"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/txtView_Stock"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="6dp"
-                            android:layout_marginTop="1dp"
-                            android:layout_marginEnd="6dp"
-                            android:layout_marginBottom="1dp"
-                            android:fontFamily="@font/core_sans_cr_45_regular"
-                            android:gravity="center"
-                            android:textColor="@color/colorSecondary2"
-                            android:textSize="@dimen/txt_font_size_header_12"
-                            android:textStyle="bold"
-                            android:text="Out of Stock"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardView_Stock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="18dp"
+                        android:layout_marginTop="9dp"
+                        app:cardBackgroundColor="@color/colorTransparent"
+                        app:cardElevation="0dp"
+                        app:layout_constraintStart_toStartOf="@+id/txtView_Name"
+                        app:layout_constraintTop_toBottomOf="@+id/txtView_Name">
 
-                </com.google.android.material.card.MaterialCardView>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/shape_container_weight">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardView_Weight"
-                    android:layout_width="32dp"
-                    android:layout_height="18dp"
-                    android:layout_marginTop="9dp"
-                    app:cardBackgroundColor="@color/colorTransparent"
-                    app:cardElevation="0dp"
-                    app:layout_constraintEnd_toEndOf="@+id/txtView_Price"
-                    app:layout_constraintTop_toBottomOf="@+id/txtView_Price">
+                            <TextView
+                                android:id="@+id/txtView_Stock"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="6dp"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginEnd="6dp"
+                                android:layout_marginBottom="1dp"
+                                android:fontFamily="@font/core_sans_cr_45_regular"
+                                android:gravity="center"
+                                android:text="@string/txt_out_of_stock"
+                                android:textColor="@color/colorSecondary2"
+                                android:textSize="@dimen/txt_font_size_header_12"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/shape_container_weight">
+                    </com.google.android.material.card.MaterialCardView>
 
-                        <TextView
-                            android:id="@+id/txtView_Weight"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="6dp"
-                            android:layout_marginTop="1dp"
-                            android:layout_marginEnd="6dp"
-                            android:layout_marginBottom="1dp"
-                            android:fontFamily="@font/core_sans_cr_45_regular"
-                            android:gravity="center"
-                            android:textColor="@color/colorSecondary2"
-                            android:textSize="@dimen/txt_font_size_header_12"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardView_Weight"
+                        android:layout_width="32dp"
+                        android:layout_height="18dp"
+                        android:layout_marginTop="9dp"
+                        app:cardBackgroundColor="@color/colorTransparent"
+                        app:cardElevation="0dp"
+                        app:layout_constraintEnd_toEndOf="@+id/txtView_Price"
+                        app:layout_constraintTop_toBottomOf="@+id/txtView_Price">
 
-                </com.google.android.material.card.MaterialCardView>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/shape_container_weight">
+
+                            <TextView
+                                android:id="@+id/txtView_Weight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="6dp"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginEnd="6dp"
+                                android:layout_marginBottom="1dp"
+                                android:fontFamily="@font/core_sans_cr_45_regular"
+                                android:gravity="center"
+                                android:textColor="@color/colorSecondary2"
+                                android:textSize="@dimen/txt_font_size_header_12"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
 
 
-                <TextView
-                    android:id="@+id/txtView_Description"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="46dp"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/core_sans_cr_45_regular"
-                    android:gravity="start"
-                    android:text="TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/colorSecondary2"
-                    android:textSize="@dimen/txt_font_size_header_16"
-                    app:layout_constraintEnd_toEndOf="@+id/txtView_Price"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="@+id/txtView_Name"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView_Stock" />
+                    <TextView
+                        android:id="@+id/txtView_Description"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="46dp"
+                        android:ellipsize="end"
+                        android:paddingBottom="28dp"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:justificationMode="inter_word"
+                        android:text="@string/txt_no_description"
+                        android:textColor="@color/colorSecondary2"
+                        android:textSize="@dimen/txt_font_size_header_16"
+                        app:layout_constraintEnd_toEndOf="@+id/txtView_Price"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="@+id/txtView_Name"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView_Stock" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.skydoves.androidveil.VeilLayout>
 
-    </androidx.core.widget.NestedScrollView>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout_Bottom"
@@ -187,7 +214,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
+        <!-- todo: container bg -->
 
         <TextView
             android:id="@+id/txtView_Quantity"
@@ -198,9 +225,9 @@
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/core_sans_cr_55_medium"
             android:gravity="start"
-            android:text="Quantity"
+            android:text="@string/txt_quantity"
             android:textAlignment="textStart"
-            android:textColor="@color/colorSecondary"
+            android:textColor="@color/colorText"
             android:textSize="@dimen/txt_font_size_header_24"
             app:layout_constraintBottom_toTopOf="@+id/btn_Add_To_Cart"
             app:layout_constraintStart_toStartOf="parent"
@@ -213,7 +240,7 @@
             android:layout_height="30dp"
             android:layout_marginEnd="9dp"
             android:adjustViewBounds="true"
-            android:background="@drawable/ic_circle_plus"
+            android:background="@drawable/ic_minus"
             android:clickable="true"
             android:focusable="true"
             android:padding="8dp"
@@ -229,14 +256,15 @@
             android:layout_marginEnd="9dp"
             android:fontFamily="@font/core_sans_cr_55_medium"
             android:gravity="center"
-            android:text="9"
+            android:text="0"
             android:textAlignment="center"
-            android:textColor="@color/colorSecondary"
+            android:textColor="@color/colorText"
             android:textSize="@dimen/txt_font_size_header_24"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imgBtn_Minus"
             app:layout_constraintEnd_toStartOf="@+id/imgBtn_Plus"
-            app:layout_constraintTop_toTopOf="@+id/imgBtn_Minus" />
+            app:layout_constraintTop_toTopOf="@+id/imgBtn_Minus"
+            tools:ignore="HardcodedText" />
 
         <ImageButton
             android:id="@+id/imgBtn_Plus"
@@ -245,7 +273,7 @@
             android:layout_height="30dp"
             android:layout_marginEnd="20dp"
             android:adjustViewBounds="true"
-            android:background="@drawable/ic_circle_plus"
+            android:background="@drawable/ic_plus"
             android:clickable="true"
             android:focusable="true"
             android:padding="8dp"
@@ -262,7 +290,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/btn_height_medium_45"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/ripple_btn_primary_color_selector"
+            android:background="@drawable/ripple_btn_negative_color_selector"
             android:fontFamily="@font/core_sans_cr_65_bold"
             android:gravity="center"
             android:text="@string/txt_remove_from_cart"

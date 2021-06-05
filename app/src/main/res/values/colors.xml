@@ -30,6 +30,9 @@
     <color name="colorBlack">#1D2021</color>
     <color name="colorBlackDark">#0F1012</color>
 
+    <color name="colorSnackBarErrorBg">#F34949</color>
+    <color name="colorSnackBarErrorAction">#B63737</color>
+
     <color name="colorRed">#D71C32</color>
     <color name="colorRedDark">#A31526</color>
     <color name="colorRedLight">#F34949</color>

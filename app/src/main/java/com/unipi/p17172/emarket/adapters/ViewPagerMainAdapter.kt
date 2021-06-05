@@ -2,22 +2,28 @@ package com.unipi.p17172.emarket.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.Lifecycle
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.unipi.p17172.emarket.ui.fragments.FavoritesFragment
+import com.unipi.p17172.emarket.ui.fragments.HomeFragment
+import com.unipi.p17172.emarket.ui.fragments.MyAccountFragment
+import com.unipi.p17172.emarket.ui.fragments.MyCartFragment
 
-class ViewPagerMainAdapter(supportFragmentManager: FragmentManager) :
-    FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class ViewPagerMainAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
+    FragmentStateAdapter(fm, lifecycle) {
 
-    private val fragmentList = ArrayList<Fragment>()
+    private val fragmentsList:ArrayList<Fragment> = arrayListOf(
+        HomeFragment(),
+        MyCartFragment(),
+        FavoritesFragment(),
+        MyAccountFragment()
+    )
 
-    override fun getItem(position: Int): Fragment {
-        return fragmentList[position]
+    override fun getItemCount(): Int {
+        return fragmentsList.size
     }
 
-    override fun getCount(): Int {
-        return fragmentList.size
-    }
-
-    fun addFragment(fragment: Fragment) {
-        fragmentList.add(fragment)
+    override fun createFragment(position: Int): Fragment {
+        return fragmentsList[position]
     }
 }

@@ -13,6 +13,7 @@ import com.unipi.p17172.emarket.adapters.ProductsListAdapter
 import com.unipi.p17172.emarket.database.FirestoreHelper
 import com.unipi.p17172.emarket.databinding.FragmentHomeBinding
 import com.unipi.p17172.emarket.models.Product
+import com.unipi.p17172.emarket.utils.Constants
 
 
 class HomeFragment : Fragment() {
@@ -30,51 +31,53 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         init()
-        loadDeals()
-        loadPopular()
 
         return binding.root
     }
 
     private fun init() {
+        veilRecyclers()
 
+        loadDeals()
     }
 
     private fun loadDeals() {
         FirestoreHelper().getDealsList(this@HomeFragment)
     }
-
     /**
      * A function to get the successful product list from cloud firestore.
      *
      * @param productsList Will receive the product list from cloud firestore.
      */
-    fun successProductsListFromFireStore(productsList: ArrayList<Product>) {
-
-        // Hide Progress dialog.
-        // hideProgressDialog()
+    fun successDealsListFromFireStore(productsList: ArrayList<Product>) {
 
         if (productsList.size > 0) {
-            //binding.veilRecyclerViewDeals.unVeil()
             binding.veilRecyclerViewDeals.visibility = View.VISIBLE
             binding.layoutEmptyStateDeals.root.visibility = View.GONE
 
             // sets VeilRecyclerView's properties
             binding.veilRecyclerViewDeals.run {
                 setVeilLayout(R.layout.shimmer_item_product)
-                setAdapter(ProductsListAdapter(requireActivity(), productsList, this@HomeFragment))
+                setAdapter(
+                    ProductsListAdapter(
+                        requireActivity(),
+                        productsList,
+                        this@HomeFragment
+                    )
+                )
                 setLayoutManager(LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false))
                 getRecyclerView().setHasFixedSize(true)
-                addVeiledItems(15)
+                addVeiledItems(Constants.DEFAULT_VEILED_ITEMS_HORIZONTAL)
                 // delay-auto-unveil
                 Handler(Looper.getMainLooper()).postDelayed(
                     {
-                        unVeil()
+                        unveilRecyclers()
                     },
                     1000
                 )
             }
         } else {
+            unveilRecyclers()
             binding.veilRecyclerViewDeals.visibility = View.INVISIBLE
             binding.layoutEmptyStateDeals.root.visibility = View.VISIBLE
         }
@@ -84,10 +87,26 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun veilRecyclers() {
+        binding.apply {
+            veilRecyclerViewDeals.veil()
+            veilRecyclerViewPopular.veil()
+
+            veilRecyclerViewDeals.addVeiledItems(Constants.DEFAULT_VEILED_ITEMS_HORIZONTAL)
+            veilRecyclerViewPopular.addVeiledItems(Constants.DEFAULT_VEILED_ITEMS_HORIZONTAL)
+        }
+    }
+    private fun unveilRecyclers() {
+        binding.apply {
+            veilRecyclerViewDeals.unVeil()
+            veilRecyclerViewPopular.unVeil()
+        }
+    }
+
     override fun onResume() {
         super.onResume()
 
-        loadDeals()
+        init()
     }
 
     override fun onDestroyView() {

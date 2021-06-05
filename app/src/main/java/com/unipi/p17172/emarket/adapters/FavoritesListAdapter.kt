@@ -4,13 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.unipi.p17172.emarket.R
-import com.unipi.p17172.emarket.database.FirestoreHelper
-import com.unipi.p17172.emarket.database.FirestoreHelper.IsFavoriteCallback
-import com.unipi.p17172.emarket.databinding.RecyclerItemProductBinding
-import com.unipi.p17172.emarket.models.Product
+import com.unipi.p17172.emarket.databinding.RecyclerItemProductWideFavoritesBinding
+import com.unipi.p17172.emarket.models.Favorite
 import com.unipi.p17172.emarket.ui.activities.ProductDetailsActivity
 import com.unipi.p17172.emarket.utils.Constants
 import com.unipi.p17172.emarket.utils.GlideLoader
@@ -19,11 +16,10 @@ import com.unipi.p17172.emarket.utils.GlideLoader
 /**
  * A adapter class for products list items.
  */
-open class ProductsListAdapter(
+open class FavoritesListAdapter(
     private val context: Context,
-    private var list: ArrayList<Product>,
-    private val fragment: Fragment
-) : RecyclerView.Adapter<ProductsListAdapter.ProductsViewHolder>() {
+    private var list: ArrayList<Favorite>
+) : RecyclerView.Adapter<FavoritesListAdapter.FavoritesViewHolder>() {
 
     /**
      * Inflates the item views which is designed in xml layout file
@@ -31,12 +27,13 @@ open class ProductsListAdapter(
      * create a new
      * {@link ProductsViewHolder} and initializes some private fields to be used by RecyclerView.
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsViewHolder {
-        return ProductsViewHolder(
-            RecyclerItemProductBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesViewHolder {
+        return FavoritesViewHolder(
+            RecyclerItemProductWideFavoritesBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false)
+                false
+            )
         )
     }
 
@@ -50,39 +47,23 @@ open class ProductsListAdapter(
      * of the given type. You can either create a new View manually or inflate it from an XML
      * layout file.
      */
-    override fun onBindViewHolder(holder: ProductsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavoritesViewHolder, position: Int) {
         val model = list[position]
-        var isInFavorites = false
 
         holder.binding.apply {
-            // Check if user has this item in their favorites
-            FirestoreHelper().isFavorite(model.id, object : IsFavoriteCallback {
-                override fun onCallback(isFavorite: Boolean) {
-                    if (isFavorite) {
-                        checkboxFavorite.isChecked = true
-                        isInFavorites = true
-                    }
-                }
-            })
-            GlideLoader(context).loadProductPictureWide(model.iconUrl, imgViewIcon)
+            GlideLoader(context).loadProductPictureWide(model.iconUrl, imgViewProduct)
             txtViewName.text = model.name
             txtViewPrice.text = String.format(
                 context.getString(R.string.txt_format_price),
                 context.getString(R.string.curr_eur),
                 model.price
             )
-            txtViewWeight.text = String.format(
-                context.getString(R.string.txt_format_weight),
-                model.weight,
-                model.weightUnit
-            )
         }
         holder.itemView.setOnClickListener {
             // Launch Product details screen.
             val intent = Intent(context, ProductDetailsActivity::class.java)
             intent.putExtra(Constants.EXTRA_PRODUCT_ID, model.id)
-            intent.putExtra(Constants.EXTRA_PRODUCT_PRICE, Constants.DEFAULT_CURRENCY + model.price)
-            intent.putExtra(Constants.EXTRA_IS_IN_FAVORITES, isInFavorites)
+            intent.putExtra(Constants.EXTRA_IS_IN_FAVORITES, true) // true : since we are already in favorites.
             context.startActivity(intent)
         }
     }
@@ -97,5 +78,5 @@ open class ProductsListAdapter(
     /**
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      */
-    class ProductsViewHolder(val binding: RecyclerItemProductBinding) : RecyclerView.ViewHolder(binding.root)
+    class FavoritesViewHolder(val binding: RecyclerItemProductWideFavoritesBinding) : RecyclerView.ViewHolder(binding.root)
 }
