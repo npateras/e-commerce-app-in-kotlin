@@ -51,6 +51,8 @@
         personal details</string>
     <string name="txt_no_notifications">No notifications!</string>
     <string name="txt_no_notifications_2">New notifications will appear here.</string>
+    <string name="txt_login">Login</string>
+    <string name="txt_register">Register</string>
     <string name="txt_no_orders">No orders found!</string>
     <string name="txt_no_orders_2">You have no pending or previous orders.</string>
     <string name="txt_no_orders_pending">You have no pending or previous orders.</string>
@@ -85,7 +87,7 @@
     <string name="txt_profile">Profile</string>
     <string name="txt_first_name">First name</string>
     <string name="txt_last_name">Last name</string>
-    <string name="txt_phone_number">Phone number</string>
+    <string name="txt_phone_number">Phone Number</string>
     <string name="txt_street_address">Street address</string>
     <string name="txt_zip_code">Zip code</string>
     <string name="txt_country">Country</string>
@@ -101,7 +103,14 @@
     <string name="txt_error_selecting_below_zero">You can\'t select a negative value.</string>
     <string name="txt_error_max_quantity">Max selectable quantity is 99.</string>
     <string name="txt_error_max_stock">Maximum quantity stock reached.</string>
-
+    <string name="txt_error_registration_failed">An error has occurred with registration, please contact our support team.</string>
+    <string name="txt_error_empty_name">Please enter your full name.</string>
+    <string name="txt_error_empty_password">Please enter your password.</string>
+    <string name="txt_error_empty_email">Please enter your email.</string>
+    <string name="txt_please_wait">Please wait…</string>
+    <string name="txt_please_click_back_again_to_exit">Please click back again to exit.</string>
+    <string name="txt_password_reset_mail_sent">Email sent successfully to reset your password!</string>
+    <string name="txt_format_phone">+%1$s %2$s</string>
 
     <!-- Input Texts -->
     <string name="input_txt_hint_phone_number">Your mobile number</string>
@@ -161,7 +170,6 @@
     <string name="drawer_nav_bar_item_settings">Settings</string>
     <string name="drawer_nav_bar_item_exit">Exit</string>
 
-
     <string name="input_txt_hint_dash">-</string>
     <string name="txt_account_info">Account Info</string>
     <string name="txt_edit_profile">Edit Profile</string>
@@ -181,6 +189,20 @@
     <string name="input_txt_hint_name">Your name</string>
     <string name="txt_enter_email_address_to_send_reset_code">Enter email address to send reset code.</string>
     <string name="txt_password_reset">Password Reset</string>
+    <string name="txt_already_have_an_account">Already have an account? <b>Sign In</b></string>
+    <string name="txt_don_t_have_an_account">Don\'t have an account? <b>Sign Up</b></string>
+    <string name="txt_update_profile">Update Profile</string>
+    <string name="txt_must_sign_in_2">You must sign in to see your profile.</string>
+    <string name="txt_must_sign_in">Sign In!</string>
+    <string name="txt_sign_out">Sign Out</string>
+    <string name="txt_full_name">Full Name</string>
+    <string name="txt_email">Email</string>
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="notification_favorites">Favorites</string>
+    <string name="notification_channel_desc">Notifies you when an item in your favorites is back in stock!</string>
+    <string name="notification_payload_fav_title">%1$s: Stock updated!</string>
+    <string name="notification_payload_fav_body">%1$s is now available in stock 😍</string>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 </resources>

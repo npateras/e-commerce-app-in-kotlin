@@ -86,7 +86,6 @@
         android:layout_gravity="start"
         app:itemIconTint="@color/colorPrimary"
         app:itemTextColor="@drawable/selector_drawer_item_color"
-        app:headerLayout="@layout/nav_drawer_header_not_signed_in"
         app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

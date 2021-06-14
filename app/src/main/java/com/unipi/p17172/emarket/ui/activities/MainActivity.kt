@@ -5,23 +5,28 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.unipi.p17172.emarket.R
 import com.unipi.p17172.emarket.adapters.ViewPagerMainAdapter
+import com.unipi.p17172.emarket.database.FirestoreHelper
 import com.unipi.p17172.emarket.databinding.ActivityMainBinding
+import com.unipi.p17172.emarket.models.User
+import com.unipi.p17172.emarket.service.MyFirebaseMessagingService
+import com.unipi.p17172.emarket.utils.Constants
 import java.util.*
 
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -31,14 +36,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setUpUI()
+        setupUI()
 
         init()
     }
 
-    private fun setUpUI() {
+    private fun setupUI() {
         setUpTabs()
         setUpActionBar()
+        setupNavDrawer()
     }
 
      private fun setUpActionBar() {
@@ -49,28 +55,48 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             it.displayOptions = DISPLAY_SHOW_CUSTOM
             it.setCustomView(R.layout.toolbar_activity_main)
         }
-
-        setupNavDrawer()
     }
 
     private fun setupNavDrawer() {
-        val toggle = ActionBarDrawerToggle(
-            this, binding.drawerLayout, binding.toolbar.root,
-            R.string.nav_drawer_close, R.string.nav_drawer_close
-        )
-        binding.drawerLayout.addDrawerListener(toggle)
-        // Change drawer arrow icon
-        toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.colorTabSelected)
-        // Set navigation arrow icon
-        toggle.setHomeAsUpIndicator(R.drawable.ic_list)
-        toggle.syncState()
+        binding.apply {
+            val toggle = ActionBarDrawerToggle(
+                this@MainActivity, drawerLayout, toolbar.root,
+                R.string.nav_drawer_close, R.string.nav_drawer_close
+            )
+            drawerLayout.addDrawerListener(toggle)
+            // Change drawer arrow icon
+            toggle.drawerArrowDrawable.color =
+                ContextCompat.getColor(this@MainActivity, R.color.colorTabSelected)
+            // Set navigation arrow icon
+            toggle.setHomeAsUpIndicator(R.drawable.ic_list)
+            toggle.syncState()
 
-        binding.navView.setNavigationItemSelectedListener(this)
-        binding.navView.setCheckedItem(R.id.nav_drawer_item_products)
+            if (FirestoreHelper().getCurrentUserID().isEmpty()) {
+                navView.inflateHeaderView(R.layout.nav_drawer_header_not_signed_in)
+                navView.getHeaderView(0)
+                    .findViewById<MaterialButton>(R.id.btn_NavView_Sign_In)
+                    .setOnClickListener{ goToSignInActivity(this@MainActivity) }
+            }
+            else {
+                navView.inflateHeaderView(R.layout.nav_drawer_header_signed_in)
+                FirestoreHelper().getUserDetails(this@MainActivity)
+                /*navView.getHeaderView(0).apply {
+                    findViewById<TextView>(R.id.navDrawer_SignedIn_Full_Name)
+                        .setText()
+                    findViewById<TextView>(R.id.navDrawer_SignedIn_Email)
+                        .setText()
+                }*/
+
+            }
+            navView.setNavigationItemSelectedListener(this@MainActivity)
+            navView.setCheckedItem(R.id.nav_drawer_item_products)
+        }
     }
 
     private fun init() {
-
+        if (FirestoreHelper().getCurrentUserID() != "") {
+            FirestoreHelper().getUserFCMRegistrationToken(this)
+        }
     }
 
     private fun setUpTabs() {
@@ -80,7 +106,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             viewPagerHomeActivity.adapter = adapter
 
             TabLayoutMediator(tabs, viewPagerHomeActivity){tab, position ->
-                Log.e("pos", position.toString())
                 when (position) {
                     0 -> tab.setIcon(R.drawable.ic_food_stand)
                     1 -> tab.setIcon(R.drawable.ic_shopping_cart)
@@ -140,5 +165,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val drawer = findViewById<DrawerLayout>(R.id.drawer_Layout)
         drawer.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    fun userDetailsSuccess(userInfo: User) {
+        binding.apply {
+            navView.getHeaderView(0).apply {
+                findViewById<TextView>(R.id.navDrawer_SignedIn_Full_Name)
+                    .text = userInfo.fullName
+                findViewById<TextView>(R.id.navDrawer_SignedIn_Email)
+                    .text = userInfo.email
+            }
+        }
+    }
+
+    fun userFcmRegistrationTokenSuccess(token: String) {
+        MyFirebaseMessagingService.addTokenToFirestore(token)
+        Log.e(Constants.TAG, "New token: $token")
+    }
+
+    override fun onBackPressed() {
+        doubleBackToExit()
     }
 }

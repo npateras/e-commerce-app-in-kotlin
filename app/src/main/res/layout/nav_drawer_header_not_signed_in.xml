@@ -42,7 +42,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txt_Header_1" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_Sign_In"
+            android:id="@+id/btn_NavView_Sign_In"
             style="@style/ButtonStyle.White"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/btn_height_small_37"

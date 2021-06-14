@@ -20,6 +20,7 @@ class SnackBarErrorClass(
         getView().setPadding(0, 0, 0, 0)
         getView().findViewById<MaterialButton>(R.id.btn_Dismiss).setOnClickListener { dismiss() }
         animationMode = ANIMATION_MODE_SLIDE
+        behavior = Constants.SNACKBAR_BEHAVIOR
     }
 
     companion object {

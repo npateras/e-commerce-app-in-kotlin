@@ -81,7 +81,6 @@ open class ProductsListAdapter(
             // Launch Product details screen.
             val intent = Intent(context, ProductDetailsActivity::class.java)
             intent.putExtra(Constants.EXTRA_PRODUCT_ID, model.id)
-            intent.putExtra(Constants.EXTRA_PRODUCT_PRICE, Constants.DEFAULT_CURRENCY + model.price)
             intent.putExtra(Constants.EXTRA_IS_IN_FAVORITES, isInFavorites)
             context.startActivity(intent)
         }

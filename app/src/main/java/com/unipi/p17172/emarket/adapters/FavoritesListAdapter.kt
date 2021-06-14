@@ -51,7 +51,7 @@ open class FavoritesListAdapter(
         val model = list[position]
 
         holder.binding.apply {
-            GlideLoader(context).loadProductPictureWide(model.iconUrl, imgViewProduct)
+            GlideLoader(context).loadProductPictureWide(model.imgUrl, imgViewProduct)
             txtViewName.text = model.name
             txtViewPrice.text = String.format(
                 context.getString(R.string.txt_format_price),
@@ -62,7 +62,7 @@ open class FavoritesListAdapter(
         holder.itemView.setOnClickListener {
             // Launch Product details screen.
             val intent = Intent(context, ProductDetailsActivity::class.java)
-            intent.putExtra(Constants.EXTRA_PRODUCT_ID, model.id)
+            intent.putExtra(Constants.EXTRA_PRODUCT_ID, model.productId)
             intent.putExtra(Constants.EXTRA_IS_IN_FAVORITES, true) // true : since we are already in favorites.
             context.startActivity(intent)
         }

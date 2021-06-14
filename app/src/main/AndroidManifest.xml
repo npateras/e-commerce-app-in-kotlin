@@ -16,11 +16,29 @@
         android:usesCleartextTraffic="true"
         android:fullBackupContent="@xml/backup_descriptor">
 
+        <!-- [START fcm_default_icon] -->
+        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+             See README(https://goo.gl/l4GJaQ) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_stat_name" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <!-- [END fcm_default_icon] -->
+        <!-- [START fcm_default_channel] -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+        <!-- [END fcm_default_channel] -->
+
         <!-- Splash Screen Activity -->
         <activity
             android:name="com.unipi.p17172.emarket.ui.activities.SplashActivity"
             android:theme="@style/Theme.EMarket.NoActionBar"
-            android:screenOrientation="fullSensor">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,6 +60,11 @@
             android:theme="@style/Theme.EMarket.NoActionBar3"
             android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
 
+            <intent-filter>
+                <action android:name="ProductDetailsActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
@@ -59,17 +82,25 @@
                 android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
         </activity>
 
-        <!-- Sign in activity -->
+        <!-- Sign In activity -->
         <activity
             android:name="com.unipi.p17172.emarket.ui.activities.SignInActivity"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.EMarket.NoActionBar2"/>
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar4"
+            android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
 
-        <!-- Sign in with phone number activity -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
+        </activity>
+
+        <!-- Sign Up activity -->
         <activity
-            android:name="com.unipi.p17172.emarket.ui.activities.SignInPhoneActivity"
-            android:label="@string/label_activity_sign_in_with_phone_number"
+            android:name="com.unipi.p17172.emarket.ui.activities.SignUpActivity"
             android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar4"
             android:parentActivityName="com.unipi.p17172.emarket.ui.activities.SignInActivity">
 
             <meta-data
@@ -77,22 +108,43 @@
                 android:value="com.unipi.p17172.emarket.ui.activities.SignInActivity" />
         </activity>
 
-        <!-- Phone number registration activity -->
+        <!-- Forgot Password activity -->
         <activity
-            android:name="com.unipi.p17172.emarket.ui.activities.SignInPhoneVerificationActivity"
-            android:label="@string/label_activity_sign_in_with_phone_number_verification"
-            android:parentActivityName="com.unipi.p17172.emarket.ui.activities.SignInPhoneActivity">
+            android:name="com.unipi.p17172.emarket.ui.activities.ForgotPasswordActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar4"
+            android:parentActivityName="com.unipi.p17172.emarket.ui.activities.SignInActivity">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.unipi.p17172.emarket.ui.activities.SignInPhoneActivity" />
+                android:value="com.unipi.p17172.emarket.ui.activities.SignInActivity" />
         </activity>
 
-        <!-- Fill your account information after phone number verification activity -->
+        <!-- Update Profile activity -->
         <activity
-            android:name="com.unipi.p17172.emarket.ui.activities.FillAccInfoActivity"
+            android:name="com.unipi.p17172.emarket.ui.activities.UpdateProfileActivity"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.EMarket.NoActionBar2" />
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar4"
+            android:parentActivityName="com.unipi.p17172.emarket.ui.activities.SignInActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.unipi.p17172.emarket.ui.activities.SignInActivity" />
+        </activity>
+
+        <!-- [START firebase_service] -->
+        <service
+            android:name=".service.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <!-- [END firebase_service] -->
+
+        <receiver android:name=".service.NotificationReceiver"/>
     </application>
 
 </manifest>

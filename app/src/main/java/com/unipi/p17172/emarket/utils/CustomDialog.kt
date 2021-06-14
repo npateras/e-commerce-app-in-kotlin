@@ -20,7 +20,7 @@ class CustomDialog {
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
             dialog.window?.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL, WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL)
-            dialog.setContentView(R.layout.dialog_number_verified)
+            dialog.setContentView(R.layout.snackbar_sign_up_success)
             val btnDismiss = dialog.findViewById<TextView>(R.id.btn_Try_Again)
             btnDismiss?.setOnClickListener { dialog.dismiss() }
             dialog.show()
@@ -38,7 +38,7 @@ class CustomDialog {
             val dialog = BottomSheetDialog(activity)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setCancelable(false)
-            dialog.setContentView(R.layout.dialog_number_verified)
+            dialog.setContentView(R.layout.snackbar_sign_up_success)
 
             val btnTryAgain = dialog.findViewById<TextView>(R.id.btn_Try_Again)
             btnTryAgain?.setOnClickListener {

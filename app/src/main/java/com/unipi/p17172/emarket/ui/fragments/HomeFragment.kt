@@ -52,8 +52,12 @@ class HomeFragment : Fragment() {
     fun successDealsListFromFireStore(productsList: ArrayList<Product>) {
 
         if (productsList.size > 0) {
-            binding.veilRecyclerViewDeals.visibility = View.VISIBLE
-            binding.layoutEmptyStateDeals.root.visibility = View.GONE
+
+            // Show the recycler and remove the empty state layout completely.
+            binding.apply {
+                veilRecyclerViewDeals.visibility = View.VISIBLE
+                layoutEmptyStateDeals.root.visibility = View.GONE
+            }
 
             // sets VeilRecyclerView's properties
             binding.veilRecyclerViewDeals.run {
@@ -78,11 +82,16 @@ class HomeFragment : Fragment() {
             }
         } else {
             unveilRecyclers()
-            binding.veilRecyclerViewDeals.visibility = View.INVISIBLE
-            binding.layoutEmptyStateDeals.root.visibility = View.VISIBLE
+            // Hide the recycler and show the empty state layout.
+            binding.apply {
+                veilRecyclerViewDeals.visibility = View.INVISIBLE
+                layoutEmptyStateDeals.root.visibility = View.VISIBLE
+            }
+
         }
     }
 
+    // todo
     private fun loadPopular() {
 
     }

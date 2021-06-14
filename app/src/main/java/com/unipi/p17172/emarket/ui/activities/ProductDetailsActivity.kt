@@ -26,7 +26,6 @@ class ProductDetailsActivity : BaseActivity() {
     private lateinit var modelCart: Cart
 
     private var productId: String = ""
-    private var productPrice: String = ""
     private var isInFavorites: Boolean = false
     private var cartId: String = ""
     private val userId = FirestoreHelper().getCurrentUserID()
@@ -47,11 +46,6 @@ class ProductDetailsActivity : BaseActivity() {
         if (intent.hasExtra(Constants.EXTRA_PRODUCT_ID)) {
             productId =
                 intent.getStringExtra(Constants.EXTRA_PRODUCT_ID)!!
-        }
-
-        if (intent.hasExtra(Constants.EXTRA_PRODUCT_PRICE)) {
-            productPrice =
-                intent.getStringExtra(Constants.EXTRA_PRODUCT_PRICE)!!
         }
 
         if (intent.hasExtra(Constants.EXTRA_IS_IN_FAVORITES)) {
@@ -135,7 +129,11 @@ class ProductDetailsActivity : BaseActivity() {
             )
             txtViewName.text = product.name
             txtViewDescription.text = product.description
-            txtViewPrice.text = productPrice
+            txtViewPrice.text = String.format(
+                getString(R.string.txt_format_price),
+                Constants.DEFAULT_CURRENCY,
+                product.price
+            )
             txtViewWeight.text = String.format(
                 getString(R.string.txt_format_weight),
                 product.weight,

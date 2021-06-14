@@ -35,8 +35,8 @@
         <include
             android:id="@+id/layout_Empty_State"
             layout="@layout/layout_empty_state_favorites"
-            android:layout_width="0dp"
-            android:layout_height="160dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingStart="16dp"
             android:paddingEnd="0dp"

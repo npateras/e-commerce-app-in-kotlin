@@ -16,7 +16,7 @@ data class Favorite(
     val dateAdded: Date = Date(),
     var userId: String = "",
     var productId: String = "",
-    val iconUrl: String = "",
+    val imgUrl: String = "",
     val name: String = "",
     val price: Double = 0.00,
     val sale: Float = 0f,
