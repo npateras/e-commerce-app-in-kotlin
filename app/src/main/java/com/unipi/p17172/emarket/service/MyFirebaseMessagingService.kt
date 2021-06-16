@@ -41,7 +41,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             data[Constants.PAYLOAD_PRODUCT_NAME])
 
         val resultIntent = Intent(this@MyFirebaseMessagingService, ProductDetailsActivity::class.java).run {
-            putExtra(Constants.EXTRA_PRODUCT_ID, data[Constants.EXTRA_PRODUCT_ID])
+            putExtra(Constants.EXTRA_PRODUCT_ID, data[Constants.PAYLOAD_PRODUCT_ID])
             putExtra(Constants.EXTRA_IS_IN_FAVORITES, true)
         }
 
@@ -55,7 +55,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         // Action broadcasters
         val cancelIntent = Intent(this, NotificationReceiver::class.java).run {
-            putExtra("extraNotificationId", Constants.NOTIFICATION_ID);
+            putExtra(Constants.EXTRA_NOTIFICATION_ID, Constants.NOTIFICATION_ID)
         }
         val cancelPendingIntent =
             PendingIntent.getBroadcast(this, Constants.NOTIFICATION_ID, cancelIntent, PendingIntent.FLAG_CANCEL_CURRENT)
@@ -71,12 +71,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val defaultSoundUri: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
         val notification: Notification = NotificationCompat.Builder(this@MyFirebaseMessagingService, Constants.NOTIFICATION_CHANNEL_ID)
-            .setOngoing(true)
+            .setOngoing(false)
             .setSmallIcon(getNotificationIcon())
             .setAutoCancel(true)
             .setContentIntent(resultPendingIntent)
-            .addAction(R.drawable.ic_heart, "READ", cancelPendingIntent) // todo
-            .addAction(R.drawable.ic_heart, "ADD TO CART", cancelPendingIntent) // todo
+            .addAction(R.drawable.ic_heart, getString(R.string.notification_mark_as_read), cancelPendingIntent) // todo
+            .addAction(R.drawable.ic_heart, getString(R.string.notification_add_to_cart), cancelPendingIntent) // todo
             .setLargeIcon(imgBitmap)
             .setGroup(Constants.GROUP_KEY_FAVORITES)
             .setStyle(NotificationCompat.BigPictureStyle()

@@ -12,10 +12,7 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
-import com.unipi.p17172.emarket.models.Cart
-import com.unipi.p17172.emarket.models.Favorite
-import com.unipi.p17172.emarket.models.Product
-import com.unipi.p17172.emarket.models.User
+import com.unipi.p17172.emarket.models.*
 import com.unipi.p17172.emarket.ui.activities.*
 import com.unipi.p17172.emarket.ui.fragments.FavoritesFragment
 import com.unipi.p17172.emarket.ui.fragments.HomeFragment
@@ -157,6 +154,51 @@ class FirestoreHelper {
 
                 // Here we have created a new instance for Products ArrayList.
                 val productsList: ArrayList<Product> = ArrayList()
+
+                // A for loop as per the list of documents to convert them into Products ArrayList.
+                for (i in document.documents) {
+
+                    val product = i.toObject(Product::class.java)
+                    product!!.id = i.id
+
+                    productsList.add(product)
+                }
+                when (fragment) {
+                    is HomeFragment -> {
+                        fragment.successDealsListFromFireStore(productsList)
+                    }
+                    else -> {}
+                }
+            }
+            .addOnFailureListener { e ->
+                // Hide the progress dialog if there is any error based on the base class instance.
+                when (fragment) {
+                    is HomeFragment -> {
+                        // TODO: Show error state maybe
+                    }
+                }
+
+                Log.e("Get Product List", "Error while getting product list.", e)
+            }
+    }
+
+    /**
+     * A function to get the products list from cloud firestore that are on sale.
+     *
+     * @param fragment The fragment is passed as parameter as the function is called from fragment and need to the success result.
+     */
+    fun getCategoriesList(activity: Activity) {
+        // The collection name for PRODUCTS
+        dbFirestore.collection(Constants.COLLECTION_CATEGORIES)
+            .orderBy(Constants.FIELD_NAME, Query.Direction.DESCENDING)
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+
+                // Here we get the list of boards in the form of documents.
+                Log.d("Categories List", document.documents.toString())
+
+                // Here we have created a new instance for Products ArrayList.
+                val categoriesList: ArrayList<Category> = ArrayList()
 
                 // A for loop as per the list of documents to convert them into Products ArrayList.
                 for (i in document.documents) {

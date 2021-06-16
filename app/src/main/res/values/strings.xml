@@ -198,11 +198,19 @@
     <string name="txt_full_name">Full Name</string>
     <string name="txt_email">Email</string>
 
+
+    // Categories
+    <string name="txt_all_categories">All Categories</string>
+
+
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="notification_favorites">Favorites</string>
     <string name="notification_channel_desc">Notifies you when an item in your favorites is back in stock!</string>
     <string name="notification_payload_fav_title">%1$s: Stock updated!</string>
     <string name="notification_payload_fav_body">%1$s is now available in stock 😍</string>
+    <string name="notification_add_to_cart">Add to cart</string>
+    <string name="notification_mark_as_read">Mark as read</string>
+
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 </resources>

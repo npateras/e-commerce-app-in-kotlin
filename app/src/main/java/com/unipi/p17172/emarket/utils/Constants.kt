@@ -36,6 +36,7 @@ object Constants {
     // Firebase Constants
     // This is used for the collection name for USERS.
     const val COLLECTION_USERS: String = "users"
+    const val COLLECTION_CATEGORIES: String = "categories"
     const val COLLECTION_PRODUCTS: String = "Products"
     const val COLLECTION_PRODUCTS2: String = "products"
     const val COLLECTION_FAVORITES: String = "favorites"
@@ -73,11 +74,12 @@ object Constants {
 
     // Intent Extras
     const val EXTRA_PRODUCT_ID: String = "extraProductId"
-    const val EXTRA_PRODUCT_PRICE: String = "extraProductPrice"
     const val EXTRA_IS_IN_FAVORITES: String = "extraIsInFavorites"
     const val EXTRA_REG_USERS_SNACKBAR: String = "extraShowRegisteredUserSnackbar"
     const val EXTRA_PROFILE_NOT_COMPLETED_SNACKBAR: String = "extraShowProfileNotCompletedSnackbar"
     const val EXTRA_USER_EMAIL: String = "extraUserEmail"
+    const val EXTRA_CATEGORY_ID: String = "extraCategoryId"
+    const val EXTRA_NOTIFICATION_ID: String = "extraNotificationId"
 
     const val PAYLOAD_PRODUCT_ID: String = "PRODUCT_ID"
     const val PAYLOAD_PRODUCT_IMG_URL: String = "PRODUCT_IMG_URL"

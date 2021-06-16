@@ -34,105 +34,119 @@
             android:value="@string/default_notification_channel_id" />
         <!-- [END fcm_default_channel] -->
 
-        <!-- Splash Screen Activity -->
-        <activity
-            android:name="com.unipi.p17172.emarket.ui.activities.SplashActivity"
-            android:theme="@style/Theme.EMarket.NoActionBar"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <!-- region [START Activities] -->
+            <!-- Splash Screen Activity -->
+            <activity
+                android:name="com.unipi.p17172.emarket.ui.activities.SplashActivity"
+                android:theme="@style/Theme.EMarket.NoActionBar"
+                android:screenOrientation="portrait">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+            </activity>
 
-        <!-- Home/Main Activity -->
-        <activity
-            android:name="com.unipi.p17172.emarket.ui.activities.MainActivity"
-            android:label="@string/title_activity_home"
-            android:theme="@style/Theme.EMarket.NoActionBar3">
-        </activity>
+            <!-- Home/Main Activity -->
+            <activity
+                android:name="com.unipi.p17172.emarket.ui.activities.MainActivity"
+                android:label="@string/title_activity_home"
+                android:theme="@style/Theme.EMarket.NoActionBar3">
+            </activity>
 
-        <!-- Product Details Activity -->
-        <activity
-            android:name="com.unipi.p17172.emarket.ui.activities.ProductDetailsActivity"
-            android:label=""
-            android:theme="@style/Theme.EMarket.NoActionBar3"
-            android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
+            <!-- Product Details Activity -->
+            <activity
+                android:name="com.unipi.p17172.emarket.ui.activities.ProductDetailsActivity"
+                android:label=""
+                android:theme="@style/Theme.EMarket.NoActionBar3"
+                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
 
-            <intent-filter>
-                <action android:name="ProductDetailsActivity"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+                <intent-filter>
+                    <action android:name="ProductDetailsActivity"/>
+                    <category android:name="android.intent.category.DEFAULT"/>
+                </intent-filter>
 
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
-        </activity>
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
+            </activity>
 
-        <!-- Notifications Activity -->
-        <activity
-            android:name="com.unipi.p17172.emarket.ui.activities.NotificationsActivity"
-            android:label="@string/label_activity_notifications"
-            android:theme="@style/Theme.EMarket.NoActionBar3"
-            android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
+            <!-- Notifications Activity -->
+            <activity
+                android:name="com.unipi.p17172.emarket.ui.activities.NotificationsActivity"
+                android:label="@string/label_activity_notifications"
+                android:theme="@style/Theme.EMarket.NoActionBar3"
+                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
 
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
-        </activity>
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
+            </activity>
 
-        <!-- Sign In activity -->
-        <activity
-            android:name="com.unipi.p17172.emarket.ui.activities.SignInActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/Theme.EMarket.NoActionBar4"
-            android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
+            <!-- Sign In activity -->
+            <activity
+                android:name="com.unipi.p17172.emarket.ui.activities.SignInActivity"
+                android:launchMode="singleTask"
+                android:windowSoftInputMode="adjustResize"
+                android:theme="@style/Theme.EMarket.NoActionBar4"
+                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
 
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
-        </activity>
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
+            </activity>
 
-        <!-- Sign Up activity -->
-        <activity
-            android:name="com.unipi.p17172.emarket.ui.activities.SignUpActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/Theme.EMarket.NoActionBar4"
-            android:parentActivityName="com.unipi.p17172.emarket.ui.activities.SignInActivity">
+            <!-- Sign Up activity -->
+            <activity
+                android:name="com.unipi.p17172.emarket.ui.activities.SignUpActivity"
+                android:launchMode="singleTask"
+                android:windowSoftInputMode="adjustResize"
+                android:theme="@style/Theme.EMarket.NoActionBar4"
+                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.SignInActivity">
 
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.unipi.p17172.emarket.ui.activities.SignInActivity" />
-        </activity>
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.unipi.p17172.emarket.ui.activities.SignInActivity" />
+            </activity>
 
-        <!-- Forgot Password activity -->
-        <activity
-            android:name="com.unipi.p17172.emarket.ui.activities.ForgotPasswordActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/Theme.EMarket.NoActionBar4"
-            android:parentActivityName="com.unipi.p17172.emarket.ui.activities.SignInActivity">
+            <!-- Forgot Password activity -->
+            <activity
+                android:name="com.unipi.p17172.emarket.ui.activities.ForgotPasswordActivity"
+                android:launchMode="singleTask"
+                android:windowSoftInputMode="adjustResize"
+                android:theme="@style/Theme.EMarket.NoActionBar4"
+                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.SignInActivity">
 
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.unipi.p17172.emarket.ui.activities.SignInActivity" />
-        </activity>
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.unipi.p17172.emarket.ui.activities.SignInActivity" />
+            </activity>
 
-        <!-- Update Profile activity -->
-        <activity
-            android:name="com.unipi.p17172.emarket.ui.activities.UpdateProfileActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/Theme.EMarket.NoActionBar4"
-            android:parentActivityName="com.unipi.p17172.emarket.ui.activities.SignInActivity">
+            <!-- Update Profile activity -->
+            <activity
+                android:name="com.unipi.p17172.emarket.ui.activities.UpdateProfileActivity"
+                android:launchMode="singleTask"
+                android:windowSoftInputMode="adjustResize"
+                android:theme="@style/Theme.EMarket.NoActionBar4"
+                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.SignInActivity">
 
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.unipi.p17172.emarket.ui.activities.SignInActivity" />
-        </activity>
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.unipi.p17172.emarket.ui.activities.SignInActivity" />
+            </activity>
+            <!-- All Categories activity -->
+            <activity
+                android:name="com.unipi.p17172.emarket.ui.activities.AllCategoriesActivity"
+                android:launchMode="singleTask"
+                android:windowSoftInputMode="adjustResize"
+                android:theme="@style/Theme.EMarket.NoActionBar3"
+                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
+
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
+            </activity>
+        <!-- endregion [END Activities] -->
 
         <!-- [START firebase_service] -->
         <service
