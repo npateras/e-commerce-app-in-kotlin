@@ -15,5 +15,5 @@ data class Category(
     val name: String = "",
     val imgUrl: String = "",
     val description: String = "",
-    val categoryId: String = "",
+    var categoryId: String = "",
 ) : Parcelable

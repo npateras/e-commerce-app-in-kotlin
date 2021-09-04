@@ -80,10 +80,18 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun goToSignInActivity(context: Context, showRegisteredSnackBar: Boolean, userEmail: String) {
-
         val intent = Intent(context, SignInActivity::class.java)
         intent.putExtra(Constants.EXTRA_REG_USERS_SNACKBAR, showRegisteredSnackBar)
         intent.putExtra(Constants.EXTRA_USER_EMAIL, userEmail)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        finish()
+        startActivity(intent)
+    }
+
+
+    fun goToListProductsActivity(context: Context, filter: String) {
+        val intent = Intent(context, ListProductsActivity::class.java)
+        intent.putExtra(Constants.EXTRA_FILTER, filter)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         finish()
         startActivity(intent)

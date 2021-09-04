@@ -1,9 +1,15 @@
 package com.unipi.p17172.emarket.ui.activities
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.unipi.p17172.emarket.R
+import com.unipi.p17172.emarket.adapters.CategoriesListAdapter
 import com.unipi.p17172.emarket.database.FirestoreHelper
 import com.unipi.p17172.emarket.databinding.ActivityAllCategoriesBinding
+import com.unipi.p17172.emarket.models.Category
 
 class AllCategoriesActivity : BaseActivity() {
 
@@ -13,6 +19,7 @@ class AllCategoriesActivity : BaseActivity() {
      * @see binding
      * */
     private lateinit var binding: ActivityAllCategoriesBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState) // This calls the parent constructor
@@ -29,7 +36,48 @@ class AllCategoriesActivity : BaseActivity() {
     }
 
     private fun getCategories() {
-        FirestoreHelper()
+        FirestoreHelper().getCategoriesList(this)
+    }
+
+    fun successCategoriesListFromFirestore(categoriesList: ArrayList<Category>) {
+
+        if (categoriesList.size > 0) {
+            // Show the recycler and remove the empty state layout completely.
+            binding.apply {
+                veilRecyclerViewAllCategories.visibility = View.VISIBLE
+                layoutEmptyStateCategories.root.visibility = View.GONE
+            }
+
+            // sets VeilRecyclerView's properties
+            binding.veilRecyclerViewAllCategories.run {
+                setVeilLayout(R.layout.shimmer_item_product)
+                setAdapter(
+                    CategoriesListAdapter(
+                        this@AllCategoriesActivity,
+                        categoriesList
+                    )
+                )
+                setLayoutManager(LinearLayoutManager(this@AllCategoriesActivity, LinearLayoutManager.VERTICAL, false))
+                getRecyclerView().setHasFixedSize(true)
+                addVeiledItems(7)
+                // delay-auto-unveil
+                Handler(Looper.getMainLooper()).postDelayed(
+                    {
+                        unVeil()
+                    },
+                    1000
+                )
+            }
+        }
+        else {
+            // Hide the recycler and show the empty state layout.
+            binding.apply {
+                veilRecyclerViewAllCategories.unVeil()
+                veilRecyclerViewAllCategories.visibility = View.INVISIBLE
+                layoutEmptyStateCategories.root.visibility = View.VISIBLE
+            }
+
+        }
     }
 
     private fun setUpActionBar() {

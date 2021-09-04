@@ -78,6 +78,7 @@ object Constants {
     const val EXTRA_REG_USERS_SNACKBAR: String = "extraShowRegisteredUserSnackbar"
     const val EXTRA_PROFILE_NOT_COMPLETED_SNACKBAR: String = "extraShowProfileNotCompletedSnackbar"
     const val EXTRA_USER_EMAIL: String = "extraUserEmail"
+    const val EXTRA_FILTER: String = "extraFilter"
     const val EXTRA_CATEGORY_ID: String = "extraCategoryId"
     const val EXTRA_NOTIFICATION_ID: String = "extraNotificationId"
 

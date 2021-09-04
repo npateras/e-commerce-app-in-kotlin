@@ -183,14 +183,14 @@ class FirestoreHelper {
     }
 
     /**
-     * A function to get the products list from cloud firestore that are on sale.
+     * A function to get the products list from cloud firestorm that are on sale.
      *
-     * @param fragment The fragment is passed as parameter as the function is called from fragment and need to the success result.
+     * @param activity The fragment is passed as parameter as the function is called from fragment and need to the success result.
      */
     fun getCategoriesList(activity: Activity) {
         // The collection name for PRODUCTS
         dbFirestore.collection(Constants.COLLECTION_CATEGORIES)
-            .orderBy(Constants.FIELD_NAME, Query.Direction.DESCENDING)
+            .orderBy(Constants.FIELD_NAME, Query.Direction.ASCENDING)
             .get() // Will get the documents snapshots.
             .addOnSuccessListener { document ->
 
@@ -203,27 +203,27 @@ class FirestoreHelper {
                 // A for loop as per the list of documents to convert them into Products ArrayList.
                 for (i in document.documents) {
 
-                    val product = i.toObject(Product::class.java)
-                    product!!.id = i.id
+                    val category = i.toObject(Category::class.java)
+                    category!!.categoryId = i.id
 
-                    productsList.add(product)
+                    categoriesList.add(category)
                 }
-                when (fragment) {
-                    is HomeFragment -> {
-                        fragment.successDealsListFromFireStore(productsList)
+                when (activity) {
+                    is AllCategoriesActivity -> {
+                        activity.successCategoriesListFromFirestore(categoriesList)
                     }
                     else -> {}
                 }
             }
             .addOnFailureListener { e ->
                 // Hide the progress dialog if there is any error based on the base class instance.
-                when (fragment) {
-                    is HomeFragment -> {
+                when (activity) {
+                    is AllCategoriesActivity -> {
                         // TODO: Show error state maybe
                     }
                 }
 
-                Log.e("Get Product List", "Error while getting product list.", e)
+                Log.e("Get Categories List", "Error while getting categories list.", e)
             }
     }
 

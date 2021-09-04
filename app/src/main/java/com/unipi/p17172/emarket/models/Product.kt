@@ -14,13 +14,14 @@ import java.util.*
 @Parcelize
 @IgnoreExtraProperties
 data class Product(
+    val addedByUser: String = "",
+    val category: String = "",
     @ServerTimestamp
     val dateAdded: Date = Date(),
-    val popularity: Popularity = Popularity(),
-    val categoryId: String = "",
     val description: String = "",
     val iconUrl: String = "",
     val name: String = "",
+    val popularity: Popularity = Popularity(),
     val price: Double = 0.00,
     val sale: Float = 0f,
     val stock: Int = 0,

@@ -39,7 +39,8 @@
             <activity
                 android:name="com.unipi.p17172.emarket.ui.activities.SplashActivity"
                 android:theme="@style/Theme.EMarket.NoActionBar"
-                android:screenOrientation="portrait">
+                android:screenOrientation="fullSensor"
+                android:exported="true">
                 <intent-filter>
                     <action android:name="android.intent.action.MAIN" />
 
@@ -50,16 +51,15 @@
             <!-- Home/Main Activity -->
             <activity
                 android:name="com.unipi.p17172.emarket.ui.activities.MainActivity"
-                android:label="@string/title_activity_home"
                 android:theme="@style/Theme.EMarket.NoActionBar3">
             </activity>
 
             <!-- Product Details Activity -->
             <activity
                 android:name="com.unipi.p17172.emarket.ui.activities.ProductDetailsActivity"
-                android:label=""
                 android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
+                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity"
+                android:exported="true">
 
                 <intent-filter>
                     <action android:name="ProductDetailsActivity"/>
@@ -71,10 +71,20 @@
                     android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
             </activity>
 
+            <!-- List Products Activity -->
+            <activity
+                android:name="com.unipi.p17172.emarket.ui.activities.ListProductsActivity"
+                android:theme="@style/Theme.EMarket.NoActionBar3"
+                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
+
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
+            </activity>
+
             <!-- Notifications Activity -->
             <activity
                 android:name="com.unipi.p17172.emarket.ui.activities.NotificationsActivity"
-                android:label="@string/label_activity_notifications"
                 android:theme="@style/Theme.EMarket.NoActionBar3"
                 android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
 
@@ -134,6 +144,7 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.unipi.p17172.emarket.ui.activities.SignInActivity" />
             </activity>
+
             <!-- All Categories activity -->
             <activity
                 android:name="com.unipi.p17172.emarket.ui.activities.AllCategoriesActivity"

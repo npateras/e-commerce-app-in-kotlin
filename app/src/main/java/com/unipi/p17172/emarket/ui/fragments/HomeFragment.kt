@@ -6,7 +6,6 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unipi.p17172.emarket.R
 import com.unipi.p17172.emarket.adapters.ProductsListAdapter
@@ -14,9 +13,10 @@ import com.unipi.p17172.emarket.database.FirestoreHelper
 import com.unipi.p17172.emarket.databinding.FragmentHomeBinding
 import com.unipi.p17172.emarket.models.Product
 import com.unipi.p17172.emarket.utils.Constants
+import com.unipi.p17172.emarket.utils.IntentUtils
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
     // ~~~~~~~VARIABLES~~~~~~~
     private var _binding: FragmentHomeBinding? = null  // Scoped to the lifecycle of the fragment's view (between onCreateView and onDestroyView)
@@ -37,13 +37,14 @@ class HomeFragment : Fragment() {
 
     private fun init() {
         veilRecyclers()
-
         loadDeals()
+        setupClickListeners()
     }
 
     private fun loadDeals() {
         FirestoreHelper().getDealsList(this@HomeFragment)
     }
+
     /**
      * A function to get the successful product list from cloud firestore.
      *
@@ -109,6 +110,14 @@ class HomeFragment : Fragment() {
         binding.apply {
             veilRecyclerViewDeals.unVeil()
             veilRecyclerViewPopular.unVeil()
+        }
+    }
+
+    private fun setupClickListeners() {
+        binding.apply {
+            txtViewCategoriesViewAll.setOnClickListener { IntentUtils().goToCategoriesActivity(requireActivity()) }
+            txtViewDealsViewAll.setOnClickListener { IntentUtils().goToListProductsActivity(requireActivity(), "deals") }
+            txtViewPopularViewAll.setOnClickListener { IntentUtils().goToListProductsActivity(requireActivity(), "popular") }
         }
     }
 

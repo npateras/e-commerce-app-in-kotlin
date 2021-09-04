@@ -55,7 +55,6 @@
                     android:elevation="3dp"
                     android:src="@drawable/shape_user_profile_frame" />
 
-
             </FrameLayout>
 
             <TextView

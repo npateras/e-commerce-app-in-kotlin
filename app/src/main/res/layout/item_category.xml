@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:ignore="ContentDescription">
 
     <com.google.android.material.card.MaterialCardView
@@ -15,7 +16,6 @@
         android:clickable="true"
         app:cardBackgroundColor="@color/colorTransparent"
         app:cardElevation="0dp"
-        android:layout_marginTop="29dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -32,7 +32,7 @@
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/core_sans_cr_55_medium"
                 android:gravity="start"
-                android:text="@string/txt_category_beverages"
+                android:text="@string/txt_loading"
                 android:textAlignment="textStart"
                 android:textColor="@color/colorText"
                 android:textSize="@dimen/txt_font_size_header_16"
@@ -49,7 +49,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/core_sans_cr_45_regular"
                 android:justificationMode="inter_word"
-                android:text="@string/txt_category_beverages_desc"
+                android:text="@string/txt_loading"
                 android:textColor="@color/colorSecondary2"
                 android:textSize="@dimen/txt_font_size_header_14"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -103,4 +103,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
