@@ -13,7 +13,6 @@
         android:id="@+id/cardView_SingleItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
         app:cardBackgroundColor="@color/colorTransparent"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"

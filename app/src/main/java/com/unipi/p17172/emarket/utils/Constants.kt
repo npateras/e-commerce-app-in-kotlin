@@ -22,7 +22,7 @@ object Constants {
     const val DEFAULT_CURRENCY: String = "€"
     const val DEFAULT_VEILED_ITEMS_HORIZONTAL: Int = 4
     const val DEFAULT_VEILED_ITEMS_VERTICAL: Int = 15
-    const val DEFAULT_CART_QUANTITY: Int = 1
+    const val DEFAULT_CART_ITEM_QUANTITY: Int = 1
     const val DEFAULT_MAX_ITEM_CART_QUANTITY: Int = 99
     val SNACKBAR_BEHAVIOR = BaseTransientBottomBar.Behavior().apply {
         setSwipeDirection(SwipeDismissBehavior.SWIPE_DIRECTION_ANY) }
@@ -38,7 +38,6 @@ object Constants {
     const val COLLECTION_USERS: String = "users"
     const val COLLECTION_CATEGORIES: String = "categories"
     const val COLLECTION_PRODUCTS: String = "Products"
-    const val COLLECTION_PRODUCTS2: String = "products"
     const val COLLECTION_FAVORITES: String = "favorites"
     const val COLLECTION_NOTIFICATIONS: String = "notifications"
     const val COLLECTION_CART_ITEMS: String = "cart_items"
@@ -46,6 +45,7 @@ object Constants {
     // Fields
     const val FIELD_ADDED_BY_USER: String = "addedByUser"
     const val FIELD_ADDRESS: String = "address"
+    const val FIELD_CATEGORY: String = "category"
     const val FIELD_CATEGORY_ID: String = "categoryId"
     const val FIELD_COUNTRY: String = "country"
     const val FIELD_DATE_ADDED: String = "dateAdded"
@@ -78,8 +78,10 @@ object Constants {
     const val EXTRA_REG_USERS_SNACKBAR: String = "extraShowRegisteredUserSnackbar"
     const val EXTRA_PROFILE_NOT_COMPLETED_SNACKBAR: String = "extraShowProfileNotCompletedSnackbar"
     const val EXTRA_USER_EMAIL: String = "extraUserEmail"
+    const val EXTRA_USER_DETAILS: String = "extraUserDetails"
     const val EXTRA_FILTER: String = "extraFilter"
     const val EXTRA_CATEGORY_ID: String = "extraCategoryId"
+    const val EXTRA_CATEGORY_NAME: String = "extraCategoryName"
     const val EXTRA_NOTIFICATION_ID: String = "extraNotificationId"
 
     const val PAYLOAD_PRODUCT_ID: String = "PRODUCT_ID"

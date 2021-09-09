@@ -24,7 +24,7 @@ class FavoritesFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
 
         init()
@@ -48,15 +48,12 @@ class FavoritesFragment : Fragment() {
      */
     fun successFavoritesListFromFireStore(favoritesList: ArrayList<Favorite>) {
 
-        // Hide Progress dialog.
-        // hideProgressDialog()
-
         if (favoritesList.size > 0) {
-            binding.veilRecyclerViewFavorites.visibility = View.VISIBLE
+            binding.veilRecyclerView.visibility = View.VISIBLE
             binding.layoutEmptyState.root.visibility = View.GONE
 
             // sets VeilRecyclerView's properties
-            binding.veilRecyclerViewFavorites.run {
+            binding.veilRecyclerView.run {
                 setVeilLayout(R.layout.shimmer_item_product)
                 setAdapter(
                     FavoritesListAdapter(
@@ -78,19 +75,18 @@ class FavoritesFragment : Fragment() {
         }
         else {
             binding.apply {
-                veilRecyclerViewFavorites.unVeil()
-                veilRecyclerViewFavorites.visibility = View.GONE
+                veilRecyclerView.unVeil()
+                veilRecyclerView.visibility = View.GONE
                 layoutEmptyState.root.visibility = View.VISIBLE
             }
-
         }
     }
 
     private fun veilRecycler() {
         binding.apply {
-            veilRecyclerViewFavorites.veil()
+            veilRecyclerView.veil()
 
-            veilRecyclerViewFavorites.addVeiledItems(Constants.DEFAULT_VEILED_ITEMS_VERTICAL)
+            veilRecyclerView.addVeiledItems(Constants.DEFAULT_VEILED_ITEMS_VERTICAL)
         }
     }
 
@@ -102,6 +98,7 @@ class FavoritesFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+
         _binding = null
     }
 }

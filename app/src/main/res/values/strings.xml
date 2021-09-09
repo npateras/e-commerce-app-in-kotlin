@@ -85,8 +85,6 @@
     <string name="txt_empty_cart">Your cart is empty!</string>
     <string name="txt_empty_cart_2">Looks like you haven\'t made your choice yet 😢</string>
     <string name="txt_profile">Profile</string>
-    <string name="txt_first_name">First name</string>
-    <string name="txt_last_name">Last name</string>
     <string name="txt_phone_number">Phone Number</string>
     <string name="txt_street_address">Street address</string>
     <string name="txt_zip_code">Zip code</string>
@@ -112,10 +110,22 @@
     <string name="txt_password_reset_mail_sent">Email sent successfully to reset your password!</string>
     <string name="txt_format_phone">+%1$s %2$s</string>
 
+    <string name="txt_category_vegetables">Vegetables</string>
+    <string name="txt_category_beverages">Beverages</string>
+    <string name="txt_category_chilled">Chilled</string>
+    <string name="txt_category_household">Household</string>
+    <string name="txt_category_homeware">Homeware</string>
+    <string name="txt_category_grocery">Grocery</string>
+    <string name="txt_category_fish">Fish</string>
+    <string name="txt_category_meat">Meat</string>
+    <string name="txt_category_frozen">Frozen</string>
+    <string name="txt_category_Fruits">Fruits</string>
+    <string name="txt_category_Liquor">Liquor</string>
+    <string name="txt_category_Pharmacy">Pharmacy</string>
+
     <!-- Input Texts -->
     <string name="input_txt_hint_phone_number">Your mobile number</string>
-    <string name="input_txt_hint_first_name">Your first name</string>
-    <string name="input_txt_hint_last_name">Your last name</string>
+    <string name="input_txt_hint_full_name">Your full name</string>
     <string name="input_txt_hint_address">Your address</string>
     <string name="input_txt_hint_zip_code">Your zip code</string>
 
@@ -212,6 +222,8 @@
     <string name="notification_payload_fav_body">%1$s is now available in stock 😍</string>
     <string name="notification_add_to_cart">Add to cart</string>
     <string name="notification_mark_as_read">Mark as read</string>
+    <string name="txt_no_products">No products!</string>
+    <string name="txt_no_products_2">There are no products for this category 🤔</string>
 
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 

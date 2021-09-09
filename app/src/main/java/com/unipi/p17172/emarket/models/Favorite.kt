@@ -12,14 +12,13 @@ import java.util.*
 @Parcelize
 @IgnoreExtraProperties
 data class Favorite(
-    @ServerTimestamp
-    val dateAdded: Date = Date(),
     var userId: String = "",
     var productId: String = "",
     val imgUrl: String = "",
     val name: String = "",
     val price: Double = 0.00,
     val sale: Float = 0f,
-    val stock: Int = 0,
-    var id: String = "",
+    @ServerTimestamp
+    val dateAdded: Date = Date(),
+    var id: String = ""
 ) : Parcelable

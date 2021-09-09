@@ -23,7 +23,7 @@
 
     <include
         android:id="@+id/empty_state_view"
-        layout="@layout/recycler_empty_state_notifications"
+        layout="@layout/layout_empty_state_notifications"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone"

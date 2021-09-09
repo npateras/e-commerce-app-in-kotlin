@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unipi.p17172.emarket.R
-import com.unipi.p17172.emarket.adapters.ProductsListAdapter
+import com.unipi.p17172.emarket.adapters.ProductsListFragmentAdapter
 import com.unipi.p17172.emarket.database.FirestoreHelper
 import com.unipi.p17172.emarket.databinding.FragmentHomeBinding
 import com.unipi.p17172.emarket.models.Product
@@ -64,10 +64,9 @@ class HomeFragment : BaseFragment() {
             binding.veilRecyclerViewDeals.run {
                 setVeilLayout(R.layout.shimmer_item_product)
                 setAdapter(
-                    ProductsListAdapter(
-                        requireActivity(),
-                        productsList,
-                        this@HomeFragment
+                    ProductsListFragmentAdapter(
+                        this@HomeFragment,
+                        productsList
                     )
                 )
                 setLayoutManager(LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false))
@@ -118,6 +117,10 @@ class HomeFragment : BaseFragment() {
             txtViewCategoriesViewAll.setOnClickListener { IntentUtils().goToCategoriesActivity(requireActivity()) }
             txtViewDealsViewAll.setOnClickListener { IntentUtils().goToListProductsActivity(requireActivity(), "deals") }
             txtViewPopularViewAll.setOnClickListener { IntentUtils().goToListProductsActivity(requireActivity(), "popular") }
+            imgBtnCategoryChilled.setOnClickListener{ IntentUtils().goToListProductsActivity(requireActivity(), "Chilled") }
+            imgBtnCategoryGrocery.setOnClickListener{ IntentUtils().goToListProductsActivity(requireActivity(), "Grocery") }
+            imgBtnCategoryHousehold.setOnClickListener{ IntentUtils().goToListProductsActivity(requireActivity(), "Household") }
+            imgBtnCategoryLiquor.setOnClickListener{ IntentUtils().goToListProductsActivity(requireActivity(), "Liquor") }
         }
     }
 

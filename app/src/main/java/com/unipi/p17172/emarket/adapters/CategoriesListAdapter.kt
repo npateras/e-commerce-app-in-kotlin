@@ -1,15 +1,14 @@
 package com.unipi.p17172.emarket.adapters
 
 import android.content.Context
-import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.unipi.p17172.emarket.databinding.ItemCategoryBinding
 import com.unipi.p17172.emarket.models.Category
-import com.unipi.p17172.emarket.ui.activities.ListProductsActivity
-import com.unipi.p17172.emarket.utils.Constants
 import com.unipi.p17172.emarket.utils.GlideLoader
+import com.unipi.p17172.emarket.utils.IntentUtils
 
 
 /**
@@ -55,10 +54,8 @@ open class CategoriesListAdapter(
             txtViewDescription.text = model.description
         }
         holder.itemView.setOnClickListener {
-            // Launch List Products screen.
-            val intent = Intent(context, ListProductsActivity::class.java)
-            intent.putExtra(Constants.EXTRA_CATEGORY_ID, model.categoryId)
-            context.startActivity(intent)
+            Log.d("", "test")
+            IntentUtils().goToListProductsActivity(context, model.name)
         }
     }
 

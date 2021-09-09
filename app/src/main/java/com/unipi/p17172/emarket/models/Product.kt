@@ -21,7 +21,7 @@ data class Product(
     val description: String = "",
     val iconUrl: String = "",
     val name: String = "",
-    val popularity: Popularity = Popularity(),
+    val popularity: Int = 0,
     val price: Double = 0.00,
     val sale: Float = 0f,
     val stock: Int = 0,

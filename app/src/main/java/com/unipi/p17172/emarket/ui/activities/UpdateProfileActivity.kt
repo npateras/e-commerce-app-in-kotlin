@@ -1,56 +1,58 @@
 package com.unipi.p17172.emarket.ui.activities
 
-import android.app.ActionBar.DISPLAY_SHOW_CUSTOM
 import android.os.Bundle
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.unipi.p17172.emarket.R
-import com.unipi.p17172.emarket.adapters.ViewPagerOrdersAdapter
-import com.unipi.p17172.emarket.databinding.ActivityOrdersBinding
-import com.unipi.p17172.emarket.ui.fragments.PendingOrdersFragment
-import com.unipi.p17172.emarket.ui.fragments.PreviousOrdersFragment
-import java.util.*
+import com.unipi.p17172.emarket.databinding.ActivityUserProfileEditBinding
+import com.unipi.p17172.emarket.models.User
+import com.unipi.p17172.emarket.utils.Constants
 
 
 class UpdateProfileActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityOrdersBinding
+    private lateinit var binding: ActivityUserProfileEditBinding
+    private lateinit var mUserDetails: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityOrdersBinding.inflate(layoutInflater)
+        binding = ActivityUserProfileEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setUpUI()
         init()
     }
 
-    private fun setUpUI() {
-        setUpActionBar()
-        setupTabs()
-    }
+    private fun init() {
+        setupUI()
 
-    private fun setUpActionBar() {
-        setSupportActionBar(binding.toolbar.root)
-        Objects.requireNonNull(supportActionBar)!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        val actionBar: android.app.ActionBar? = actionBar
-        actionBar?.let {
-            it.displayOptions = DISPLAY_SHOW_CUSTOM
-            it.setCustomView(R.layout.toolbar_activity_main)
+        if (intent.hasExtra(Constants.EXTRA_USER_DETAILS)) {
+            // Get the user details from intent as a ParcelableExtra.
+            mUserDetails = intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS)!!
+
+            binding.apply {
+                inputTxtFirstName.setText(mUserDetails.fullName)
+            }
         }
     }
 
-
-    private fun setupTabs() {
-        val adapter = ViewPagerOrdersAdapter(supportFragmentManager)
-        adapter.addFragment(PendingOrdersFragment())
-        adapter.addFragment(PreviousOrdersFragment())
-        binding.viewPagerBody.adapter = adapter
-        binding.tabs.setupWithViewPager(binding.viewPagerBody)
+    private fun setupUI() {
+        setupActionBar()
     }
 
-    private fun init() {
+    private fun setupActionBar() {
+        setSupportActionBar(binding.toolbar.root)
 
+        val actionBar = supportActionBar
+        binding.apply {
+            toolbar.imgBtnSave.setOnClickListener {
+
+            }
+        }
+        actionBar?.let {
+            it.setDisplayShowCustomEnabled(true)
+            it.setCustomView(R.layout.toolbar_product_details)
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+        }
     }
 }

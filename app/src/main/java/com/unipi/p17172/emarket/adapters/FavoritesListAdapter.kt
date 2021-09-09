@@ -1,16 +1,15 @@
 package com.unipi.p17172.emarket.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.unipi.p17172.emarket.R
-import com.unipi.p17172.emarket.databinding.RecyclerItemProductWideFavoritesBinding
+import com.unipi.p17172.emarket.databinding.ItemProductWideFavoriteBinding
 import com.unipi.p17172.emarket.models.Favorite
-import com.unipi.p17172.emarket.ui.activities.ProductDetailsActivity
-import com.unipi.p17172.emarket.utils.Constants
-import com.unipi.p17172.emarket.utils.GlideLoader
+import com.unipi.p17172.emarket.utils.IntentUtils
 
 
 /**
@@ -29,7 +28,7 @@ open class FavoritesListAdapter(
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesViewHolder {
         return FavoritesViewHolder(
-            RecyclerItemProductWideFavoritesBinding.inflate(
+            ItemProductWideFavoriteBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -49,23 +48,30 @@ open class FavoritesListAdapter(
      */
     override fun onBindViewHolder(holder: FavoritesViewHolder, position: Int) {
         val model = list[position]
+        var priceReduced = 0.00
 
         holder.binding.apply {
-            GlideLoader(context).loadProductPictureWide(model.imgUrl, imgViewProduct)
+            // GlideLoader(context).loadProductPictureWide(model.imgUrl, imgViewProduct)
             txtViewName.text = model.name
             txtViewPrice.text = String.format(
                 context.getString(R.string.txt_format_price),
                 context.getString(R.string.curr_eur),
                 model.price
             )
+            if (model.sale != 0f) {
+                txtViewPriceReduced.apply {
+                    visibility = View.VISIBLE
+                    foreground = AppCompatResources.getDrawable(context, R.drawable.striking_red_text)
+                    text = String.format(
+                        context.getString(R.string.txt_format_price),
+                        context.getString(R.string.curr_eur),
+                        model.price
+                    )
+                }
+                priceReduced = model.price - (model.price * model.sale)
+            }
         }
-        holder.itemView.setOnClickListener {
-            // Launch Product details screen.
-            val intent = Intent(context, ProductDetailsActivity::class.java)
-            intent.putExtra(Constants.EXTRA_PRODUCT_ID, model.productId)
-            intent.putExtra(Constants.EXTRA_IS_IN_FAVORITES, true) // true : since we are already in favorites.
-            context.startActivity(intent)
-        }
+        holder.itemView.setOnClickListener { IntentUtils().goToProductDetailsActivity(context, model.productId, true) } // true : since we are already in favorites.
     }
 
     /**
@@ -78,5 +84,5 @@ open class FavoritesListAdapter(
     /**
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      */
-    class FavoritesViewHolder(val binding: RecyclerItemProductWideFavoritesBinding) : RecyclerView.ViewHolder(binding.root)
+    class FavoritesViewHolder(val binding: ItemProductWideFavoriteBinding) : RecyclerView.ViewHolder(binding.root)
 }

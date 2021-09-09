@@ -19,6 +19,9 @@ import com.unipi.p17172.emarket.ui.fragments.HomeFragment
 import com.unipi.p17172.emarket.ui.fragments.MyAccountFragment
 import com.unipi.p17172.emarket.utils.Constants
 
+
+
+
 class FirestoreHelper {
 
     // Access a Cloud Firestore instance.
@@ -182,6 +185,46 @@ class FirestoreHelper {
             }
     }
 
+    fun getProductsListFromCategory(activity: Activity, filter: String) {
+        dbFirestore.collection(Constants.COLLECTION_PRODUCTS)
+            .whereEqualTo(Constants.FIELD_CATEGORY, filter) // Getting products only from a certain category
+            .orderBy(Constants.FIELD_NAME, Query.Direction.DESCENDING)
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+
+                // Here we get the list of boards in the form of documents.
+                Log.d("Products List", document.documents.toString())
+
+                // Here we have created a new instance for Products ArrayList.
+                val productsList: ArrayList<Product> = ArrayList()
+
+                // A for loop as per the list of documents to convert them into Products ArrayList.
+                for (i in document.documents) {
+
+                    val product = i.toObject(Product::class.java)
+                    product!!.id = i.id
+
+                    productsList.add(product)
+                }
+                when (activity) {
+                    is ListProductsActivity -> {
+                        activity.successOProductsListFromFirestore(productsList)
+                    }
+                    else -> {}
+                }
+            }
+            .addOnFailureListener { e ->
+                // Hide the progress dialog if there is any error based on the base class instance.
+                when (activity) {
+                    is ListProductsActivity -> {
+                        // TODO: Show error state maybe
+                    }
+                }
+
+                Log.e("Get Product List", "Error while getting product list.", e)
+            }
+    }
+
     /**
      * A function to get the products list from cloud firestorm that are on sale.
      *
@@ -287,24 +330,39 @@ class FirestoreHelper {
             }
     }
 
-    fun addToFavorites(activity: Activity, productId: String, userId: String) {
-        // The "users" is collection name. If the collection is already created then it will not create the same one again.
-        dbFirestore.collection(Constants.COLLECTION_USERS)
-            // Document ID for users fields. Here the document it is the User ID.
-            .document(productId)
-            .collection(Constants.COLLECTION_FAVORITES)
-            .document(userId)
-            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge later on instead of replacing the fields.
-            .set(userId, SetOptions.merge())
+    fun addToFavorites(fragment: Fragment, favorite: Favorite) {
+        dbFirestore.collection(Constants.COLLECTION_FAVORITES)
+            .document()
+            .set(favorite, SetOptions.merge())
             .addOnSuccessListener {
+                Log.d("", "task success")
 
-                // Here call a function of base activity for transferring the result to it.
-                //activity.userRegistrationSuccess()
+                when (fragment) {
+                    is HomeFragment -> {}
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e(
+                    fragment.javaClass.simpleName,
+                    "Error while adding a product to user's favorites.",
+                    e
+                )
+            }
+    }
+
+    fun addToFavorites(activity: Activity, favorite: Favorite) {
+        dbFirestore.collection(Constants.COLLECTION_FAVORITES)
+            .document()
+            .set(favorite, SetOptions.merge())
+            .addOnSuccessListener {
+                when (activity) {
+                    is ProductDetailsActivity -> {}
+                }
             }
             .addOnFailureListener { e ->
                 Log.e(
                     activity.javaClass.simpleName,
-                    "Error while registering the user.",
+                    "Error while adding a product to user's favorites.",
                     e
                 )
             }
@@ -485,29 +543,59 @@ class FirestoreHelper {
                 }
         }
 
-    fun removeFromFavorites(activity: Activity, productId: String, userId: String) {
-            // The "users" is collection name. If the collection is already created then it will not create the same one again.
-            dbFirestore.collection(Constants.COLLECTION_USERS)
-                // Document ID for users fields. Here the document it is the User ID.
-                .document(productId)
-                .collection(Constants.COLLECTION_FAVORITES)
-                .document(userId)
-                // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge later on instead of replacing the fields.
-                .delete()
-                .addOnSuccessListener {
-
-                    // Here call a function of base activity for transferring the result to it.
-                    //activity.userRegistrationSuccess()
+    fun deleteFavoriteProduct(fragment: Fragment, productId: String) {
+        dbFirestore.collection(Constants.COLLECTION_FAVORITES)
+            .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
+            .whereEqualTo(Constants.FIELD_PRODUCT_ID, productId)
+            .get()
+            .addOnCompleteListener{ task ->
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        dbFirestore
+                            .collection(Constants.COLLECTION_FAVORITES)
+                            .document(document.id)
+                            .delete()
+                    }
                 }
-                .addOnFailureListener { e ->
-                    Log.e(
-                        activity.javaClass.simpleName,
-                        "Error while registering the user.",
-                        e
-                    )
+                else {
+                    Log.d(fragment.javaClass.simpleName, "Error getting documents: ", task.exception);
                 }
-        }
+            }
+            .addOnFailureListener { e ->
+                Log.e(
+                    fragment.javaClass.simpleName,
+                    "Error while getting product from user's favorites.",
+                    e
+                )
+            }
+    }
 
+    fun deleteFavoriteProduct(activity: Activity, productId: String) {
+        dbFirestore.collection(Constants.COLLECTION_FAVORITES)
+            .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
+            .whereEqualTo(Constants.FIELD_PRODUCT_ID, productId)
+            .get()
+            .addOnCompleteListener{ task ->
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        dbFirestore
+                            .collection(Constants.COLLECTION_FAVORITES)
+                            .document(document.id)
+                            .delete()
+                    }
+                }
+                else {
+                    Log.d(activity.javaClass.simpleName, "Error getting documents: ", task.exception);
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while getting product from user's favorites.",
+                    e
+                )
+            }
+    }
 
     /**
      * A function to get the product details based on the product id.

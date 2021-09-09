@@ -6,6 +6,7 @@ import com.unipi.p17172.emarket.R
 import com.unipi.p17172.emarket.database.FirestoreHelper
 import com.unipi.p17172.emarket.databinding.ActivityProductDetailsBinding
 import com.unipi.p17172.emarket.models.Cart
+import com.unipi.p17172.emarket.models.Favorite
 import com.unipi.p17172.emarket.models.Product
 import com.unipi.p17172.emarket.utils.Constants
 import com.unipi.p17172.emarket.utils.GlideLoader
@@ -78,17 +79,23 @@ class ProductDetailsActivity : BaseActivity() {
                 toolbar.actionBarImgBtnMyCart.setOnClickListener { goToCartActivity(this@ProductDetailsActivity) }
                 toolbar.actionBarCheckboxFavorite.setOnClickListener {
                     if (toolbar.actionBarCheckboxFavorite.isChecked) {
-                        FirestoreHelper().removeFromFavorites(
+                        FirestoreHelper().deleteFavoriteProduct(
                             this@ProductDetailsActivity,
-                            productId,
-                            userId
+                            productId
                         )
                     }
                     else {
+                        val favorite = Favorite(
+                            FirestoreHelper().getCurrentUserID(),
+                            modelProduct.id,
+                            modelProduct.iconUrl,
+                            modelProduct.name,
+                            modelProduct.price,
+                            modelProduct.sale
+                        )
                         FirestoreHelper().addToFavorites(
                             this@ProductDetailsActivity,
-                            productId,
-                            userId
+                            favorite
                         )
                     }
                 }

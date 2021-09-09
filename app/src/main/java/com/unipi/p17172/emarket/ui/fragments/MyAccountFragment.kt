@@ -11,10 +11,12 @@ import com.unipi.p17172.emarket.database.FirestoreHelper
 import com.unipi.p17172.emarket.databinding.FragmentMyAccountBinding
 import com.unipi.p17172.emarket.models.User
 import com.unipi.p17172.emarket.ui.activities.MainActivity
+import com.unipi.p17172.emarket.utils.IntentUtils
 
 class MyAccountFragment : BaseFragment() {
     // Scoped to the lifecycle of the fragment's view (between onCreateView and onDestroyView)
     private var _binding: FragmentMyAccountBinding? = null
+    private lateinit var mUserDetails: User
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -49,7 +51,7 @@ class MyAccountFragment : BaseFragment() {
         if (FirestoreHelper().getCurrentUserID() != "") {
             // Apply click listeners
             binding.apply {
-                btnUpdateProfile.setOnClickListener { goToUpdateProfileActivity(this@MyAccountFragment.requireContext()) }
+                btnUpdateProfile.setOnClickListener { IntentUtils().goToUpdateUserDetailsActivity(this@MyAccountFragment.requireContext(), mUserDetails) }
                 btnLogOut.setOnClickListener{
                     FirebaseAuth.getInstance().signOut()
                     val intent = Intent(context, MainActivity::class.java)
@@ -85,6 +87,8 @@ class MyAccountFragment : BaseFragment() {
      * @param mUser A model class with user details.
      */
     fun userDetailsSuccess(mUser: User) {
+        mUserDetails = mUser
+
         // Set user details.
         binding.apply {
             textViewFullName.text = mUser.fullName

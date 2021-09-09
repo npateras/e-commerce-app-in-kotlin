@@ -1,56 +1,130 @@
 package com.unipi.p17172.emarket.ui.activities
 
-import android.app.ActionBar.DISPLAY_SHOW_CUSTOM
 import android.os.Bundle
-import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Handler
+import android.os.Looper
+import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
 import com.unipi.p17172.emarket.R
-import com.unipi.p17172.emarket.adapters.ViewPagerOrdersAdapter
-import com.unipi.p17172.emarket.databinding.ActivityOrdersBinding
-import com.unipi.p17172.emarket.ui.fragments.PendingOrdersFragment
-import com.unipi.p17172.emarket.ui.fragments.PreviousOrdersFragment
-import java.util.*
+import com.unipi.p17172.emarket.adapters.ProductsListActivityAdapter
+import com.unipi.p17172.emarket.database.FirestoreHelper
+import com.unipi.p17172.emarket.databinding.ActivityListProductsBinding
+import com.unipi.p17172.emarket.models.Product
+import com.unipi.p17172.emarket.utils.Constants
 
+class ListProductsActivity : BaseActivity() {
 
-class ListProductsActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityOrdersBinding
+    /**
+     * Class variables
+     *
+     * @see binding
+     * */
+    private lateinit var binding: ActivityListProductsBinding
+    private var filter = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super.onCreate(savedInstanceState) // This calls the parent constructor
+        binding = ActivityListProductsBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view) // This is used to align the xml view to this class
 
-        binding = ActivityOrdersBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        setUpUI()
         init()
     }
 
-    private fun setUpUI() {
+    private fun init () {
+        if (intent.hasExtra(Constants.EXTRA_CATEGORY_NAME))
+            filter = intent.getStringExtra(Constants.EXTRA_CATEGORY_NAME)!!
+
+        setupUI()
+        getProducts()
+    }
+
+    private fun getProducts() {
+        FirestoreHelper().getProductsListFromCategory(this@ListProductsActivity, filter)
+    }
+
+    fun successOProductsListFromFirestore(productsList: ArrayList<Product>) {
+
+        if (productsList.size > 0) {
+            // Show the recycler and remove the empty state layout completely.
+            binding.apply {
+                veilRecyclerView.visibility = View.VISIBLE
+                layoutEmptyState.root.visibility = View.GONE
+            }
+
+            // sets VeilRecyclerView's properties
+            binding.veilRecyclerView.run {
+                setVeilLayout(R.layout.shimmer_item_product)
+                setAdapter(ProductsListActivityAdapter(this@ListProductsActivity, productsList))
+                setLayoutManager(GridLayoutManager(this@ListProductsActivity, 3, GridLayoutManager.VERTICAL, false))
+                getRecyclerView().setHasFixedSize(true)
+                addVeiledItems(7)
+                // delay-auto-unveil
+                Handler(Looper.getMainLooper()).postDelayed(
+                    {
+                        unVeil()
+                    },
+                    1000
+                )
+            }
+        }
+        else {
+            // Hide the recycler and show the empty state layout.
+            binding.apply {
+                veilRecyclerView.unVeil()
+                veilRecyclerView.visibility = View.INVISIBLE
+                layoutEmptyState.root.visibility = View.VISIBLE
+            }
+
+        }
+    }
+
+    private fun getFilterTranslated(filter: String): String {
+        when (filter) {
+            "Vegetables" ->
+                return getString(R.string.txt_category_vegetables)
+            "Fruits" ->
+                return getString(R.string.txt_category_Fruits)
+            "Liquor" ->
+                return getString(R.string.txt_category_Liquor)
+            "Pharmacy" ->
+                return getString(R.string.txt_category_Pharmacy)
+            "Household" ->
+                return getString(R.string.txt_category_household)
+            "Homeware" ->
+                return getString(R.string.txt_category_homeware)
+            "Grocery" ->
+                return getString(R.string.txt_category_grocery)
+            "Meat" ->
+                return getString(R.string.txt_category_meat)
+            "Frozen" ->
+                return getString(R.string.txt_category_frozen)
+            "Chilled" ->
+                return getString(R.string.txt_category_chilled)
+            "Fish" ->
+                return getString(R.string.txt_category_fish)
+            "Beverages" ->
+                return getString(R.string.txt_category_beverages)
+        }
+        return filter
+    }
+
+    private fun setupUI() {
         setUpActionBar()
-        setupTabs()
     }
 
     private fun setUpActionBar() {
         setSupportActionBar(binding.toolbar.root)
-        Objects.requireNonNull(supportActionBar)!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        val actionBar: android.app.ActionBar? = actionBar
-        actionBar?.let {
-            it.displayOptions = DISPLAY_SHOW_CUSTOM
-            it.setCustomView(R.layout.toolbar_activity_main)
+
+        val actionBar = supportActionBar
+        binding.apply {
+            toolbar.textViewActionBarLabel.text = getFilterTranslated(filter)
         }
-    }
-
-
-    private fun setupTabs() {
-        val adapter = ViewPagerOrdersAdapter(supportFragmentManager)
-        adapter.addFragment(PendingOrdersFragment())
-        adapter.addFragment(PreviousOrdersFragment())
-        binding.viewPagerBody.adapter = adapter
-        binding.tabs.setupWithViewPager(binding.viewPagerBody)
-    }
-
-    private fun init() {
-
+        actionBar?.let {
+            it.setDisplayShowCustomEnabled(true)
+            it.setCustomView(R.layout.toolbar_product_details)
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+        }
     }
 }

@@ -7,10 +7,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorBackground"
     android:fillViewport="true"
-    tools:context=".ui.activities."
+    tools:context=".ui.activities.UpdateProfileActivity"
     tools:ignore="contentDescription">
-
-    <!-- TODO: CONTEXT -->
 
     <include
         android:id="@+id/toolbar"
@@ -34,7 +32,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/shape_container_top"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:fontFamily="@font/core_sans_cr_55_medium"
-                    android:text="First Name"
+                    android:text="@string/txt_full_name"
                     android:textColor="@color/colorText"
                     android:textSize="@dimen/txt_font_size_header_16"
                     android:textStyle="bold"
@@ -99,45 +97,10 @@
                         style="@style/TextEditInputStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/input_txt_hint_first_name"
+                        android:hint="@string/input_txt_hint_full_name"
                         android:inputType="textPersonName" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputTxtLayout_Last_Name"
-                    style="@style/TextInputLayoutStyle_2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="16dp"
-                    app:hintEnabled="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/inputTxtLayout_First_Name"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_Last_Name">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/inputTxt_Last_Name"
-                        style="@style/TextEditInputStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/input_txt_hint_last_name"
-                        android:inputType="textPersonName" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <TextView
-                    android:id="@+id/textView_Last_Name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="29dp"
-                    android:fontFamily="@font/core_sans_cr_55_medium"
-                    android:text="Last Name"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/txt_font_size_header_16"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/inputTxtLayout_Last_Name"
-                    app:layout_constraintTop_toBottomOf="@+id/inputTxtLayout_First_Name" />
 
                 <com.hbb20.CountryCodePicker
                     android:id="@+id/countryCodePicker"
@@ -189,9 +152,9 @@
                     style="@style/TextInputLayoutStyle_2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:hintEnabled="false"
                     android:layout_marginStart="16dp"
-                    app:layout_constraintEnd_toEndOf="@+id/inputTxtLayout_Last_Name"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toEndOf="@+id/frameLayout_User_Picture"
                     app:layout_constraintStart_toEndOf="@+id/countryCodePicker"
                     app:layout_constraintTop_toTopOf="@+id/countryCodePicker">
 
@@ -209,14 +172,14 @@
                     android:id="@+id/textView_Phone_Number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="29dp"
                     android:fontFamily="@font/core_sans_cr_55_medium"
-                    android:text="Phone Number"
+                    android:text="@string/txt_phone_number"
+                    android:layout_marginTop="29dp"
                     android:textColor="@color/colorText"
                     android:textSize="@dimen/txt_font_size_header_16"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/countryCodePicker"
-                    app:layout_constraintTop_toBottomOf="@+id/inputTxtLayout_Last_Name" />
+                    app:layout_constraintTop_toBottomOf="@+id/inputTxtLayout_First_Name" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inputTxtLayout_Address"
@@ -225,7 +188,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="32dp"
                     app:hintEnabled="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/inputTxtLayout_First_Name"
                     app:layout_constraintTop_toBottomOf="@+id/textView_Address">
@@ -235,7 +200,7 @@
                         style="@style/TextEditInputStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/input_txt_hint_last_name"
+                        android:hint="@string/input_txt_hint_address"
                         android:inputType="text" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -250,7 +215,7 @@
                     android:textColor="@color/colorText"
                     android:textSize="@dimen/txt_font_size_header_16"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/inputTxtLayout_Last_Name"
+                    app:layout_constraintStart_toStartOf="@+id/textView_Phone_Number"
                     app:layout_constraintTop_toBottomOf="@+id/countryCodePicker" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

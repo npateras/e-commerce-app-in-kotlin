@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
         <com.skydoves.androidveil.VeilRecyclerFrameView
-            android:id="@+id/veilRecyclerView_Favorites"
+            android:id="@+id/veilRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"

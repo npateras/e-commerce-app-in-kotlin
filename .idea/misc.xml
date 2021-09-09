@@ -7,18 +7,38 @@
         <entry key="..\:/Downloads (HDD)/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/activity_notifications.xml" value="0.24003623188405798" />
         <entry key="..\:/Downloads (HDD)/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/item_category.xml" value="0.22" />
         <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/drawable/ic_box_colored.xml" value="0.3651041666666667" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/drawable/ic_cactus_colored.xml" value="0.3651041666666667" />
         <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/drawable/ic_plastic_bottle.xml" value="0.3651041666666667" />
         <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/drawable/ic_tags.xml" value="0.3651041666666667" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/drawable/striking_red_text.xml" value="0.3651041666666667" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/activity_acc_fill_info.xml" value="0.33" />
         <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/activity_all_categories.xml" value="0.3489583333333333" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/activity_list_products.xml" value="0.3489583333333333" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/activity_user_profile_edit.xml" value="0.33" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/fragment_favorites.xml" value="0.3489583333333333" />
         <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/fragment_home.xml" value="0.3489583333333333" />
         <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/fragment_my_account.xml" value="0.3489583333333333" />
         <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/fragment_my_cart.xml" value="0.3489583333333333" />
         <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/item_category.xml" value="0.25" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/item_product.xml" value="0.67" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/item_product_wide.xml" value="0.3489583333333333" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/item_product_wide_favorite.xml" value="0.3489583333333333" />
         <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/layout_empty_state_cart.xml" value="0.33" />
         <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/layout_empty_state_categories.xml" value="0.3489583333333333" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/layout_empty_state_category_products.xml" value="0.3489583333333333" />
         <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/layout_empty_state_favorites.xml" value="0.3489583333333333" />
         <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/layout_must_sign_in.xml" value="0.3484375" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/recycler_empty_state_cart.xml" value="0.3489583333333333" />
         <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/recycler_empty_state_deals.xml" value="0.3489583333333333" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/recycler_empty_state_notifications.xml" value="0.3489583333333333" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/recycler_empty_state_orders.xml" value="0.3489583333333333" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/recycler_empty_state_search.xml" value="0.3489583333333333" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/recycler_item_order.xml" value="0.3489583333333333" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/recycler_item_product.xml" value="0.3489583333333333" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/recycler_item_product_wide.xml" value="0.3489583333333333" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/recycler_item_product_wide_favorites.xml" value="0.3489583333333333" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/shimmer_item_product.xml" value="0.3489583333333333" />
+        <entry key="..\:/Vault/University/DISSERTATION/eMarket/eMarket/app/src/main/res/layout/toolbar_title_only.xml" value="0.3489583333333333" />
       </map>
     </option>
   </component>

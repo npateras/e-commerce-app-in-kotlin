@@ -242,7 +242,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtView_Deals"
-            tools:listitem="@layout/recycler_item_product" />
+            tools:listitem="@layout/item_product" />
 
         <TextView
             android:id="@+id/txtView_Popular"
@@ -288,7 +288,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/recyclerView_FragHome_Deals"
             app:layout_constraintTop_toBottomOf="@+id/txtView_Popular"
-            tools:listitem="@layout/recycler_item_product" />
+            tools:listitem="@layout/item_product" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
