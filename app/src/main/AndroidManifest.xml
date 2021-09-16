@@ -74,12 +74,7 @@
             <!-- List Products Activity -->
             <activity
                 android:name="com.unipi.p17172.emarket.ui.activities.ListProductsActivity"
-                android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
-
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
+                android:theme="@style/Theme.EMarket.NoActionBar3">
             </activity>
 
             <!-- Notifications Activity -->
@@ -134,10 +129,10 @@
 
             <!-- Update Profile activity -->
             <activity
-                android:name="com.unipi.p17172.emarket.ui.activities.UpdateProfileActivity"
+                android:name="com.unipi.p17172.emarket.ui.activities.EditProfileActivity"
                 android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustResize"
-                android:theme="@style/Theme.EMarket.NoActionBar4"
+                android:theme="@style/Theme.EMarket.NoActionBar3"
                 android:parentActivityName="com.unipi.p17172.emarket.ui.activities.SignInActivity">
 
                 <meta-data
@@ -157,6 +152,40 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
             </activity>
+
+            <!-- List Addresses activity -->
+            <activity
+                android:name="com.unipi.p17172.emarket.ui.activities.ListAddressActivity"
+                android:launchMode="singleTask"
+                android:windowSoftInputMode="adjustResize"
+                android:theme="@style/Theme.EMarket.NoActionBar3"
+                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
+
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
+            </activity>
+
+            <!-- Add/Edit Addresses activity -->
+            <activity
+                android:name="com.unipi.p17172.emarket.ui.activities.AddEditAddressActivity"
+                android:launchMode="singleTask"
+                android:windowSoftInputMode="adjustResize"
+                android:theme="@style/Theme.EMarket.NoActionBar3"
+                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.ListAddressActivity">
+
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.unipi.p17172.emarket.ui.activities.ListAddressActivity" />
+            </activity>
+
+        <!-- Checkout activity -->
+        <activity
+            android:name="com.unipi.p17172.emarket.ui.activities.CheckoutActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar3">
+        </activity>
         <!-- endregion [END Activities] -->
 
         <!-- [START firebase_service] -->

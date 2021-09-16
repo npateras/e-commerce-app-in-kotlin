@@ -6,7 +6,7 @@ import android.os.Looper
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.unipi.p17172.emarket.R
-import com.unipi.p17172.emarket.adapters.ProductsListActivityAdapter
+import com.unipi.p17172.emarket.adapters.ProductsListAdapter
 import com.unipi.p17172.emarket.database.FirestoreHelper
 import com.unipi.p17172.emarket.databinding.ActivityListProductsBinding
 import com.unipi.p17172.emarket.models.Product
@@ -55,7 +55,7 @@ class ListProductsActivity : BaseActivity() {
             // sets VeilRecyclerView's properties
             binding.veilRecyclerView.run {
                 setVeilLayout(R.layout.shimmer_item_product)
-                setAdapter(ProductsListActivityAdapter(this@ListProductsActivity, productsList))
+                setAdapter(ProductsListAdapter(this@ListProductsActivity, productsList))
                 setLayoutManager(GridLayoutManager(this@ListProductsActivity, 3, GridLayoutManager.VERTICAL, false))
                 getRecyclerView().setHasFixedSize(true)
                 addVeiledItems(7)
@@ -105,6 +105,10 @@ class ListProductsActivity : BaseActivity() {
                 return getString(R.string.txt_category_fish)
             "Beverages" ->
                 return getString(R.string.txt_category_beverages)
+            "Deals" ->
+                return getString(R.string.txt_deals)
+            "Popular" ->
+                return getString(R.string.txt_popular)
         }
         return filter
     }

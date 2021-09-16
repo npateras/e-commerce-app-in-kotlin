@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorBackground"
     android:fillViewport="true"
-    tools:context=".ui.activities.UpdateProfileActivity"
+    tools:context=".ui.activities.EditProfileActivity"
     tools:ignore="contentDescription">
 
     <include
@@ -41,33 +41,32 @@
                 <FrameLayout
                     android:id="@+id/frameLayout_User_Picture"
                     android:layout_width="56dp"
-                    android:layout_height="0dp"
+                    android:layout_height="56dp"
                     android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/inputTxtLayout_First_Name"
+                    app:layout_constraintBottom_toBottomOf="@+id/inputTxtLayout_Full_Name"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/inputTxtLayout_First_Name">
+                    app:layout_constraintTop_toTopOf="@+id/inputTxtLayout_Full_Name">
 
                     <View
                         android:id="@+id/view_User_Picture"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center"
                         android:background="@drawable/ic_user_sample" />
 
-                    <de.hdodenhof.circleimageview.CircleImageView
+                    <ImageView
                         android:id="@+id/img_User_Picture_Frame"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:elevation="3dp"
+                        android:layout_margin="0dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/shape_user_profile_frame">
-
-                    </de.hdodenhof.circleimageview.CircleImageView>
+                        android:src="@drawable/shape_user_profile_frame" />
 
                 </FrameLayout>
 
 
                 <TextView
-                    android:id="@+id/textView_First_Name"
+                    android:id="@+id/textView_Full_Name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
@@ -76,11 +75,11 @@
                     android:textColor="@color/colorText"
                     android:textSize="@dimen/txt_font_size_header_16"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/inputTxtLayout_First_Name"
+                    app:layout_constraintStart_toStartOf="@+id/inputTxtLayout_Full_Name"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputTxtLayout_First_Name"
+                    android:id="@+id/inputTxtLayout_Full_Name"
                     style="@style/TextInputLayoutStyle_2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -90,12 +89,13 @@
                     app:hintEnabled="false"
                     app:layout_constraintEnd_toStartOf="@+id/frameLayout_User_Picture"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_First_Name">
+                    app:layout_constraintTop_toBottomOf="@+id/textView_Full_Name">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/inputTxt_First_Name"
+                        android:id="@+id/inputTxt_Full_Name"
                         style="@style/TextEditInputStyle"
                         android:layout_width="match_parent"
+                        android:textColor="@color/colorText"
                         android:layout_height="match_parent"
                         android:hint="@string/input_txt_hint_full_name"
                         android:inputType="textPersonName" />
@@ -127,7 +127,7 @@
                     app:ccp_autoDetectLanguage="true"
                     app:ccp_autoFormatNumber="false"
                     app:ccp_clickable="true"
-                    app:ccp_contentColor="@color/colorSecondary"
+                    app:ccp_contentColor="@color/colorText"
                     app:ccp_countryAutoDetectionPref="SIM_NETWORK_LOCALE"
                     app:ccp_countryPreference="GR,CY"
                     app:ccp_defaultNameCode="GR"
@@ -146,28 +146,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView_Phone_Number" />
 
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputTxtLayout_Phone_Number"
-                    style="@style/TextInputLayoutStyle_2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    app:hintEnabled="false"
-                    app:layout_constraintEnd_toEndOf="@+id/frameLayout_User_Picture"
-                    app:layout_constraintStart_toEndOf="@+id/countryCodePicker"
-                    app:layout_constraintTop_toTopOf="@+id/countryCodePicker">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/inputTxt_Phone_Number"
-                        style="@style/TextEditInputStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/input_txt_hint_phone_number"
-                        android:inputType="number" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
                 <TextView
                     android:id="@+id/textView_Phone_Number"
                     android:layout_width="wrap_content"
@@ -179,44 +157,31 @@
                     android:textSize="@dimen/txt_font_size_header_16"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/countryCodePicker"
-                    app:layout_constraintTop_toBottomOf="@+id/inputTxtLayout_First_Name" />
+                    app:layout_constraintTop_toBottomOf="@+id/inputTxtLayout_Full_Name" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputTxtLayout_Address"
+                    android:id="@+id/inputTxtLayout_Phone_Number"
                     style="@style/TextInputLayoutStyle_2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginBottom="32dp"
                     app:hintEnabled="false"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/inputTxtLayout_First_Name"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_Address">
+                    app:layout_constraintEnd_toEndOf="@+id/frameLayout_User_Picture"
+                    app:layout_constraintStart_toEndOf="@+id/countryCodePicker"
+                    app:layout_constraintTop_toTopOf="@+id/countryCodePicker">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/inputTxt_Address"
+                        android:id="@+id/inputTxt_Phone_Number"
                         style="@style/TextEditInputStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/input_txt_hint_address"
-                        android:inputType="text" />
+                        android:hint="@string/input_txt_hint_phone_number"
+                        android:inputType="number"
+                        android:textColor="@color/colorText" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
-                <TextView
-                    android:id="@+id/textView_Address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="29dp"
-                    android:fontFamily="@font/core_sans_cr_55_medium"
-                    android:text="@string/txt_address"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/txt_font_size_header_16"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/textView_Phone_Number"
-                    app:layout_constraintTop_toBottomOf="@+id/countryCodePicker" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

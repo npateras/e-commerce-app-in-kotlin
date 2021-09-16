@@ -1,16 +1,13 @@
 package com.unipi.p17172.emarket.adapters
 
-import android.app.Activity
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.unipi.p17172.emarket.R
-import com.unipi.p17172.emarket.database.FirestoreHelper
-import com.unipi.p17172.emarket.database.FirestoreHelper.IsFavoriteCallback
 import com.unipi.p17172.emarket.databinding.ItemProductBinding
-import com.unipi.p17172.emarket.models.Favorite
 import com.unipi.p17172.emarket.models.Product
 import com.unipi.p17172.emarket.utils.GlideLoader
 import com.unipi.p17172.emarket.utils.IntentUtils
@@ -19,10 +16,10 @@ import com.unipi.p17172.emarket.utils.IntentUtils
 /**
  * A adapter class for products list items.
  */
-open class ProductsListActivityAdapter(
-    private val activity: Activity,
+open class ProductsListAdapter(
+    private val context: Context,
     private var list: ArrayList<Product>
-) : RecyclerView.Adapter<ProductsListActivityAdapter.ProductsViewHolder>() {
+) : RecyclerView.Adapter<ProductsListAdapter.ProductsViewHolder>() {
 
     /**
      * Inflates the item views which is designed in xml layout file
@@ -35,7 +32,8 @@ open class ProductsListActivityAdapter(
             ItemProductBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false)
+                false
+            )
         )
     }
 
@@ -51,26 +49,19 @@ open class ProductsListActivityAdapter(
      */
     override fun onBindViewHolder(holder: ProductsViewHolder, position: Int) {
         val model = list[position]
-        var isInFavorites = false
-        var priceReduced = 0.00
+        var priceReduced = model.price
 
         holder.binding.apply {
-            // Check if user has this item in their favorites
-            FirestoreHelper().isFavorite(model.id, object : IsFavoriteCallback {
-                override fun onCallback(isFavorite: Boolean) {
-                    if (isFavorite) {
-                        checkboxFavorite.isChecked = true
-                        isInFavorites = true
-                    }
-                }
-            })
-
-            GlideLoader(activity).loadProductPictureWide(model.iconUrl, imgViewIcon)
+            GlideLoader(context).loadProductPictureWide(
+                model.iconUrl,
+                imgViewIcon
+            )
             txtViewName.text = model.name
-            if (model.sale != 0f) {
+            if (model.sale != 0.0) {
                 txtViewPriceReduced.apply {
                     visibility = View.VISIBLE
-                    foreground = AppCompatResources.getDrawable(context, R.drawable.striking_red_text)
+                    foreground =
+                        AppCompatResources.getDrawable(context, R.drawable.striking_red_text)
                     text = String.format(
                         context.getString(R.string.txt_format_price),
                         context.getString(R.string.curr_eur),
@@ -88,28 +79,15 @@ open class ProductsListActivityAdapter(
             }
 
             txtViewWeight.text = String.format(
-                activity.getString(R.string.txt_format_weight),
+                context.getString(R.string.txt_format_weight),
                 model.weight,
                 model.weightUnit
             )
-
-            checkboxFavorite.setOnClickListener {
-                if (isInFavorites)
-                    FirestoreHelper().deleteFavoriteProduct(activity, model.id)
-                else {
-                    val favorite = Favorite(
-                        FirestoreHelper().getCurrentUserID(),
-                        model.id,
-                        model.iconUrl,
-                        model.name,
-                        model.price,
-                        model.sale
-                    )
-                    FirestoreHelper().addToFavorites(activity, favorite)
-                }
-            }
         }
-        holder.itemView.setOnClickListener { IntentUtils().goToProductDetailsActivity(activity, model.id, isInFavorites) }
+        // Click listener on list item click
+        holder.itemView.setOnClickListener {
+            IntentUtils().goToProductDetailsActivity(context, model.id)
+        }
     }
 
     /**

@@ -23,7 +23,7 @@ data class Product(
     val name: String = "",
     val popularity: Int = 0,
     val price: Double = 0.00,
-    val sale: Float = 0f,
+    val sale: Double = 0.00,
     val stock: Int = 0,
     val weight: Int = 0,
     val weightUnit: String = "",

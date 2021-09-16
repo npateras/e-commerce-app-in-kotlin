@@ -11,17 +11,16 @@ import kotlinx.parcelize.Parcelize
 @Keep
 @Parcelize
 @IgnoreExtraProperties
-data class Cart(
-    var userId: String = "",
-    var productId: String = "",
+data class Address(
+    val userId: String = "",
+    val fullName: String = "",
 
-    val imgUrl: String = "",
-    val name: String = "",
-    val price: Double = 0.00,
-    val sale: Double = 0.0,
-    var stock: Int = 0,
-    val weight: Int = 0,
-    val weightUnit: String = "",
-    var cartQuantity: Int = 0,
+    val phoneNumber: String = "",
+    val phoneCode: Int = 0,
+
+    val address: String = "",
+    val zipCode: String = "",
+    val additionalNote: String = "",
+
     var id: String = "",
 ) : Parcelable

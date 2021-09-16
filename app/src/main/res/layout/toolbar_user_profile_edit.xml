@@ -24,10 +24,10 @@
                     android:background="@null"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_check_mark"
-                    android:tint="@color/colorWhite"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/colorWhite" />
 
                 <TextView
                     android:id="@+id/textView_ActionBar_Label"

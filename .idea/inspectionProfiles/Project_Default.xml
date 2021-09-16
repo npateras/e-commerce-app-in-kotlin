@@ -126,6 +126,8 @@
     <inspection_tool class="scwjava_Donotexposeinternalarray" enabled="true" level="SENSEI WARNING" enabled_by_default="true" />
     <inspection_tool class="scwjava_ExceptionCreatedbutnotthrown" enabled="true" level="SENSEI WARNING" enabled_by_default="true" />
     <inspection_tool class="scwjava_Incorrectequalitycheckofwrappervalues" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
+    <inspection_tool class="scwjava_Incorrectequalitycheckofwrappervaluesequals" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
+    <inspection_tool class="scwjava_Incorrectequalitycheckofwrappervaluesnotequals" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="scwjava_IncorrectuseofObjects.equals" enabled="true" level="SENSEI WARNING" enabled_by_default="true" />
     <inspection_tool class="scwjava_InefficientuseofString.indexOf" enabled="true" level="SENSEI WARNING" enabled_by_default="true" />
     <inspection_tool class="scwjava_InvalidcomparisonofStringtonumberprimitive" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />

@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.unipi.p17172.emarket.R
-import com.unipi.p17172.emarket.databinding.ItemProductWideFavoriteBinding
+import com.unipi.p17172.emarket.databinding.ItemFavoriteProductBinding
 import com.unipi.p17172.emarket.models.Favorite
+import com.unipi.p17172.emarket.utils.GlideLoader
 import com.unipi.p17172.emarket.utils.IntentUtils
 
 
@@ -28,7 +29,7 @@ open class FavoritesListAdapter(
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesViewHolder {
         return FavoritesViewHolder(
-            ItemProductWideFavoriteBinding.inflate(
+            ItemFavoriteProductBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -51,14 +52,9 @@ open class FavoritesListAdapter(
         var priceReduced = 0.00
 
         holder.binding.apply {
-            // GlideLoader(context).loadProductPictureWide(model.imgUrl, imgViewProduct)
+            GlideLoader(context).loadProductPictureWide(model.imgUrl, imgViewProduct)
             txtViewName.text = model.name
-            txtViewPrice.text = String.format(
-                context.getString(R.string.txt_format_price),
-                context.getString(R.string.curr_eur),
-                model.price
-            )
-            if (model.sale != 0f) {
+            if (model.sale != 0.0) {
                 txtViewPriceReduced.apply {
                     visibility = View.VISIBLE
                     foreground = AppCompatResources.getDrawable(context, R.drawable.striking_red_text)
@@ -70,8 +66,13 @@ open class FavoritesListAdapter(
                 }
                 priceReduced = model.price - (model.price * model.sale)
             }
+            txtViewPrice.text = String.format(
+                context.getString(R.string.txt_format_price),
+                context.getString(R.string.curr_eur),
+                priceReduced
+            )
         }
-        holder.itemView.setOnClickListener { IntentUtils().goToProductDetailsActivity(context, model.productId, true) } // true : since we are already in favorites.
+        holder.itemView.setOnClickListener { IntentUtils().goToProductDetailsActivity(context, model.productId) } // true : since we are already in favorites.
     }
 
     /**
@@ -84,5 +85,5 @@ open class FavoritesListAdapter(
     /**
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      */
-    class FavoritesViewHolder(val binding: ItemProductWideFavoriteBinding) : RecyclerView.ViewHolder(binding.root)
+    class FavoritesViewHolder(val binding: ItemFavoriteProductBinding) : RecyclerView.ViewHolder(binding.root)
 }

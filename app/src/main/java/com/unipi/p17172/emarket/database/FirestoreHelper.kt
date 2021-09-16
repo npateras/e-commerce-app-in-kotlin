@@ -17,7 +17,9 @@ import com.unipi.p17172.emarket.ui.activities.*
 import com.unipi.p17172.emarket.ui.fragments.FavoritesFragment
 import com.unipi.p17172.emarket.ui.fragments.HomeFragment
 import com.unipi.p17172.emarket.ui.fragments.MyAccountFragment
+import com.unipi.p17172.emarket.ui.fragments.MyCartFragment
 import com.unipi.p17172.emarket.utils.Constants
+
 
 
 
@@ -27,6 +29,8 @@ class FirestoreHelper {
     // Access a Cloud Firestore instance.
     private val dbFirestore = FirebaseFirestore.getInstance()
 
+
+    // region -User Management-
     /**
      * A function to get the user id of current logged user.
      */
@@ -66,16 +70,6 @@ class FirestoreHelper {
         })
     }
 
-    //region FCM management
-    /**
-     * A function that gets the registration fcm tokens from the registered user in the FireStore
-     * database.
-     *
-     * @param activity The activity is passed as parameter to the function because it is called from
-     * activity and need to the success result.
-     * @param onComplete When the async task if completed, it will return a mutable list with all
-     * the user registration fcm tokens.
-     */
     fun getFCMRegistrationTokenDB(onComplete: (tokens: MutableList<String>) -> Unit) {
         dbFirestore.collection(Constants.COLLECTION_USERS)
             .document(getCurrentUserID())
@@ -111,7 +105,410 @@ class FirestoreHelper {
                 )
             }
     }
-    //endregion FCM
+    //end region USER
+
+    // region ADDRESS
+    fun getAddressList(activity: ListAddressActivity) {
+        // The collection name for PRODUCTS
+        dbFirestore.collection(Constants.COLLECTION_ADDRESSES)
+            .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+                // Here we get the list of boards in the form of documents.
+                Log.e(activity.javaClass.simpleName, document.documents.toString())
+                // Here we have created a new instance for address ArrayList.
+                val addressList: ArrayList<Address> = ArrayList()
+
+                // A for loop as per the list of documents to convert them into Boards ArrayList.
+                for (i in document.documents) {
+
+                    val address = i.toObject(Address::class.java)!!
+                    address.id = i.id
+
+                    addressList.add(address)
+                }
+
+                activity.successUserAddressListFromFirestore(addressList)
+            }
+            .addOnFailureListener { e ->
+                // Here call a function of base activity for transferring the result to it.
+
+                activity.hideProgressDialog()
+
+                Log.e(activity.javaClass.simpleName, "Error while getting the address list.", e)
+            }
+    }
+
+    /**
+     * A function to add address to the cloud firestore.
+     *
+     * @param activity
+     * @param addressInfo
+     */
+    fun addAddress(activity: AddEditAddressActivity, addressInfo: Address) {
+
+        // Collection name address.
+        dbFirestore.collection(Constants.COLLECTION_ADDRESSES)
+            .document()
+            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
+            .set(addressInfo, SetOptions.merge())
+            .addOnSuccessListener {
+
+                // Here call a function of base activity for transferring the result to it.
+                activity.successUpdateAddressToFirestore()
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while adding the address.",
+                    e
+                )
+            }
+    }
+
+    /**
+     * A function to update the existing address to the cloud firestore.
+     *
+     * @param activity Base class
+     * @param addressInfo Which fields are to be updated.
+     * @param addressId existing address id
+     */
+    fun updateAddress(activity: AddEditAddressActivity, addressInfo: Address, addressId: String) {
+
+        dbFirestore.collection(Constants.COLLECTION_ADDRESSES)
+            .document(addressId)
+            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
+            .set(addressInfo, SetOptions.merge())
+            .addOnSuccessListener {
+
+                // Here call a function of base activity for transferring the result to it.
+                activity.successUpdateAddressToFirestore()
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while updating the Address.",
+                    e
+                )
+            }
+    }
+
+    /**
+     * A function to delete the existing address from the cloud firestore.
+     *
+     * @param activity Base class
+     * @param addressId existing address id
+     */
+    fun deleteAddress(activity: ListAddressActivity, addressId: String) {
+
+        dbFirestore.collection(Constants.COLLECTION_ADDRESSES)
+            .document(addressId)
+            .delete()
+            .addOnSuccessListener {
+
+                // Here call a function of base activity for transferring the result to it.
+                activity.deleteAddressSuccess()
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while deleting the address.",
+                    e
+                )
+            }
+    }
+    // endregion
+
+    /**
+     * A function to get all the product list from the cloud firestore.
+     *
+     * @param fragment The fragment is passed as parameter to the function because it is called from fragment and need to the success result.
+     */
+    fun getAllProductsList(fragment: MyCartFragment) {
+        // The collection name for PRODUCTS
+        dbFirestore.collection(Constants.COLLECTION_PRODUCTS)
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+
+                // Here we get the list of boards in the form of documents.
+                Log.e("Products List", document.documents.toString())
+
+                // Here we have created a new instance for Products ArrayList.
+                val productsList: ArrayList<Product> = ArrayList()
+
+                // A for loop as per the list of documents to convert them into Products ArrayList.
+                for (i in document.documents) {
+
+                    val product = i.toObject(Product::class.java)
+                    product!!.id = i.id
+
+                    productsList.add(product)
+                }
+
+                fragment.successProductsListFromFireStore(productsList)
+            }
+            .addOnFailureListener { e ->
+                Log.e("Get Product List", "Error while getting all product list.", e)
+            }
+    }
+
+    // region -Cart Management-
+    /**
+     * A function to get the cart items list from the cloud firestore.
+     *
+     * @param fragment
+     */
+    fun getCartItemsList(fragment: MyCartFragment) {
+        // The collection name for Cart Items
+        dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
+            .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+                // Here we get the list of boards in the form of documents.
+                Log.e(fragment.javaClass.simpleName, document.documents.toString())
+                // Here we have created a new instance for cart items ArrayList.
+                val cartItemsList: ArrayList<Cart> = ArrayList()
+
+                // A for loop as per the list of documents to convert them into Boards ArrayList.
+                for (i in document.documents) {
+
+                    val cart = i.toObject(Cart::class.java)!!
+                    cart.id = i.id
+
+                    cartItemsList.add(cart)
+                }
+
+                fragment.successCartItemsListFromFireStore(cartItemsList)
+            }
+            .addOnFailureListener { e ->
+                Log.e(fragment.javaClass.simpleName, "Error while getting the cart items list of the user.", e)
+            }
+    }
+
+    /**
+     * A function to update the existing cart details to the cloud firestore.
+     *
+     * @param activity Base class
+     * @param cartItem Which fields are to be updated.
+     */
+    fun addItemToCart(activity: ProductDetailsActivity, cartItem: Cart) {
+        dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
+            .document()
+            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
+            .set(cartItem, SetOptions.merge())
+            .addOnSuccessListener {
+
+                // Here call a function of base activity for transferring the result to it.
+                activity.successItemAddedToCart()
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while adding item to cart.",
+                    e
+                )
+            }
+    }
+
+    /**
+     * A function to update the existing cart item from the cloud firestore.
+     *
+     * @param activity Base class
+     * @param cartItem Which fields are to be updated.
+     * @param productId product id of the item.
+     */
+    fun updateItemFromCart(activity: ProductDetailsActivity, cartItem: Cart, productId: String) {
+
+        dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
+            .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
+            .whereEqualTo(Constants.FIELD_PRODUCT_ID, productId)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    if (task.result!!.isEmpty)
+                        activity.hideProgressDialog()
+
+                    for (document in task.result!!) {
+                        dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
+                            .document(document.id)
+                            .set(cartItem, SetOptions.merge())
+                            .addOnSuccessListener {
+                                activity.hideProgressDialog()
+                            }
+                            .addOnFailureListener { e ->
+                                activity.hideProgressDialog()
+                                Log.e(
+                                    activity.javaClass.simpleName,
+                                    "Error while updating the cart item.",
+                                    e
+                                )
+                            }
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while getting cart item while updating.",
+                    e
+                )
+            }
+    }
+
+    /**
+     * A function to delete the existing cart item from the cloud firestore.
+     *
+     * @param activity Base class
+     * @param productId product id of the item.
+     */
+    fun deleteItemFromCart(context: Context, productId: String) {
+
+        dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
+            .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
+            .whereEqualTo(Constants.FIELD_PRODUCT_ID, productId)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    when (context) {
+                        is ProductDetailsActivity -> {
+                            if (task.result!!.isEmpty)
+                                context.hideProgressDialog()
+
+                            for (document in task.result!!) {
+                                dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
+                                    .document(document.id)
+                                    .delete()
+                                    .addOnSuccessListener {
+                                        context.successItemDeletedFromCart()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        context.hideProgressDialog()
+                                        Log.e(
+                                            context.javaClass.simpleName,
+                                            "Error while deleting the cart item.",
+                                            e
+                                        )
+                                    }
+                            }
+                        }
+                        MyCartFragment().requireContext() -> {
+                            if (task.result!!.isEmpty)
+                                MyCartFragment().hideProgressDialog()
+
+                            for (document in task.result!!) {
+                                dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
+                                    .document(document.id)
+                                    .delete()
+                                    .addOnSuccessListener {
+                                        MyCartFragment().itemRemovedSuccess()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        MyCartFragment().hideProgressDialog()
+                                        Log.e(
+                                            context.javaClass.simpleName,
+                                            "Error while deleting the cart item.",
+                                            e
+                                        )
+                                    }
+                            }
+                        }
+                    }
+
+                }
+            }
+            .addOnFailureListener { e ->
+                when (context) {
+                    is ProductDetailsActivity -> {
+                        context.hideProgressDialog()
+                        Log.e(
+                            context.javaClass.simpleName,
+                            "Error while getting cart item while removal.",
+                            e
+                        )
+                    }
+                    MyCartFragment().requireContext() -> {
+                        MyCartFragment().hideProgressDialog()
+                        Log.e(
+                            context.javaClass.simpleName,
+                            "Error while getting cart item while removal.",
+                            e
+                        )
+                    }
+                }
+            }
+    }
+
+    /**
+     * A function to update the cart item in the cloud firestore.
+     *
+     * @param context activity class.
+     * @param cart_id cart id of the item.
+     * @param itemHashMap to be updated values.
+     */
+    fun updateMyCart(context: Context, cart_id: String, itemHashMap: HashMap<String, Any>) {
+
+        // Cart items collection name
+        dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
+            .document(cart_id) // cart id
+            .update(itemHashMap) // A HashMap of fields which are to be updated.
+            .addOnSuccessListener {
+
+                // Notify the success result of the updated cart items list to the base class.
+                when (context) {
+                    MyCartFragment().requireContext() -> {
+                        MyCartFragment().itemUpdateSuccess()
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+
+                // Hide the progress dialog if there is any error.
+                when (context) {
+                    MyCartFragment().requireContext() -> {
+                        MyCartFragment().hideProgressDialog()
+                    }
+                }
+
+                Log.e(
+                    context.javaClass.simpleName,
+                    "Error while updating the cart item.",
+                    e
+                )
+            }
+    }
+    // endregion
+
+    /**
+     * A function to update the existing user details to the cloud firestore.
+     *
+     * @param activity Base class
+     * @param userInfo Which fields are to be updated.
+     */
+    fun updateProfile(activity: EditProfileActivity, userInfo: User) {
+
+        dbFirestore.collection(Constants.COLLECTION_ADDRESSES)
+            .document(getCurrentUserID())
+            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
+            .set(userInfo, SetOptions.merge())
+            .addOnSuccessListener {
+
+                // Here call a function of base activity for transferring the result to it.
+                activity.successUpdateProfileToFirestore()
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while updating the user's profile.",
+                    e
+                )
+            }
+    }
 
     /**
      * A function to make an entry of the registered user in the FireStore database.
@@ -185,7 +582,110 @@ class FirestoreHelper {
             }
     }
 
+    fun getPopularList(fragment: Fragment) {
+        // The collection name for PRODUCTS
+        dbFirestore.collection(Constants.COLLECTION_PRODUCTS)
+            .whereGreaterThan(Constants.FIELD_POPULARITY, 0)
+            .orderBy(Constants.FIELD_POPULARITY, Query.Direction.DESCENDING)
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+
+                // Here we get the list of boards in the form of documents.
+                Log.d("Popular Products List", document.documents.toString())
+
+                // Here we have created a new instance for Products ArrayList.
+                val popularProductsList: ArrayList<Product> = ArrayList()
+
+                // A for loop as per the list of documents to convert them into Products ArrayList.
+                for (i in document.documents) {
+
+                    val product = i.toObject(Product::class.java)
+                    product!!.id = i.id
+
+                    popularProductsList.add(product)
+                }
+                when (fragment) {
+                    is HomeFragment -> {
+                        fragment.successPopularListFromFireStore(popularProductsList)
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("Get Popular Product List", "Error while getting popular product list.", e)
+            }
+    }
+
     fun getProductsListFromCategory(activity: Activity, filter: String) {
+        // Special case when user opens the deals and popular categories.
+        when (filter) {
+            "Deals" -> {
+                // The collection name for PRODUCTS
+                dbFirestore.collection(Constants.COLLECTION_PRODUCTS)
+                    .whereGreaterThan(Constants.FIELD_SALE, 0) // Only return products with a sale percentage bigger than 0.
+                    .orderBy(Constants.FIELD_SALE, Query.Direction.DESCENDING)
+                    .get() // Will get the documents snapshots.
+                    .addOnSuccessListener { document ->
+
+                        // Here we get the list of boards in the form of documents.
+                        Log.d("Products On-Sale List", document.documents.toString())
+
+                        // Here we have created a new instance for Products ArrayList.
+                        val productsList: ArrayList<Product> = ArrayList()
+
+                        // A for loop as per the list of documents to convert them into Products ArrayList.
+                        for (i in document.documents) {
+
+                            val product = i.toObject(Product::class.java)
+                            product!!.id = i.id
+
+                            productsList.add(product)
+                        }
+                        when (activity) {
+                            is ListProductsActivity -> {
+                                activity.successOProductsListFromFirestore(productsList)
+                            }
+                        }
+                    }
+                    .addOnFailureListener { e ->
+                        Log.e("Get Product On-Sale List", "Error while getting product on-sale list.", e)
+                    }
+                return
+            }
+            "Popular" -> {
+                dbFirestore.collection(Constants.COLLECTION_PRODUCTS)
+                    .whereGreaterThan(Constants.FIELD_POPULARITY, 0)
+                    .orderBy(Constants.FIELD_POPULARITY, Query.Direction.DESCENDING)
+                    .get() // Will get the documents snapshots.
+                    .addOnSuccessListener { document ->
+
+                        // Here we get the list of boards in the form of documents.
+                        Log.d("Popular Products List", document.documents.toString())
+
+                        // Here we have created a new instance for Products ArrayList.
+                        val productsList: ArrayList<Product> = ArrayList()
+
+                        // A for loop as per the list of documents to convert them into Products ArrayList.
+                        for (i in document.documents) {
+
+                            val product = i.toObject(Product::class.java)
+                            product!!.id = i.id
+
+                            productsList.add(product)
+                        }
+                        when (activity) {
+                            is ListProductsActivity -> {
+                                activity.successOProductsListFromFirestore(productsList)
+                            }
+                        }
+                    }
+                    .addOnFailureListener { e ->
+                        Log.e("Get Popular Product List", "Error while getting popular products list.", e)
+                    }
+                return
+            }
+        }
+        // If the above statement isn't valid we will proceed to get the products for a specific
+        // product category
         dbFirestore.collection(Constants.COLLECTION_PRODUCTS)
             .whereEqualTo(Constants.FIELD_CATEGORY, filter) // Getting products only from a certain category
             .orderBy(Constants.FIELD_NAME, Query.Direction.DESCENDING)
@@ -193,7 +693,7 @@ class FirestoreHelper {
             .addOnSuccessListener { document ->
 
                 // Here we get the list of boards in the form of documents.
-                Log.d("Products List", document.documents.toString())
+                Log.d("Category Products List", document.documents.toString())
 
                 // Here we have created a new instance for Products ArrayList.
                 val productsList: ArrayList<Product> = ArrayList()
@@ -214,14 +714,7 @@ class FirestoreHelper {
                 }
             }
             .addOnFailureListener { e ->
-                // Hide the progress dialog if there is any error based on the base class instance.
-                when (activity) {
-                    is ListProductsActivity -> {
-                        // TODO: Show error state maybe
-                    }
-                }
-
-                Log.e("Get Product List", "Error while getting product list.", e)
+                Log.e("Get Category Product List", "Error while getting category products list.", e)
             }
     }
 
@@ -259,13 +752,6 @@ class FirestoreHelper {
                 }
             }
             .addOnFailureListener { e ->
-                // Hide the progress dialog if there is any error based on the base class instance.
-                when (activity) {
-                    is AllCategoriesActivity -> {
-                        // TODO: Show error state maybe
-                    }
-                }
-
                 Log.e("Get Categories List", "Error while getting categories list.", e)
             }
     }
@@ -307,23 +793,58 @@ class FirestoreHelper {
             }
     }
 
-    fun isFavorite(productId: String, isFavoriteCallback: IsFavoriteCallback) {
-
-        var isFavorite = false
-
-        // The collection name for PRODUCTS
+    fun getFavoriteProduct(productDetailsActivity: ProductDetailsActivity, productId: String) {
         dbFirestore.collection(Constants.COLLECTION_FAVORITES)
             .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
             .whereEqualTo(Constants.FIELD_PRODUCT_ID, productId)
             .get() // Will get the documents snapshots.
-            .addOnSuccessListener { document ->
-                // Here we get the list of boards in the form of documents.
-                Log.d("Favorites", document?.documents.toString())
+            .addOnCompleteListener { task ->
 
-                if (document != null && !document.isEmpty)
-                    isFavorite = true
+                if (task.result!!.isEmpty) {
+                    productDetailsActivity.successFavoriteProductFromFirestore(Favorite())
+                    return@addOnCompleteListener
+                }
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        // Here we get the list of boards in the form of documents.
+                        Log.d("Favorite Product", document.toString())
 
-                isFavoriteCallback.onCallback(isFavorite)
+                        val favoriteProduct: Favorite = document.toObject(Favorite::class.java)
+
+                        productDetailsActivity.successFavoriteProductFromFirestore(favoriteProduct)
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("Get Favorites", "Error while getting favorites of product.", e)
+            }
+    }
+
+    fun checkIfProductIsInCart(activity: Activity, productId: String) {
+        dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
+            .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
+            .whereEqualTo(Constants.FIELD_PRODUCT_ID, productId)
+            .get() // Will get the documents snapshots.
+            .addOnCompleteListener { task ->
+
+                if (task.result!!.isEmpty) {
+                    when (activity) {
+                        is ProductDetailsActivity -> activity.successCartItemFromFirestore(Cart())
+                    }
+                    return@addOnCompleteListener
+                }
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        // Here we get the list of boards in the form of documents.
+                        Log.d("Cart Item", document.toString())
+
+                        val cartItem: Cart = document.toObject(Cart::class.java)
+
+                        when (activity) {
+                            is ProductDetailsActivity -> activity.successCartItemFromFirestore(cartItem)
+                        }
+                    }
+                }
             }
             .addOnFailureListener { e ->
                 Log.e("Get Favorites", "Error while getting favorites of product.", e)
@@ -354,11 +875,6 @@ class FirestoreHelper {
         dbFirestore.collection(Constants.COLLECTION_FAVORITES)
             .document()
             .set(favorite, SetOptions.merge())
-            .addOnSuccessListener {
-                when (activity) {
-                    is ProductDetailsActivity -> {}
-                }
-            }
             .addOnFailureListener { e ->
                 Log.e(
                     activity.javaClass.simpleName,
@@ -520,30 +1036,7 @@ class FirestoreHelper {
             }
     }
 
-    fun getCartId(activity: ProductDetailsActivity, userId: String, productId: String) {
-
-            var cartId = ""
-
-            // The collection name for PRODUCTS
-            dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
-                .whereEqualTo(Constants.FIELD_USER_ID, userId)
-                .whereEqualTo(Constants.FIELD_PRODUCT_ID, productId)
-                .get() // Will get the documents snapshots.
-                .addOnSuccessListener { document ->
-                    // Here we get the list of boards in the form of documents.
-                    Log.d("Favorites", document?.documents.toString())
-
-                    if (document != null && !document.isEmpty)
-                        cartId = document.documents[0][Constants.FIELD_CART_ID] as String
-
-                    activity.cartIdSuccess(cartId)
-                }
-                .addOnFailureListener { e ->
-                    Log.e("Get Cart ID", "Error while getting ID of cart.", e)
-                }
-        }
-
-    fun deleteFavoriteProduct(fragment: Fragment, productId: String) {
+    fun deleteFavoriteProduct(productDetailsActivity: ProductDetailsActivity, productId: String) {
         dbFirestore.collection(Constants.COLLECTION_FAVORITES)
             .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
             .whereEqualTo(Constants.FIELD_PRODUCT_ID, productId)
@@ -558,39 +1051,12 @@ class FirestoreHelper {
                     }
                 }
                 else {
-                    Log.d(fragment.javaClass.simpleName, "Error getting documents: ", task.exception);
+                    Log.d(productDetailsActivity.javaClass.simpleName, "Error getting documents: ", task.exception);
                 }
             }
             .addOnFailureListener { e ->
                 Log.e(
-                    fragment.javaClass.simpleName,
-                    "Error while getting product from user's favorites.",
-                    e
-                )
-            }
-    }
-
-    fun deleteFavoriteProduct(activity: Activity, productId: String) {
-        dbFirestore.collection(Constants.COLLECTION_FAVORITES)
-            .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
-            .whereEqualTo(Constants.FIELD_PRODUCT_ID, productId)
-            .get()
-            .addOnCompleteListener{ task ->
-                if (task.isSuccessful) {
-                    for (document in task.result!!) {
-                        dbFirestore
-                            .collection(Constants.COLLECTION_FAVORITES)
-                            .document(document.id)
-                            .delete()
-                    }
-                }
-                else {
-                    Log.d(activity.javaClass.simpleName, "Error getting documents: ", task.exception);
-                }
-            }
-            .addOnFailureListener { e ->
-                Log.e(
-                    activity.javaClass.simpleName,
+                    productDetailsActivity.javaClass.simpleName,
                     "Error while getting product from user's favorites.",
                     e
                 )
@@ -614,7 +1080,7 @@ class FirestoreHelper {
                 // Convert the snapshot to the object of Product data model class.
                 val product = document.toObject(Product::class.java)!!
 
-                activity.productDetailsSuccess(product)
+                activity.successProductDetailsFromFirestore(product)
             }
             .addOnFailureListener { e ->
                 Log.e(
@@ -623,41 +1089,5 @@ class FirestoreHelper {
                     e
                 )
             }
-    }
-
-
-    /**
-     * A function to get the list of orders from cloud firestore.
-     */
-    fun getCartProductDetails(activity: ProductDetailsActivity, cartId: String) {
-        dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
-            .document(cartId)
-            .get() // Will get the documents snapshots.
-            .addOnSuccessListener { document ->
-                Log.d(activity.javaClass.simpleName, document.toString())
-
-                val cartItem = document.toObject(Cart::class.java)!!
-
-                activity.cartProductDetailsSuccess(cartItem)
-            }
-            .addOnFailureListener { e ->
-                // Here call a function of base activity for transferring the result to it.
-
-                activity.unveilDetails()
-
-                Log.e(
-                    activity.javaClass.simpleName,
-                    "Error while getting cart product details.",
-                    e
-                )
-            }
-    }
-
-
-    /**
-     * Callbacks
-     */
-    interface IsFavoriteCallback {
-        fun onCallback(isFavorite: Boolean)
     }
 }

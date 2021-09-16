@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/core_sans_cr_55_medium"
                 android:gravity="start"
-                android:hint="@string/input_txt_hint_name"
+                android:hint="@string/input_txt_hint_full_name"
                 android:inputType="textPersonName"
                 android:textAlignment="textStart"
                 android:textColor="@color/colorText"

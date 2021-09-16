@@ -3,9 +3,9 @@ package com.unipi.p17172.emarket.models
 import android.os.Parcelable
 import androidx.annotation.Keep
 import com.google.firebase.firestore.IgnoreExtraProperties
-import com.google.firebase.firestore.ServerTimestamp
 import kotlinx.parcelize.Parcelize
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * A data model class with required fields.
@@ -13,14 +13,17 @@ import java.util.*
 @Keep
 @Parcelize
 @IgnoreExtraProperties
-data class Favorite(
+data class Order(
     var userId: String = "",
-    var productId: String = "",
-    val imgUrl: String = "",
-    val name: String = "",
-    val price: Double = 0.00,
-    val sale: Double = 0.00,
-    @ServerTimestamp
-    val dateAdded: Date = Date(),
+    val address: Address = Address(),
+
+    val cartItems: ArrayList<Cart> = ArrayList(),
+    val title: String = "",
+
+    val subTotalAmount: String = "",
+    val shippingCharge: String = "",
+    val totalAmount: String = "",
+
+    val orderDate: Date = Date(),
     var id: String = ""
 ) : Parcelable

@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unipi.p17172.emarket.R
-import com.unipi.p17172.emarket.adapters.ProductsListFragmentAdapter
+import com.unipi.p17172.emarket.adapters.ProductsListAdapter
 import com.unipi.p17172.emarket.database.FirestoreHelper
 import com.unipi.p17172.emarket.databinding.FragmentHomeBinding
 import com.unipi.p17172.emarket.models.Product
@@ -38,6 +38,7 @@ class HomeFragment : BaseFragment() {
     private fun init() {
         veilRecyclers()
         loadDeals()
+        loadPopular()
         setupClickListeners()
     }
 
@@ -45,11 +46,6 @@ class HomeFragment : BaseFragment() {
         FirestoreHelper().getDealsList(this@HomeFragment)
     }
 
-    /**
-     * A function to get the successful product list from cloud firestore.
-     *
-     * @param productsList Will receive the product list from cloud firestore.
-     */
     fun successDealsListFromFireStore(productsList: ArrayList<Product>) {
 
         if (productsList.size > 0) {
@@ -64,8 +60,8 @@ class HomeFragment : BaseFragment() {
             binding.veilRecyclerViewDeals.run {
                 setVeilLayout(R.layout.shimmer_item_product)
                 setAdapter(
-                    ProductsListFragmentAdapter(
-                        this@HomeFragment,
+                    ProductsListAdapter(
+                        requireContext(),
                         productsList
                     )
                 )
@@ -91,9 +87,49 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    // todo
     private fun loadPopular() {
+        FirestoreHelper().getPopularList(this@HomeFragment)
+    }
 
+    fun successPopularListFromFireStore(popularProductsList: ArrayList<Product>) {
+
+        if (popularProductsList.size > 0) {
+
+            // Show the recycler and remove the empty state layout completely.
+            binding.apply {
+                veilRecyclerViewPopular.visibility = View.VISIBLE
+                layoutEmptyStatePopular.root.visibility = View.GONE
+            }
+
+            // sets VeilRecyclerView's properties
+            binding.veilRecyclerViewPopular.run {
+                setVeilLayout(R.layout.shimmer_item_product)
+                setAdapter(
+                    ProductsListAdapter(
+                        requireContext(),
+                        popularProductsList
+                    )
+                )
+                setLayoutManager(LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false))
+                getRecyclerView().setHasFixedSize(true)
+                addVeiledItems(Constants.DEFAULT_VEILED_ITEMS_HORIZONTAL)
+                // delay-auto-unveil
+                Handler(Looper.getMainLooper()).postDelayed(
+                    {
+                        unveilRecyclers()
+                    },
+                    1000
+                )
+            }
+        } else {
+            unveilRecyclers()
+            // Hide the recycler and show the empty state layout.
+            binding.apply {
+                veilRecyclerViewPopular.visibility = View.INVISIBLE
+                layoutEmptyStatePopular.root.visibility = View.VISIBLE
+            }
+
+        }
     }
 
     private fun veilRecyclers() {
@@ -115,7 +151,7 @@ class HomeFragment : BaseFragment() {
     private fun setupClickListeners() {
         binding.apply {
             txtViewCategoriesViewAll.setOnClickListener { IntentUtils().goToCategoriesActivity(requireActivity()) }
-            txtViewDealsViewAll.setOnClickListener { IntentUtils().goToListProductsActivity(requireActivity(), "deals") }
+            txtViewDealsViewAll.setOnClickListener { IntentUtils().goToListProductsActivity(requireActivity(), "Deals") }
             txtViewPopularViewAll.setOnClickListener { IntentUtils().goToListProductsActivity(requireActivity(), "popular") }
             imgBtnCategoryChilled.setOnClickListener{ IntentUtils().goToListProductsActivity(requireActivity(), "Chilled") }
             imgBtnCategoryGrocery.setOnClickListener{ IntentUtils().goToListProductsActivity(requireActivity(), "Grocery") }

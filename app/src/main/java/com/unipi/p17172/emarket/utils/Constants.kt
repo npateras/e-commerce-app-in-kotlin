@@ -7,6 +7,8 @@ import android.provider.MediaStore
 import android.webkit.MimeTypeMap
 import com.google.android.material.behavior.SwipeDismissBehavior
 import com.google.android.material.snackbar.BaseTransientBottomBar
+import java.text.SimpleDateFormat
+import java.util.*
 
 // Create a custom object to declare all the constant values in a single file. The constant values declared here is can be used in whole application.
 /**
@@ -24,6 +26,7 @@ object Constants {
     const val DEFAULT_VEILED_ITEMS_VERTICAL: Int = 15
     const val DEFAULT_CART_ITEM_QUANTITY: Int = 1
     const val DEFAULT_MAX_ITEM_CART_QUANTITY: Int = 99
+    const val DEFAULT_DELIVERY_COST: Double = 3.00
     val SNACKBAR_BEHAVIOR = BaseTransientBottomBar.Behavior().apply {
         setSwipeDirection(SwipeDismissBehavior.SWIPE_DIRECTION_ANY) }
 
@@ -31,7 +34,7 @@ object Constants {
     const val TAG: String = "[eMarket]"
     const val EMARKET_PREFERENCES: String = "eMarketPrefs"
     const val LOGGED_IN_USERNAME: String = "logged_in_username"
-
+    val standardSimpleDateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.ENGLISH)
 
     // Firebase Constants
     // This is used for the collection name for USERS.
@@ -39,12 +42,14 @@ object Constants {
     const val COLLECTION_CATEGORIES: String = "categories"
     const val COLLECTION_PRODUCTS: String = "Products"
     const val COLLECTION_FAVORITES: String = "favorites"
+    const val COLLECTION_ADDRESSES: String = "addresses"
     const val COLLECTION_NOTIFICATIONS: String = "notifications"
     const val COLLECTION_CART_ITEMS: String = "cart_items"
 
     // Fields
     const val FIELD_ADDED_BY_USER: String = "addedByUser"
     const val FIELD_ADDRESS: String = "address"
+    const val FIELD_POPULARITY: String = "popularity"
     const val FIELD_CATEGORY: String = "category"
     const val FIELD_CATEGORY_ID: String = "categoryId"
     const val FIELD_COUNTRY: String = "country"
@@ -74,6 +79,10 @@ object Constants {
 
     // Intent Extras
     const val EXTRA_PRODUCT_ID: String = "extraProductId"
+    const val EXTRA_PRODUCT_MODEL: String = "extra_product_model"
+    const val EXTRA_ADDRESS_MODEL: String = "extra_address_model"
+    const val EXTRA_ADDRESS_DETAILS: String = "extra_address_details"
+    const val EXTRA_SELECT_ADDRESS: String = "extra_select_address"
     const val EXTRA_IS_IN_FAVORITES: String = "extraIsInFavorites"
     const val EXTRA_REG_USERS_SNACKBAR: String = "extraShowRegisteredUserSnackbar"
     const val EXTRA_PROFILE_NOT_COMPLETED_SNACKBAR: String = "extraShowProfileNotCompletedSnackbar"

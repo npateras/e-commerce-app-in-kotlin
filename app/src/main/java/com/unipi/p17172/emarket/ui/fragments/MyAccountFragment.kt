@@ -11,6 +11,7 @@ import com.unipi.p17172.emarket.database.FirestoreHelper
 import com.unipi.p17172.emarket.databinding.FragmentMyAccountBinding
 import com.unipi.p17172.emarket.models.User
 import com.unipi.p17172.emarket.ui.activities.MainActivity
+import com.unipi.p17172.emarket.utils.Constants
 import com.unipi.p17172.emarket.utils.IntentUtils
 
 class MyAccountFragment : BaseFragment() {
@@ -52,6 +53,7 @@ class MyAccountFragment : BaseFragment() {
             // Apply click listeners
             binding.apply {
                 btnUpdateProfile.setOnClickListener { IntentUtils().goToUpdateUserDetailsActivity(this@MyAccountFragment.requireContext(), mUserDetails) }
+                btnAddresses.setOnClickListener { IntentUtils().goToListAddressesActivity(this@MyAccountFragment.requireContext()) }
                 btnLogOut.setOnClickListener{
                     FirebaseAuth.getInstance().signOut()
                     val intent = Intent(context, MainActivity::class.java)
@@ -91,23 +93,18 @@ class MyAccountFragment : BaseFragment() {
 
         // Set user details.
         binding.apply {
-            textViewFullName.text = mUser.fullName
-            textViewEmailValue.text = mUser.email
+            textViewFullName.text = mUserDetails.fullName
+            textViewEmailValue.text = mUserDetails.email
+            textViewDateRegisteredValue.text = Constants.standardSimpleDateFormat.format(mUserDetails.dateRegistered)
+
             // If some details aren't set by the user we completely remove the view instead of
             // showing a blank view.
-            if (mUser.address == "") {
-                textViewAddress.visibility = View.GONE
-                textViewAddressValue.visibility = View.GONE
-            }
-            else textViewAddressValue.text = mUser.address
-
-            if (mUser.phone == "") {
-                textViewPhone.visibility = View.GONE
-                textViewPhoneValue.visibility = View.GONE
-            }
-            else textViewPhoneValue.text = String.format(
-                getString(R.string.txt_format_phone),
-                mUser.phoneCode, mUser.phone)
+            if (mUserDetails.phoneNumber != "")
+                if (mUserDetails.phoneCode.toString() != "")
+                    textViewPhoneValue.text = String.format(getString(R.string.txt_format_phone), mUserDetails.phoneCode, mUserDetails.phoneNumber)
+                else
+                    textViewPhoneValue.text = mUserDetails.phoneNumber
+            else textViewPhoneValue.text = getString(R.string.txt_none)
         }
 
         unveilDetails()

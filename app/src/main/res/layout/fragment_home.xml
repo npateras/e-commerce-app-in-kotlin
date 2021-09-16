@@ -230,18 +230,19 @@
             app:veilFrame_radius="8dp"/>
 
         <include
-            android:visibility="gone"
             android:id="@+id/layout_Empty_State_Deals"
-            android:layout_width="0dp"
-            android:layout_height="160dp"
-            android:layout_marginTop="12dp"
             layout="@layout/layout_empty_state_deals"
-            android:clipToPadding = "false"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:clipToPadding="false"
             android:paddingStart="16dp"
             android:paddingEnd="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/veilRecyclerView_Deals"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtView_Deals"/>
+            app:layout_constraintTop_toBottomOf="@+id/txtView_Deals" />
 
         <TextView
             style="@style/TextView_Header_14"
@@ -286,6 +287,21 @@
             app:veilFrame_baseAlpha="0.6"
             app:veilFrame_highlightAlpha="1.0"
             app:veilFrame_radius="8dp"/>
+
+        <include
+            android:id="@+id/layout_Empty_State_Popular"
+            layout="@layout/layout_empty_state_popular"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:clipToPadding="false"
+            android:paddingStart="16dp"
+            android:paddingEnd="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/veilRecyclerView_Popular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtView_Popular" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

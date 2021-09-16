@@ -17,14 +17,13 @@ data class User(
     val id: String = "",
     val fullName: String = "",
     val email: String = "",
-    val address: String = "",
-    val country: String = "",
-    val zipCode: String = "",
+    val phoneNumber: String = "",
+    val phoneCode: Int = 0,
+
     val registrationTokens: MutableList<String> = mutableListOf(),
-    val profileCompleted: Boolean = false,
+
     @ServerTimestamp
     val dateRegistered: Date = Date(),
-    val phone: String = "",
-    val phoneCode: Int = 0,
     val profImgUrl: String = "",
+    val profileCompleted: Boolean = false,
 ) : Parcelable
