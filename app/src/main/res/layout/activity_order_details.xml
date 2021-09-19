@@ -7,12 +7,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorBackground"
     android:fillViewport="true"
-    tools:context=".ui.activities."
+    tools:context=".ui.activities.OrderDetailsActivity"
     tools:ignore="contentDescription">
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar_activity_my_orders"
+        layout="@layout/toolbar_title_only"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -65,12 +65,12 @@
                 <TextView
                     android:id="@+id/txtView_Address_Value"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/core_sans_cr_45_regular"
-                    android:text="@string/txt_address"
+                    android:text="@string/txt_loading"
                     android:ellipsize="end"
-                    android:maxLines="1"
+                    android:maxLines="2"
                     android:textColor="@color/colorText2"
                     android:textSize="@dimen/txt_font_size_header_16"
                     app:layout_constraintBottom_toBottomOf="@+id/imgView_Address"
@@ -81,50 +81,13 @@
                     app:layout_constraintVertical_bias="0.0" />
 
                 <ImageView
-                    android:id="@+id/imgView_Delivery_Time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_clock_filled"
-                    app:layout_constraintStart_toStartOf="@+id/imgView_Address"
-                    app:layout_constraintTop_toBottomOf="@+id/imgView_Address" />
-
-                <TextView
-                    android:id="@+id/txtView_Delivery_Time_Header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/core_sans_cr_55_medium"
-                    android:text="@string/txt_delivery_time"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/txt_font_size_header_16"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/txtView_Address_Value"
-                    app:layout_constraintTop_toTopOf="@+id/imgView_Delivery_Time" />
-
-                <TextView
-                    android:id="@+id/txtView_Delivery_Time_Value"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:fontFamily="@font/core_sans_cr_45_regular"
-                    android:text="@string/txt_address"
-                    android:textColor="@color/colorText2"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textSize="@dimen/txt_font_size_header_16"
-                    app:layout_constraintBottom_toBottomOf="@+id/imgView_Delivery_Time"
-                    app:layout_constraintEnd_toEndOf="@+id/txtView_Address_Value"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/txtView_Delivery_Time_Header"
-                    app:layout_constraintTop_toBottomOf="@+id/txtView_Delivery_Time_Header" />
-
-                <ImageView
                     android:id="@+id/imgView_Total_Amt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/ic_coins_filled"
-                    app:layout_constraintStart_toStartOf="@+id/imgView_Delivery_Time"
-                    app:layout_constraintTop_toBottomOf="@+id/imgView_Delivery_Time" />
+                    app:layout_constraintStart_toStartOf="@+id/imgView_Address"
+                    app:layout_constraintTop_toBottomOf="@+id/txtView_Address_Value" />
 
                 <TextView
                     android:id="@+id/txtView_Total_Amt_Header"
@@ -135,21 +98,21 @@
                     android:textColor="@color/colorText"
                     android:textSize="@dimen/txt_font_size_header_16"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/txtView_Delivery_Time_Value"
+                    app:layout_constraintStart_toStartOf="@+id/txtView_Address_Value"
                     app:layout_constraintTop_toTopOf="@+id/imgView_Total_Amt" />
 
                 <TextView
                     android:id="@+id/txtView_Total_Amt_Value"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:fontFamily="@font/core_sans_cr_45_regular"
-                    android:text="@string/txt_address"
-                    android:textColor="@color/colorText2"
                     android:ellipsize="end"
+                    android:fontFamily="@font/core_sans_cr_45_regular"
                     android:maxLines="1"
+                    android:text="@string/txt_loading"
+                    android:textColor="@color/colorText2"
                     android:textSize="@dimen/txt_font_size_header_16"
                     app:layout_constraintBottom_toBottomOf="@+id/imgView_Total_Amt"
-                    app:layout_constraintEnd_toEndOf="@+id/txtView_Delivery_Time_Value"
+                    app:layout_constraintEnd_toEndOf="@+id/txtView_Address_Value"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/txtView_Total_Amt_Header"
                     app:layout_constraintTop_toBottomOf="@+id/txtView_Total_Amt_Header" />
@@ -179,14 +142,14 @@
                     android:id="@+id/txtView_Payment_Method_Value"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:fontFamily="@font/core_sans_cr_45_regular"
-                    android:text="@string/txt_address"
-                    android:textColor="@color/colorText2"
                     android:ellipsize="end"
+                    android:fontFamily="@font/core_sans_cr_45_regular"
                     android:maxLines="1"
+                    android:text="@string/txt_loading"
+                    android:textColor="@color/colorText2"
                     android:textSize="@dimen/txt_font_size_header_16"
                     app:layout_constraintBottom_toBottomOf="@+id/imgView_Payment_Method"
-                    app:layout_constraintEnd_toEndOf="@+id/txtView_Total_Amt_Value"
+                    app:layout_constraintEnd_toEndOf="@+id/txtView_Address_Value"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/txtView_Payment_Method_Header"
                     app:layout_constraintTop_toBottomOf="@+id/txtView_Payment_Method_Header" />
@@ -218,14 +181,14 @@
                     android:id="@+id/txtView_Order_Status_Value"
                     android:layout_width="0dp"
                     android:layout_height="20dp"
-                    android:fontFamily="@font/core_sans_cr_45_regular"
-                    android:text="@string/txt_address"
-                    android:textColor="@color/colorText2"
                     android:ellipsize="end"
+                    android:fontFamily="@font/core_sans_cr_45_regular"
                     android:maxLines="1"
+                    android:text="@string/txt_loading"
+                    android:textColor="@color/colorText2"
                     android:textSize="@dimen/txt_font_size_header_16"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-                    app:layout_constraintEnd_toEndOf="@+id/txtView_Payment_Method_Value"
+                    app:layout_constraintEnd_toEndOf="@+id/txtView_Address_Value"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/txtView_Order_Status_Header"
                     app:layout_constraintTop_toBottomOf="@+id/txtView_Order_Status_Header" />
@@ -236,11 +199,10 @@
                 android:id="@+id/constraintLayout_Body"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/constraintLayout_Bottom"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout_Head">
-
 
                 <TextView
                     android:id="@+id/txtView_Items"
@@ -256,57 +218,27 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="0dp"
+                <com.skydoves.androidveil.VeilRecyclerFrameView
+                    android:id="@+id/veilRecyclerView"
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginTop="12dp"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_cart_product"
-                    android:nestedScrollingEnabled="false"
+                    android:clipToPadding="false"
+                    android:paddingTop="29dp"
+                    android:paddingBottom="21dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtView_Items" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout_Bottom"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_container_dialog_bottom"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_SignIn_With_Phone"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="379dp"
-                    android:layout_height="@dimen/btn_height_medium_45"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/ripple_btn_primary_color_selector"
-                    android:fontFamily="@font/core_sans_cr_55_medium"
-                    android:gravity="center"
-                    android:text="@string/button_add_to_cart"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/btn_font_size_small_14"
-                    app:backgroundTint="@null"
-                    app:icon="@drawable/ic_add_to_cart"
-                    app:iconGravity="textStart"
-                    app:iconPadding="10dp"
-                    app:iconSize="@dimen/txt_font_size_action_bar_20"
-                    app:iconTint="@color/colorWhite"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
+                    app:layout_constraintTop_toBottomOf="@+id/txtView_Items"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:veilFrame_baseAlpha="0.6"
+                    app:veilFrame_baseColor="@color/colorSecondary2"
+                    app:veilFrame_defaultChildVisible="false"
+                    app:veilFrame_highlightAlpha="1.0"
+                    app:veilFrame_highlightColor="@color/colorWhite"
+                    app:veilFrame_radius="8dp"
+                    app:veilFrame_shimmerEnable="true"
+                    app:veilFrame_veiled="true" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -99,9 +99,11 @@
     <string name="txt_apartment">Apartment</string>
     <string name="txt_other">Other</string>
     <string name="txt_format_price" translatable="false">%1$s%2$,.2f</string>
+    <string name="txt_format_price_button_authorize" translatable="true">Authorize %1$s%2$,.2f</string>
     <string name="txt_format_weight" translatable="false">%1$d %2$s</string>
     <string name="txt_out_of_stock">Out of Stock</string>
     <string name="txt_available">Available</string>
+
     <string name="txt_error_selecting_below_zero">You can\'t select a negative value.</string>
     <string name="txt_error_max_quantity">Max selectable quantity is 99.</string>
     <string name="txt_error_max_stock">Maximum quantity stock reached.</string>
@@ -112,6 +114,12 @@
     <string name="txt_error_empty_phone">Please enter your phone number.</string>
     <string name="txt_error_empty_address">Please enter your address.</string>
     <string name="txt_error_empty_zip_code">Please enter your zip code.</string>
+    <string name="txt_error_payment_method_not_selected">Please select a payment method!</string>
+    <string name="txt_error_empty_card_number">Please enter your credit card\'s number.</string>
+    <string name="txt_error_empty_card_full_name">Please enter your credit card\'s full name.</string>
+    <string name="txt_error_empty_card_exp_date">Please enter your credit card\'s expiry date (separate with /).</string>
+    <string name="txt_error_empty_card_cvv">Please enter your credit card\'s CVV.</string>
+
     <string name="txt_please_wait">Please wait…</string>
     <string name="txt_please_click_back_again_to_exit">Please click back again to exit.</string>
     <string name="txt_password_reset_mail_sent">Email sent successfully to reset your password!</string>
@@ -247,6 +255,22 @@
     <string name="txt_your_address_added_successfully">Your address has been successfully added!</string>
     <string name="txt_your_address_updated_successfully">Your address has been successfully updated!</string>
     <string name="txt_profile_updated">Your profile has been updated successfully!</string>
+    <string name="txt_pay_with_credit_card">Pay with credit card</string>
+    <string name="txt_credit_card">Credit Card</string>
+    <string name="txt_cash_on_delivery">Cash on Delivery</string>
+    <string name="txt_selected_address">Selected Address</string>
+    <string name="txt_items_receipt">Items Receipt</string>
+    <string name="txt_continue">Continue</string>
+    <string name="txt_credit_card_details">Credit Card Details</string>
+    <string name="txt_credit_card_details_2">Enter your credit card details to pay.</string>
+    <string name="input_txt_hint_card_number">Your credit card\'s number</string>
+    <string name="txt_authorize">Authorize</string>
+    <string name="input_txt_hint_card_name">Your full name that is written in your card</string>
+    <string name="input_txt_hint_card_exp_date">Exp. Date</string>
+    <string name="input_txt_hint_card_cvv">CVV</string>
+    <string name="txt_order_placed_successfully">Your order has been placed successfully!</string>
+    <string name="txt_pay_invoice">Pay Invoice</string>
+    <string name="txt_my_orders">My Orders</string>
 
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 

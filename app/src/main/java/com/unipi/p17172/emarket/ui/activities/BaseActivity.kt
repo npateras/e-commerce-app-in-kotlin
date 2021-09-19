@@ -71,9 +71,6 @@ open class BaseActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun goToCartActivity(context: Context) {
-        startActivity(Intent(context, MyCartActivity::class.java))
-    }
 
     fun goToSignInActivity(context: Context) {
         startActivity(Intent(context, SignInActivity::class.java))

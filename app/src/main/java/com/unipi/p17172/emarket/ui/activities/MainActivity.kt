@@ -1,12 +1,9 @@
 package com.unipi.p17172.emarket.ui.activities
 
-import android.app.ActionBar.DISPLAY_SHOW_CUSTOM
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -23,6 +20,8 @@ import com.unipi.p17172.emarket.databinding.ActivityMainBinding
 import com.unipi.p17172.emarket.models.User
 import com.unipi.p17172.emarket.service.MyFirebaseMessagingService
 import com.unipi.p17172.emarket.utils.Constants
+import com.unipi.p17172.emarket.utils.IntentUtils
+import com.unipi.p17172.emarket.utils.SnackBarSuccessClass
 import java.util.*
 
 
@@ -43,16 +42,17 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     private fun setupUI() {
         setUpTabs()
-        setUpActionBar()
+        setupActionBar()
         setupNavDrawer()
+
+        binding.toolbar.actionBarImgBtnMyCart.setOnClickListener { IntentUtils().goToListCartItemsActivity(this) }
     }
 
-     private fun setUpActionBar() {
+    private fun setupActionBar() {
         setSupportActionBar(binding.toolbar.root)
-        Objects.requireNonNull(supportActionBar)!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        val actionBar: android.app.ActionBar? = actionBar
+        val actionBar = supportActionBar
         actionBar?.let {
-            it.displayOptions = DISPLAY_SHOW_CUSTOM
+            it.setDisplayShowCustomEnabled(true)
             it.setCustomView(R.layout.toolbar_activity_main)
         }
     }
@@ -80,13 +80,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             else {
                 navView.inflateHeaderView(R.layout.nav_drawer_header_signed_in)
                 FirestoreHelper().getUserDetails(this@MainActivity)
-                /*navView.getHeaderView(0).apply {
-                    findViewById<TextView>(R.id.navDrawer_SignedIn_Full_Name)
-                        .setText()
-                    findViewById<TextView>(R.id.navDrawer_SignedIn_Email)
-                        .setText()
-                }*/
-
             }
             navView.setNavigationItemSelectedListener(this@MainActivity)
             navView.setCheckedItem(R.id.nav_drawer_item_products)
@@ -96,6 +89,13 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private fun init() {
         if (FirestoreHelper().getCurrentUserID() != "") {
             FirestoreHelper().getUserFCMRegistrationToken(this)
+        }
+
+        if (intent.hasExtra(Constants.EXTRA_SHOW_ORDER_PLACED_SNACKBAR)
+            && intent.getBooleanExtra(Constants.EXTRA_SHOW_ORDER_PLACED_SNACKBAR, false)) {
+            SnackBarSuccessClass
+                .make(binding.root, getString(R.string.txt_order_placed_successfully))
+                .show()
         }
     }
 
@@ -108,9 +108,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             TabLayoutMediator(tabs, viewPagerHomeActivity){tab, position ->
                 when (position) {
                     0 -> tab.setIcon(R.drawable.ic_food_stand)
-                    1 -> tab.setIcon(R.drawable.ic_shopping_cart)
-                    2 -> tab.setIcon(R.drawable.ic_heart)
-                    3 -> tab.setIcon(R.drawable.ic_user_circle)
+                    1 -> tab.setIcon(R.drawable.ic_heart)
+                    2 -> tab.setIcon(R.drawable.ic_user_circle)
                 }
             }.attach()
 
@@ -122,14 +121,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                             navView.setCheckedItem(R.id.nav_drawer_item_products)
                         }
                         1 -> {
-                            toolbar.textViewActionBarHeader.text = getString(R.string.txt_my_cart)
-                            navView.setCheckedItem(R.id.nav_drawer_item_cart)
-                        }
-                        2 -> {
                             toolbar.textViewActionBarHeader.text = getString(R.string.txt_favorite_products)
                             navView.setCheckedItem(R.id.nav_drawer_item_favorites)
                         }
-                        3 -> {
+                        2 -> {
                             toolbar.textViewActionBarHeader.text = getString(R.string.txt_my_account)
                             navView.setCheckedItem(R.id.nav_drawer_item_profile)
                         }
@@ -147,16 +142,13 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         when (item.itemId) {
             R.id.nav_drawer_item_products -> binding.tabs.getTabAt(0)?.select()
             R.id.nav_drawer_item_favorites -> binding.tabs.getTabAt(2)?.select()
-            R.id.nav_drawer_item_cart -> binding.tabs.getTabAt(1)?.select()
-            R.id.nav_drawer_item_profile -> binding.tabs.getTabAt(3)?.select()
-            R.id.nav_drawer_item_orders -> {
-                val intent = Intent(this@MainActivity, MyOrdersActivity::class.java)
-                startActivity(intent)
+            R.id.nav_drawer_item_cart -> {
+                IntentUtils().goToListCartItemsActivity(this)
                 return false
             }
-            R.id.nav_drawer_item_settings -> {
-                /*val intent = Intent(this@MainActivity, Settings::class.java)
-                startActivity(intent)*/
+            R.id.nav_drawer_item_profile -> binding.tabs.getTabAt(3)?.select()
+            R.id.nav_drawer_item_orders -> {
+                IntentUtils().goToListOrdersActivity(this)
                 return false
             }
             R.id.nav_drawer_item_exit -> ActivityCompat.finishAffinity(this)

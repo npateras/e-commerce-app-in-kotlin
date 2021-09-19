@@ -23,12 +23,13 @@
                     android:adjustViewBounds="true"
                     android:background="@null"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_bell"
+                    android:src="@drawable/ic_shopping_cart"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/colorWhite" />
 
-                <ImageButton
+                <!--<ImageButton
                     android:id="@+id/actionBar_Checkbox_Favorite"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -42,7 +43,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/actionBar_ImgBtn_My_Cart"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintVertical_bias="0.0" />-->
 
                 <TextView
                     android:id="@+id/textView_ActionBar_Header"

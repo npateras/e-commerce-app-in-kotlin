@@ -3,6 +3,7 @@ package com.unipi.p17172.emarket.models
 import android.os.Parcelable
 import androidx.annotation.Keep
 import com.google.firebase.firestore.IgnoreExtraProperties
+import com.google.firebase.firestore.ServerTimestamp
 import kotlinx.parcelize.Parcelize
 import java.util.*
 import kotlin.collections.ArrayList
@@ -21,9 +22,13 @@ data class Order(
     val title: String = "",
 
     val subTotalAmount: String = "",
-    val shippingCharge: String = "",
+    val deliveryCharge: String = "",
     val totalAmount: String = "",
 
+    val paymentMethod: String = "",
+    val orderStatus: Int = 0,
+
+    @ServerTimestamp
     val orderDate: Date = Date(),
     var id: String = ""
 ) : Parcelable

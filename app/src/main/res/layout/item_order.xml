@@ -7,7 +7,7 @@
     tools:ignore="ContentDescription">
 
     <TextView
-        android:id="@+id/textView_Date"
+        android:id="@+id/txtView_Date"
         android:layout_width="223dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
@@ -20,7 +20,8 @@
         android:textSize="@dimen/txt_font_size_header_14"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView_SingleItem"
@@ -31,7 +32,7 @@
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_Date">
+        app:layout_constraintTop_toBottomOf="@+id/txtView_Date">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -43,7 +44,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:src="@drawable/ic_shopping_bags_filled"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -53,7 +54,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginEnd="16dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/core_sans_cr_55_medium"
                 android:maxLines="1"
@@ -61,29 +61,44 @@
                 android:textColor="@color/colorSecondary"
                 android:textSize="@dimen/txt_font_size_header_16"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/textView_ActionBar_Header4"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/imgView_Product"
                 app:layout_constraintTop_toTopOf="@+id/imgView_Product" />
 
             <TextView
-                android:id="@+id/textView_Items"
+                android:id="@+id/txtView_Price"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/core_sans_cr_45_regular"
                 android:maxLines="1"
-                android:text="@string/txt_item_or_items"
+                android:text="@string/txt_total_amount"
                 android:textColor="@color/colorSecondary2"
                 android:textSize="@dimen/txt_font_size_header_14"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/txtView_Name"
                 app:layout_constraintStart_toStartOf="@+id/txtView_Name"
                 app:layout_constraintTop_toBottomOf="@+id/txtView_Name" />
 
             <TextView
-                android:id="@+id/textView_Arriving"
+                android:id="@+id/txtView_Price_Value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/core_sans_cr_45_regular"
+                android:maxLines="1"
+                android:text="@string/txt_loading"
+                android:textAlignment="textStart"
+                android:textColor="@color/colorSecondary2"
+                android:textSize="@dimen/txt_font_size_header_14"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/constraintLayout_Chevron"
+                app:layout_constraintStart_toEndOf="@+id/txtView_Price"
+                app:layout_constraintTop_toTopOf="@+id/txtView_Price" />
+
+            <TextView
+                android:id="@+id/txtView_Status"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -91,46 +106,34 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/core_sans_cr_45_regular"
                 android:maxLines="1"
-                android:text="@string/txt_arriving"
+                android:text="@string/txt_order_status"
                 android:textColor="@color/colorSecondary2"
                 android:textSize="@dimen/txt_font_size_header_14"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/txtView_Price"
-                app:layout_constraintStart_toStartOf="@+id/txtView_Price"
-                app:layout_constraintTop_toBottomOf="@+id/txtView_Price" />
+                app:layout_constraintStart_toStartOf="@+id/txtView_Name"
+                app:layout_constraintTop_toBottomOf="@+id/txtView_Price"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/txtView_Price"
+                android:id="@+id/txtView_Status_Value"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="9dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="24dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/core_sans_cr_45_regular"
                 android:maxLines="1"
-                android:text="@string/txt_total"
+                android:text="@string/txt_loading"
+                android:textAlignment="textStart"
                 android:textColor="@color/colorSecondary2"
                 android:textSize="@dimen/txt_font_size_header_14"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/constraintLayout_Chevron"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView_Items"
-                app:layout_constraintTop_toBottomOf="@+id/textView_Items" />
-
-            <TextView
-                android:id="@+id/textView_ActionBar_Header4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="9dp"
-                android:fontFamily="@font/core_sans_cr_55_medium"
-                android:text="Now"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/txt_font_size_header_10"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/txtView_Name"
-                app:layout_constraintEnd_toStartOf="@+id/constraintLayout_Chevron"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintStart_toEndOf="@+id/txtView_Price"
+                app:layout_constraintTop_toTopOf="@+id/txtView_Status" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout_Chevron"

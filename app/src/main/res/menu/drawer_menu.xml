@@ -36,10 +36,10 @@
     <item android:title="@string/drawer_nav_bar_category_other">
         <menu>
             <group android:checkableBehavior="single">
-            <item
+            <!--<item
                 android:id="@+id/nav_drawer_item_settings"
                 android:icon="@drawable/ic_gear"
-                android:title="@string/drawer_nav_bar_item_settings" />
+                android:title="@string/drawer_nav_bar_item_settings" />-->
             <item
                 android:id="@+id/nav_drawer_item_exit"
                 android:icon="@drawable/ic_exit"

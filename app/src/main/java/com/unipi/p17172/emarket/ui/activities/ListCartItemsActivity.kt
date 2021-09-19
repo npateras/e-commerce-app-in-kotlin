@@ -1,54 +1,53 @@
-package com.unipi.p17172.emarket.ui.fragments
+package com.unipi.p17172.emarket.ui.activities
 
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unipi.p17172.emarket.R
 import com.unipi.p17172.emarket.adapters.CartItemsListAdapter
 import com.unipi.p17172.emarket.database.FirestoreHelper
-import com.unipi.p17172.emarket.databinding.FragmentMyCartBinding
+import com.unipi.p17172.emarket.databinding.ActivityListCartItemsBinding
 import com.unipi.p17172.emarket.models.Cart
 import com.unipi.p17172.emarket.models.Product
 import com.unipi.p17172.emarket.utils.Constants
 import com.unipi.p17172.emarket.utils.IntentUtils
 
-class MyCartFragment : BaseFragment() {
-    // Scoped to the lifecycle of the fragment's view (between onCreateView and onDestroyView)
-    private var _binding: FragmentMyCartBinding? = null
-    private val binding get() = _binding!!
+class ListCartItemsActivity : BaseActivity() {
 
+    /**
+     * Class variables
+     *
+     * @see binding
+     * */
+    private lateinit var binding: ActivityListCartItemsBinding
     // A global variable for the product list.
     private lateinit var mProductsList: ArrayList<Product>
-
     // A global variable for the cart list items.
     private lateinit var mCartListItems: ArrayList<Cart>
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentMyCartBinding.inflate(inflater, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState) // This calls the parent constructor
+        binding = ActivityListCartItemsBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view) // This is used to align the xml view to this class
 
         init()
-
-        return binding.root
     }
 
     private fun init() {
         getProductList()
         setupUI()
     }
-
+    
     /**
      * A function to get product list to compare the current stock with the cart items.
      */
     private fun getProductList() {
+        showProgressDialog()
         veilRecycler()
 
         FirestoreHelper().getAllProductsList(this)
@@ -72,6 +71,7 @@ class MyCartFragment : BaseFragment() {
 
     fun successCartItemsListFromFireStore(cartItemsList: ArrayList<Cart>) {
 
+        hideProgressDialog()
         binding.veilRecyclerView.unVeil()
 
         for (product in mProductsList) {
@@ -98,7 +98,9 @@ class MyCartFragment : BaseFragment() {
                 val availableQuantity = item.stock
 
                 if (availableQuantity > 0) {
-                    val price = item.price
+                    var price = item.price
+                    if (item.sale != 0.0)
+                        price -= price * item.sale
                     val quantity = item.cartQuantity
 
                     subTotal += (price * quantity)
@@ -108,6 +110,7 @@ class MyCartFragment : BaseFragment() {
             // Show the recycler and remove the empty state layout completely.
             binding.apply {
                 veilRecyclerView.visibility = View.VISIBLE
+                constraintLayoutBottom.visibility = View.VISIBLE
                 layoutEmptyState.root.visibility = View.GONE
                 // Costs
                 txtViewSubtotalValue.text = String.format(getString(R.string.txt_format_price), getString(R.string.curr_eur), subTotal)
@@ -120,12 +123,12 @@ class MyCartFragment : BaseFragment() {
                 setVeilLayout(R.layout.shimmer_item_product)
                 setAdapter(
                     CartItemsListAdapter(
-                        requireContext(),
+                        this@ListCartItemsActivity,
                         cartItemsList,
                         true
                     )
                 )
-                setLayoutManager(LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false))
+                setLayoutManager(LinearLayoutManager(this@ListCartItemsActivity, LinearLayoutManager.VERTICAL, false))
                 getRecyclerView().setHasFixedSize(true)
                 addVeiledItems(7)
                 // delay-auto-unveil
@@ -136,18 +139,20 @@ class MyCartFragment : BaseFragment() {
                     1000
                 )
             }
-        } else {
+        }
+        else {
             // Hide the recycler and show the empty state layout.
             binding.apply {
+                constraintLayoutBottom.visibility = View.INVISIBLE
                 veilRecyclerView.visibility = View.INVISIBLE
                 layoutEmptyState.root.visibility = View.VISIBLE
             }
-
         }
     }
 
     private fun veilRecycler() {
         binding.apply {
+            constraintLayoutBottom.visibility = View.INVISIBLE
             veilRecyclerView.veil()
             veilRecyclerView.addVeiledItems(Constants.DEFAULT_VEILED_ITEMS_HORIZONTAL)
         }
@@ -160,11 +165,7 @@ class MyCartFragment : BaseFragment() {
 
         hideProgressDialog()
 
-        Toast.makeText(
-            this.requireContext(),
-            resources.getString(R.string.txt_item_removed_from_cart),
-            Toast.LENGTH_SHORT
-        ).show()
+        Toast.makeText(this, getString(R.string.txt_item_removed_from_cart), Toast.LENGTH_LONG).show()
 
         getCartItemsList()
     }
@@ -186,22 +187,37 @@ class MyCartFragment : BaseFragment() {
             txtViewTotalAmountValue.text = ""
         }
         setupClickListeners()
+        setupActionBar()
     }
 
     private fun setupClickListeners() {
         binding.apply {
-            btnCheckout.setOnClickListener { IntentUtils().goToCheckoutActivity(requireActivity()) }
+            btnCheckout.setOnClickListener { IntentUtils().goToListAddressesActivity(this@ListCartItemsActivity, true) }
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun setupActionBar() {
+        setSupportActionBar(binding.toolbar.root)
 
-        init()
+        val actionBar = supportActionBar
+        binding.apply {
+            toolbar.textViewActionBarLabel.text = getString(R.string.txt_my_cart)
+        }
+        actionBar?.let {
+            it.setDisplayShowCustomEnabled(true)
+            it.setCustomView(R.layout.toolbar_product_details)
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+        }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

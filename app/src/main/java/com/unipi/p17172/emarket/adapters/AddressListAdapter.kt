@@ -70,7 +70,7 @@ open class AddressListAdapter(
         }
         if (selectAddress) {
             holder.itemView.setOnClickListener {
-                IntentUtils().goToEditAddressActivity(context, model)
+                IntentUtils().goToCheckoutActivity(context, model)
             }
         }
     }

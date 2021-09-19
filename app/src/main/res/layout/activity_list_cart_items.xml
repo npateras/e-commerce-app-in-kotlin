@@ -6,7 +6,12 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     android:fillViewport="true"
+    tools:context=".ui.activities.ListCartItemsActivity"
     tools:ignore="contentDescription">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_title_only" />
 
     <com.skydoves.androidveil.VeilRecyclerFrameView
         android:id="@+id/veilRecyclerView"
@@ -19,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.0"
         app:veilFrame_baseAlpha="0.6"
         app:veilFrame_baseColor="@color/colorSecondary2"
@@ -30,22 +35,11 @@
         app:veilFrame_shimmerEnable="true"
         app:veilFrame_veiled="true" />
 
-    <include
-        android:id="@+id/layout_Empty_State"
-        layout="@layout/layout_empty_state_cart"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:clipToPadding="false"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout_Bottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout_Bottom"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -167,5 +161,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtView_Total_Amount" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/layout_Empty_State"
+        layout="@layout/layout_empty_state_cart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

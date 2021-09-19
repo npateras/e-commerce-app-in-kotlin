@@ -7,14 +7,12 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.unipi.p17172.emarket.ui.fragments.FavoritesFragment
 import com.unipi.p17172.emarket.ui.fragments.HomeFragment
 import com.unipi.p17172.emarket.ui.fragments.MyAccountFragment
-import com.unipi.p17172.emarket.ui.fragments.MyCartFragment
 
 class ViewPagerMainAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fm, lifecycle) {
 
     private val fragmentsList:ArrayList<Fragment> = arrayListOf(
         HomeFragment(),
-        MyCartFragment(),
         FavoritesFragment(),
         MyAccountFragment()
     )

@@ -17,23 +17,6 @@ open class BaseFragment : Fragment() {
     private lateinit var mProgressDialog: Dialog
     // END
 
-    fun isSignedIn(fragment: Fragment) {
-        when (fragment) {
-            is HomeFragment -> {
-
-            }
-            is MyCartFragment -> {
-
-            }
-            is FavoritesFragment -> {
-
-            }
-            is MyAccountFragment -> {
-
-            }
-        }
-    }
-
     fun goToSignInActivity(context: Context) {
         startActivity(Intent(context, SignInActivity::class.java))
     }

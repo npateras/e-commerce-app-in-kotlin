@@ -1,7 +1,6 @@
 package com.unipi.p17172.emarket.ui.activities
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import com.unipi.p17172.emarket.R
@@ -12,6 +11,7 @@ import com.unipi.p17172.emarket.models.Favorite
 import com.unipi.p17172.emarket.models.Product
 import com.unipi.p17172.emarket.utils.Constants
 import com.unipi.p17172.emarket.utils.GlideLoader
+import com.unipi.p17172.emarket.utils.IntentUtils
 import com.unipi.p17172.emarket.utils.SnackBarErrorClass
 import java.util.*
 
@@ -158,8 +158,10 @@ class ProductDetailsActivity : BaseActivity() {
         if (modelCart != null && modelCart?.userId != "") {
             if (modelCart?.cartQuantity == 0)
                 showAddToCart()
-            else if (modelCart?.cartQuantity!! >= 1)
+            else if (modelCart?.cartQuantity!! >= 1) {
                 hideAddToCart()
+                binding.txtViewQuantityValue.text = modelCart?.cartQuantity.toString()
+            }
         }
         else {
             addItemToCart()
@@ -310,17 +312,15 @@ class ProductDetailsActivity : BaseActivity() {
                 imgBtnMinus.setOnClickListener { changeItemQuantity(imgBtnMinus) }
 
                 // ActionBar
-                toolbar.actionBarImgBtnMyCart.setOnClickListener { goToCartActivity(this@ProductDetailsActivity) }
+                toolbar.actionBarImgBtnMyCart.setOnClickListener { IntentUtils().goToListCartItemsActivity(this@ProductDetailsActivity) }
                 toolbar.actionBarCheckboxFavorite.setOnClickListener {
                     if (!toolbar.actionBarCheckboxFavorite.isChecked) {
-                        Log.e("", "checked")
                         FirestoreHelper().deleteFavoriteProduct(
                             this@ProductDetailsActivity,
                             modelProduct.id
                         )
                     }
                     else {
-                        Log.e("", "not checked")
                         val favorite = Favorite(
                             FirestoreHelper().getCurrentUserID(),
                             modelProduct.id,
@@ -329,7 +329,6 @@ class ProductDetailsActivity : BaseActivity() {
                             modelProduct.price,
                             modelProduct.sale
                         )
-                        Log.e("", favorite.toString())
                         FirestoreHelper().addToFavorites(
                             this@ProductDetailsActivity,
                             favorite
@@ -359,5 +358,11 @@ class ProductDetailsActivity : BaseActivity() {
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        getProductDetails()
     }
 }

@@ -17,12 +17,7 @@ import com.unipi.p17172.emarket.ui.activities.*
 import com.unipi.p17172.emarket.ui.fragments.FavoritesFragment
 import com.unipi.p17172.emarket.ui.fragments.HomeFragment
 import com.unipi.p17172.emarket.ui.fragments.MyAccountFragment
-import com.unipi.p17172.emarket.ui.fragments.MyCartFragment
 import com.unipi.p17172.emarket.utils.Constants
-
-
-
-
 
 class FirestoreHelper {
 
@@ -225,9 +220,9 @@ class FirestoreHelper {
     /**
      * A function to get all the product list from the cloud firestore.
      *
-     * @param fragment The fragment is passed as parameter to the function because it is called from fragment and need to the success result.
+     * @param context
      */
-    fun getAllProductsList(fragment: MyCartFragment) {
+    fun getAllProductsList(context: Context) {
         // The collection name for PRODUCTS
         dbFirestore.collection(Constants.COLLECTION_PRODUCTS)
             .get() // Will get the documents snapshots.
@@ -248,7 +243,11 @@ class FirestoreHelper {
                     productsList.add(product)
                 }
 
-                fragment.successProductsListFromFireStore(productsList)
+                when (context) {
+                    is ListCartItemsActivity -> context.successProductsListFromFireStore(productsList)
+                    is CheckoutActivity -> context.successProductsListFromFireStore(productsList)
+                    is PayWithCreditCardActivity -> context.successProductsListFromFireStore(productsList)
+                }
             }
             .addOnFailureListener { e ->
                 Log.e("Get Product List", "Error while getting all product list.", e)
@@ -259,16 +258,17 @@ class FirestoreHelper {
     /**
      * A function to get the cart items list from the cloud firestore.
      *
-     * @param fragment
+     * @param context
      */
-    fun getCartItemsList(fragment: MyCartFragment) {
+    fun getCartItemsList(context: Context) {
         // The collection name for Cart Items
         dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
             .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
             .get() // Will get the documents snapshots.
             .addOnSuccessListener { document ->
                 // Here we get the list of boards in the form of documents.
-                Log.e(fragment.javaClass.simpleName, document.documents.toString())
+                Log.e(context.javaClass.simpleName, document.documents.toString())
+
                 // Here we have created a new instance for cart items ArrayList.
                 val cartItemsList: ArrayList<Cart> = ArrayList()
 
@@ -281,10 +281,18 @@ class FirestoreHelper {
                     cartItemsList.add(cart)
                 }
 
-                fragment.successCartItemsListFromFireStore(cartItemsList)
+                when (context) {
+                    is ListCartItemsActivity -> context.successCartItemsListFromFireStore(cartItemsList)
+                    is CheckoutActivity -> context.successCartItemsList(cartItemsList)
+                    is PayWithCreditCardActivity -> context.successCartItemsList(cartItemsList)
+                }
             }
             .addOnFailureListener { e ->
-                Log.e(fragment.javaClass.simpleName, "Error while getting the cart items list of the user.", e)
+                Log.e(
+                    context.javaClass.simpleName,
+                    "Error while getting the cart items list of the user.",
+                    e
+                )
             }
     }
 
@@ -363,7 +371,7 @@ class FirestoreHelper {
     /**
      * A function to delete the existing cart item from the cloud firestore.
      *
-     * @param activity Base class
+     * @param context
      * @param productId product id of the item.
      */
     fun deleteItemFromCart(context: Context, productId: String) {
@@ -396,19 +404,19 @@ class FirestoreHelper {
                                     }
                             }
                         }
-                        MyCartFragment().requireContext() -> {
+                        is ListCartItemsActivity -> {
                             if (task.result!!.isEmpty)
-                                MyCartFragment().hideProgressDialog()
+                                context.hideProgressDialog()
 
                             for (document in task.result!!) {
                                 dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
                                     .document(document.id)
                                     .delete()
                                     .addOnSuccessListener {
-                                        MyCartFragment().itemRemovedSuccess()
+                                        context.itemRemovedSuccess()
                                     }
                                     .addOnFailureListener { e ->
-                                        MyCartFragment().hideProgressDialog()
+                                        context.hideProgressDialog()
                                         Log.e(
                                             context.javaClass.simpleName,
                                             "Error while deleting the cart item.",
@@ -431,8 +439,8 @@ class FirestoreHelper {
                             e
                         )
                     }
-                    MyCartFragment().requireContext() -> {
-                        MyCartFragment().hideProgressDialog()
+                    is ListCartItemsActivity -> {
+                        context.hideProgressDialog()
                         Log.e(
                             context.javaClass.simpleName,
                             "Error while getting cart item while removal.",
@@ -460,8 +468,8 @@ class FirestoreHelper {
 
                 // Notify the success result of the updated cart items list to the base class.
                 when (context) {
-                    MyCartFragment().requireContext() -> {
-                        MyCartFragment().itemUpdateSuccess()
+                    is ListCartItemsActivity -> {
+                        context.itemUpdateSuccess()
                     }
                 }
             }
@@ -469,8 +477,8 @@ class FirestoreHelper {
 
                 // Hide the progress dialog if there is any error.
                 when (context) {
-                    MyCartFragment().requireContext() -> {
-                        MyCartFragment().hideProgressDialog()
+                    is ListCartItemsActivity -> {
+                        context.hideProgressDialog()
                     }
                 }
 
@@ -851,26 +859,6 @@ class FirestoreHelper {
             }
     }
 
-    fun addToFavorites(fragment: Fragment, favorite: Favorite) {
-        dbFirestore.collection(Constants.COLLECTION_FAVORITES)
-            .document()
-            .set(favorite, SetOptions.merge())
-            .addOnSuccessListener {
-                Log.d("", "task success")
-
-                when (fragment) {
-                    is HomeFragment -> {}
-                }
-            }
-            .addOnFailureListener { e ->
-                Log.e(
-                    fragment.javaClass.simpleName,
-                    "Error while adding a product to user's favorites.",
-                    e
-                )
-            }
-    }
-
     fun addToFavorites(activity: Activity, favorite: Favorite) {
         dbFirestore.collection(Constants.COLLECTION_FAVORITES)
             .document()
@@ -879,46 +867,6 @@ class FirestoreHelper {
                 Log.e(
                     activity.javaClass.simpleName,
                     "Error while adding a product to user's favorites.",
-                    e
-                )
-            }
-    }
-
-    /**
-     * A function to update the cart item in the cloud firestore.
-     *
-     * @param context Context of a activity class.
-     * @param cartId cart id of the item.
-     */
-    fun updateCartProduct(context: Context, cartId: String, quantity: Int) {
-        val cartHashMap = HashMap<String, Any>()
-        cartHashMap[Constants.FIELD_CART_QUANTITY] = quantity
-
-        // Cart items collection name
-        dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
-            .document(cartId) // user id
-            .update(cartHashMap) // A HashMap of fields which are to be updated.
-            .addOnSuccessListener {
-
-                // Notify the success result of the updated cart items list to the base class.
-                when (context) {
-                    is MyCartActivity -> {
-//                        context.itemUpdateSuccess()
-                    }
-                }
-            }
-            .addOnFailureListener { e ->
-
-                // Hide the progress dialog if there is any error.
-                /*when (context) {
-                    is CartListActivity -> {
-                        context.hideProgressDialog()
-                    }
-                }*/
-
-                Log.e(
-                    context.javaClass.simpleName,
-                    "Error while updating the cart item.",
                     e
                 )
             }
@@ -1051,7 +999,7 @@ class FirestoreHelper {
                     }
                 }
                 else {
-                    Log.d(productDetailsActivity.javaClass.simpleName, "Error getting documents: ", task.exception);
+                    Log.d(productDetailsActivity.javaClass.simpleName, "Error getting documents: ", task.exception)
                 }
             }
             .addOnFailureListener { e ->
@@ -1090,4 +1038,128 @@ class FirestoreHelper {
                 )
             }
     }
+
+    /**
+     * A function to place an order of the user in the cloud firestore.
+     *
+     * @param context
+     * @param order Order Info
+     */
+    fun placeOrder(context: Context, order: Order) {
+
+        dbFirestore.collection(Constants.COLLECTION_ORDERS)
+            .document()
+            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
+            .set(order, SetOptions.merge())
+            .addOnSuccessListener {
+
+                when (context) {
+                    is CheckoutActivity -> context.orderPlacedSuccess()
+                    is PayWithCreditCardActivity -> context.orderPlacedSuccess()
+                }
+            }
+            .addOnFailureListener { e ->
+
+                // Hide the progress dialog if there is any error.
+                when (context) {
+                    is CheckoutActivity -> context.hideProgressDialog()
+                    is PayWithCreditCardActivity -> context.hideProgressDialog()
+                }
+                Log.e(
+                    context.javaClass.simpleName,
+                    "Error while placing an order.",
+                    e
+                )
+            }
+    }
+
+    /**
+     * A function to update all the required details in the cloud firestore after placing the order successfully.
+     *
+     * @param context
+     * @param cartList List of cart items.
+     */
+    fun updateAllDetails(context: Context, cartList: ArrayList<Cart>) {
+
+        val writeBatch = dbFirestore.batch()
+
+        // Here we will update the product stock in the products collection based to cart quantity.
+        for (cart in cartList) {
+
+            val productHashMap = HashMap<String, Any>()
+
+            productHashMap[Constants.FIELD_STOCK] =
+                (cart.stock - cart.stock)
+
+            val documentReference = dbFirestore.collection(Constants.COLLECTION_PRODUCTS)
+                .document(cart.productId)
+
+            writeBatch.update(documentReference, productHashMap)
+        }
+
+        // Delete the list of cart items
+        for (cart in cartList) {
+
+            val documentReference = dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
+                .document(cart.id)
+            writeBatch.delete(documentReference)
+        }
+
+        writeBatch.commit().addOnSuccessListener {
+
+            when (context) {
+                is CheckoutActivity -> context.allDetailsUpdatedSuccessfully()
+                is PayWithCreditCardActivity -> context.allDetailsUpdatedSuccessfully()
+            }
+
+        }.addOnFailureListener { e ->
+
+            when (context) {
+                is CheckoutActivity -> context.hideProgressDialog()
+                is PayWithCreditCardActivity -> context.hideProgressDialog()
+            }
+
+            Log.e(
+                context.javaClass.simpleName,
+                "Error while updating all the details after order placed.",
+                e
+            )
+        }
+    }
+
+    /**
+     * A function to get the list of orders from cloud firestore.
+     */
+    fun getMyOrdersList(context: Context) {
+        dbFirestore.collection(Constants.COLLECTION_ORDERS)
+            .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+                Log.e(context.javaClass.simpleName, document.documents.toString())
+                val list: ArrayList<Order> = ArrayList()
+
+                for (i in document.documents) {
+
+                    val orderItem = i.toObject(Order::class.java)!!
+                    orderItem.id = i.id
+
+                    list.add(orderItem)
+                }
+
+                when (context) {
+                    is ListOrdersActivity -> context.successOrdersListFromFirestore(list)
+                }
+
+            }
+            .addOnFailureListener { e ->
+                // Here call a function of base activity for transferring the result to it.
+
+                when (context) {
+                    is ListOrdersActivity -> context.hideProgressDialog()
+                }
+
+                Log.e(context.javaClass.simpleName, "Error while getting the orders list.", e)
+            }
+    }
+
 }

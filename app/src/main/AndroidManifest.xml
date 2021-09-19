@@ -77,17 +77,6 @@
                 android:theme="@style/Theme.EMarket.NoActionBar3">
             </activity>
 
-            <!-- Notifications Activity -->
-            <activity
-                android:name="com.unipi.p17172.emarket.ui.activities.NotificationsActivity"
-                android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
-
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
-            </activity>
-
             <!-- Sign In activity -->
             <activity
                 android:name="com.unipi.p17172.emarket.ui.activities.SignInActivity"
@@ -185,6 +174,35 @@
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.EMarket.NoActionBar3">
+        </activity>
+
+        <!-- My Cart Items List activity -->
+        <activity
+            android:name="com.unipi.p17172.emarket.ui.activities.ListCartItemsActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar3">
+        </activity>
+
+        <!-- My Orders List activity -->
+        <activity
+            android:name="com.unipi.p17172.emarket.ui.activities.ListOrdersActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar3">
+        </activity>
+
+        <!-- Order Details activity -->
+        <activity
+            android:name="com.unipi.p17172.emarket.ui.activities.OrderDetailsActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:parentActivityName="com.unipi.p17172.emarket.ui.activities.ListOrdersActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.unipi.p17172.emarket.ui.activities.ListOrdersActivity" />
         </activity>
         <!-- endregion [END Activities] -->
 

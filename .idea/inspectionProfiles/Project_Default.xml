@@ -136,6 +136,7 @@
     <inspection_tool class="scwjava_RegexInjection" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="scwjava_String.formatreturnvaluebeingignored" enabled="true" level="SENSEI WARNING" enabled_by_default="true" />
     <inspection_tool class="scwjava_StringsRegexUseEscapeRegexSpecialCharacterforAnyCharMatching" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
+    <inspection_tool class="scwjava_URLClassloaderCallsuperwhenoverridinggetPermissions" enabled="true" level="SENSEI WARNING" enabled_by_default="true" />
     <inspection_tool class="scwjava_ValidateZipEntries" enabled="true" level="SENSEI WARNING" enabled_by_default="true" />
     <inspection_tool class="scwspring_AccessControlMvcRequestMatcherismoresecurethanAntPathRequestMatcherforSpringMVCpatterns" enabled="true" level="SENSEI WARNING" enabled_by_default="true" />
     <inspection_tool class="scwspring_AuthenticationUsernameEnumerationavoidUsernameNotFoundException" enabled="true" level="SENSEI WARNING" enabled_by_default="true" />
