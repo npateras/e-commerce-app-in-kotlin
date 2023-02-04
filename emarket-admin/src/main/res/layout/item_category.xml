@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="ContentDescription">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView_SingleItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/colorTransparent"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_container_recycler_view_horizontal">
+
+            <TextView
+                android:id="@+id/txtView_Header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/core_sans_cr_55_medium"
+                android:gravity="start"
+                android:text="@string/txt_loading"
+                android:textAlignment="textStart"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/txt_font_size_header_16"
+                app:layout_constraintStart_toEndOf="@+id/imgView_Icon"
+                app:layout_constraintTop_toTopOf="@+id/imgView_Icon" />
+
+            <TextView
+                android:id="@+id/txtView_Description"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/core_sans_cr_45_regular"
+                android:justificationMode="inter_word"
+                android:text="@string/txt_loading"
+                android:textColor="@color/colorSecondary2"
+                android:textSize="@dimen/txt_font_size_header_14"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/constraintLayout_Chevron"
+                app:layout_constraintStart_toStartOf="@+id/txtView_Header"
+                app:layout_constraintTop_toBottomOf="@+id/txtView_Header" />
+
+            <ImageView
+                android:id="@+id/imgView_Icon"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="@dimen/img_btn_width_large_70"
+                android:layout_height="@dimen/img_btn_width_large_70"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/ripple_btn_category_selector"
+                android:padding="8dp"
+                android:clickable="false"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_plastic_bottle"
+                app:iconGravity="textStart"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout_Chevron"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@drawable/selector_recycler_chevron_right"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imgView_Chevron"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/colorContainer" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

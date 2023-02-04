@@ -30,6 +30,8 @@
     <color name="colorBlack">#1D2021</color>
     <color name="colorBlackDark">#0F1012</color>
     <color name="colorYellowOrange">#FDC600</color>
+    <color name="colorGrey">#6E7989</color>
+    <color name="colorGreyLight">#AAAAAA</color>
 
     <color name="colorSnackBarErrorBg">#F34949</color>
     <color name="colorSnackBarErrorAction">#B63737</color>

@@ -8,18 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:171137555840:android:3f304a3de6c6ee93a63565",
+        "mobilesdk_app_id": "1:171137555840:android:ff260e4866e0fef2a63565",
         "android_client_info": {
-          "package_name": "com.unipi.p17172.emarket"
+          "package_name": "com.unipi.mpsp21043.emarket"
         }
       },
       "oauth_client": [
         {
-          "client_id": "171137555840-gjj33i17qvauqrnk1572eaul408f1s86.apps.googleusercontent.com",
+          "client_id": "171137555840-2em6jct2olgro435alg6aabrljk7ipet.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.unipi.p17172.emarket",
-            "certificate_hash": "9361ef320f9b90679eb2e33f485f274d9cdaf783"
+            "package_name": "com.unipi.mpsp21043.emarket",
+            "certificate_hash": "eeb68adb866e9f751a41c0ad0a86d439d7624bd4"
           }
         },
         {

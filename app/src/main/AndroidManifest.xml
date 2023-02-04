@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.unipi.p17172.emarket">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -13,8 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EMarket"
-        android:usesCleartextTraffic="true"
-        android:fullBackupContent="@xml/backup_descriptor">
+        android:usesCleartextTraffic="true">
 
         <!-- [START fcm_default_icon] -->
         <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
@@ -35,12 +33,13 @@
         <!-- [END fcm_default_channel] -->
 
         <!-- region [START Activities] -->
-            <!-- Splash Screen Activity -->
+        
+            <!-- Home/Main Activity -->
             <activity
-                android:name="com.unipi.p17172.emarket.ui.activities.SplashActivity"
-                android:theme="@style/Theme.EMarket.NoActionBar"
-                android:screenOrientation="fullSensor"
+                android:name=".ui.activities.MainActivity"
+                android:theme="@style/Theme.EMarket.NoActionBar3"
                 android:exported="true">
+                
                 <intent-filter>
                     <action android:name="android.intent.action.MAIN" />
 
@@ -48,17 +47,11 @@
                 </intent-filter>
             </activity>
 
-            <!-- Home/Main Activity -->
-            <activity
-                android:name="com.unipi.p17172.emarket.ui.activities.MainActivity"
-                android:theme="@style/Theme.EMarket.NoActionBar3">
-            </activity>
-
             <!-- Product Details Activity -->
             <activity
-                android:name="com.unipi.p17172.emarket.ui.activities.ProductDetailsActivity"
+                android:name=".ui.activities.ProductDetailsActivity"
                 android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity"
+                android:parentActivityName=".ui.activities.MainActivity"
                 android:exported="true">
 
                 <intent-filter>
@@ -68,141 +61,153 @@
 
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
+                    android:value=".ui.activities.MainActivity" />
             </activity>
 
             <!-- List Products Activity -->
             <activity
-                android:name="com.unipi.p17172.emarket.ui.activities.ListProductsActivity"
-                android:theme="@style/Theme.EMarket.NoActionBar3">
+                android:name=".ui.activities.ListProductsActivity"
+                android:theme="@style/Theme.EMarket.NoActionBar3"
+                android:exported="true">
             </activity>
 
             <!-- Sign In activity -->
             <activity
-                android:name="com.unipi.p17172.emarket.ui.activities.SignInActivity"
+                android:name=".ui.activities.SignInActivity"
                 android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.EMarket.NoActionBar4"
-                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
+                android:parentActivityName=".ui.activities.MainActivity"
+                android:exported="true">
 
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
+                    android:value=".ui.activities.MainActivity" />
             </activity>
 
             <!-- Sign Up activity -->
             <activity
-                android:name="com.unipi.p17172.emarket.ui.activities.SignUpActivity"
+                android:name=".ui.activities.SignUpActivity"
                 android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.EMarket.NoActionBar4"
-                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.SignInActivity">
+                android:parentActivityName=".ui.activities.SignInActivity"
+                android:exported="true">
 
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.unipi.p17172.emarket.ui.activities.SignInActivity" />
+                    android:value=".ui.activities.SignInActivity" />
             </activity>
 
             <!-- Forgot Password activity -->
             <activity
-                android:name="com.unipi.p17172.emarket.ui.activities.ForgotPasswordActivity"
+                android:name=".ui.activities.ForgotPasswordActivity"
                 android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.EMarket.NoActionBar4"
-                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.SignInActivity">
+                android:parentActivityName=".ui.activities.SignInActivity"
+                android:exported="true">
 
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.unipi.p17172.emarket.ui.activities.SignInActivity" />
+                    android:value=".ui.activities.SignInActivity" />
             </activity>
 
             <!-- Update Profile activity -->
             <activity
-                android:name="com.unipi.p17172.emarket.ui.activities.EditProfileActivity"
+                android:name=".ui.activities.EditProfileActivity"
                 android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.SignInActivity">
+                android:parentActivityName=".ui.activities.SignInActivity"
+                android:exported="true">
 
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.unipi.p17172.emarket.ui.activities.SignInActivity" />
+                    android:value=".ui.activities.SignInActivity" />
             </activity>
 
             <!-- All Categories activity -->
             <activity
-                android:name="com.unipi.p17172.emarket.ui.activities.AllCategoriesActivity"
+                android:name=".ui.activities.AllCategoriesActivity"
                 android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
+                android:parentActivityName=".ui.activities.MainActivity"
+                android:exported="true">
 
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
+                    android:value=".ui.activities.MainActivity" />
             </activity>
 
             <!-- List Addresses activity -->
             <activity
-                android:name="com.unipi.p17172.emarket.ui.activities.ListAddressActivity"
+                android:name=".ui.activities.ListAddressActivity"
                 android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.MainActivity">
+                android:parentActivityName=".ui.activities.MainActivity"
+                android:exported="true">
 
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.unipi.p17172.emarket.ui.activities.MainActivity" />
+                    android:value=".ui.activities.MainActivity" />
             </activity>
 
             <!-- Add/Edit Addresses activity -->
             <activity
-                android:name="com.unipi.p17172.emarket.ui.activities.AddEditAddressActivity"
+                android:name=".ui.activities.AddEditAddressActivity"
                 android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName="com.unipi.p17172.emarket.ui.activities.ListAddressActivity">
+                android:parentActivityName=".ui.activities.ListAddressActivity"
+                android:exported="true">
 
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.unipi.p17172.emarket.ui.activities.ListAddressActivity" />
+                    android:value=".ui.activities.ListAddressActivity" />
             </activity>
 
         <!-- Checkout activity -->
         <activity
-            android:name="com.unipi.p17172.emarket.ui.activities.CheckoutActivity"
+            android:name=".ui.activities.CheckoutActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize"
-            android:theme="@style/Theme.EMarket.NoActionBar3">
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:exported="true">
         </activity>
 
         <!-- My Cart Items List activity -->
         <activity
-            android:name="com.unipi.p17172.emarket.ui.activities.ListCartItemsActivity"
+            android:name=".ui.activities.ListCartItemsActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize"
-            android:theme="@style/Theme.EMarket.NoActionBar3">
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:exported="true">
         </activity>
 
         <!-- My Orders List activity -->
         <activity
-            android:name="com.unipi.p17172.emarket.ui.activities.ListOrdersActivity"
+            android:name=".ui.activities.ListOrdersActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize"
-            android:theme="@style/Theme.EMarket.NoActionBar3">
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:exported="true">
         </activity>
 
         <!-- Order Details activity -->
         <activity
-            android:name="com.unipi.p17172.emarket.ui.activities.OrderDetailsActivity"
+            android:name=".ui.activities.OrderDetailsActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.EMarket.NoActionBar3"
-            android:parentActivityName="com.unipi.p17172.emarket.ui.activities.ListOrdersActivity">
+            android:parentActivityName=".ui.activities.ListOrdersActivity"
+            android:exported="true">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.unipi.p17172.emarket.ui.activities.ListOrdersActivity" />
+                android:value=".ui.activities.ListOrdersActivity" />
         </activity>
         <!-- endregion [END Activities] -->
 
