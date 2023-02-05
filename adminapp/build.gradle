@@ -12,7 +12,7 @@ android {
     buildToolsVersion '33.0.0'
 
     defaultConfig {
-        applicationId "com.unipi.mpsp21043.emarket"
+        applicationId "com.unipi.mpsp21043.emarketadmin"
         minSdkVersion 27
         targetSdkVersion 33
         versionCode 1
@@ -71,7 +71,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    namespace 'com.unipi.mpsp21043.emarket'
+    namespace 'com.unipi.mpsp21043.emarketadmin'
 }
 
 dependencies {
