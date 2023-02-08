@@ -69,7 +69,7 @@ class SignUpActivity : BaseActivity() {
 
     private fun setupClickListeners() {
         binding.apply {
-            txtViewSignIn.setOnClickListener { onBackPressed() }
+            txtViewSignIn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
             btnSignUp.setOnClickListener{ registerUser() }
         }
     }

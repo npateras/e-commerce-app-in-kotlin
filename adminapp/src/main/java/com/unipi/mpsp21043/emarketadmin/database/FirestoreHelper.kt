@@ -7,7 +7,10 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GetTokenResult
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
@@ -18,6 +21,7 @@ import com.unipi.mpsp21043.emarketadmin.ui.fragments.FavoritesFragment
 import com.unipi.mpsp21043.emarketadmin.ui.fragments.HomeFragment
 import com.unipi.mpsp21043.emarketadmin.ui.fragments.MyAccountFragment
 import com.unipi.mpsp21043.emarketadmin.utils.Constants
+import kotlinx.coroutines.tasks.await
 
 class FirestoreHelper {
 
@@ -100,6 +104,33 @@ class FirestoreHelper {
                 )
             }
     }
+
+    /*fun getUserAdminStatus(signInActivity: SignInActivity) {
+        dbFirestore.collection(Constants.COLLECTION_USERS)
+            .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
+            .get() // Will get the documents snapshots.
+            .addOnCompleteListener { task ->
+
+                if (task.result!!.isEmpty) {
+                    signInActivity.successUserAdminStatusFromFirestore(User())
+                    return@addOnCompleteListener
+                }
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        // Here we get the list of boards in the form of documents.
+                        Log.d("User", document.toString())
+
+                        val userDetails: User = document.toObject(User::class.java)
+
+                        signInActivity.successUserAdminStatusFromFirestore(userDetails)
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("Get Favorites", "Error while getting favorites of product.", e)
+            }
+    }*/
+
     //end region USER
 
     // region ADDRESS

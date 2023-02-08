@@ -117,6 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/btn_height_small_37"
             android:layout_marginEnd="147dp"
+            android:layout_marginBottom="36dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/core_sans_cr_55_medium"
             android:text="@string/txt_forgot_password_question"
@@ -125,34 +126,11 @@
             android:textColor="@color/colorSecondary2"
             android:textSize="@dimen/btn_font_size_small_14"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_Sign_In"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_Sign_In"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/inputTxtLayout_Password"
             app:layout_constraintTop_toTopOf="@+id/btn_Sign_In" />
-
-        <TextView
-            android:id="@+id/txtView_Sign_Up"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="200dp"
-            android:layout_height="@dimen/btn_height_small_37"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="36dp"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/core_sans_cr_55_medium"
-            android:lines="2"
-            android:text="@string/txt_don_t_have_an_account"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="@color/colorSecondary2"
-            android:textSize="@dimen/btn_font_size_small_14"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_Sign_In"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/txtView_Forgot_Password"
-            app:layout_constraintTop_toBottomOf="@+id/txtView_Forgot_Password" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_Sign_In"
@@ -167,6 +145,5 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

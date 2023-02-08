@@ -13,7 +13,6 @@ import com.unipi.mpsp21043.emarketadmin.utils.Constants
 import com.unipi.mpsp21043.emarketadmin.utils.GlideLoader
 import com.unipi.mpsp21043.emarketadmin.utils.IntentUtils
 import com.unipi.mpsp21043.emarketadmin.utils.SnackBarErrorClass
-import java.util.*
 
 class ProductDetailsActivity : BaseActivity() {
 

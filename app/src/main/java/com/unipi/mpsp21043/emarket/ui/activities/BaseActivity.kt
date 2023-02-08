@@ -100,7 +100,7 @@ open class BaseActivity : AppCompatActivity() {
     fun doubleBackToExit() {
 
         if (doubleBackToExitPressedOnce) {
-            super.onBackPressed()
+            super.getOnBackPressedDispatcher().onBackPressed()
             return
         }
 

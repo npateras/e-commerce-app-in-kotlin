@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.animation.AnimationUtils
+import android.window.OnBackInvokedDispatcher
 import com.google.firebase.auth.FirebaseAuth
 import com.unipi.mpsp21043.emarket.R
 import com.unipi.mpsp21043.emarket.database.FirestoreHelper
@@ -179,7 +180,9 @@ class SignInActivity : BaseActivity() {
         }
     }
 
-    override fun onBackPressed() {
+    override fun getOnBackInvokedDispatcher(): OnBackInvokedDispatcher {
         goToMainActivity(this@SignInActivity)
+        return super.getOnBackInvokedDispatcher()
     }
+
 }

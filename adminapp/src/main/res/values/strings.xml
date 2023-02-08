@@ -272,6 +272,8 @@
     <string name="txt_pay_invoice">Pay Invoice</string>
     <string name="txt_my_orders">My Orders</string>
 
+    <string name="txt_admin">admin</string>
+    <string name="txt_error_user_not_admin">You must be an administrator to use this app!</string>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 </resources>

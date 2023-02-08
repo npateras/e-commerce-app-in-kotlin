@@ -1,11 +1,20 @@
 package com.unipi.mpsp21043.emarketadmin.ui.activities
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.view.View
+import android.view.ViewTreeObserver
 import android.view.animation.AnimationUtils
+import android.view.animation.AnticipateInterpolator
+import android.window.OnBackInvokedDispatcher
+import android.window.SplashScreen
+import androidx.activity.viewModels
+import androidx.core.animation.doOnEnd
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.firebase.auth.FirebaseAuth
 import com.unipi.mpsp21043.emarketadmin.R
 import com.unipi.mpsp21043.emarketadmin.database.FirestoreHelper
@@ -18,12 +27,65 @@ import com.unipi.mpsp21043.emarketadmin.utils.SnackBarSuccessClass
 
 class SignInActivity : BaseActivity() {
     private lateinit var binding: ActivitySignInBinding
+    private var isLoading = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        // Enable support for Splash Screen API for
+        // proper Android 12+ support
+        installSplashScreen().apply {
+            /*setOnExitAnimationListener { sp ->
+                // Create your custom animation.
+                sp.iconView.animate().rotation(180F).duration = 3000L
+                val slideUp = ObjectAnimator.ofFloat(
+                    sp.iconView,
+                    View.TRANSLATION_Y,
+                    0f,
+                    sp.iconView.height.toFloat()
+                )
+                slideUp.interpolator = AnticipateInterpolator()
+                slideUp.duration = 3000L
+
+                // Call SplashScreenView.remove at the end of your custom animation.
+                slideUp.doOnEnd { sp.remove() }
+
+                // Run your animation.
+                slideUp.start()
+            }*/
+            setKeepOnScreenCondition {
+                isLoading
+            }
+        }
+
+        if (FirestoreHelper().getCurrentUserID() != "")
+            goToMainActivity(this@SignInActivity)
+        else
+            isLoading = false
+
+        /*// Set up an OnPreDrawListener to the root view.
+        val content: View = findViewById(android.R.id.content)
+        content.viewTreeObserver.addOnPreDrawListener(
+            object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    // Check if the initial data is ready.
+                    return if (FirestoreHelper().getCurrentUserID() != "") {
+                        isLoading = false
+                        // The content is ready; start drawing.
+                        content.viewTreeObserver.removeOnPreDrawListener(this)
+                        goToMainActivity(this@SignInActivity)
+                        true
+                    }
+                    else {
+                        // The content is not ready; suspend.
+                        true
+                    }
+                }
+            }
+        )*/
 
         init()
     }
@@ -69,11 +131,6 @@ class SignInActivity : BaseActivity() {
 
     private fun setupClickListeners() {
         binding.apply {
-            txtViewSignUp.setOnClickListener {
-                // Launch the sign up screen when the user clicks on the sign up text.
-                val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
-                startActivity(intent)
-            }
             txtViewForgotPassword.setOnClickListener {
                 // Launch the forgot password screen when the user clicks on the forgot password text.
                 val intent = Intent(this@SignInActivity, ForgotPasswordActivity::class.java)
@@ -121,22 +178,17 @@ class SignInActivity : BaseActivity() {
         // Hide the progress dialog.
         hideProgressDialog()
 
-        if (!user.profileCompleted) {
-            // todo
-            // If the user profile is incomplete then launch the UserProfileActivity.
+        if (user.role != getString(R.string.txt_admin)) {
+            SnackBarErrorClass
+                .make(binding.root, getString(R.string.txt_error_user_not_admin))
+                .show()
 
-            /*val intent = Intent(this@SignInActivity, UserProfileActivity::class.java)
-            intent.putExtra(Constants.EXTRA_USER_DETAILS, user)
-            startActivity(intent)*/
-
-            goToMainActivity(this@SignInActivity, true)
-            finish()
-        } else {
+        }
+        else {
             // Redirect the user to Dashboard Screen after log in.
             goToMainActivity(this@SignInActivity)
             finish()
         }
-        finish()
     }
 
     private fun validateFields(): Boolean {
@@ -170,16 +222,11 @@ class SignInActivity : BaseActivity() {
             setSupportActionBar(root)
             textViewActionBarLabel.text = getString(R.string.txt_login)
         }
-
-        val actionBar = supportActionBar
-        actionBar?.let {
-            it.setDisplayShowCustomEnabled(true)
-            it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
-        }
     }
 
-    override fun onBackPressed() {
-        goToMainActivity(this@SignInActivity)
+    override fun getOnBackInvokedDispatcher(): OnBackInvokedDispatcher {
+        doubleBackToExit()
+        return super.getOnBackInvokedDispatcher()
     }
+
 }

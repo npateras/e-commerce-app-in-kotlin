@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EMarket"
+        android:theme="@style/Theme.EMarket.Starting"
         android:usesCleartextTraffic="true">
 
         <!-- [START fcm_default_icon] -->
@@ -38,13 +38,12 @@
             <activity
                 android:name=".ui.activities.MainActivity"
                 android:theme="@style/Theme.EMarket.NoActionBar3"
+                android:parentActivityName=".ui.activities.SignInActivity"
                 android:exported="true">
-                
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
 
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.activities.SignInActivity" />
             </activity>
 
             <!-- Product Details Activity -->
@@ -54,14 +53,15 @@
                 android:parentActivityName=".ui.activities.MainActivity"
                 android:exported="true">
 
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.activities.MainActivity" />
+
                 <intent-filter>
                     <action android:name="ProductDetailsActivity"/>
                     <category android:name="android.intent.category.DEFAULT"/>
                 </intent-filter>
 
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.activities.MainActivity" />
             </activity>
 
             <!-- List Products Activity -->
@@ -77,12 +77,14 @@
                 android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.EMarket.NoActionBar4"
-                android:parentActivityName=".ui.activities.MainActivity"
                 android:exported="true">
 
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.activities.MainActivity" />
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+
             </activity>
 
             <!-- Sign Up activity -->
