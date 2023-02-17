@@ -57,6 +57,7 @@ class CheckoutActivity : BaseActivity() {
             mAddressDetails = if (Build.VERSION.SDK_INT >= 33) {
                 intent.getParcelableExtra(Constants.EXTRA_SELECTED_ADDRESS, Address::class.java)
             } else {
+                @Suppress("DEPRECATION")
                 intent.getParcelableExtra(Constants.EXTRA_SELECTED_ADDRESS)
             }
         }

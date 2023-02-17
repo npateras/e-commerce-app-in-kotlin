@@ -2,6 +2,7 @@ package com.unipi.mpsp21043.emarketadmin.models
 
 import android.os.Parcelable
 import androidx.annotation.Keep
+import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.IgnoreExtraProperties
 import com.google.firebase.firestore.ServerTimestamp
 import kotlinx.parcelize.Parcelize
@@ -14,12 +15,13 @@ import java.util.*
 @Parcelize
 @IgnoreExtraProperties
 data class Product(
-    val addedByUser: String = "",
+    var addedByUser: String = "",
+    val lastModifiedBy: String = "",
     val category: String = "",
     @ServerTimestamp
     val dateAdded: Date = Date(),
     val description: String = "",
-    val iconUrl: String = "",
+    var iconUrl: String = "",
     val name: String = "",
     val popularity: Int = 0,
     val price: Double = 0.00,

@@ -35,6 +35,23 @@ class GlideLoader(val context: Context) : AppGlideModule() {
     /**
      * A function to load image from Uri or URL for the user profile picture.
      */
+    fun loadAddEditProductPicture(image: Any, imageView: ImageView) {
+        try {
+            // Load the user image in the ImageView.
+            Glide
+                .with(context)
+                .load(image) // Uri or URL of the image
+                .fitCenter() // Scale type of the image.
+                .placeholder(R.drawable.png_picture_sample) // A default place holder if image is failed to load.
+                .into(imageView) // the view in which the image will be loaded.
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
+    /**
+     * A function to load image from Uri or URL for the user profile picture.
+     */
     fun loadUserPicture(image: Any, imageView: ImageView) {
         try {
             // Load the user image in the ImageView.

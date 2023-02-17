@@ -2,6 +2,7 @@ package com.unipi.mpsp21043.emarketadmin.ui.activities
 
 import android.os.Bundle
 import android.view.View
+import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.content.res.AppCompatResources
 import com.unipi.mpsp21043.emarketadmin.R
 import com.unipi.mpsp21043.emarketadmin.database.FirestoreHelper
@@ -9,10 +10,10 @@ import com.unipi.mpsp21043.emarketadmin.databinding.ActivityProductDetailsBindin
 import com.unipi.mpsp21043.emarketadmin.models.Cart
 import com.unipi.mpsp21043.emarketadmin.models.Favorite
 import com.unipi.mpsp21043.emarketadmin.models.Product
+import com.unipi.mpsp21043.emarketadmin.models.User
 import com.unipi.mpsp21043.emarketadmin.utils.Constants
 import com.unipi.mpsp21043.emarketadmin.utils.GlideLoader
 import com.unipi.mpsp21043.emarketadmin.utils.IntentUtils
-import com.unipi.mpsp21043.emarketadmin.utils.SnackBarErrorClass
 
 class ProductDetailsActivity : BaseActivity() {
 
@@ -26,12 +27,10 @@ class ProductDetailsActivity : BaseActivity() {
     private lateinit var productId: String
 
     private lateinit var modelProduct: Product
-    private var modelCart: Cart? = null
-    private lateinit var modelFavorite: Favorite
+    private lateinit var mAddedByUser: User
+    private lateinit var mLastModifiedByUser: User
 
-    private var isInFavorites: Boolean = false
     private var priceReduced: Double = 0.00
-    private var cartProductQuantity = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState) // This calls the parent constructor
@@ -39,8 +38,8 @@ class ProductDetailsActivity : BaseActivity() {
         val view = binding.root
         setContentView(view) // This is used to align the xml view to this class
 
-        init()
         setupUI()
+        init()
     }
 
     private fun init() {
@@ -53,13 +52,16 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     private fun getProductDetails() {
-        showProgressDialog()
-
+        binding.txtViewPriceReduced.visibility = View.GONE
         FirestoreHelper().getProductDetails(this, productId)
     }
 
     fun successProductDetailsFromFirestore(product: Product) {
         modelProduct = product
+
+        // Since we set the product model, we can setup our click listeners for the toolbar.
+        setupClickListeners()
+
         loadProductDetails()
     }
 
@@ -70,18 +72,24 @@ class ProductDetailsActivity : BaseActivity() {
                 modelProduct.iconUrl,
                 imgViewPicture
             )
+
+            toolbar.textViewActionBarLabel.text = modelProduct.name
             txtViewName.text = modelProduct.name
             txtViewDescription.text = modelProduct.description
-            txtViewPriceReduced.apply {
-                visibility = View.VISIBLE
-                foreground =
-                    AppCompatResources.getDrawable(context, R.drawable.striking_red_text)
-                text = String.format(
-                    context.getString(R.string.txt_format_price),
-                    context.getString(R.string.curr_eur),
-                    modelProduct.price
-                )
+
+            if (modelProduct.sale != 0.0) {
+                txtViewPriceReduced.apply {
+                    visibility = View.VISIBLE
+                    foreground =
+                        AppCompatResources.getDrawable(context, R.drawable.striking_red_text)
+                    text = String.format(
+                        context.getString(R.string.txt_format_price),
+                        context.getString(R.string.curr_eur),
+                        modelProduct.price
+                    )
+                }
             }
+
             priceReduced = modelProduct.price - (modelProduct.price * modelProduct.sale)
             txtViewPrice.text = String.format(
                 getString(R.string.txt_format_price),
@@ -98,195 +106,61 @@ class ProductDetailsActivity : BaseActivity() {
                 txtViewStock.text = getString(R.string.txt_available)
         }
 
-        checkIfProductIsInFavorites()
-    }
+        binding.apply {
 
-    private fun checkIfProductIsInFavorites() {
-        FirestoreHelper().getFavoriteProduct(this, modelProduct.id)
-    }
-
-    fun successFavoriteProductFromFirestore(favoriteProduct: Favorite) {
-        modelFavorite = favoriteProduct
-
-        if (modelFavorite.productId != "") {
-            isInFavorites = true
-            binding.toolbar.actionBarCheckboxFavorite.isChecked = true
+            if (modelProduct.addedByUser.isEmpty()) {
+                textViewAddedByUser.visibility = View.INVISIBLE
+                imageViewArrowAddedBy.visibility = View.INVISIBLE
+            }
+            if (modelProduct.lastModifiedBy.isEmpty()) {
+                textViewLastModifiedByUser.visibility = View.INVISIBLE
+                imageViewArrowModifiedBy.visibility = View.INVISIBLE
+            }
         }
 
-        checkIfProductIsInCart()
+        if (modelProduct.addedByUser.isNotEmpty()){
+            FirestoreHelper().getUserDetails(this@ProductDetailsActivity, modelProduct.addedByUser, "added")
+            binding.textViewAddedByUser.visibility = View.VISIBLE
+            binding.imageViewArrowAddedBy.visibility = View.VISIBLE
+        }
+        else if (modelProduct.lastModifiedBy.isNotEmpty()) {
+            FirestoreHelper().getUserDetails(this@ProductDetailsActivity, modelProduct.lastModifiedBy, "modified")
+            binding.textViewLastModifiedByUser.visibility = View.VISIBLE
+            binding.imageViewArrowModifiedBy.visibility = View.VISIBLE
+        }
+        else
+            unveilDetails()
     }
 
-    private fun checkIfProductIsInCart() {
-        FirestoreHelper().checkIfProductIsInCart(this, modelProduct.id)
+    fun successAddedByUserDetailsFromFirestore(user: User) {
+        mAddedByUser = user
+
+        binding.textViewAddedByUser.text = String.format(getString(R.string.txt_format_added_by_user), mAddedByUser.fullName)
+
+        if (modelProduct.lastModifiedBy.isNotEmpty()) {
+            FirestoreHelper().getUserDetails(this@ProductDetailsActivity, modelProduct.lastModifiedBy, "modified")
+            binding.textViewLastModifiedByUser.visibility = View.VISIBLE
+        }
+        else
+            unveilDetails()
     }
 
-    fun successCartItemFromFirestore(cartItem: Cart) {
+    fun successLastModifiedByUserDetailsFromFirestore(user: User) {
+        mLastModifiedByUser = user
 
-        modelCart = cartItem
-
-        if (modelCart?.userId != "") {
-            cartProductQuantity = modelCart!!.cartQuantity
-            updateCart()
+        binding.apply {
+            textViewLastModifiedByUser.text = String.format(getString(R.string.txt_format_last_modified_by_user), mLastModifiedByUser.fullName)
+            textViewLastModifiedByUser.visibility = View.VISIBLE
+            imageViewArrowModifiedBy.visibility = View.VISIBLE
         }
 
-        hideProgressDialog()
         unveilDetails()
-    }
-
-    private fun hideAddToCart() {
-        binding.apply {
-            btnAddToCart.visibility = View.INVISIBLE
-            btnRemoveFromCart.visibility = View.VISIBLE
-        }
-    }
-    private fun showAddToCart() {
-        binding.apply {
-            btnAddToCart.visibility = View.VISIBLE
-            btnRemoveFromCart.visibility = View.GONE
-        }
     }
 
     private fun unveilDetails() {
         binding.apply {
             vLayoutHead.unVeil()
             vLayoutBody.unVeil()
-        }
-    }
-
-    private fun updateCart() {
-        if (modelCart != null && modelCart?.userId != "") {
-            if (modelCart?.cartQuantity == 0)
-                showAddToCart()
-            else if (modelCart?.cartQuantity!! >= 1) {
-                hideAddToCart()
-                binding.txtViewQuantityValue.text = modelCart?.cartQuantity.toString()
-            }
-        }
-        else {
-            addItemToCart()
-        }
-    }
-
-    private fun addItemToCart() {
-        showProgressDialog()
-        hideAddToCart()
-
-        if (cartProductQuantity == 0)
-            cartProductQuantity++
-
-        modelCart = Cart(
-            userId = FirestoreHelper().getCurrentUserID(),
-            productId = modelProduct.id,
-            imgUrl = modelProduct.iconUrl,
-            name = modelProduct.name,
-            price = modelProduct.price,
-            sale = modelProduct.sale,
-            stock = modelProduct.stock,
-            weight = modelProduct.weight,
-            weightUnit = modelProduct.weightUnit,
-            cartQuantity = cartProductQuantity
-        )
-
-        FirestoreHelper().addItemToCart(this, modelCart!!)
-    }
-
-    fun successItemAddedToCart() {
-        hideProgressDialog()
-        hideAddToCart()
-
-       binding.txtViewQuantityValue.text = cartProductQuantity.toString()
-    }
-
-    private fun updateItemToCart() {
-        showProgressDialog()
-
-        modelCart = Cart(
-            userId = FirestoreHelper().getCurrentUserID(),
-            productId = modelProduct.id,
-            imgUrl = modelProduct.iconUrl,
-            name = modelProduct.name,
-            price = modelProduct.price,
-            sale = modelProduct.sale,
-            stock = modelProduct.stock,
-            weight = modelProduct.weight,
-            weightUnit = modelProduct.weightUnit,
-            cartQuantity = cartProductQuantity
-        )
-
-        FirestoreHelper().updateItemFromCart(this, modelCart!!, modelProduct.id)
-    }
-
-    private fun deleteItemFromCard() {
-        showProgressDialog()
-
-        FirestoreHelper().deleteItemFromCart(this, modelProduct.id)
-    }
-
-    fun successItemDeletedFromCart() {
-        hideProgressDialog()
-        showAddToCart()
-
-        modelCart = null
-    }
-
-    private fun changeItemQuantity(view: View) {
-        binding.apply {
-            when (view) {
-                imgBtnPlus -> {
-                    if (modelCart != null)  {
-                        // If next item quantity is not exceeding the max stock quantity and max default item number.
-                        // Basically, it let's you pick a max quantity of 99 for the same product.
-                        if (cartProductQuantity + 1 <= Constants.DEFAULT_MAX_ITEM_CART_QUANTITY)
-                        // If the selected quantity doesn't exceed the max stock number.
-                            if (cartProductQuantity + 1 <= modelProduct.stock) {
-                                cartProductQuantity++
-                                updateItemToCart()
-                            }
-                            else {
-                                // If it does, show a snackbar and explain the issue.
-                                SnackBarErrorClass
-                                    .make(view, getString(R.string.txt_error_max_stock))
-                                    .setAnchorView(binding.constraintLayoutBottom)
-                                    .show()
-                                return
-                            }
-                        else {
-                            // If the user is trying to select a quantity of more than 99,
-                            // Show a snackbar and explain the issue.
-                            SnackBarErrorClass
-                                .make(view, getString(R.string.txt_error_max_quantity))
-                                .setAnchorView(binding.constraintLayoutBottom)
-                                .show()
-                            return
-                        }
-                    }
-                    else {
-                        addItemToCart()
-                    }
-                }
-                imgBtnMinus -> {
-                    when {
-                        cartProductQuantity - 1 == 0 -> {
-                            cartProductQuantity = 0
-                            deleteItemFromCard()
-                        }
-                        cartProductQuantity > 0 -> {
-                            cartProductQuantity--
-                            updateItemToCart()
-                        }
-                        else -> {
-                            SnackBarErrorClass
-                                .make(view, getString(R.string.txt_error_selecting_below_zero))
-                                .setAnchorView(binding.constraintLayoutBottom)
-                                .show()
-                            return
-                        }
-                    }
-                }
-            }
-            updateCart()
-
-            txtViewQuantityValue.text = cartProductQuantity.toString()
         }
     }
 
@@ -298,53 +172,15 @@ class ProductDetailsActivity : BaseActivity() {
         }
 
         setupActionBar()
-        setupClickListeners()
     }
 
     private fun setupClickListeners() {
-        // If user IS logged in
-        if (FirestoreHelper().getCurrentUserID() != "")
-            binding.apply {
-                btnAddToCart.setOnClickListener { updateCart() }
-                btnRemoveFromCart.setOnClickListener { deleteItemFromCard() }
-                imgBtnPlus.setOnClickListener { changeItemQuantity(imgBtnPlus) }
-                imgBtnMinus.setOnClickListener { changeItemQuantity(imgBtnMinus) }
+        binding.apply {
 
-                // ActionBar
-                toolbar.actionBarImgBtnMyCart.setOnClickListener { IntentUtils().goToListCartItemsActivity(this@ProductDetailsActivity) }
-                toolbar.actionBarCheckboxFavorite.setOnClickListener {
-                    if (!toolbar.actionBarCheckboxFavorite.isChecked) {
-                        FirestoreHelper().deleteFavoriteProduct(
-                            this@ProductDetailsActivity,
-                            modelProduct.id
-                        )
-                    }
-                    else {
-                        val favorite = Favorite(
-                            FirestoreHelper().getCurrentUserID(),
-                            modelProduct.id,
-                            modelProduct.iconUrl,
-                            modelProduct.name,
-                            modelProduct.price,
-                            modelProduct.sale
-                        )
-                        FirestoreHelper().addToFavorites(
-                            this@ProductDetailsActivity,
-                            favorite
-                        )
-                    }
-                }
-            }
-        else
-            binding.apply {
-                listOf(btnAddToCart, imgBtnPlus, imgBtnMinus, toolbar.actionBarCheckboxFavorite, toolbar.actionBarImgBtnMyCart)
-                    .forEach {
-                        it.setOnClickListener {
-                            toolbar.actionBarCheckboxFavorite.isChecked = false
-                            goToSignInActivity(this@ProductDetailsActivity)
-                        }
-                    }
-            }
+            // ActionBar
+            toolbar.actionBarImgBtnEdit.setOnClickListener { IntentUtils().goToEditProductActivity(this@ProductDetailsActivity, modelProduct) }
+            toolbar.actionBarImgBtnDelete.setOnClickListener {  }
+        }
     }
 
     private fun setupActionBar() {
@@ -359,9 +195,19 @@ class ProductDetailsActivity : BaseActivity() {
         }
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
+
     override fun onResume() {
         super.onResume()
 
         getProductDetails()
+    }
+
+    override fun getOnBackInvokedDispatcher(): OnBackInvokedDispatcher {
+        finish()
+        return super.getOnBackInvokedDispatcher()
     }
 }

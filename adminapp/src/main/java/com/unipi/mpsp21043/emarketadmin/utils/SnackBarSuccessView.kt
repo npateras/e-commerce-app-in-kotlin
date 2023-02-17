@@ -14,7 +14,7 @@ class SnackBarSuccessView @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr), ContentViewCallback {
 
     init {
-        View.inflate(context, R.layout.snackbar_sign_up_success, this)
+        View.inflate(context, R.layout.snackbar_success, this)
         clipToPadding = false
     }
 

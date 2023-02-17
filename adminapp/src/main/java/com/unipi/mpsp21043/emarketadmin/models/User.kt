@@ -27,4 +27,5 @@ data class User(
     val profImgUrl: String = "",
     val profileCompleted: Boolean = false,
     val role: String = "",
+    val notifications: Boolean = true,
 ) : Parcelable

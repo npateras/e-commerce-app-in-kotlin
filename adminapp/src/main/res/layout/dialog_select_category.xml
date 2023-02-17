@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    tools:ignore="ContentDescription">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view_body"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_container_all_corners"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/text_view_header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/core_sans_cr_45_regular"
+                    android:text="@string/category"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorText"
+                    android:textSize="@dimen/txt_font_size_header_24"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioGroup
+                    android:id="@+id/radio_group"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:weightSum="1"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="@+id/text_view_header"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_header"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_header">
+
+                    <RadioButton
+                        android:id="@+id/radio_button_beverages"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="start"
+                        android:checked="false"
+                        android:drawableStart="@drawable/svg_category_beverages"
+                        android:drawablePadding="16dp"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:text="@string/txt_category_beverages"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_chilled"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="8dp"
+                        android:checked="false"
+                        android:drawableStart="@drawable/svg_category_chilled"
+                        android:drawablePadding="16dp"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:text="@string/txt_category_chilled"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_fish"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="8dp"
+                        android:checked="false"
+                        android:drawableStart="@drawable/svg_category_fish"
+                        android:drawablePadding="16dp"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:text="@string/txt_category_fish"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_frozen"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="8dp"
+                        android:checked="false"
+                        android:drawableStart="@drawable/svg_category_frozen"
+                        android:drawablePadding="16dp"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:text="@string/txt_category_frozen"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_fruits"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="8dp"
+                        android:checked="false"
+                        android:drawableStart="@drawable/svg_category_fruits"
+                        android:drawablePadding="16dp"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:text="@string/txt_category_fruits"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_grocery"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="8dp"
+                        android:checked="false"
+                        android:drawableStart="@drawable/svg_category_grocery_cart"
+                        android:drawablePadding="16dp"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:text="@string/txt_category_grocery"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_homeware"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="8dp"
+                        android:checked="false"
+                        android:drawableStart="@drawable/svg_category_homeware"
+                        android:drawablePadding="16dp"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:text="@string/txt_category_homeware"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_household"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="8dp"
+                        android:checked="false"
+                        android:drawableStart="@drawable/svg_category_household"
+                        android:drawablePadding="16dp"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:text="@string/txt_category_household"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_liquor"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="8dp"
+                        android:checked="false"
+                        android:drawableStart="@drawable/svg_category_liquor"
+                        android:drawablePadding="16dp"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:text="@string/txt_category_liquor"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_meat"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="8dp"
+                        android:checked="false"
+                        android:drawableStart="@drawable/svg_category_meat"
+                        android:drawablePadding="16dp"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:text="@string/txt_category_meat"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_pharmacy"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="8dp"
+                        android:checked="false"
+                        android:drawableStart="@drawable/svg_category_pharmacy"
+                        android:drawablePadding="16dp"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:text="@string/txt_category_pharmacy"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_vegetables"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="8dp"
+                        android:checked="false"
+                        android:drawableStart="@drawable/svg_category_vegetables"
+                        android:drawablePadding="16dp"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:text="@string/txt_category_vegetables"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+                </RadioGroup>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_Dialog_Select"
+                    style="@style/ButtonStyle.PrimaryColor"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/btn_height_small_37"
+                    android:layout_marginBottom="36dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/select"
+                    app:backgroundTint="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/radio_group"
+                    app:layout_constraintStart_toStartOf="@+id/radio_group"
+                    app:layout_constraintTop_toBottomOf="@+id/radio_group" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>

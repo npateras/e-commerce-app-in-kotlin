@@ -36,7 +36,7 @@ class ListOrdersActivity : BaseActivity() {
     }
 
     private fun getOrdersList() {
-        FirestoreHelper().getMyOrdersList(this)
+        FirestoreHelper().getOrdersList(this)
     }
 
     fun successOrdersListFromFirestore(ordersList: ArrayList<Order>) {
@@ -50,7 +50,6 @@ class ListOrdersActivity : BaseActivity() {
 
             // sets VeilRecyclerView's properties
             binding.veilRecyclerView.run {
-                setVeilLayout(R.layout.shimmer_item_product)
                 setAdapter(
                     OrdersListAdapter(
                         this@ListOrdersActivity,

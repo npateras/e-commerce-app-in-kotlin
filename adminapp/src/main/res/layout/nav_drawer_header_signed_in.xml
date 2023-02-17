@@ -3,19 +3,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="16dp"
     tools:ignore="ContentDescription">
 
-    <ImageView
+    <FrameLayout
+        android:id="@+id/navDrawerFrameLayoutUserPicture"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="8dp">
+
+        <View
+            android:id="@+id/navDrawerViewUserPicture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_user_sample" />
+
+        <ProgressBar
+            android:id="@+id/navDrawerProgressBarProfImgLoading"
+            android:visibility="gone"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/colorPrimaryDark"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/navDrawerImgViewUserPicture"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:elevation="3dp"
+            android:src="@drawable/shape_user_profile_frame" />
+
+    </FrameLayout>
+
+   <!-- <ImageView
         android:id="@+id/navDrawer_SignedIn_Profile_Img"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginTop="64dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/ic_user_sample"/>
+        android:src="@drawable/ic_user_sample"/>-->
 
 
     <TextView
@@ -26,16 +60,17 @@
         android:textColor="@color/colorSecondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""/>
+        android:drawablePadding="8dp"
+        android:text="@string/txt_loading"/>
 
     <TextView
         android:id="@+id/navDrawer_SignedIn_Email"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         style="@style/TextView_16.Secondary"
-        android:textColor="@color/colorSecondary3"
+        android:textColor="@color/colorWhiteLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""/>
+        android:text="@string/txt_loading"/>
 
 </LinearLayout>

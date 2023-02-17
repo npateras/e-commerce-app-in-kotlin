@@ -11,16 +11,14 @@ import com.unipi.mpsp21043.emarketadmin.databinding.ItemAddressBinding
 import com.unipi.mpsp21043.emarketadmin.models.Address
 import com.unipi.mpsp21043.emarketadmin.ui.activities.AddEditAddressActivity
 import com.unipi.mpsp21043.emarketadmin.utils.Constants
-import com.unipi.mpsp21043.emarketadmin.utils.IntentUtils
-
+import java.util.*
 
 /**
  * A adapter class for products list items.
  */
 open class AddressListAdapter(
     private val context: Context,
-    private var list: ArrayList<Address>,
-    private val selectAddress: Boolean
+    private var list: ArrayList<Address>
 ) : RecyclerView.Adapter<AddressListAdapter.AddressViewHolder>() {
 
     /**
@@ -67,11 +65,6 @@ open class AddressListAdapter(
                 model.address,
                 model.zipCode
             )
-        }
-        if (selectAddress) {
-            holder.itemView.setOnClickListener {
-                IntentUtils().goToCheckoutActivity(context, model)
-            }
         }
     }
 

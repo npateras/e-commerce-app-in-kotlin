@@ -12,6 +12,7 @@ import com.unipi.mpsp21043.emarketadmin.databinding.FragmentMyAccountBinding
 import com.unipi.mpsp21043.emarketadmin.models.User
 import com.unipi.mpsp21043.emarketadmin.ui.activities.MainActivity
 import com.unipi.mpsp21043.emarketadmin.utils.Constants
+import com.unipi.mpsp21043.emarketadmin.utils.GlideLoader
 import com.unipi.mpsp21043.emarketadmin.utils.IntentUtils
 
 class MyAccountFragment : BaseFragment() {
@@ -65,15 +66,6 @@ class MyAccountFragment : BaseFragment() {
             // GET user details
             getUserDetails()
         }
-        else // If user is not signed in
-            binding.apply {
-                // We make the sign in layout visible and add the button click listeners accordingly.
-                layoutMustBeSignedIn.apply {
-                    root.visibility = View.VISIBLE
-                    btnSignIn.setOnClickListener{ goToSignInActivity(this@MyAccountFragment.requireContext()) }
-                    txtViewSignUp.setOnClickListener{ goToSignInActivity(this@MyAccountFragment.requireContext()) }
-                }
-            }
     }
 
     /**
@@ -105,6 +97,15 @@ class MyAccountFragment : BaseFragment() {
                 else
                     textViewPhoneValue.text = mUserDetails.phoneNumber
             else textViewPhoneValue.text = getString(R.string.txt_none)
+
+            if (mUserDetails.profImgUrl.isNotEmpty()) {
+                binding.progressBarProfImgLoading.visibility = View.VISIBLE
+                GlideLoader(this@MyAccountFragment.requireContext()).loadUserPicture(
+                    mUserDetails.profImgUrl,
+                    binding.imgViewUserPicture
+                )
+                binding.progressBarProfImgLoading.visibility = View.GONE
+            }
         }
 
         unveilDetails()

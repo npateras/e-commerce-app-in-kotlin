@@ -74,8 +74,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             .setSmallIcon(getNotificationIcon())
             .setAutoCancel(true)
             .setContentIntent(resultPendingIntent)
-            .addAction(R.drawable.ic_heart, getString(R.string.notification_mark_as_read), cancelPendingIntent) // todo
-            .addAction(R.drawable.ic_heart, getString(R.string.notification_add_to_cart), cancelPendingIntent) // todo
+            /*.addAction(R.drawable.ic_heart, getString(R.string.notification_mark_as_read), cancelPendingIntent) // todo
+            .addAction(R.drawable.ic_heart, getString(R.string.notification_add_to_cart), cancelPendingIntent) // todo*/
             .setLargeIcon(imgBitmap)
             .setGroup(Constants.GROUP_KEY_FAVORITES)
             .setStyle(NotificationCompat.BigPictureStyle()

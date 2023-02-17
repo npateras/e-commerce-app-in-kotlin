@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorPrimary"
+    tools:ignore="ContentDescription">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/action_bar_button_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="14dp"
+            android:adjustViewBounds="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/svg_search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorWhite" />
+
+        <EditText
+            android:id="@+id/text_input_layout_search_bar"
+            style="@style/TextEditInputSearch"
+            android:layout_width="0dp"
+            android:layout_height="47dp"
+            android:layout_marginEnd="16dp"
+            app:hintEnabled="false"
+            android:hint="@string/search_hint"
+            android:textColorHint="@color/colorSecondary3"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:drawablePadding="8dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            android:drawableEnd="@drawable/svg_microphone"
+            android:background="@drawable/custom_edit_text_cut"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/action_bar_button_search"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </EditText>
+        <!--<com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_layout_search_bar"
+            style="@style/TextInputLayoutStyleSearch"
+            android:layout_width="0dp"
+            android:layout_height="47dp"
+            android:layout_marginEnd="16dp"
+            app:hintEnabled="false"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/action_bar_button_search"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_edit_input_search_bar"
+                style="@style/TextEditInputSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/search_hint"
+                android:maxLines="2"
+                android:drawablePadding="8dp"
+                android:drawableEnd="@drawable/svg_microphone"
+                android:textColor="@color/colorText" />
+
+        </com.google.android.material.textfield.TextInputLayout>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.appcompat.widget.Toolbar>

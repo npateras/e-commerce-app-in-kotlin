@@ -42,7 +42,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     private fun setupUI() {
-        setUpTabs()
+        setupTabs()
         setupActionBar()
         setupNavDrawer()
 
@@ -100,7 +100,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
-    private fun setUpTabs() {
+    private fun setupTabs() {
         val adapter = ViewPagerMainAdapter(supportFragmentManager, lifecycle)
 
         binding.apply {

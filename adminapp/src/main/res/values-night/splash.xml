@@ -2,8 +2,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.EMarket.Starting" parent="Theme.SplashScreen">
         <!-- Splash Screen -->
-        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/colorPrimaryDark</item>
-        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/ic_emarket_logo</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/colorPrimary</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/emarket_admin_branding_logo</item>
         <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="s">3000</item>
         <item name="android:windowSplashScreenBehavior" tools:targetApi="tiramisu">icon_preferred</item>
 

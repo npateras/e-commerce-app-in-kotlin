@@ -3,6 +3,9 @@ package com.unipi.mpsp21043.emarketadmin.ui.activities
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -10,7 +13,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -21,9 +23,9 @@ import com.unipi.mpsp21043.emarketadmin.databinding.ActivityMainBinding
 import com.unipi.mpsp21043.emarketadmin.models.User
 import com.unipi.mpsp21043.emarketadmin.service.MyFirebaseMessagingService
 import com.unipi.mpsp21043.emarketadmin.utils.Constants
+import com.unipi.mpsp21043.emarketadmin.utils.GlideLoader
 import com.unipi.mpsp21043.emarketadmin.utils.IntentUtils
 import com.unipi.mpsp21043.emarketadmin.utils.SnackBarSuccessClass
-import java.util.*
 
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -46,7 +48,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setupActionBar()
         setupNavDrawer()
 
-        binding.toolbar.actionBarImgBtnMyCart.setOnClickListener { IntentUtils().goToListCartItemsActivity(this) }
+        binding.toolbar.actionBarButtonSearch.setOnClickListener { IntentUtils().goToSearchActivity(this) }
     }
 
     private fun setupActionBar() {
@@ -62,26 +64,18 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         binding.apply {
             val toggle = ActionBarDrawerToggle(
                 this@MainActivity, drawerLayout, toolbar.root,
-                R.string.nav_drawer_close, R.string.nav_drawer_close
+                R.string.nav_drawer_open_menu, R.string.nav_drawer_open_menu
             )
             drawerLayout.addDrawerListener(toggle)
             // Change drawer arrow icon
             toggle.drawerArrowDrawable.color =
                 ContextCompat.getColor(this@MainActivity, R.color.colorTabSelected)
             // Set navigation arrow icon
-            toggle.setHomeAsUpIndicator(R.drawable.ic_list)
+            toggle.setHomeAsUpIndicator(R.drawable.svg_list)
             toggle.syncState()
 
-            if (FirestoreHelper().getCurrentUserID().isEmpty()) {
-                navView.inflateHeaderView(R.layout.nav_drawer_header_not_signed_in)
-                navView.getHeaderView(0)
-                    .findViewById<MaterialButton>(R.id.btn_NavView_Sign_In)
-                    .setOnClickListener{ goToSignInActivity(this@MainActivity) }
-            }
-            else {
-                navView.inflateHeaderView(R.layout.nav_drawer_header_signed_in)
-                FirestoreHelper().getUserDetails(this@MainActivity)
-            }
+            navView.inflateHeaderView(R.layout.nav_drawer_header_signed_in)
+            FirestoreHelper().getUserDetails(this@MainActivity)
             navView.setNavigationItemSelectedListener(this@MainActivity)
             navView.setCheckedItem(R.id.nav_drawer_item_products)
         }
@@ -108,9 +102,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
             TabLayoutMediator(tabs, viewPagerHomeActivity){tab, position ->
                 when (position) {
-                    0 -> tab.setIcon(R.drawable.ic_food_stand)
-                    1 -> tab.setIcon(R.drawable.ic_heart)
-                    2 -> tab.setIcon(R.drawable.ic_user_circle)
+                    0 -> tab.setIcon(R.drawable.svg_statistics)
+                    1 -> tab.setIcon(R.drawable.svg_food_stand_products)
+                    2 -> tab.setIcon(R.drawable.svg_orders)
+                    3 -> tab.setIcon(R.drawable.svg_users)
+                    4 -> tab.setIcon(R.drawable.svg_user_circle)
                 }
             }.attach()
 
@@ -118,14 +114,22 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 override fun onTabSelected(tab: TabLayout.Tab) {
                     when (tab.position) {
                         0 -> {
-                            toolbar.textViewActionBarHeader.text = getString(R.string.txt_store)
-                            navView.setCheckedItem(R.id.nav_drawer_item_products)
+                            toolbar.textViewActionBarHeader.text = getString(R.string.txt_statistics)
+                            navView.setCheckedItem(R.id.nav_drawer_item_statistics)
                         }
                         1 -> {
-                            toolbar.textViewActionBarHeader.text = getString(R.string.txt_favorite_products)
-                            navView.setCheckedItem(R.id.nav_drawer_item_favorites)
+                            toolbar.textViewActionBarHeader.text = getString(R.string.txt_products)
+                            navView.setCheckedItem(R.id.nav_drawer_item_products)
                         }
                         2 -> {
+                            toolbar.textViewActionBarHeader.text = getString(R.string.txt_orders)
+                            navView.setCheckedItem(R.id.nav_drawer_item_orders)
+                        }
+                        3 -> {
+                            toolbar.textViewActionBarHeader.text = getString(R.string.txt_users)
+                            navView.setCheckedItem(R.id.nav_drawer_item_users)
+                        }
+                        4 -> {
                             toolbar.textViewActionBarHeader.text = getString(R.string.txt_my_account)
                             navView.setCheckedItem(R.id.nav_drawer_item_profile)
                         }
@@ -141,17 +145,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Handle navigation view item clicks here.
 
         when (item.itemId) {
-            R.id.nav_drawer_item_products -> binding.tabs.getTabAt(0)?.select()
-            R.id.nav_drawer_item_favorites -> binding.tabs.getTabAt(2)?.select()
-            R.id.nav_drawer_item_cart -> {
-                IntentUtils().goToListCartItemsActivity(this)
-                return false
-            }
-            R.id.nav_drawer_item_profile -> binding.tabs.getTabAt(3)?.select()
-            R.id.nav_drawer_item_orders -> {
-                IntentUtils().goToListOrdersActivity(this)
-                return false
-            }
+            R.id.nav_drawer_item_statistics -> binding.tabs.getTabAt(0)?.select()
+            R.id.nav_drawer_item_products -> binding.tabs.getTabAt(1)?.select()
+            R.id.nav_drawer_item_orders -> binding.tabs.getTabAt(2)?.select()
+            R.id.nav_drawer_item_users -> binding.tabs.getTabAt(3)?.select()
+            R.id.nav_drawer_item_profile -> binding.tabs.getTabAt(4)?.select()
             R.id.nav_drawer_item_exit -> ActivityCompat.finishAffinity(this)
         }
 
@@ -168,7 +166,29 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 findViewById<TextView>(R.id.navDrawer_SignedIn_Email)
                     .text = userInfo.email
             }
+
+            // Check if user is ADMIN and then show the admin features in nav drawer bar.
+            if (userInfo.role == Constants.ROLE_ADMIN) {
+                // And also add the admin icon next to the name in nav drawer header.
+                navView.getHeaderView(0).apply {
+                    findViewById<TextView>(R.id.navDrawer_SignedIn_Full_Name)
+                        .setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.svg_admin_icon, 0)
+                }
+            }
+
+            if (userInfo.profImgUrl.isNotEmpty()) {
+                val imgViewProfPicture = navView.getHeaderView(0).findViewById<ImageView>(R.id.navDrawerImgViewUserPicture)
+                val progressBarProfPicture = navView.getHeaderView(0).findViewById<ProgressBar>(R.id.navDrawerProgressBarProfImgLoading)
+
+                progressBarProfPicture.visibility = View.VISIBLE
+                GlideLoader(this@MainActivity).loadUserPicture(
+                    userInfo.profImgUrl,
+                    imgViewProfPicture
+                )
+                progressBarProfPicture.visibility = View.GONE
+            }
         }
+
     }
 
     fun userFcmRegistrationTokenSuccess(token: String) {
@@ -177,7 +197,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     override fun getOnBackInvokedDispatcher(): OnBackInvokedDispatcher {
-        doubleBackToExit()
+        // doubleBackToExit()
         return super.getOnBackInvokedDispatcher()
     }
 }

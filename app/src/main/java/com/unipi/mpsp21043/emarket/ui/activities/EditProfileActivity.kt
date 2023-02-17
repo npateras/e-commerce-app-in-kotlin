@@ -1,5 +1,6 @@
 package com.unipi.mpsp21043.emarket.ui.activities
 
+import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
@@ -30,7 +31,12 @@ class EditProfileActivity : BaseActivity() {
 
         if (intent.hasExtra(Constants.EXTRA_USER_DETAILS)) {
             // Get the user details from intent as a ParcelableExtra.
-            mUserDetails = intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS)!!
+            mUserDetails = if (Build.VERSION.SDK_INT >= 33) {
+                intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS, User::class.java)!!
+            } else {
+                @Suppress("DEPRECATION")
+                intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS)!!
+            }
 
             binding.apply {
                 inputTxtFullName.setText(mUserDetails.fullName)

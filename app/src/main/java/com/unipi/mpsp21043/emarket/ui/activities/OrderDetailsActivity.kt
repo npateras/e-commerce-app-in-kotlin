@@ -1,5 +1,6 @@
 package com.unipi.mpsp21043.emarket.ui.activities
 
+import android.os.Build
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unipi.mpsp21043.emarket.R
@@ -33,8 +34,12 @@ class OrderDetailsActivity : BaseActivity() {
 
     private fun init() {
         if (intent.hasExtra(Constants.EXTRA_ORDER_DETAILS)) {
-            mOrderDetails =
+            mOrderDetails  = if (Build.VERSION.SDK_INT >= 33) {
+                intent.getParcelableExtra(Constants.EXTRA_ORDER_DETAILS, Order::class.java)!!
+            } else {
+                @Suppress("DEPRECATION")
                 intent.getParcelableExtra(Constants.EXTRA_ORDER_DETAILS)!!
+            }
 
             setRecyclerView()
         }

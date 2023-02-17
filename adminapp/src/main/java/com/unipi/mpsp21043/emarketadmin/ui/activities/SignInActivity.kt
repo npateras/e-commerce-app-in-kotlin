@@ -1,19 +1,12 @@
 package com.unipi.mpsp21043.emarketadmin.ui.activities
 
-import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
-import android.view.View
-import android.view.ViewTreeObserver
 import android.view.animation.AnimationUtils
-import android.view.animation.AnticipateInterpolator
 import android.window.OnBackInvokedDispatcher
-import android.window.SplashScreen
-import androidx.activity.viewModels
-import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.firebase.auth.FirebaseAuth
 import com.unipi.mpsp21043.emarketadmin.R
@@ -65,27 +58,6 @@ class SignInActivity : BaseActivity() {
             goToMainActivity(this@SignInActivity)
         else
             isLoading = false
-
-        /*// Set up an OnPreDrawListener to the root view.
-        val content: View = findViewById(android.R.id.content)
-        content.viewTreeObserver.addOnPreDrawListener(
-            object : ViewTreeObserver.OnPreDrawListener {
-                override fun onPreDraw(): Boolean {
-                    // Check if the initial data is ready.
-                    return if (FirestoreHelper().getCurrentUserID() != "") {
-                        isLoading = false
-                        // The content is ready; start drawing.
-                        content.viewTreeObserver.removeOnPreDrawListener(this)
-                        goToMainActivity(this@SignInActivity)
-                        true
-                    }
-                    else {
-                        // The content is not ready; suspend.
-                        true
-                    }
-                }
-            }
-        )*/
 
         init()
     }

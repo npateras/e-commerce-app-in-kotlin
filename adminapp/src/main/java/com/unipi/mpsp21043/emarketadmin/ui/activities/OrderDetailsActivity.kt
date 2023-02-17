@@ -43,7 +43,6 @@ class OrderDetailsActivity : BaseActivity() {
     private fun setRecyclerView() {
         // sets VeilRecyclerView's properties
         binding.veilRecyclerView.run {
-            setVeilLayout(R.layout.shimmer_item_product)
             setAdapter(
                 OrderCartProductListAdapter(
                     this@OrderDetailsActivity,

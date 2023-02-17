@@ -85,15 +85,6 @@ open class BaseActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-
-    fun goToListProductsActivity(context: Context, filter: String) {
-        val intent = Intent(context, ListProductsActivity::class.java)
-        intent.putExtra(Constants.EXTRA_FILTER, filter)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        finish()
-        startActivity(intent)
-    }
-
     /**
      * A function to implement the double back press feature to exit the app.
      */

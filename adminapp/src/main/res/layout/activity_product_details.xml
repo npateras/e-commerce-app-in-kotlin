@@ -21,35 +21,37 @@
         android:layout_height="0dp"
         android:layout_below="@+id/toolbar"
         android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@id/constraintLayout_Bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <com.skydoves.androidveil.VeilLayout
                 android:id="@+id/vLayout_Head"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                app:veilLayout_radius="8dp"
-                app:veilLayout_baseColor="@color/colorSecondary2"
-                app:veilLayout_highlightColor="@color/colorWhite"
                 app:veilLayout_baseAlpha="0.6"
+                app:veilLayout_baseColor="@color/colorSecondary2"
                 app:veilLayout_highlightAlpha="1.0"
+                app:veilLayout_highlightColor="@color/colorWhite"
+                app:veilLayout_radius="8dp"
                 app:veilLayout_shimmerEnable="true"
                 app:veilLayout_veiled="false">
 
-            <ImageView
-                android:id="@+id/imgView_Picture"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="fitCenter"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_picture_wide" />
+                <ImageView
+                    android:id="@+id/imgView_Picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_picture_wide" />
 
             </com.skydoves.androidveil.VeilLayout>
 
@@ -57,11 +59,11 @@
                 android:id="@+id/vLayout_body"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:veilLayout_radius="8dp"
-                app:veilLayout_baseColor="@color/colorSecondary2"
-                app:veilLayout_highlightColor="@color/colorWhite"
                 app:veilLayout_baseAlpha="0.6"
+                app:veilLayout_baseColor="@color/colorSecondary2"
                 app:veilLayout_highlightAlpha="1.0"
+                app:veilLayout_highlightColor="@color/colorWhite"
+                app:veilLayout_radius="8dp"
                 app:veilLayout_shimmerEnable="true"
                 app:veilLayout_veiled="false">
 
@@ -95,10 +97,10 @@
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/core_sans_cr_45_regular"
                         android:text="0.00"
-                        android:visibility="gone"
                         android:textAlignment="textEnd"
                         android:textColor="@color/colorSecondary2"
                         android:textSize="@dimen/txt_font_size_header_16"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/txtView_Name"
                         app:layout_constraintEnd_toStartOf="@+id/txtView_Price"
                         app:layout_constraintTop_toTopOf="@+id/txtView_Name"
@@ -206,9 +208,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="46dp"
                         android:ellipsize="end"
-                        android:paddingBottom="28dp"
                         android:fontFamily="@font/core_sans_cr_45_regular"
                         android:justificationMode="inter_word"
+                        android:paddingBottom="28dp"
                         android:text="@string/txt_no_description"
                         android:textColor="@color/colorSecondary2"
                         android:textSize="@dimen/txt_font_size_header_16"
@@ -216,6 +218,59 @@
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="@+id/txtView_Name"
                         app:layout_constraintTop_toBottomOf="@+id/cardView_Stock" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image_view_arrow_modified_by"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_view_last_modified_by_user"
+                        app:layout_constraintStart_toStartOf="@+id/txtView_Description"
+                        app:layout_constraintTop_toTopOf="@+id/text_view_last_modified_by_user"
+                        app:srcCompat="@drawable/svg_arrow_interface_next" />
+
+                    <TextView
+                        android:id="@+id/text_view_last_modified_by_user"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:text="@string/txt_loading"
+                        android:textColor="@color/colorText"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/txtView_Description"
+                        app:layout_constraintStart_toEndOf="@+id/image_view_arrow_modified_by"
+                        app:layout_constraintTop_toBottomOf="@+id/txtView_Description" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image_view_arrow_added_by"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_view_added_by_user"
+                        app:layout_constraintStart_toStartOf="@+id/txtView_Description"
+                        app:layout_constraintTop_toTopOf="@+id/text_view_added_by_user"
+                        app:srcCompat="@drawable/svg_arrow_interface_next" />
+
+                    <TextView
+                        android:id="@+id/text_view_added_by_user"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="9dp"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:text="@string/txt_loading"
+                        android:textColor="@color/colorText"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/txtView_Description"
+                        app:layout_constraintStart_toEndOf="@+id/image_view_arrow_added_by"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_last_modified_by_user"
+                        app:layout_constraintVertical_bias="0.0" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -225,129 +280,5 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout_Bottom"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-        <!-- todo: container bg -->
-
-        <TextView
-            android:id="@+id/txtView_Quantity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="@font/core_sans_cr_55_medium"
-            android:gravity="start"
-            android:text="@string/txt_quantity"
-            android:textAlignment="textStart"
-            android:textColor="@color/colorText"
-            android:textSize="@dimen/txt_font_size_header_24"
-            app:layout_constraintBottom_toTopOf="@+id/btn_Add_To_Cart"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/imgBtn_Minus"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="9dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/ic_minus"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="8dp"
-            android:scaleType="fitCenter"
-            app:iconGravity="textStart"
-            app:layout_constraintEnd_toStartOf="@+id/txtView_Quantity_Value"
-            app:layout_constraintTop_toTopOf="@+id/txtView_Quantity" />
-
-        <TextView
-            android:id="@+id/txtView_Quantity_Value"
-            android:layout_width="42dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="9dp"
-            android:fontFamily="@font/core_sans_cr_55_medium"
-            android:gravity="center"
-            android:text="0"
-            android:textAlignment="center"
-            android:textColor="@color/colorText"
-            android:textSize="@dimen/txt_font_size_header_24"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imgBtn_Minus"
-            app:layout_constraintEnd_toStartOf="@+id/imgBtn_Plus"
-            app:layout_constraintTop_toTopOf="@+id/imgBtn_Minus"
-            tools:ignore="HardcodedText" />
-
-        <ImageButton
-            android:id="@+id/imgBtn_Plus"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="20dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/ic_plus"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="8dp"
-            android:scaleType="fitCenter"
-            app:iconGravity="textStart"
-            app:layout_constraintBottom_toBottomOf="@+id/txtView_Quantity_Value"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txtView_Quantity_Value" />
-
-        <com.google.android.material.button.MaterialButton
-            android:visibility="gone"
-            android:id="@+id/btn_Remove_From_Cart"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/btn_height_medium_45"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/ripple_btn_negative_color_selector"
-            android:fontFamily="@font/core_sans_cr_65_bold"
-            android:gravity="center"
-            android:text="@string/txt_remove_from_cart"
-            android:textAlignment="center"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/btn_font_size_small_14"
-            app:backgroundTint="@null"
-            app:icon="@drawable/ic_remove_from_cart"
-            app:iconGravity="textStart"
-            app:iconPadding="10dp"
-            app:iconSize="24dp"
-            app:iconTint="@color/colorWhite"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/imgBtn_Plus"
-            app:layout_constraintStart_toStartOf="@+id/txtView_Quantity" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_Add_To_Cart"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/btn_height_medium_45"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/ripple_btn_primary_color_selector"
-            android:fontFamily="@font/core_sans_cr_65_bold"
-            android:gravity="center"
-            android:text="@string/button_add_to_cart"
-            android:textAlignment="center"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/btn_font_size_small_14"
-            app:backgroundTint="@null"
-            app:icon="@drawable/ic_add_to_cart"
-            app:iconGravity="textStart"
-            app:iconPadding="10dp"
-            app:iconSize="24dp"
-            app:iconTint="@color/colorWhite"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/imgBtn_Plus"
-            app:layout_constraintStart_toStartOf="@+id/txtView_Quantity" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

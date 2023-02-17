@@ -1,8 +1,6 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
-    <inspection_tool class="DartOutdatedDependencies" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="DartPathPackageReference" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="fcd36335-ac86-4bef-8d30-062d8aae0364_CryptoCipherInsecureAsymmetricCryptographicAlgorithm" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="fcd36335-ac86-4bef-8d30-062d8aae0364_CryptoKeyAgreementGuideonApprovedCryptographicAlgorithm" enabled="true" level="SENSEI MARKED INFO" enabled_by_default="true" />
     <inspection_tool class="fcd36335-ac86-4bef-8d30-062d8aae0364_CryptoKeyAgreementInsecureCryptographicAlgorithm" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
@@ -105,6 +103,9 @@
     <inspection_tool class="scwbasic-protection-set_InjectionAvoidCodeInjectionUseSafeConstructornoarguments" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="scwbasic-protection-set_InjectionAvoidSQLInjectionUseParameterizedQueriesPreparedStatement" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="scwbasic-protection-set_InjectionAvoidSQLInjectionUseParameterizedQueriesStatement" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
+    <inspection_tool class="scwbasic-protection-set_VulnerableLog4jdependency-Log4ShellCVE-2021-44228CVE-2021-45046CVE-2021-45105" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="scwbasic-protection-set_VulnerableLog4jversion-Log4ShellCVE-2021-44228CVE-2021-45046CVE-2021-45105" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
+    <inspection_tool class="scwbasic-protection-set_VulnerableLog4jversionproperty-Log4ShellCVE-2021-44228CVE-2021-45046CVE-2021-45105" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="scwbasic-protection-set_XMLInjectionSetmissingsecureprocessingfeature" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="scwbasic-protection-set_XMLInjectionSetsecureprocessingfeaturetotrue" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="scwbasic-protection-set_XXEDocumentBuilderFactoryAddmissingfeaturedissallow-doctype-decl" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
@@ -115,11 +116,16 @@
     <inspection_tool class="scwbasic-protection-set_XXEDocumentBuilderFactorySetfeaturestofalse" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="scwbasic-protection-set_XXEDocumentBuilderFactorySetfeaturestotrue" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="scwbasic-protection-set_XXEDocumentBuilderFactorySetterstofalse" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
+    <inspection_tool class="scwbasic-protection-set_XXESetmissingsecureprocessingfeature" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
+    <inspection_tool class="scwbasic-protection-set_XXESetsecureprocessingfeaturetotrue" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="scwbasic-protection-set_XXEXMLInputFactoryAddIS_SUPPORTING_EXTERNAL_ENTITIESfeature" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="scwbasic-protection-set_XXEXMLInputFactoryAddSUPPORT_DTDfeature" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="scwbasic-protection-set_XXEXMLInputFactorySetfeaturestofalse" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="scwjava_CollectionsDonotexposeinternalLists" enabled="true" level="SENSEI MARKED INFO" enabled_by_default="true" />
     <inspection_tool class="scwjava_CollectionsDonotexposeinternalSets" enabled="true" level="SENSEI MARKED INFO" enabled_by_default="true" />
+    <inspection_tool class="scwjava_CommandInjectionUntrusteddatainProcessBuildercommand" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
+    <inspection_tool class="scwjava_CommandInjectionUntrusteddatainProcessBuildercommand-Add" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
+    <inspection_tool class="scwjava_Createprivateconstructorforutilityclassallfieldsmethodsarestatic" enabled="true" level="SENSEI INFO" enabled_by_default="true" />
     <inspection_tool class="scwjava_Donotcompareclassestypesbytheirname" enabled="true" level="SENSEI WARNING" enabled_by_default="true" />
     <inspection_tool class="scwjava_Donotcompareclassestypesbytheirnameliteral" enabled="true" level="SENSEI WARNING" enabled_by_default="true" />
     <inspection_tool class="scwjava_Donotcompareclassestypesbytheirnameliteralinverted" enabled="true" level="SENSEI WARNING" enabled_by_default="true" />
@@ -151,6 +157,7 @@
     <inspection_tool class="scwspring_DataProtectionSecureDataStorageAvoidDataExposureHashpasswordsusingstronghashingalgorithms" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="scwspring_DataProtectionSecureDataStorageAvoidDataExposureHashpasswordsusingstronghashingalgorithms-1" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="scwspring_Encryptorsrequirestheuseofarandom8-bytesalt" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
+    <inspection_tool class="scwspring_EnvironmentTestUtilsisdeprecated" enabled="true" level="SENSEI WARNING" enabled_by_default="true" />
     <inspection_tool class="scwspring_Fieldinjectionisnotrecommended" enabled="true" level="SENSEI INFO" enabled_by_default="true" />
     <inspection_tool class="scwspring_Fieldinjectionisnotrecommendedlombok" enabled="true" level="SENSEI INFO" enabled_by_default="true" />
     <inspection_tool class="scwspring_InjectionXXEJaxb2MarshallersetProcessExternalEntitiessettotrue" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
@@ -167,6 +174,7 @@
     <inspection_tool class="scwspring_Missingannotationinupdatequery" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="scwspring_Non-annotatedcontrollerpublicmethod" enabled="true" level="SENSEI WARNING" enabled_by_default="true" />
     <inspection_tool class="scwspring_ProtectagainstSessionFixationattacks" enabled="true" level="SENSEI WARNING" enabled_by_default="true" />
+    <inspection_tool class="scwspring_RestTemplateBuilderrequestFactoryClientHttpRequestFactoryisdeprecated" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="scwspring_SecureTransportuseRequiresSecuretoenforceHTTPS" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="scwspring_SecureTransportuseRequiresSecuretoenforceHTTPSonallpaths" enabled="true" level="SENSEI WARNING" enabled_by_default="true" />
     <inspection_tool class="scwspring_SecurityMisconfigurationCORSAvoidbroadsettingsCorsRegistryallowCredentials" enabled="true" level="SENSEI WARNING" enabled_by_default="true" />

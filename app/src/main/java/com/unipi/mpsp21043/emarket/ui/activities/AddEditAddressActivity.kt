@@ -1,5 +1,6 @@
 package com.unipi.mpsp21043.emarket.ui.activities
 
+import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
@@ -27,8 +28,12 @@ class AddEditAddressActivity : BaseActivity() {
 
     private fun init() {
         if (intent.hasExtra(Constants.EXTRA_ADDRESS_DETAILS)) {
-            mUserAddress =
-                intent.getParcelableExtra(Constants.EXTRA_ADDRESS_DETAILS)!!
+            mUserAddress = if (Build.VERSION.SDK_INT >= 33) {
+                intent.getParcelableExtra(Constants.EXTRA_ADDRESS_DETAILS, Address::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                intent.getParcelableExtra(Constants.EXTRA_ADDRESS_DETAILS)
+            }
         }
     }
 

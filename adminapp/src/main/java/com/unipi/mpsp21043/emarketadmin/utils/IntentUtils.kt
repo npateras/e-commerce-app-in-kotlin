@@ -5,21 +5,11 @@ import android.content.Context
 import android.content.Intent
 import com.unipi.mpsp21043.emarketadmin.models.Address
 import com.unipi.mpsp21043.emarketadmin.models.Order
+import com.unipi.mpsp21043.emarketadmin.models.Product
 import com.unipi.mpsp21043.emarketadmin.models.User
 import com.unipi.mpsp21043.emarketadmin.ui.activities.*
 
 class IntentUtils {
-    fun goToListProductsActivity(context: Context, filter: String) {
-        // Launch List Products screen.
-        val intent = Intent(context, ListProductsActivity::class.java)
-        intent.putExtra(Constants.EXTRA_CATEGORY_NAME, filter)
-        context.startActivity(intent)
-    }
-
-    fun goToCategoriesActivity(activity: Activity) {
-        val intent = Intent(activity, AllCategoriesActivity::class.java)
-        activity.startActivity(intent)
-    }
 
     fun goToUpdateUserDetailsActivity(context: Context, user: User) {
         val intent = Intent(context, EditProfileActivity::class.java)
@@ -34,15 +24,16 @@ class IntentUtils {
         context.applicationContext.startActivity(intent)
     }
 
-    fun goToListAddressesActivity(context: Context, selectAddress: Boolean) {
-        val intent = Intent(context, ListAddressActivity::class.java)
-        intent.putExtra(Constants.EXTRA_SELECT_ADDRESS, selectAddress)
+    fun goToAddNewProductActivity(context: Context) {
+        // Launch add/edit product screen.
+        val intent = Intent(context, AddEditProductActivity::class.java)
         context.startActivity(intent)
     }
 
-    fun goToCheckoutActivity(context: Context, mSelectedAddress: Address) {
-        val intent = Intent(context, CheckoutActivity::class.java)
-        intent.putExtra(Constants.EXTRA_SELECTED_ADDRESS, mSelectedAddress)
+    fun goToEditProductActivity(context: Context, mProduct: Product) {
+        // Launch add/edit product screen.
+        val intent = Intent(context, AddEditProductActivity::class.java)
+        intent.putExtra(Constants.EXTRA_PRODUCT_MODEL, mProduct)
         context.startActivity(intent)
     }
 
@@ -59,34 +50,16 @@ class IntentUtils {
         context.startActivity(intent)
     }
 
+    fun goToSearchActivity(context: Context) {
+        val intent = Intent(context, SearchActivity::class.java)
+        context.startActivity(intent)
+    }
+
     fun goToProductDetailsActivity(context: Context, productId: String) {
         // Launch Product details screen.
         val intent = Intent(context, ProductDetailsActivity::class.java)
         intent.putExtra(Constants.EXTRA_PRODUCT_ID, productId)
         context.startActivity(intent)
-    }
-
-    fun goToCheckoutActivity(context: Context) {
-        val intent = Intent(context, CheckoutActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        context.applicationContext.startActivity(intent)
-    }
-
-    fun goToListOrdersActivity(context: Context) {
-        val intent = Intent(context, ListOrdersActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        context.applicationContext.startActivity(intent)
-    }
-
-    fun goToListCartItemsActivity(context: Context) {
-        val intent = Intent(context, ListCartItemsActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        context.applicationContext.startActivity(intent)
-    }
-
-    fun goToPayWithCreditCardActivity(context: Context) {
-        val intent = Intent(context, PayWithCreditCardActivity::class.java)
-        context.applicationContext.startActivity(intent)
     }
 
     fun goToMainActivity(context: Context, showOrderPlacedSnackbar: Boolean) {

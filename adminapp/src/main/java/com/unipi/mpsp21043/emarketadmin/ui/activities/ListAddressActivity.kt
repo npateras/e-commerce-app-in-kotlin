@@ -92,8 +92,7 @@ class ListAddressActivity : BaseActivity() {
 
             // sets VeilRecyclerView's properties
             binding.veilRecyclerView.run {
-                setVeilLayout(R.layout.shimmer_item_product)
-                setAdapter(AddressListAdapter(this@ListAddressActivity, addressList, mSelectAddress))
+                setAdapter(AddressListAdapter(this@ListAddressActivity, addressList))
                 setLayoutManager(LinearLayoutManager(this@ListAddressActivity, LinearLayoutManager.VERTICAL, false))
                 getRecyclerView().setHasFixedSize(true)
                 addVeiledItems(5)

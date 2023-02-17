@@ -31,16 +31,9 @@
     <string name="button_dismiss">Dismiss</string>
     <string name="button_try_again">Try Again</string>
     <string name="button_resend_in">Resend in %1$ss</string>
-    <string name="button_add_to_cart">Add to cart</string>
-    <string name="button_checkout">Checkout</string>
 
 
     <!-- Text Views -->
-    <string name="txt_welcome">Welcome</string>
-    <string name="txt_subtotal">Subtotal</string>
-    <string name="txt_delivery_charge">Delivery Charge</string>
-    <string name="txt_item_removed_from_cart">Item removed from cart successfully!</string>
-    <string name="txt_nav_header_sign_in">Sign in or create a new account.</string>
     <string name="txt_congratulations">Congratulations!</string>
     <string name="txt_congratulations_2">Your account has been
         created successfully! You can now
@@ -56,7 +49,6 @@
     <string name="txt_no_notifications">No notifications!</string>
     <string name="txt_no_notifications_2">New notifications will appear here.</string>
     <string name="txt_login">Login</string>
-    <string name="txt_register">Register</string>
     <string name="txt_no_orders">No orders found!</string>
     <string name="txt_no_orders_2">You have no pending or previous orders.</string>
     <string name="txt_no_orders_pending">You have no pending or previous orders.</string>
@@ -86,8 +78,6 @@
     <string name="txt_processing">Processing</string>
     <string name="txt_completed">Completed</string>
     <string name="txt_loading">Loading…</string>
-    <string name="txt_empty_cart">Your cart is empty!</string>
-    <string name="txt_empty_cart_2">Looks like you haven\'t made your choice yet 😢</string>
     <string name="txt_profile">Profile</string>
     <string name="txt_phone_number">Phone Number</string>
     <string name="txt_street_address">Street address</string>
@@ -98,15 +88,19 @@
     <string name="txt_house_">House</string>
     <string name="txt_apartment">Apartment</string>
     <string name="txt_other">Other</string>
-    <string name="txt_format_price" translatable="false">%1$s%2$,.2f</string>
-    <string name="txt_format_price_button_authorize" translatable="true">Authorize %1$s%2$,.2f</string>
-    <string name="txt_format_weight" translatable="false">%1$d %2$s</string>
     <string name="txt_out_of_stock">Out of Stock</string>
     <string name="txt_available">Available</string>
 
-    <string name="txt_error_selecting_below_zero">You can\'t select a negative value.</string>
-    <string name="txt_error_max_quantity">Max selectable quantity is 99.</string>
-    <string name="txt_error_max_stock">Maximum quantity stock reached.</string>
+    <!-- Formats -->
+    <string name="txt_format_price" translatable="false">%1$s%2$,.2f</string>
+    <string name="txt_format_weight" translatable="false">%1$d %2$s</string>
+    <string name="txt_format_added_by_user">Added By: %1$s</string>
+    <string name="txt_format_last_modified_by_user">Last Modified By: %1$s</string>
+    <string name="txt_format_update">Update %1$s</string>
+
+    <!-- Success Messages -->
+
+    <!-- Error Messages -->
     <string name="txt_error_registration_failed">An error has occurred with registration, please contact our support team.</string>
     <string name="txt_error_empty_name">Please enter your full name.</string>
     <string name="txt_error_empty_password">Please enter your password.</string>
@@ -114,11 +108,14 @@
     <string name="txt_error_empty_phone">Please enter your phone number.</string>
     <string name="txt_error_empty_address">Please enter your address.</string>
     <string name="txt_error_empty_zip_code">Please enter your zip code.</string>
-    <string name="txt_error_payment_method_not_selected">Please select a payment method!</string>
-    <string name="txt_error_empty_card_number">Please enter your credit card\'s number.</string>
-    <string name="txt_error_empty_card_full_name">Please enter your credit card\'s full name.</string>
-    <string name="txt_error_empty_card_exp_date">Please enter your credit card\'s expiry date (separate with /).</string>
-    <string name="txt_error_empty_card_cvv">Please enter your credit card\'s CVV.</string>
+
+    <string name="txt_error_empty_product_category">Please select a category for the product.</string>
+    <string name="txt_error_empty_product_description">Please enter details about the product.</string>
+    <string name="txt_error_empty_product_name">Please enter the name of the product.</string>
+    <string name="txt_error_empty_product_price">Please enter the price of the product in #.## format.</string>
+    <string name="txt_error_empty_product_stock">Please enter the available stock of the product.</string>
+
+    <string name="txt_error_user_not_admin">You must be an administrator to use this app!</string>
 
     <string name="txt_please_wait">Please wait…</string>
     <string name="txt_please_click_back_again_to_exit">Please click back again to exit.</string>
@@ -126,6 +123,7 @@
     <string name="txt_format_phone">+%1$s %2$s</string>
     <string name="txt_format_address">%1$s, %2$s</string>
 
+    <!-- Categories -->
     <string name="txt_category_vegetables">Vegetables</string>
     <string name="txt_category_beverages">Beverages</string>
     <string name="txt_category_chilled">Chilled</string>
@@ -135,15 +133,27 @@
     <string name="txt_category_fish">Fish</string>
     <string name="txt_category_meat">Meat</string>
     <string name="txt_category_frozen">Frozen</string>
-    <string name="txt_category_Fruits">Fruits</string>
-    <string name="txt_category_Liquor">Liquor</string>
-    <string name="txt_category_Pharmacy">Pharmacy</string>
+    <string name="txt_category_fruits">Fruits</string>
+    <string name="txt_category_liquor">Liquor</string>
+    <string name="txt_category_pharmacy">Pharmacy</string>
 
     <!-- Input Texts -->
+    <string name="input_txt_hint_dash">-</string>
     <string name="input_txt_hint_phone_number">Your mobile number</string>
     <string name="input_txt_hint_full_name">Your full name</string>
     <string name="input_txt_hint_address">Your address</string>
     <string name="input_txt_hint_zip_code">Your zip code</string>
+    <string name="input_txt_hint_category">Product category. Ex: Fruits</string>
+    <string name="input_txt_hint_product_name">Product name. Ex: Apple</string>
+    <string name="input_txt_hint_product_price">Product price. Ex: 5.30</string>
+    <string name="input_txt_hint_product_weight">Product weight. Ex: 2KG</string>
+    <string name="input_txt_hint_product_sale">Product sale. Ex: 0.5 = 50%</string>
+    <string name="input_txt_hint_product_stock">Product stock. Ex: 65</string>
+    <string name="input_txt_hint_description">Product details.</string>
+
+    <string name="input_txt_hint_email">Your email address</string>
+    <string name="input_txt_hint_password">Your password</string>
+    <string name="input_txt_hint_name">Your name</string>
 
     <!-- Welcome Activity -->
     <string name="welcome_act_header">Welcome to\n<b>eMarket</b> shopping</string>
@@ -166,59 +176,38 @@
     <string name="title_activity_home">HomeActivity</string>
 
     <!-- Fragment Home -->
-    <string name="txt_categories">Categories</string>
-    <string name="txt_deals">Deals</string>
-    <string name="txt_popular">Popular</string>
-    <string name="txt_view_all">View all</string>
-
-    <!-- Categories-->
-    <string name="txt_household">Household</string>
-    <string name="txt_grocery">Grocery</string>
-    <string name="txt_liquor">Liquor</string>
-    <string name="txt_chilled">Chilled</string>
 
     <!-- Main Action Bar -->
     <string name="txt_store">Store</string>
-    <string name="txt_my_cart">My Cart</string>
-    <string name="txt_favorite_products">Favorite Products</string>
+    <string name="txt_statistics">Statistics</string>
+    <string name="txt_products">Products</string>
+    <string name="txt_orders">Orders</string>
+    <string name="txt_users">Users</string>
     <string name="txt_my_account">My Account</string>
 
     <!-- ~~~~~~~NAV BAR~~~~~~~ -->
-    <string name="nav_drawer_open">Open</string>
-    <string name="nav_drawer_close">Close</string>
+    <string name="nav_drawer_open_menu">Open Side Menu</string>
     <string name="drawer_nav_bar_category_general">General</string>
     <string name="drawer_nav_bar_item_products">Products</string>
-    <string name="drawer_nav_bar_item_cart">My Cart</string>
+    <string name="drawer_nav_bar_item_orders">Orders</string>
+    <string name="drawer_nav_bar_item_users">Users</string>
+
     <string name="drawer_nav_bar_category_account">Account</string>
     <string name="drawer_nav_bar_item_my_account">My Account</string>
-    <string name="drawer_nav_bar_item_orders">My Orders</string>
     <string name="drawer_nav_bar_category_other">Other</string>
     <string name="drawer_nav_bar_item_settings">Settings</string>
     <string name="drawer_nav_bar_item_exit">Exit</string>
 
-    <string name="input_txt_hint_dash">-</string>
     <string name="txt_account_info">Account Info</string>
     <string name="txt_edit_profile">Edit Profile</string>
-    <string name="txt_no_deals_available">No deals available!</string>
-    <string name="txt_check_again_another_time">Check again another time.</string>
-    <string name="txt_remove_from_cart">Remove from cart</string>
     <string name="txt_no_description">No description.</string>
-    <string name="txt_quantity">Quantity</string>
     <string name="txt_dismiss">DISMISS</string>
-    <string name="txt_no_categories">No categories found!</string>
-    <string name="txt_no_categories_2">If you think this is an error, contact us!</string>
     <string name="txt_no_favorites">No favorites found!</string>
     <string name="txt_no_favorites_2">You haven\'t add anything to your favorites yet!</string>
-    <string name="input_txt_hint_email">Your email address</string>
-    <string name="input_txt_hint_password">Your password</string>
     <string name="txt_forgot_password_question">Forgot password?</string>
     <string name="txt_forgot_password">Forgot password</string>
-    <string name="txt_lets_get_started">Let\'s get started</string>
-    <string name="input_txt_hint_name">Your name</string>
     <string name="txt_enter_email_address_to_send_reset_code">Enter email address to send reset code.</string>
     <string name="txt_password_reset">Password Reset</string>
-    <string name="txt_already_have_an_account">Already have an account? <b>Sign In</b></string>
-    <string name="txt_don_t_have_an_account">Don\'t have an account? <b>Sign Up</b></string>
     <string name="txt_update_profile">Update Profile</string>
     <string name="txt_must_sign_in_2">You must sign in to see this.</string>
     <string name="txt_must_sign_in">Sign In!</string>
@@ -227,8 +216,7 @@
     <string name="txt_email">Email</string>
 
 
-    // Categories
-    <string name="txt_all_categories">All Categories</string>
+    <!-- Categories -->
     <string name="txt_add_new_address">Add address</string>
     <string name="txt_edit_address">Edit address</string>
 
@@ -238,11 +226,8 @@
     <string name="notification_channel_desc">Notifies you when an item in your favorites is back in stock!</string>
     <string name="notification_payload_fav_title">%1$s: Stock updated!</string>
     <string name="notification_payload_fav_body">%1$s is now available in stock 😍</string>
-    <string name="notification_add_to_cart">Add to cart</string>
-    <string name="notification_mark_as_read">Mark as read</string>
     <string name="txt_no_products">No products!</string>
-    <string name="txt_no_products_2">There are no products for this category 🤔</string>
-    <string name="txt_no_popular_available">No popular products!</string>
+    <string name="txt_no_products_2">No products found in database.</string>
     <string name="txt_none">None</string>
     <string name="txt_date_registered">Date Registered</string>
     <string name="txt_edit">Edit</string>
@@ -254,26 +239,53 @@
     <string name="txt_address_deleted_confirmation">Your address has been deleted successfully!</string>
     <string name="txt_your_address_added_successfully">Your address has been successfully added!</string>
     <string name="txt_your_address_updated_successfully">Your address has been successfully updated!</string>
+
+    <string name="txt_product_added_successfully">%1$s has been added successfully!</string>
+    <string name="txt_product_updated_successfully">%1$s has been updated successfully!</string>
+
     <string name="txt_profile_updated">Your profile has been updated successfully!</string>
     <string name="txt_pay_with_credit_card">Pay with credit card</string>
-    <string name="txt_credit_card">Credit Card</string>
-    <string name="txt_cash_on_delivery">Cash on Delivery</string>
-    <string name="txt_selected_address">Selected Address</string>
-    <string name="txt_items_receipt">Items Receipt</string>
-    <string name="txt_continue">Continue</string>
-    <string name="txt_credit_card_details">Credit Card Details</string>
-    <string name="txt_credit_card_details_2">Enter your credit card details to pay.</string>
-    <string name="input_txt_hint_card_number">Your credit card\'s number</string>
-    <string name="txt_authorize">Authorize</string>
-    <string name="input_txt_hint_card_name">Your full name that is written in your card</string>
-    <string name="input_txt_hint_card_exp_date">Exp. Date</string>
-    <string name="input_txt_hint_card_cvv">CVV</string>
+
     <string name="txt_order_placed_successfully">Your order has been placed successfully!</string>
-    <string name="txt_pay_invoice">Pay Invoice</string>
     <string name="txt_my_orders">My Orders</string>
 
     <string name="txt_admin">admin</string>
-    <string name="txt_error_user_not_admin">You must be an administrator to use this app!</string>
+    <string name="notifications_must_be_enabled">This must be enabled in order to receive push notifications!</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="notifications">Notifications</string>
+    <string name="image_selection_failed">Image selection Failed!</string>
+    <string name="read_storage_permission_denied">Oops, you just denied the permission for storage. You can also allow it from settings.</string>
+
+    <string name="edit_this_product">Edit This Product</string>
+    <string name="delete_this_product">Delete This Product</string>
+
+    <string name="txt_add_new_product">Add a new product</string>
+    <string name="txt_add_new_product_2">Add a new product for sale!</string>
+    <string name="add_product">Add Product</string>
+    <string name="update_product">Update Product</string>
+    <string name="category">Category</string>
+    <string name="select">Select</string>
+
+    <string name="txt_weight_unit_grams">Grams (G)</string>
+    <string name="txt_weight_unit_kg">Kilograms (KG)</string>
+    <string name="txt_weight_unit_pills">Pills</string>
+    <string name="txt_weight_unit_liters">Liters (Lt)</string>
+    <string name="txt_weight_unit_shortcut_grams">G</string>
+    <string name="txt_weight_unit_shortcut_kg">KG</string>
+    <string name="txt_weight_unit_shortcut_pills">Pills</string>
+    <string name="txt_weight_unit_shortcut_liters">Lt</string>
+    <string name="weight_unit">Weight Unit</string>
+    <string name="update_a_product">Update a product</string>
+    <string name="update_a_product_2">Update a existing product with new details!</string>
+    <string name="txt_search_something">Search for something!</string>
+    <string name="txt_search_something_2">Try searching for anything, we will find it 🔍</string>
+    <string name="products">Products</string>
+    <string name="users">Users</string>
+    <string name="orders">Orders</string>
+    <string name="filter">Filter</string>
+
+
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 </resources>

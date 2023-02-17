@@ -26,7 +26,6 @@
     <!-- Img Button Sizes -->
     <dimen name="img_btn_height_medium_45">45dp</dimen>
     <dimen name="img_btn_width_medium_45">45dp</dimen>
-    <dimen name="img_btn_width_large_70">70dp</dimen>
 
     <!-- Spinner Sizes -->
     <dimen name="spinner_country_picker_height_55">55dp</dimen>

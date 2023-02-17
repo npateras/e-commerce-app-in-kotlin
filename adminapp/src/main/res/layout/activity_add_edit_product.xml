@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".ui.activities.AddEditProductActivity"
+    tools:ignore="ContentDescription" >
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_title_only" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view_body"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@+id/toolbar"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/shape_container_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <TextView
+                android:id="@+id/text_view_header_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="29dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/core_sans_cr_45_regular"
+                android:text="@string/txt_add_new_product"
+                android:textAlignment="textStart"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/txt_font_size_header_24"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_view_header_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/core_sans_cr_45_regular"
+                android:text="@string/txt_add_new_product_2"
+                android:textAlignment="textStart"
+                android:textColor="@color/colorText2"
+                android:textSize="@dimen/txt_font_size_header_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_header_1" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:shimmer_auto_start="false"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <include
+                    layout="@layout/shimmer_add_edit_product" />
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linear_layout_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/linear_layout_picture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="250dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="@+id/text_view_header_2"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_header_2"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_header_2">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView_Picture"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:elevation="10dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardCornerRadius="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <RelativeLayout
+                            android:id="@+id/relative_layout_image_contents"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/image_view_picture"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:foreground="?attr/selectableItemBackgroundBorderless"
+                                android:background="@color/colorImageViewBackground"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/png_picture_sample" />
+
+                            <ImageView
+                                android:id="@+id/imageView_Picture_Add_Button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_gravity="end|bottom"
+                                android:padding="16dp"
+                                android:src="@drawable/svg_add_picture" />
+
+                        </RelativeLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_product_category"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    app:hintEnabled="true"
+                    app:helperText="Required*"
+                    app:counterMaxLength="40"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintEnd_toEndOf="@+id/text_view_header_2"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_header_2"
+                    app:layout_constraintTop_toBottomOf="@+id/frame_layout_picture">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/auto_complete_text_view_product_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:fontFamily="@font/core_sans_cr_55_medium"
+                        android:gravity="start"
+                        android:hint="@string/input_txt_hint_category"
+                        android:inputType="none"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorText"
+                        android:textColorHint="@color/colorSecondary4"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_product_name"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    app:hintEnabled="true"
+                    app:helperText="Required*"
+                    app:counterMaxLength="25"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="@+id/text_view_header_2"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_header_2"
+                    app:layout_constraintTop_toBottomOf="@+id/text_input_layout_Category">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_input_edit_text_product_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:fontFamily="@font/core_sans_cr_55_medium"
+                        android:gravity="start"
+                        android:hint="@string/input_txt_hint_product_name"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorText"
+                        android:textColorHint="@color/colorSecondary4"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_product_price"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    app:hintEnabled="true"
+                    app:helperText="Required*"
+                    app:counterMaxLength="10"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="@+id/text_view_header_2"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_header_2"
+                    app:layout_constraintTop_toBottomOf="@+id/text_input_layout_Category">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_input_edit_text_product_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:fontFamily="@font/core_sans_cr_55_medium"
+                        android:gravity="start"
+                        android:inputType="numberDecimal"
+                        android:hint="@string/input_txt_hint_product_price"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorText"
+                        android:textColorHint="@color/colorSecondary4"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_product_sale"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    app:hintEnabled="true"
+                    app:counterMaxLength="4"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="@+id/text_view_header_2"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_header_2"
+                    app:layout_constraintTop_toBottomOf="@+id/text_input_layout_Category">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_input_edit_text_product_sale"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:fontFamily="@font/core_sans_cr_55_medium"
+                        android:gravity="start"
+                        android:inputType="numberDecimal"
+                        android:hint="@string/input_txt_hint_product_sale"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorText"
+                        android:textColorHint="@color/colorSecondary4"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_product_stock"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    app:hintEnabled="true"
+                    app:helperText="Required*"
+                    app:counterMaxLength="10"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="@+id/text_view_header_2"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_header_2"
+                    app:layout_constraintTop_toBottomOf="@+id/text_input_layout_Category">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_input_edit_text_product_stock"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:fontFamily="@font/core_sans_cr_55_medium"
+                        android:gravity="start"
+                        android:inputType="number"
+                        android:hint="@string/input_txt_hint_product_stock"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorText"
+                        android:textColorHint="@color/colorSecondary4"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_input_layout_product_weight"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:hintEnabled="true"
+                        app:counterMaxLength="3"
+                        app:helperTextTextColor="@color/colorRed"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/text_input_layout_product_weight_unit"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/text_input_edit_text_product_weight"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:fontFamily="@font/core_sans_cr_55_medium"
+                            android:gravity="start"
+                            android:hint="@string/input_txt_hint_product_weight"
+                            android:inputType="number"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/colorText"
+                            android:textColorHint="@color/colorSecondary4"
+                            android:textSize="14sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_input_layout_product_weight_unit"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        app:boxStrokeColor="@color/colorPrimary"
+                        app:hintEnabled="true"
+                        app:counterMaxLength="40"
+                        app:helperTextTextColor="@color/colorRed"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/auto_complete_text_view_weight_unit"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:fontFamily="@font/core_sans_cr_55_medium"
+                            android:gravity="start"
+                            android:inputType="none"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/colorText"
+                            android:textColorHint="@color/colorSecondary4"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout_product_description"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    app:hintEnabled="true"
+                    app:helperText="Required*"
+                    app:counterMaxLength="25"
+                    app:layout_constraintEnd_toEndOf="@+id/text_input_layout_product_name"
+                    app:layout_constraintStart_toStartOf="@+id/text_input_layout_product_name"
+                    app:layout_constraintTop_toBottomOf="@+id/text_input_layout_product_name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_input_edit_text_product_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:fontFamily="@font/core_sans_cr_55_medium"
+                        android:gravity="start"
+                        android:hint="@string/input_txt_hint_description"
+                        android:inputType="textMultiLine"
+                        android:minLines="3"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorText"
+                        android:textColorHint="@color/colorSecondary4"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="36dp"
+                android:layout_marginEnd="16dp"
+                android:layout_gravity="bottom|end">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_add_product"
+                    style="@style/ButtonStyle.PrimaryColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/btn_height_small_37"
+                    android:layout_gravity="bottom|end"
+                    android:text="@string/add_product"
+                    android:textStyle="bold"
+                    app:backgroundTint="@null"
+                    app:icon="@drawable/ic_check_mark"
+                    app:iconTint="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_edit_product"
+                    style="@style/ButtonStyle.PrimaryColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/btn_height_small_37"
+                    android:layout_gravity="bottom|end"
+                    android:text="@string/update_product"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:backgroundTint="@null"
+                    app:icon="@drawable/ic_vector_white_edit"
+                    app:iconTint="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
