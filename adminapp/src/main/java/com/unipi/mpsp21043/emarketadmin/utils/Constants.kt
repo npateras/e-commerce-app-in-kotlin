@@ -23,8 +23,6 @@ object Constants {
 
     // Default Constants
     const val DEFAULT_CURRENCY: String = "€"
-    const val DEFAULT_VEILED_ITEMS_HORIZONTAL: Int = 4
-    const val DEFAULT_VEILED_ITEMS_VERTICAL: Int = 15
     const val DEFAULT_MAX_ITEM_CART_QUANTITY: Int = 99
     const val DEFAULT_DELIVERY_COST: Double = 3.00
     val SNACKBAR_BEHAVIOR = BaseTransientBottomBar.Behavior().apply {
@@ -77,6 +75,8 @@ object Constants {
 
     // Intent Extras
     const val EXTRA_PRODUCT_ID: String = "extraProductId"
+    const val EXTRA_USER_ID: String = "extraUserId"
+    const val EXTRA_ORDER_ID: String = "extraOrderId"
     const val EXTRA_ADDRESS_MODEL: String = "extra_address_model"
     const val EXTRA_PRODUCT_MODEL: String = "extra_product_model"
     const val EXTRA_ADDRESS_DETAILS: String = "extra_address_details"
@@ -85,6 +85,8 @@ object Constants {
     const val EXTRA_IS_IN_FAVORITES: String = "extraIsInFavorites"
     const val EXTRA_REG_USERS_SNACKBAR: String = "extraShowRegisteredUserSnackbar"
     const val EXTRA_PROFILE_NOT_COMPLETED_SNACKBAR: String = "extraShowProfileNotCompletedSnackbar"
+    const val EXTRA_SNACKBAR_MESSAGE: String = "extraSnackbarMessage"
+    const val EXTRA_SNACKBAR_TYPE: String = "extraSnackbarType"
     const val EXTRA_USER_EMAIL: String = "extraUserEmail"
     const val EXTRA_USER_DETAILS: String = "extraUserDetails"
     const val EXTRA_PRODUCT_DETAILS: String = "extraProductDetails"

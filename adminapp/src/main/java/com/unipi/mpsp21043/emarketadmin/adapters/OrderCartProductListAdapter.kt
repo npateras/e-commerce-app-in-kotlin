@@ -61,7 +61,7 @@ open class OrderCartProductListAdapter(
                 textViewPriceReduced.apply {
                     visibility = View.VISIBLE
                     foreground =
-                        AppCompatResources.getDrawable(context, R.drawable.striking_red_text)
+                        AppCompatResources.getDrawable(context, R.drawable.shape_striking_red_text)
                     text = String.format(
                         context.getString(R.string.txt_format_price),
                         context.getString(R.string.curr_eur),
@@ -81,7 +81,7 @@ open class OrderCartProductListAdapter(
         }
         // Click listener on list item click
         holder.itemView.setOnClickListener {
-            IntentUtils().goToProductDetailsActivity(context, model.id)
+            IntentUtils().goToProductDetailsActivity(context, model.productId)
         }
     }
 

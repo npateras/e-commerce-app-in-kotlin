@@ -22,10 +22,7 @@ import com.unipi.mpsp21043.emarketadmin.database.FirestoreHelper
 import com.unipi.mpsp21043.emarketadmin.databinding.ActivityMainBinding
 import com.unipi.mpsp21043.emarketadmin.models.User
 import com.unipi.mpsp21043.emarketadmin.service.MyFirebaseMessagingService
-import com.unipi.mpsp21043.emarketadmin.utils.Constants
-import com.unipi.mpsp21043.emarketadmin.utils.GlideLoader
-import com.unipi.mpsp21043.emarketadmin.utils.IntentUtils
-import com.unipi.mpsp21043.emarketadmin.utils.SnackBarSuccessClass
+import com.unipi.mpsp21043.emarketadmin.utils.*
 
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -86,11 +83,18 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             FirestoreHelper().getUserFCMRegistrationToken(this)
         }
 
-        if (intent.hasExtra(Constants.EXTRA_SHOW_ORDER_PLACED_SNACKBAR)
-            && intent.getBooleanExtra(Constants.EXTRA_SHOW_ORDER_PLACED_SNACKBAR, false)) {
-            SnackBarSuccessClass
-                .make(binding.root, getString(R.string.txt_order_placed_successfully))
-                .show()
+        if (intent.hasExtra(Constants.EXTRA_SNACKBAR_TYPE)) {
+            if (intent.getStringExtra(Constants.EXTRA_SNACKBAR_TYPE) == "success") {
+                SnackBarSuccessClass
+                    .make(binding.root, intent.getStringExtra(Constants.EXTRA_SNACKBAR_MESSAGE)!!)
+                    .show()
+            }
+            else if (intent.getStringExtra(Constants.EXTRA_SNACKBAR_TYPE) == "error") {
+                SnackBarErrorClass
+                    .make(binding.root, intent.getStringExtra(Constants.EXTRA_SNACKBAR_MESSAGE)!!)
+                    .show()
+            }
+
         }
     }
 
@@ -102,11 +106,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
             TabLayoutMediator(tabs, viewPagerHomeActivity){tab, position ->
                 when (position) {
-                    0 -> tab.setIcon(R.drawable.svg_statistics)
-                    1 -> tab.setIcon(R.drawable.svg_food_stand_products)
-                    2 -> tab.setIcon(R.drawable.svg_orders)
-                    3 -> tab.setIcon(R.drawable.svg_users)
-                    4 -> tab.setIcon(R.drawable.svg_user_circle)
+                    0 -> tab.setIcon(R.drawable.svg_food_stand_products)
+                    1 -> tab.setIcon(R.drawable.svg_orders)
+                    2 -> tab.setIcon(R.drawable.svg_users)
+                    3 -> tab.setIcon(R.drawable.svg_user_circle)
                 }
             }.attach()
 
@@ -114,22 +117,18 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 override fun onTabSelected(tab: TabLayout.Tab) {
                     when (tab.position) {
                         0 -> {
-                            toolbar.textViewActionBarHeader.text = getString(R.string.txt_statistics)
-                            navView.setCheckedItem(R.id.nav_drawer_item_statistics)
-                        }
-                        1 -> {
                             toolbar.textViewActionBarHeader.text = getString(R.string.txt_products)
                             navView.setCheckedItem(R.id.nav_drawer_item_products)
                         }
-                        2 -> {
+                        1 -> {
                             toolbar.textViewActionBarHeader.text = getString(R.string.txt_orders)
                             navView.setCheckedItem(R.id.nav_drawer_item_orders)
                         }
-                        3 -> {
+                        2 -> {
                             toolbar.textViewActionBarHeader.text = getString(R.string.txt_users)
                             navView.setCheckedItem(R.id.nav_drawer_item_users)
                         }
-                        4 -> {
+                        3 -> {
                             toolbar.textViewActionBarHeader.text = getString(R.string.txt_my_account)
                             navView.setCheckedItem(R.id.nav_drawer_item_profile)
                         }
@@ -145,11 +144,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Handle navigation view item clicks here.
 
         when (item.itemId) {
-            R.id.nav_drawer_item_statistics -> binding.tabs.getTabAt(0)?.select()
-            R.id.nav_drawer_item_products -> binding.tabs.getTabAt(1)?.select()
-            R.id.nav_drawer_item_orders -> binding.tabs.getTabAt(2)?.select()
-            R.id.nav_drawer_item_users -> binding.tabs.getTabAt(3)?.select()
-            R.id.nav_drawer_item_profile -> binding.tabs.getTabAt(4)?.select()
+            R.id.nav_drawer_item_products -> binding.tabs.getTabAt(0)?.select()
+            R.id.nav_drawer_item_orders -> binding.tabs.getTabAt(1)?.select()
+            R.id.nav_drawer_item_users -> binding.tabs.getTabAt(2)?.select()
+            R.id.nav_drawer_item_profile -> binding.tabs.getTabAt(3)?.select()
             R.id.nav_drawer_item_exit -> ActivityCompat.finishAffinity(this)
         }
 

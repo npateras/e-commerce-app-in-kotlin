@@ -11,6 +11,12 @@ import com.unipi.mpsp21043.emarketadmin.ui.activities.*
 
 class IntentUtils {
 
+    fun goToSignInActivity(context: Context) {
+        // Launch add/edit product screen.
+        val intent = Intent(context, SignInActivity::class.java)
+        context.startActivity(intent)
+    }
+
     fun goToUpdateUserDetailsActivity(context: Context, user: User) {
         val intent = Intent(context, EditProfileActivity::class.java)
         intent.putExtra(Constants.EXTRA_USER_DETAILS, user)
@@ -62,6 +68,13 @@ class IntentUtils {
         context.startActivity(intent)
     }
 
+    fun goToUserDetailsActivity(context: Context, userId: String) {
+        // Launch Product details screen.
+        val intent = Intent(context, UserDetailsActivity::class.java)
+        intent.putExtra(Constants.EXTRA_USER_ID, userId)
+        context.startActivity(intent)
+    }
+
     fun goToMainActivity(context: Context, showOrderPlacedSnackbar: Boolean) {
         val intent = Intent(context, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -72,6 +85,7 @@ class IntentUtils {
     fun goToOrderDetailsActivity(context: Context, order: Order) {
         val intent = Intent(context, OrderDetailsActivity::class.java)
         intent.putExtra(Constants.EXTRA_ORDER_DETAILS, order)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         context.applicationContext.startActivity(intent)
     }
 }

@@ -51,13 +51,6 @@
                         android:layout_height="wrap_content"
                         android:minHeight="28dp"
                         android:minWidth="28dp"
-                        android:icon="@drawable/svg_statistics" />
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minHeight="28dp"
-                        android:minWidth="28dp"
                         android:icon="@drawable/svg_food_stand_products" />
 
                     <com.google.android.material.tabs.TabItem

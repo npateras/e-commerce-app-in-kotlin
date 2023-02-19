@@ -1,22 +1,24 @@
 package com.unipi.mpsp21043.emarketadmin.ui.fragments
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.unipi.mpsp21043.emarketadmin.adapters.FavoritesListAdapter
+import com.unipi.mpsp21043.emarketadmin.adapters.OrdersListAdapter
+import com.unipi.mpsp21043.emarketadmin.database.FirestoreHelper
 import com.unipi.mpsp21043.emarketadmin.databinding.FragmentOrdersBinding
-import com.unipi.mpsp21043.emarketadmin.models.Favorite
-import com.unipi.mpsp21043.emarketadmin.utils.Constants
+import com.unipi.mpsp21043.emarketadmin.models.Order
 
 class OrdersFragment : Fragment() {
+    // ~~~~~~~VARIABLES~~~~~~~
     // Scoped to the lifecycle of the fragment's view (between onCreateView and onDestroyView)
     private var _binding: FragmentOrdersBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
     private val binding get() = _binding!!
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,69 +33,80 @@ class OrdersFragment : Fragment() {
     }
 
     private fun init() {
-        veilRecycler()
+        showShimmerUI()
 
-        loadFavorites()
+        getOrdersList()
     }
 
-    private fun loadFavorites() {
-        // FirestoreHelper().getFavoritesList(this@OrdersFragment)
+    private fun getOrdersList() {
+        FirestoreHelper().getOrdersList(this@OrdersFragment)
     }
 
     /**
-     * A function to get the successful product list from cloud firestore.
+     * A function to get the orders list from Cloud Firestore.
      *
-     * @param favoritesList Will receive the product list from cloud firestore.
+     * @param ordersList Will receive the orders list from cloud firestore.
      */
-    fun successFavoritesListFromFireStore(favoritesList: ArrayList<Favorite>) {
+    fun successOrdersListFromFirestore(ordersList: ArrayList<Order>) {
 
-        if (favoritesList.size > 0) {
-            binding.veilRecyclerView.visibility = View.VISIBLE
-            binding.layoutEmptyState.root.visibility = View.GONE
+        if (ordersList.size > 0) {
+            hideShimmerUI()
 
-            // sets VeilRecyclerView's properties
-            binding.veilRecyclerView.run {
-                setAdapter(
-                    FavoritesListAdapter(
-                        requireActivity(),
-                        favoritesList
-                    )
-                )
-                setLayoutManager(LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false))
-                getRecyclerView().setHasFixedSize(true)
-                addVeiledItems(Constants.DEFAULT_VEILED_ITEMS_VERTICAL)
-                // delay-auto-unveil
-                Handler(Looper.getMainLooper()).postDelayed(
-                    {
-                        unVeil()
-                    },
-                    1000
-                )
-            }
-        }
-        else {
             binding.apply {
-                veilRecyclerView.unVeil()
-                veilRecyclerView.visibility = View.GONE
-                layoutEmptyState.root.visibility = View.VISIBLE
+                // sets RecyclerView's properties
+                recyclerViewItems.run {
+                    adapter = OrdersListAdapter(
+                        requireActivity(),
+                        ordersList
+                    )
+                    layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+                    setHasFixedSize(true)
+                }
             }
         }
+        else
+            showEmptyStateUI()
     }
 
-    private fun veilRecycler() {
+    private fun showShimmerUI() {
         binding.apply {
-            veilRecyclerView.veil()
-
-            veilRecyclerView.addVeiledItems(Constants.DEFAULT_VEILED_ITEMS_VERTICAL)
+            layoutEmptyState.root.visibility = View.GONE
+            recyclerViewItems.visibility = View.GONE
+            shimmerViewContainer.visibility = View.VISIBLE
+            shimmerViewContainer.startShimmer()
         }
     }
 
+    private fun hideShimmerUI() {
+        binding.apply {
+            layoutEmptyState.root.visibility = View.GONE
+            recyclerViewItems.visibility = View.VISIBLE
+            shimmerViewContainer.visibility = View.GONE
+            shimmerViewContainer.stopShimmer()
+        }
+    }
+
+    private fun showEmptyStateUI() {
+        binding.apply {
+            layoutEmptyState.root.visibility = View.VISIBLE
+            recyclerViewItems.visibility = View.GONE
+            shimmerViewContainer.visibility = View.GONE
+            shimmerViewContainer.stopShimmer()
+        }
+    }
+
+    /**
+     * The fragment's onResume() will be called only when the Activity's onResume() is called.
+     */
     override fun onResume() {
         super.onResume()
 
         init()
     }
 
+    /**
+     * We clean up any references to the binding class instance in the fragment's onDestroyView() method.
+     */
     override fun onDestroyView() {
         super.onDestroyView()
 

@@ -33,6 +33,7 @@
     <color name="colorYellowOrange">#FDC600</color>
     <color name="colorGrey">#6E7989</color>
     <color name="colorGreyLight">#AAAAAA</color>
+    <color name="colorGreen">#29C17E</color>
 
     <color name="colorSnackBarErrorBg">#F34949</color>
     <color name="colorSnackBarErrorAction">#B63737</color>

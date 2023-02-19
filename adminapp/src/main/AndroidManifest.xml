@@ -165,12 +165,26 @@
                 android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName=".ui.activities.ListOrdersActivity"
+                android:parentActivityName=".ui.activities.MainActivity"
                 android:exported="true">
 
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.activities.ListOrdersActivity" />
+                    android:value=".ui.activities.MainActivity" />
+            </activity>
+
+            <!-- User Details activity -->
+            <activity
+                android:name=".ui.activities.UserDetailsActivity"
+                android:launchMode="singleTask"
+                android:windowSoftInputMode="adjustResize"
+                android:theme="@style/Theme.EMarket.NoActionBar3"
+                android:parentActivityName=".ui.activities.MainActivity"
+                android:exported="true">
+
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.activities.MainActivity" />
             </activity>
 
             <!-- Search activity -->

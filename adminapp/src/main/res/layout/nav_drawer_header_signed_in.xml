@@ -21,7 +21,7 @@
             android:id="@+id/navDrawerViewUserPicture"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/ic_user_sample" />
+            android:background="@drawable/svg_picture_user_sample" />
 
         <ProgressBar
             android:id="@+id/navDrawerProgressBarProfImgLoading"

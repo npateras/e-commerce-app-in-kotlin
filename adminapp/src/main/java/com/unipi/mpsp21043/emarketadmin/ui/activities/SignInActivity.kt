@@ -150,7 +150,7 @@ class SignInActivity : BaseActivity() {
         // Hide the progress dialog.
         hideProgressDialog()
 
-        if (user.role != getString(R.string.txt_admin)) {
+        if (user.role != Constants.ROLE_ADMIN) {
             SnackBarErrorClass
                 .make(binding.root, getString(R.string.txt_error_user_not_admin))
                 .show()
@@ -194,11 +194,6 @@ class SignInActivity : BaseActivity() {
             setSupportActionBar(root)
             textViewActionBarLabel.text = getString(R.string.txt_login)
         }
-    }
-
-    override fun getOnBackInvokedDispatcher(): OnBackInvokedDispatcher {
-        doubleBackToExit()
-        return super.getOnBackInvokedDispatcher()
     }
 
 }

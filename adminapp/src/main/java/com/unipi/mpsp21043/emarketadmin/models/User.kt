@@ -14,7 +14,7 @@ import java.util.*
 @Parcelize
 @IgnoreExtraProperties
 data class User(
-    val id: String = "",
+    var id: String = "",
     val fullName: String = "",
     val email: String = "",
     val phoneNumber: String = "",

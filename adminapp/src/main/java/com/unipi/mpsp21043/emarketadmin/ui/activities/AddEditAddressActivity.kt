@@ -3,6 +3,7 @@ package com.unipi.mpsp21043.emarketadmin.ui.activities
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.Toast
 import com.unipi.mpsp21043.emarketadmin.R
 import com.unipi.mpsp21043.emarketadmin.database.FirestoreHelper
@@ -39,6 +40,13 @@ class AddEditAddressActivity : BaseActivity() {
 
     private fun setupUI() {
         setUpActionBar()
+
+        binding.apply {
+            if (mUserAddress != null && mUserAddress!!.id.isNotEmpty()) {
+                buttonAddAddress.visibility = View.GONE
+                buttonEditAddress.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun saveAddressToFirestore() {
@@ -183,7 +191,7 @@ class AddEditAddressActivity : BaseActivity() {
             it.setDisplayShowCustomEnabled(true)
             it.setCustomView(R.layout.toolbar_product_details)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
         }
     }
 

@@ -12,7 +12,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar_user_profile_edit"
+        layout="@layout/toolbar_tick_check"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +52,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:background="@drawable/ic_user_sample" />
+                        android:background="@drawable/svg_picture_user_sample" />
 
                     <ProgressBar
                         android:id="@+id/progressBarProfImgLoading"
@@ -98,6 +98,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="16dp"
                     app:hintEnabled="false"
+                    app:errorTextColor="@color/colorRedLight"
+                    app:boxStrokeErrorColor="@color/colorRedLight"
                     app:layout_constraintEnd_toStartOf="@+id/frameLayout_User_Picture"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView_Full_Name">
@@ -177,6 +179,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     app:hintEnabled="false"
+                    app:errorTextColor="@color/colorRedLight"
+                    app:boxStrokeErrorColor="@color/colorRedLight"
                     app:layout_constraintEnd_toEndOf="@+id/frameLayout_User_Picture"
                     app:layout_constraintStart_toEndOf="@+id/countryCodePicker"
                     app:layout_constraintTop_toTopOf="@+id/countryCodePicker">
@@ -223,12 +227,12 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/drawable_radio_button_selector"
+                        android:background="@drawable/selector_radio_button"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/yes"
                         android:textAlignment="center"
-                        android:textColor="@drawable/drawable_radio_button_text_color_selector"
+                        android:textColor="@drawable/selector_radio_button_text_color"
                         android:textStyle="bold" />
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
@@ -238,12 +242,12 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:background="@drawable/drawable_radio_button_selector"
+                        android:background="@drawable/selector_radio_button"
                         android:button="@null"
                         android:gravity="center"
                         android:text="@string/no"
                         android:textAlignment="center"
-                        android:textColor="@drawable/drawable_radio_button_text_color_selector"
+                        android:textColor="@drawable/selector_radio_button_text_color"
                         android:textStyle="bold" />
 
                 </RadioGroup>

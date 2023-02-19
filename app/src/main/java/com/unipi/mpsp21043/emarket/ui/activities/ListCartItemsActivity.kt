@@ -118,7 +118,7 @@ class ListCartItemsActivity : BaseActivity() {
                 txtViewTotalAmountValue.text = String.format(getString(R.string.txt_format_price), getString(R.string.curr_eur), subTotal + Constants.DEFAULT_DELIVERY_COST)
             }
 
-            // sets VeilRecyclerView's properties
+            // Sets RecyclerView's properties
             binding.veilRecyclerView.run {
                 setVeilLayout(R.layout.shimmer_item_product)
                 setAdapter(

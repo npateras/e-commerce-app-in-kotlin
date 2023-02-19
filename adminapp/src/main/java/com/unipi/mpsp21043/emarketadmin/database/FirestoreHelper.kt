@@ -18,9 +18,10 @@ import com.google.firebase.storage.StorageReference
 import com.unipi.mpsp21043.emarketadmin.models.*
 import com.unipi.mpsp21043.emarketadmin.ui.activities.*
 import com.unipi.mpsp21043.emarketadmin.ui.fragments.MyAccountFragment
+import com.unipi.mpsp21043.emarketadmin.ui.fragments.OrdersFragment
 import com.unipi.mpsp21043.emarketadmin.ui.fragments.ProductsFragment
+import com.unipi.mpsp21043.emarketadmin.ui.fragments.UsersFragment
 import com.unipi.mpsp21043.emarketadmin.utils.Constants
-import org.checkerframework.checker.units.qual.s
 
 class FirestoreHelper {
 
@@ -157,8 +158,6 @@ class FirestoreHelper {
             }
             .addOnFailureListener { e ->
                 // Here call a function of base activity for transferring the result to it.
-
-                activity.hideProgressDialog()
 
                 Log.e(activity.javaClass.simpleName, "Error while getting the address list.", e)
             }
@@ -308,41 +307,34 @@ class FirestoreHelper {
     // endregion
 
     /**
-     * A function to get all the product list from the cloud firestore.
+     * A function to delete an existing product from the Cloud Firestore.
      *
-     * @param context
+     * @param activity Base class
+     * @param productId existing address id
      */
-    /*fun getAllProductsList(context: Context) {
-        // The collection name for PRODUCTS
+    fun deleteProduct(activity: Activity, productId: String) {
+
         dbFirestore.collection(Constants.COLLECTION_PRODUCTS)
-            .get() // Will get the documents snapshots.
-            .addOnSuccessListener { document ->
+            .document(productId)
+            .delete()
+            .addOnSuccessListener {
 
-                // Here we get the list of boards in the form of documents.
-                Log.e("Products List", document.documents.toString())
-
-                // Here we have created a new instance for Products ArrayList.
-                val productsList: ArrayList<Product> = ArrayList()
-
-                // A for loop as per the list of documents to convert them into Products ArrayList.
-                for (i in document.documents) {
-
-                    val product = i.toObject(Product::class.java)
-                    product!!.id = i.id
-
-                    productsList.add(product)
-                }
-
-                when (context) {
-                    is ListCartItemsActivity -> context.successProductsListFromFireStore(productsList)
-                    is CheckoutActivity -> context.successProductsListFromFireStore(productsList)
-                    is PayWithCreditCardActivity -> context.successProductsListFromFireStore(productsList)
+                // Here call a function of base activity for transferring the result to it.
+                when (activity) {
+                    is ProductDetailsActivity -> activity.deleteProductSuccess()
                 }
             }
             .addOnFailureListener { e ->
-                Log.e("Get Product List", "Error while getting all product list.", e)
+                when (activity) {
+                    is ProductDetailsActivity -> activity.hideProgressDialog()
+                }
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while deleting the product.",
+                    e
+                )
             }
-    }*/
+    }
 
     /**
      * A function to update the existing user details to the cloud firestore.
@@ -457,20 +449,6 @@ class FirestoreHelper {
                 // Here we have received the document snapshot which is converted into the User Data model object.
                 val user = document.toObject(User::class.java)!!
 
-                val sharedPreferences =
-                    activity.getSharedPreferences(
-                        Constants.EMARKET_PREFERENCES,
-                        Context.MODE_PRIVATE
-                    )
-
-                // Create an instance of the editor which is help us to edit the SharedPreference.
-                val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                editor.putString(
-                    Constants.LOGGED_IN_USERNAME,
-                    user.fullName
-                )
-                editor.apply()
-
                 when (activity) {
                     is MainActivity -> {
                         activity.userDetailsSuccess(user)
@@ -478,6 +456,10 @@ class FirestoreHelper {
                     is SignInActivity -> {
                         // Call a function of base activity for transferring the result to it.
                         activity.userLoggedInSuccess(user)
+                    }
+                    is UserDetailsActivity -> {
+                        // Call a function of base activity for transferring the result to it.
+                        activity.userDetailsSuccess(user)
                     }
                 }
             }
@@ -625,11 +607,11 @@ class FirestoreHelper {
     /**
      * A function to get the list of orders from cloud firestore.
      */
-    fun getOrdersList(context: Context) {
+    fun getOrdersList(fragment: Fragment) {
         dbFirestore.collection(Constants.COLLECTION_ORDERS)
             .get() // Will get the documents snapshots.
             .addOnSuccessListener { document ->
-                Log.e(context.javaClass.simpleName, document.documents.toString())
+                Log.e(fragment.javaClass.simpleName, document.documents.toString())
                 val list: ArrayList<Order> = ArrayList()
 
                 for (i in document.documents) {
@@ -640,25 +622,48 @@ class FirestoreHelper {
                     list.add(orderItem)
                 }
 
-                when (context) {
-                    is ListOrdersActivity -> context.successOrdersListFromFirestore(list)
+                when (fragment) {
+                    is OrdersFragment -> fragment.successOrdersListFromFirestore(list)
+                }
+
+            }
+            .addOnFailureListener { e ->
+
+                Log.e(fragment.javaClass.simpleName, "Error while getting the orders list.", e)
+            }
+    }
+
+    /**
+     * A function to get the list of users from cloud firestore.
+     */
+    fun getUsersList(fragment: Fragment) {
+        dbFirestore.collection(Constants.COLLECTION_USERS)
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+                Log.e(fragment.javaClass.simpleName, document.documents.toString())
+                val list: ArrayList<User> = ArrayList()
+
+                for (i in document.documents) {
+                    val user = i.toObject(User::class.java)!!
+                    user.id = i.id
+
+                    list.add(user)
+                }
+
+                when (fragment) {
+                    is UsersFragment -> fragment.successUsersListFromFirestore(list)
                 }
 
             }
             .addOnFailureListener { e ->
                 // Here call a function of base activity for transferring the result to it.
-
-                when (context) {
-                    is ListOrdersActivity -> context.hideProgressDialog()
-                }
-
-                Log.e(context.javaClass.simpleName, "Error while getting the orders list.", e)
+                Log.e(fragment.javaClass.simpleName, "Error while getting the users list.", e)
             }
     }
 
     fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?, imageType: String) {
 
-        //getting the storage reference
+        // Getting the storage reference
         val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
             imageType + System.currentTimeMillis() + "."
                     + Constants.getFileExtension(

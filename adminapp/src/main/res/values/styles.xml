@@ -79,6 +79,12 @@
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
+    <style name="ButtonStyle.Error" parent="ButtonStyle">
+        <item name="iconTint">@color/colorRed</item>
+        <item name="android:background">@drawable/ripple_btn_negative_color_selector</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
 <!-- TextInputLayouts -->
     <style name="TextInputLayoutStyle_2" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">@color/colorPrimary</item>

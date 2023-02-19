@@ -12,7 +12,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar_user_profile_edit"
+        layout="@layout/toolbar_tick_check"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -60,6 +60,8 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="16dp"
+                    app:errorTextColor="@color/colorRedLight"
+                    app:boxStrokeErrorColor="@color/colorRedLight"
                     app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -139,6 +141,8 @@
                     style="@style/TextInputLayoutStyle_2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    app:errorTextColor="@color/colorRedLight"
+                    app:boxStrokeErrorColor="@color/colorRedLight"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="5dp"
                     app:hintEnabled="false"
@@ -175,6 +179,8 @@
                     style="@style/TextInputLayoutStyle_2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    app:errorTextColor="@color/colorRedLight"
+                    app:boxStrokeErrorColor="@color/colorRedLight"
                     android:layout_marginTop="5dp"
                     app:hintEnabled="false"
                     app:counterMaxLength="50"
@@ -212,6 +218,8 @@
                     style="@style/TextInputLayoutStyle_2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    app:errorTextColor="@color/colorRedLight"
+                    app:boxStrokeErrorColor="@color/colorRedLight"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     app:hintEnabled="false"
@@ -251,10 +259,10 @@
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginBottom="32dp"
                     android:layout_weight="1"
+                    app:boxStrokeErrorColor="@color/colorRedLight"
+                    app:errorTextColor="@color/colorRedLight"
                     app:hintEnabled="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/inputTxtLayout_Zip_Code"
                     app:layout_constraintStart_toStartOf="@+id/textView_Additional_Notes"
                     app:layout_constraintTop_toBottomOf="@+id/textView_Additional_Notes">
@@ -264,10 +272,55 @@
                         style="@style/TextEditInputStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/colorText"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:textColor="@color/colorText" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="36dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/inputTxtLayout_Additional_Notes"
+                    app:layout_constraintTop_toBottomOf="@+id/inputTxtLayout_Additional_Notes">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_add_address"
+                        style="@style/ButtonStyle.PrimaryColor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/btn_height_small_37"
+                        android:layout_gravity="bottom|end"
+                        android:text="@string/add_address"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        app:backgroundTint="@null"
+                        app:icon="@drawable/svg_tick_check"
+                        app:iconTint="@color/colorWhite"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_edit_address"
+                        style="@style/ButtonStyle.PrimaryColor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/btn_height_small_37"
+                        android:layout_gravity="bottom|end"
+                        android:text="@string/text_update_address"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        app:backgroundTint="@null"
+                        app:icon="@drawable/svg_edit_pencil"
+                        app:iconTint="@color/colorWhite"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.unipi.mpsp21043.emarketadmin.adapters.ProductsListAdapter
 import com.unipi.mpsp21043.emarketadmin.database.FirestoreHelper
@@ -12,10 +13,13 @@ import com.unipi.mpsp21043.emarketadmin.models.Product
 import com.unipi.mpsp21043.emarketadmin.utils.IntentUtils
 
 
-class ProductsFragment : BaseFragment() {
+class ProductsFragment : Fragment() {
 
     // ~~~~~~~VARIABLES~~~~~~~
+    // Scoped to the lifecycle of the fragment's view (between onCreateView and onDestroyView)
     private var _binding: FragmentProductsBinding? = null  // Scoped to the lifecycle of the fragment's view (between onCreateView and onDestroyView)
+    // This property is only valid between onCreateView and
+    // onDestroyView.
     private val binding get() = _binding!!
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -27,19 +31,19 @@ class ProductsFragment : BaseFragment() {
         _binding = FragmentProductsBinding.inflate(inflater, container, false)
 
         init()
+        setupUI()
 
         return binding.root
     }
 
     private fun init() {
-        binding.apply {
-            veilRecyclerView.visibility = View.INVISIBLE
-            shimmerViewContainer.visibility = View.VISIBLE
-            shimmerViewContainer.startShimmer()
-            fabAdd.setOnClickListener { IntentUtils().goToAddNewProductActivity(this@ProductsFragment.requireContext())}
-        }
+        showShimmerUI()
 
         getProducts()
+    }
+
+    private fun setupUI() {
+        binding.fabAdd.setOnClickListener { IntentUtils().goToAddNewProductActivity(this@ProductsFragment.requireContext())}
     }
 
     private fun getProducts() {
@@ -54,11 +58,10 @@ class ProductsFragment : BaseFragment() {
     fun successProductsListFromFirestore(productsList: ArrayList<Product>) {
 
         if (productsList.size > 0) {
-            binding.veilRecyclerView.visibility = View.VISIBLE
-            binding.layoutEmptyState.root.visibility = View.GONE
+            hideShimmerUI()
 
-            // sets VeilRecyclerView's properties
-            binding.veilRecyclerView.run {
+            // Sets RecyclerView's properties
+            binding.recyclerViewItems.run {
                 adapter = ProductsListAdapter(
                     requireActivity(),
                     productsList
@@ -68,26 +71,51 @@ class ProductsFragment : BaseFragment() {
             }
         }
         else
-            hideRecycler()
+            showEmptyStateUI()
 
         binding.shimmerViewContainer.stopShimmer()
         binding.shimmerViewContainer.visibility = View.GONE
     }
 
-    private fun hideRecycler() {
+    private fun showShimmerUI() {
         binding.apply {
-            // veilRecyclerView.unVeil()
-            veilRecyclerView.visibility = View.GONE
-            layoutEmptyState.root.visibility = View.VISIBLE
+            layoutEmptyState.root.visibility = View.GONE
+            recyclerViewItems.visibility = View.GONE
+            shimmerViewContainer.visibility = View.VISIBLE
+            shimmerViewContainer.startShimmer()
         }
     }
 
+    private fun hideShimmerUI() {
+        binding.apply {
+            layoutEmptyState.root.visibility = View.GONE
+            recyclerViewItems.visibility = View.VISIBLE
+            shimmerViewContainer.visibility = View.GONE
+            shimmerViewContainer.stopShimmer()
+        }
+    }
+
+    private fun showEmptyStateUI() {
+        binding.apply {
+            layoutEmptyState.root.visibility = View.VISIBLE
+            recyclerViewItems.visibility = View.GONE
+            shimmerViewContainer.visibility = View.GONE
+            shimmerViewContainer.stopShimmer()
+        }
+    }
+
+    /**
+     * The fragment's onResume() will be called only when the Activity's onResume() is called.
+     */
     override fun onResume() {
         super.onResume()
 
         init()
     }
 
+    /**
+     * We clean up any references to the binding class instance in the fragment's onDestroyView() method.
+     */
     override fun onDestroyView() {
         super.onDestroyView()
 

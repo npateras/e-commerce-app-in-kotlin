@@ -10,7 +10,6 @@ class ViewPagerMainAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fm, lifecycle) {
 
     private val fragmentsList:ArrayList<Fragment> = arrayListOf(
-        StatisticsFragment(),
         ProductsFragment(),
         OrdersFragment(),
         UsersFragment(),

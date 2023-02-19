@@ -1,6 +1,8 @@
 package com.unipi.mpsp21043.emarketadmin.ui.activities
 
+import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unipi.mpsp21043.emarketadmin.R
 import com.unipi.mpsp21043.emarketadmin.adapters.OrderCartProductListAdapter
@@ -10,11 +12,6 @@ import com.unipi.mpsp21043.emarketadmin.utils.Constants
 
 class OrderDetailsActivity : BaseActivity() {
 
-    /**
-     * Class variables
-     *
-     * @see binding
-     * */
     private lateinit var binding: ActivityOrderDetailsBinding
 
     // A global variable for Order details.
@@ -32,30 +29,93 @@ class OrderDetailsActivity : BaseActivity() {
     }
 
     private fun init() {
-        if (intent.hasExtra(Constants.EXTRA_ORDER_DETAILS)) {
-            mOrderDetails =
-                intent.getParcelableExtra(Constants.EXTRA_ORDER_DETAILS)!!
+        showShimmerUI()
 
-            setRecyclerView()
+        if (intent.hasExtra(Constants.EXTRA_ORDER_DETAILS)) {
+            mOrderDetails = if (Build.VERSION.SDK_INT >= 33) {
+                intent.getParcelableExtra(Constants.EXTRA_ORDER_DETAILS, Order::class.java)!!
+            } else {
+                @Suppress("DEPRECATION")
+                intent.getParcelableExtra(Constants.EXTRA_ORDER_DETAILS)!!
+            }
+
+            setOrderItemsRecyclerView()
         }
     }
 
-    private fun setRecyclerView() {
-        // sets VeilRecyclerView's properties
-        binding.veilRecyclerView.run {
-            setAdapter(
+    private fun showShimmerUI() {
+        binding.apply {
+            shimmerLayout.root.visibility = View.VISIBLE
+            shimmerLayout.shimmerViewHeadContainer.startShimmer()
+            shimmerLayout.shimmerViewBottomContainerOrderItems.startShimmer()
+        }
+    }
+
+    private fun hideShimmerUI() {
+        binding.apply {
+            shimmerLayout.root.visibility = View.GONE
+            shimmerLayout.shimmerViewHeadContainer.stopShimmer()
+            shimmerLayout.shimmerViewBottomContainerOrderItems.stopShimmer()
+        }
+    }
+
+    private fun setOrderItemsRecyclerView() {
+        // Sets RecyclerView's properties
+        binding.recyclerViewOrderItems.run {
+            adapter = (
                 OrderCartProductListAdapter(
                     this@OrderDetailsActivity,
                     mOrderDetails.cartItems
                 )
             )
-            setLayoutManager(LinearLayoutManager(this@OrderDetailsActivity, LinearLayoutManager.VERTICAL, false))
-            getRecyclerView().setHasFixedSize(false)
+            setHasFixedSize(false)
+            layoutManager = LinearLayoutManager(this@OrderDetailsActivity, LinearLayoutManager.VERTICAL, false)
         }
+
+        hideShimmerUI()
     }
 
     private fun setupUI() {
         setupActionBar()
+
+        binding.apply {
+
+            txtViewAddressValue.text = String.format(
+                getString(R.string.txt_format_order_address),
+                mOrderDetails.address.fullName,
+                String.format(
+                    getString(R.string.txt_format_phone),
+                    mOrderDetails.address.phoneCode,
+                    mOrderDetails.address.phoneNumber
+                ),
+                mOrderDetails.address.address,
+                mOrderDetails.address.zipCode,
+                mOrderDetails.address.additionalNote,
+            )
+
+            txtViewTotalAmtValue.text = String.format(
+                getString(R.string.txt_format_price),
+                Constants.DEFAULT_CURRENCY,
+                mOrderDetails.totalAmount
+            )
+
+            txtViewPaymentMethodValue.text = mOrderDetails.paymentMethod
+
+            when (mOrderDetails.orderStatus) {
+                0 -> {
+                    textViewOrderStatusValue.text = getString(R.string.txt_pending)
+                    textViewOrderStatusValue.setTextColor(getColor(R.color.colorRed))
+                }
+                1 -> {
+                    textViewOrderStatusValue.text = getString(R.string.txt_processing)
+                    textViewOrderStatusValue.setTextColor(getColor(R.color.colorYellowOrange))
+                }
+                2 -> {
+                    textViewOrderStatusValue.text = getString(R.string.txt_completed)
+                    textViewOrderStatusValue.setTextColor(getColor(R.color.colorGreen))
+                }
+            }
+        }
     }
 
     private fun setupActionBar() {
@@ -65,11 +125,12 @@ class OrderDetailsActivity : BaseActivity() {
         binding.apply {
             toolbar.textViewActionBarLabel.text = Constants.standardSimpleDateFormat.format(mOrderDetails.orderDate)
         }
+
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setCustomView(R.layout.toolbar_product_details)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
         }
     }
 }

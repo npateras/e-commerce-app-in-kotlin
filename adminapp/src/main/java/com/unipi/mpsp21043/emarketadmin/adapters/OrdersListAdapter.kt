@@ -50,12 +50,16 @@ open class OrdersListAdapter(
 
         holder.binding.apply {
             txtViewName.text = model.title
-            txtViewPriceValue.text = model.totalAmount
+            txtViewPriceValue.text = String.format(
+                context.getString(R.string.txt_format_price),
+                Constants.DEFAULT_CURRENCY,
+                model.totalAmount
+            )
             txtViewDate.text = Constants.standardSimpleDateFormat.format(model.orderDate)
             when (model.orderStatus) {
                 0 -> {
                     txtViewStatusValue.text = context.getString(R.string.txt_pending)
-                    txtViewStatusValue.setTextColor(context.getColor(R.color.colorSecondary2))
+                    txtViewStatusValue.setTextColor(context.getColor(R.color.colorRed))
                 }
                 1 -> {
                     txtViewStatusValue.text = context.getString(R.string.txt_processing)
@@ -63,13 +67,16 @@ open class OrdersListAdapter(
                 }
                 2 -> {
                     txtViewStatusValue.text = context.getString(R.string.txt_completed)
-                    txtViewStatusValue.setTextColor(context.getColor(R.color.colorPrimary))
+                    txtViewStatusValue.setTextColor(context.getColor(R.color.colorGreen))
                 }
             }
+
+            cardViewMain.setOnClickListener { IntentUtils().goToOrderDetailsActivity(context, model) }
         }
-        holder.itemView.setOnClickListener {
+
+        /*holder.itemView.setOnClickListener {
             IntentUtils().goToOrderDetailsActivity(context, model)
-        }
+        }*/
     }
 
     /**

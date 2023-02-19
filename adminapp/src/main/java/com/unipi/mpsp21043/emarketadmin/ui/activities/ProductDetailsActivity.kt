@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.View
 import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.content.res.AppCompatResources
+import com.google.android.material.button.MaterialButton
 import com.unipi.mpsp21043.emarketadmin.R
 import com.unipi.mpsp21043.emarketadmin.database.FirestoreHelper
 import com.unipi.mpsp21043.emarketadmin.databinding.ActivityProductDetailsBinding
-import com.unipi.mpsp21043.emarketadmin.models.Cart
-import com.unipi.mpsp21043.emarketadmin.models.Favorite
 import com.unipi.mpsp21043.emarketadmin.models.Product
 import com.unipi.mpsp21043.emarketadmin.models.User
 import com.unipi.mpsp21043.emarketadmin.utils.Constants
+import com.unipi.mpsp21043.emarketadmin.utils.DialogUtils
 import com.unipi.mpsp21043.emarketadmin.utils.GlideLoader
 import com.unipi.mpsp21043.emarketadmin.utils.IntentUtils
 
@@ -81,7 +81,7 @@ class ProductDetailsActivity : BaseActivity() {
                 txtViewPriceReduced.apply {
                     visibility = View.VISIBLE
                     foreground =
-                        AppCompatResources.getDrawable(context, R.drawable.striking_red_text)
+                        AppCompatResources.getDrawable(context, R.drawable.shape_striking_red_text)
                     text = String.format(
                         context.getString(R.string.txt_format_price),
                         context.getString(R.string.curr_eur),
@@ -145,6 +145,17 @@ class ProductDetailsActivity : BaseActivity() {
             unveilDetails()
     }
 
+    /**
+     * A function notify the user that the product was deleted successfully.
+     */
+    fun deleteProductSuccess() {
+
+        // Hide progress dialog.
+        hideProgressDialog()
+
+        goToMainActivity(this@ProductDetailsActivity, "success", getString(R.string.product_deleted_successfully))
+    }
+
     fun successLastModifiedByUserDetailsFromFirestore(user: User) {
         mLastModifiedByUser = user
 
@@ -155,6 +166,29 @@ class ProductDetailsActivity : BaseActivity() {
         }
 
         unveilDetails()
+    }
+
+    private fun showDeleteProductDialog() {
+
+        binding.apply {
+            val dialog = DialogUtils().showDialogDeleteConfirmation(this@ProductDetailsActivity)
+            dialog.show()
+
+            val dialogButtonNo = dialog.findViewById<MaterialButton>(R.id.button_dialog_no)
+            val dialogButtonYes = dialog.findViewById<MaterialButton>(R.id.button_dialog_yes)
+
+            dialogButtonNo.setOnClickListener { dialog.dismiss() }
+            dialogButtonYes.setOnClickListener {
+
+                // Show the progress dialog.
+                showProgressDialog()
+
+                FirestoreHelper().deleteProduct(
+                    this@ProductDetailsActivity,
+                    modelProduct.id
+                )
+            }
+        }
     }
 
     private fun unveilDetails() {
@@ -178,8 +212,8 @@ class ProductDetailsActivity : BaseActivity() {
         binding.apply {
 
             // ActionBar
-            toolbar.actionBarImgBtnEdit.setOnClickListener { IntentUtils().goToEditProductActivity(this@ProductDetailsActivity, modelProduct) }
-            toolbar.actionBarImgBtnDelete.setOnClickListener {  }
+            toolbar.imageButtonEdit.setOnClickListener { IntentUtils().goToEditProductActivity(this@ProductDetailsActivity, modelProduct) }
+            toolbar.imageButtonDelete.setOnClickListener { showDeleteProductDialog() }
         }
     }
 
@@ -191,7 +225,7 @@ class ProductDetailsActivity : BaseActivity() {
             it.setDisplayShowCustomEnabled(true)
             it.setCustomView(R.layout.toolbar_product_details)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
         }
     }
 

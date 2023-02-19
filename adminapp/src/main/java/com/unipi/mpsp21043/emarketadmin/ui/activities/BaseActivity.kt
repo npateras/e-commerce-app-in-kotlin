@@ -63,9 +63,10 @@ open class BaseActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun goToMainActivity(context: Context, showProfileNotCompletedSnackBar: Boolean) {
+    fun goToMainActivity(context: Context, snackbarType: String, message: String) {
         val intent = Intent(context, MainActivity::class.java)
-        intent.putExtra(Constants.EXTRA_PROFILE_NOT_COMPLETED_SNACKBAR, showProfileNotCompletedSnackBar)
+        intent.putExtra(Constants.EXTRA_SNACKBAR_MESSAGE, message)
+        intent.putExtra(Constants.EXTRA_SNACKBAR_TYPE, snackbarType)
         intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
@@ -88,7 +89,7 @@ open class BaseActivity : AppCompatActivity() {
     /**
      * A function to implement the double back press feature to exit the app.
      */
-    fun doubleBackToExit() {
+    /*fun doubleBackToExit() {
 
         if (doubleBackToExitPressedOnce) {
             onBackPressedDispatcher.onBackPressed()
@@ -106,6 +107,5 @@ open class BaseActivity : AppCompatActivity() {
         backgroundExecutor.schedule({
             doubleBackToExitPressedOnce = false
         }, 2000, TimeUnit.MILLISECONDS)
-    }
-
+    }*/
 }

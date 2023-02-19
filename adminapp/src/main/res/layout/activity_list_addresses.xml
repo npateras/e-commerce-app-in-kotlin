@@ -14,27 +14,51 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar_title_only" />
 
-    <com.skydoves.androidveil.VeilRecyclerFrameView
-        android:id="@+id/veilRecyclerView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_items"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:paddingTop="29dp"
         android:paddingBottom="21dp"
+        android:visibility="gone"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:listitem="@layout/item_address"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout_Bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.0"
-        app:veilFrame_baseAlpha="0.6"
-        app:veilFrame_baseColor="@color/colorSecondary2"
-        app:veilFrame_defaultChildVisible="false"
-        app:veilFrame_highlightAlpha="1.0"
-        app:veilFrame_highlightColor="@color/colorWhite"
-        app:veilFrame_radius="8dp"
-        app:veilFrame_shimmerEnable="true"
-        app:veilFrame_veiled="true" />
+        app:layout_constraintVertical_bias="0.0"/>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout_Bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:orientation="vertical">
+
+            <include layout="@layout/shimmer_address" />
+
+            <include layout="@layout/shimmer_address" />
+
+            <include layout="@layout/shimmer_address" />
+
+            <include layout="@layout/shimmer_address" />
+
+            <include layout="@layout/shimmer_address" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <include
         android:id="@+id/layout_Empty_State"
@@ -52,6 +76,8 @@
         android:id="@+id/constraintLayout_Bottom"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:elevation="5dp"
+        android:background="@color/colorContainer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -73,7 +99,7 @@
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/btn_font_size_small_14"
             app:backgroundTint="@null"
-            app:icon="@drawable/ic_home_location"
+            app:icon="@drawable/svg_home_location_outline"
             app:iconGravity="textStart"
             app:iconPadding="10dp"
             app:iconSize="24dp"

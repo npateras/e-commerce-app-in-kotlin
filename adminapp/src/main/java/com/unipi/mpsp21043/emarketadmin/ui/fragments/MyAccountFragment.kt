@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.unipi.mpsp21043.emarketadmin.R
 import com.unipi.mpsp21043.emarketadmin.database.FirestoreHelper
@@ -15,13 +17,15 @@ import com.unipi.mpsp21043.emarketadmin.utils.Constants
 import com.unipi.mpsp21043.emarketadmin.utils.GlideLoader
 import com.unipi.mpsp21043.emarketadmin.utils.IntentUtils
 
-class MyAccountFragment : BaseFragment() {
+class MyAccountFragment : Fragment() {
+    // ~~~~~~~VARIABLES~~~~~~~
     // Scoped to the lifecycle of the fragment's view (between onCreateView and onDestroyView)
     private var _binding: FragmentMyAccountBinding? = null
     private lateinit var mUserDetails: User
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,9 +61,7 @@ class MyAccountFragment : BaseFragment() {
                 btnAddresses.setOnClickListener { IntentUtils().goToListAddressesActivity(this@MyAccountFragment.requireContext()) }
                 btnLogOut.setOnClickListener{
                     FirebaseAuth.getInstance().signOut()
-                    val intent = Intent(context, MainActivity::class.java)
-                    requireActivity().finishAffinity()
-                    startActivity(intent)
+                    IntentUtils().goToSignInActivity(this@MyAccountFragment.requireActivity())
                 }
             }
 
@@ -129,6 +131,15 @@ class MyAccountFragment : BaseFragment() {
             vLayoutHead.veil()
             vLayoutBody.veil()
         }
+    }
+
+    /**
+     * The fragment's onResume() will be called only when the Activity's onResume() is called.
+     */
+    override fun onResume() {
+        super.onResume()
+
+        init()
     }
 
     /**

@@ -14,7 +14,6 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar_product_details" />
 
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView_Body"
         android:layout_width="match_parent"
@@ -51,7 +50,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_picture_wide" />
+                    app:srcCompat="@drawable/svg_picture_sample_wide" />
 
             </com.skydoves.androidveil.VeilLayout>
 

@@ -46,13 +46,15 @@
             android:textColor="@color/colorWhite"
             android:textSize="14sp"
             android:drawableEnd="@drawable/svg_microphone"
-            android:background="@drawable/custom_edit_text_cut"
+            android:background="@drawable/selector_search_bar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/action_bar_button_search"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="Autofill,TextFields">
 
         </EditText>
+
         <!--<com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_layout_search_bar"
             style="@style/TextInputLayoutStyleSearch"

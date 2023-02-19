@@ -48,7 +48,7 @@ class AllCategoriesActivity : BaseActivity() {
                 layoutEmptyStateCategories.root.visibility = View.GONE
             }
 
-            // sets VeilRecyclerView's properties
+            // Sets RecyclerView's properties
             binding.veilRecyclerViewAllCategories.run {
                 setVeilLayout(R.layout.shimmer_item_product)
                 setAdapter(

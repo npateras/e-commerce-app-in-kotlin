@@ -20,9 +20,9 @@ data class Order(
     val cartItems: ArrayList<Cart> = ArrayList(),
     val title: String = "",
 
-    val subTotalAmount: String = "",
-    val deliveryCharge: String = "",
-    val totalAmount: String = "",
+    val subTotalAmount: Double = 0.0,
+    val deliveryCharge: Double = 0.0,
+    val totalAmount: Double = 0.0,
 
     val paymentMethod: String = "",
     val orderStatus: Int = 0,

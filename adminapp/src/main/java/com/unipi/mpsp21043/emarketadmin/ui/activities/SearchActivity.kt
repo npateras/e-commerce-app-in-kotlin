@@ -149,7 +149,7 @@ class SearchActivity : BaseActivity() {
             // Enabling our toolbar's back button.
             it.setDisplayHomeAsUpEnabled(true)
             // Setting up our toolbar's custom back button icon.
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
         }
     }
 

@@ -295,9 +295,9 @@ class EditProfileActivity : BaseActivity() {
         }
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
-            it.setCustomView(R.layout.toolbar_user_profile_edit)
+            it.setCustomView(R.layout.toolbar_tick_check)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
         }
     }
 

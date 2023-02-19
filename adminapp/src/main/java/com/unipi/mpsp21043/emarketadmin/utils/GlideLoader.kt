@@ -59,7 +59,7 @@ class GlideLoader(val context: Context) : AppGlideModule() {
                 .with(context)
                 .load(image) // Uri or URL of the image
                 .centerCrop() // Scale type of the image.
-                .placeholder(R.drawable.ic_user_sample) // A default place holder if image is failed to load.
+                .placeholder(R.drawable.svg_picture_user_sample) // A default place holder if image is failed to load.
                 .into(imageView) // the view in which the image will be loaded.
         } catch (e: IOException) {
             e.printStackTrace()
@@ -75,7 +75,7 @@ class GlideLoader(val context: Context) : AppGlideModule() {
             Glide
                 .with(context)
                 .load(image) // Uri or URL of the image
-                .placeholder(R.drawable.ic_picture) // A default place holder if image is failed to load.
+                .placeholder(R.drawable.svg_picture_sample) // A default place holder if image is failed to load.
                 .into(imageView) // the view in which the image will be loaded.
         } catch (e: IOException) {
             e.printStackTrace()
@@ -88,7 +88,7 @@ class GlideLoader(val context: Context) : AppGlideModule() {
             Glide
                 .with(context)
                 .load(image) // Uri or URL of the image
-                .placeholder(R.drawable.ic_picture_wide) // A default place holder if image is failed to load.
+                .placeholder(R.drawable.svg_picture_sample_wide) // A default place holder if image is failed to load.
                 .into(imageView) // the view in which the image will be loaded.
         } catch (e: IOException) {
             e.printStackTrace()

@@ -48,7 +48,7 @@ class ListOrdersActivity : BaseActivity() {
                 layoutEmptyState.root.visibility = View.GONE
             }
 
-            // sets VeilRecyclerView's properties
+            // Sets RecyclerView's properties
             binding.veilRecyclerView.run {
                 setVeilLayout(R.layout.shimmer_item_product)
                 setAdapter(

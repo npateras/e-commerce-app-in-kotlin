@@ -18,7 +18,6 @@ import android.widget.RadioButton
 import android.window.OnBackInvokedDispatcher
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
 import com.unipi.mpsp21043.emarketadmin.R
 import com.unipi.mpsp21043.emarketadmin.database.FirestoreHelper
@@ -173,7 +172,7 @@ class AddEditProductActivity : BaseActivity() {
 
     private fun setupClickListeners() {
         binding.apply {
-            listOf(buttonAddProduct, buttonEditProduct)
+            listOf(buttonAddProduct, buttonEditProduct, toolbar.imgBtnSave)
                 .forEach {
                     it.setOnClickListener {
                         if (validateDetails()) {
@@ -285,6 +284,7 @@ class AddEditProductActivity : BaseActivity() {
     }
 
     private fun showSelectWeightUnitDialog() {
+
         binding.apply {
             val dialog = DialogUtils().showDialogSelectWeightUnit(this@AddEditProductActivity)
             dialog.show()
@@ -593,7 +593,7 @@ class AddEditProductActivity : BaseActivity() {
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
         }
     }
 

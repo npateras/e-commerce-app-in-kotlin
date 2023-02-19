@@ -45,6 +45,33 @@ class ListAddressActivity : BaseActivity() {
         getUserAddresses()
     }
 
+    private fun showShimmerUI() {
+        binding.apply {
+            layoutEmptyState.root.visibility = View.GONE
+            recyclerViewItems.visibility = View.GONE
+            shimmerViewContainer.visibility = View.VISIBLE
+            shimmerViewContainer.startShimmer()
+        }
+    }
+
+    private fun hideShimmerUI() {
+        binding.apply {
+            layoutEmptyState.root.visibility = View.GONE
+            recyclerViewItems.visibility = View.VISIBLE
+            shimmerViewContainer.visibility = View.GONE
+            shimmerViewContainer.stopShimmer()
+        }
+    }
+
+    private fun showEmptyStateUI() {
+        binding.apply {
+            layoutEmptyState.root.visibility = View.VISIBLE
+            recyclerViewItems.visibility = View.GONE
+            shimmerViewContainer.visibility = View.GONE
+            shimmerViewContainer.stopShimmer()
+        }
+    }
+
     /**
      * Receive the result from a previous call to
      * {@link #startActivityForResult(Intent, int)}.  This follows the
@@ -68,47 +95,34 @@ class ListAddressActivity : BaseActivity() {
             }
         } else if (resultCode == Activity.RESULT_CANCELED) {
             // A log is printed when user close or cancel the image selection.
-            Log.e("Request Cancelled", "To add the address.")
+            Log.e("Request Cancelled: ", "Add an address.")
         }
     }
 
     private fun getUserAddresses() {
-        showProgressDialog()
-
         FirestoreHelper().getAddressList(this@ListAddressActivity)
     }
 
     fun successUserAddressListFromFirestore(addressList: ArrayList<Address>) {
 
-        // Hide the progress dialog
-        hideProgressDialog()
-
         if (addressList.size > 0) {
             // Show the recycler and remove the empty state layout completely.
-            binding.apply {
-                veilRecyclerView.visibility = View.VISIBLE
-                layoutEmptyState.root.visibility = View.GONE
-            }
+            hideShimmerUI()
 
-            // sets VeilRecyclerView's properties
-            binding.veilRecyclerView.run {
-                setAdapter(AddressListAdapter(this@ListAddressActivity, addressList))
-                setLayoutManager(LinearLayoutManager(this@ListAddressActivity, LinearLayoutManager.VERTICAL, false))
-                getRecyclerView().setHasFixedSize(true)
-                addVeiledItems(5)
-                // delay-auto-unveil
-                Handler(Looper.getMainLooper()).postDelayed(
-                    {
-                        unVeil()
-                    },
-                    1000
+            // Sets RecyclerView's properties
+            binding.recyclerViewItems.run {
+                adapter = AddressListAdapter(
+                    this@ListAddressActivity,
+                    addressList
                 )
+                setHasFixedSize(true)
+                layoutManager = LinearLayoutManager(this@ListAddressActivity, LinearLayoutManager.VERTICAL, false)
 
                 if (!mSelectAddress) {
                     val editSwipeHandler = object : SwipeToEditCallback(this@ListAddressActivity) {
                         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-                            val adapter = getRecyclerView().adapter as AddressListAdapter
+                            val adapter = adapter as AddressListAdapter
                             adapter.notifyEditItem(
                                 this@ListAddressActivity,
                                 viewHolder.absoluteAdapterPosition
@@ -116,7 +130,7 @@ class ListAddressActivity : BaseActivity() {
                         }
                     }
                     val editItemTouchHelper = ItemTouchHelper(editSwipeHandler)
-                    editItemTouchHelper.attachToRecyclerView(getRecyclerView())
+                    editItemTouchHelper.attachToRecyclerView(this)
 
 
                     val deleteSwipeHandler = object : SwipeToDeleteCallback(this@ListAddressActivity) {
@@ -132,19 +146,12 @@ class ListAddressActivity : BaseActivity() {
                         }
                     }
                     val deleteItemTouchHelper = ItemTouchHelper(deleteSwipeHandler)
-                    deleteItemTouchHelper.attachToRecyclerView(getRecyclerView())
+                    deleteItemTouchHelper.attachToRecyclerView(this)
                 }
             }
         }
-        else {
-            // Hide the recycler and show the empty state layout.
-            binding.apply {
-                veilRecyclerView.unVeil()
-                veilRecyclerView.visibility = View.INVISIBLE
-                layoutEmptyState.root.visibility = View.VISIBLE
-            }
-
-        }
+        else
+            showEmptyStateUI()
     }
 
     /**
@@ -165,6 +172,8 @@ class ListAddressActivity : BaseActivity() {
     }
 
     private fun setupUI() {
+        showShimmerUI()
+
         setUpActionBar()
         setupClickListeners()
     }
@@ -186,7 +195,7 @@ class ListAddressActivity : BaseActivity() {
             it.setDisplayShowCustomEnabled(true)
             it.setCustomView(R.layout.toolbar_product_details)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
         }
     }
 }

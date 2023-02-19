@@ -56,7 +56,7 @@ class HomeFragment : BaseFragment() {
                 layoutEmptyStateDeals.root.visibility = View.GONE
             }
 
-            // sets VeilRecyclerView's properties
+            // Sets RecyclerView's properties
             binding.veilRecyclerViewDeals.run {
                 setVeilLayout(R.layout.shimmer_item_product)
                 setAdapter(
@@ -101,7 +101,7 @@ class HomeFragment : BaseFragment() {
                 layoutEmptyStatePopular.root.visibility = View.GONE
             }
 
-            // sets VeilRecyclerView's properties
+            // Sets RecyclerView's properties
             binding.veilRecyclerViewPopular.run {
                 setVeilLayout(R.layout.shimmer_item_product)
                 setAdapter(
