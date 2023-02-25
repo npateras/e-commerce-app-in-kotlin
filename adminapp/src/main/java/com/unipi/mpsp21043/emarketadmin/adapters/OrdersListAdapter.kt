@@ -59,16 +59,16 @@ open class OrdersListAdapter(
             txtViewDate.text = Constants.standardSimpleDateFormat.format(model.orderDate)
             when (model.orderStatus) {
                 0 -> {
-                    txtViewStatusValue.text = context.getString(R.string.txt_pending)
-                    txtViewStatusValue.setTextColor(context.getColor(R.color.colorRed))
+                    textViewOrderStatusValue.text = context.getString(R.string.txt_pending)
+                    textViewOrderStatusValue.setTextColor(context.getColor(R.color.colorRed))
                 }
                 1 -> {
-                    txtViewStatusValue.text = context.getString(R.string.txt_processing)
-                    txtViewStatusValue.setTextColor(context.getColor(R.color.colorYellowOrange))
+                    textViewOrderStatusValue.text = context.getString(R.string.txt_processing)
+                    textViewOrderStatusValue.setTextColor(context.getColor(R.color.colorYellowOrange))
                 }
                 2 -> {
-                    txtViewStatusValue.text = context.getString(R.string.txt_completed)
-                    txtViewStatusValue.setTextColor(context.getColor(R.color.colorGreen))
+                    textViewOrderStatusValue.text = context.getString(R.string.txt_completed)
+                    textViewOrderStatusValue.setTextColor(context.getColor(R.color.colorGreen))
                 }
             }
 

@@ -8,6 +8,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -198,4 +199,15 @@ class ListAddressActivity : BaseActivity() {
             it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
         }
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
+
+    override fun getOnBackInvokedDispatcher(): OnBackInvokedDispatcher {
+        finish()
+        return super.getOnBackInvokedDispatcher()
+    }
+
 }

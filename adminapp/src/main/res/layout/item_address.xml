@@ -79,7 +79,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="14dp"
             android:ellipsize="end"
             android:fontFamily="@font/core_sans_cr_55_medium"
             android:maxLines="2"
