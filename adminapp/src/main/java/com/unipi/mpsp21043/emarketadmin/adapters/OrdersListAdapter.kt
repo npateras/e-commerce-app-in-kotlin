@@ -50,11 +50,12 @@ open class OrdersListAdapter(
 
         holder.binding.apply {
             txtViewName.text = model.title
-            txtViewPriceValue.text = String.format(
+            textViewTotalAmountValue.text = String.format(
                 context.getString(R.string.txt_format_price),
                 Constants.DEFAULT_CURRENCY,
                 model.totalAmount
             )
+            textViewClientValue.text = model.address.fullName
             txtViewDate.text = Constants.standardSimpleDateFormat.format(model.orderDate)
             when (model.orderStatus) {
                 0 -> {

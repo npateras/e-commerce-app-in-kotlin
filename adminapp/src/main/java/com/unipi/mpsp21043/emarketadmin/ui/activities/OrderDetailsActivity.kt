@@ -3,6 +3,7 @@ package com.unipi.mpsp21043.emarketadmin.ui.activities
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.window.OnBackInvokedDispatcher
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unipi.mpsp21043.emarketadmin.R
 import com.unipi.mpsp21043.emarketadmin.adapters.OrderCartProductListAdapter
@@ -133,4 +134,15 @@ class OrderDetailsActivity : BaseActivity() {
             it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
         }
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
+
+    override fun getOnBackInvokedDispatcher(): OnBackInvokedDispatcher {
+        finish()
+        return super.getOnBackInvokedDispatcher()
+    }
+
 }

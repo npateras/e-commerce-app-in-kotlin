@@ -59,9 +59,10 @@ class MyAccountFragment : Fragment() {
             binding.apply {
                 btnUpdateProfile.setOnClickListener { IntentUtils().goToUpdateUserDetailsActivity(this@MyAccountFragment.requireContext(), mUserDetails) }
                 btnAddresses.setOnClickListener { IntentUtils().goToListAddressesActivity(this@MyAccountFragment.requireContext()) }
-                btnLogOut.setOnClickListener{
+                btnLogOut.setOnClickListener {
                     FirebaseAuth.getInstance().signOut()
-                    IntentUtils().goToSignInActivity(this@MyAccountFragment.requireActivity())
+                    requireActivity().finish()
+                    IntentUtils().goToSignInActivity(this@MyAccountFragment.requireContext())
                 }
             }
 

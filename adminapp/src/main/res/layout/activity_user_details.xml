@@ -103,7 +103,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="38dp"
                     android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="24dp"
                     android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/text_view_user_Info"
                     app:layout_constraintTop_toBottomOf="@+id/text_view_user_Info">
@@ -262,33 +264,6 @@
                         android:textStyle="bold" />
 
                 </LinearLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_Addresses"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/btn_height_medium_45"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="38dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="24dp"
-                    android:background="@drawable/ripple_btn_primary_color_selector"
-                    android:fontFamily="@font/core_sans_cr_65_bold"
-                    android:gravity="center"
-                    android:text="@string/user_favorites"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/btn_font_size_small_14"
-                    app:backgroundTint="@null"
-                    app:icon="@drawable/svg_home_location_outline"
-                    app:iconGravity="textStart"
-                    app:iconPadding="10dp"
-                    app:iconSize="24dp"
-                    app:iconTint="@color/colorWhite"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_user_details" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

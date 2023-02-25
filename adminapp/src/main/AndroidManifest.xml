@@ -69,7 +69,7 @@
                 android:name=".ui.activities.SignInActivity"
                 android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustResize"
-                android:theme="@style/Theme.EMarket.NoActionBar4"
+                android:theme="@style/Theme.EMarket.NoActionBar3"
                 android:exported="true">
 
                 <intent-filter>
@@ -148,15 +148,6 @@
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ui.activities.MainActivity" />
-            </activity>
-
-            <!-- My Orders List activity -->
-            <activity
-                android:name=".ui.activities.ListOrdersActivity"
-                android:launchMode="singleTask"
-                android:windowSoftInputMode="adjustResize"
-                android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:exported="true">
             </activity>
 
             <!-- Order Details activity -->
