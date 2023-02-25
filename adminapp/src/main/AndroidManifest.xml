@@ -178,6 +178,20 @@
                     android:value=".ui.activities.MainActivity" />
             </activity>
 
+            <!-- My Account Details activity -->
+            <activity
+                android:name=".ui.activities.MyAccountActivity"
+                android:launchMode="singleTask"
+                android:windowSoftInputMode="adjustResize"
+                android:theme="@style/Theme.EMarket.NoActionBar3"
+                android:parentActivityName=".ui.activities.MainActivity"
+                android:exported="true">
+
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.activities.MainActivity" />
+            </activity>
+
             <!-- Search activity -->
             <activity
                 android:name=".ui.activities.SearchActivity"

@@ -35,6 +35,8 @@ object Constants {
     const val PRODUCT_IMAGE: String = "PRODUCT_IMAGE"
     const val ROLE_USER = "user"
     const val ROLE_ADMIN = "admin"
+    const val STATUS_SUCCESS = "success"
+    const val STATUS_ERROR = "error"
     val standardSimpleDateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.ENGLISH)
 
     // Firebase Constants

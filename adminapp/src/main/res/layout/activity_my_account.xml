@@ -7,8 +7,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorBackground"
     android:fillViewport="true"
-    tools:context=".ui.fragments.MyAccountFragment"
+    tools:context=".ui.activities.MyAccountActivity"
     tools:ignore="contentDescription">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_title_only"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView_Body"
@@ -16,27 +23,25 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <com.skydoves.androidveil.VeilLayout
-                android:id="@+id/vLayout_Head"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_layout_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:veilLayout_baseAlpha="0.6"
-                app:veilLayout_highlightAlpha="1.0"
-                app:veilLayout_highlightColor="@color/colorWhite"
-                app:veilLayout_radius="8dp"
-                app:veilLayout_shimmerEnable="true"
-                app:veilLayout_veiled="false">
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_layout_head_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <FrameLayout
                         android:id="@+id/frameLayout_User_Picture"
@@ -55,13 +60,13 @@
 
                         <ProgressBar
                             android:id="@+id/progressBarProfImgLoading"
-                            android:visibility="gone"
-                            android:indeterminate="true"
-                            android:indeterminateTintMode="src_atop"
-                            android:indeterminateTint="@color/colorPrimaryDark"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_gravity="center"
+                            android:indeterminate="true"
+                            android:indeterminateTint="@color/colorPrimaryDark"
+                            android:indeterminateTintMode="src_atop"
+                            android:visibility="gone"
                             app:layout_constraintVertical_bias="0.0" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
@@ -88,31 +93,17 @@
                         app:layout_constraintStart_toStartOf="@+id/frameLayout_User_Picture"
                         app:layout_constraintTop_toBottomOf="@+id/frameLayout_User_Picture" />
 
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </com.skydoves.androidveil.VeilLayout>
-
-            <com.skydoves.androidveil.VeilLayout
-                android:id="@+id/vLayout_body"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:veilLayout_baseAlpha="0.6"
-                app:veilLayout_baseColor="@color/colorSecondary2"
-                app:veilLayout_highlightAlpha="1.0"
-                app:veilLayout_highlightColor="@color/colorWhite"
-                app:veilLayout_radius="8dp"
-                app:veilLayout_shimmerEnable="true"
-                app:veilLayout_veiled="false">
-
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_layout_bottom_container"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/shape_container_dialog_bottom"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imgView_Picture">
+                    app:layout_constraintTop_toBottomOf="@+id/constraint_layout_head_container">
 
                     <TextView
                         android:id="@+id/textView_Account_Info"
@@ -280,10 +271,36 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </com.skydoves.androidveil.VeilLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shimmer_auto_start="false">
 
-        </LinearLayout>
+                <include layout="@layout/shimmer_my_account" />
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <include
+                android:id="@+id/layout_state_error"
+                layout="@layout/layout_state_error"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingStart="16dp"
+                android:paddingEnd="0dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 

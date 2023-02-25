@@ -1,8 +1,6 @@
 package com.unipi.mpsp21043.emarketadmin.database
 
 import android.app.Activity
-import android.content.Context
-import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -17,7 +15,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.unipi.mpsp21043.emarketadmin.models.*
 import com.unipi.mpsp21043.emarketadmin.ui.activities.*
-import com.unipi.mpsp21043.emarketadmin.ui.fragments.MyAccountFragment
 import com.unipi.mpsp21043.emarketadmin.ui.fragments.OrdersFragment
 import com.unipi.mpsp21043.emarketadmin.ui.fragments.ProductsFragment
 import com.unipi.mpsp21043.emarketadmin.ui.fragments.UsersFragment
@@ -461,6 +458,9 @@ class FirestoreHelper {
                         // Call a function of base activity for transferring the result to it.
                         activity.userDetailsSuccess(user)
                     }
+                    is MyAccountActivity -> {
+                        activity.userDetailsSuccess(user)
+                    }
                 }
             }
             .addOnFailureListener { e ->
@@ -468,6 +468,9 @@ class FirestoreHelper {
                 when (activity) {
                     is SignInActivity -> {
                         activity.hideProgressDialog()
+                    }
+                    is MyAccountActivity -> {
+                        activity.showErrorUI()
                     }
                 }
 
@@ -515,61 +518,6 @@ class FirestoreHelper {
 
                 Log.e(
                     activity.javaClass.simpleName,
-                    "Error while getting user details.",
-                    e
-                )
-            }
-    }
-
-    /**
-     * A function to get the logged user details from from FireStore Database.
-     */
-    fun getUserDetails(fragment: Fragment) {
-
-        // Here we pass the collection name from which we wants the data.
-        dbFirestore.collection(Constants.COLLECTION_USERS)
-            // The document id to get the Fields of user.
-            .document(getCurrentUserID())
-            .get()
-            .addOnSuccessListener { document ->
-
-                Log.d(fragment.javaClass.simpleName, document.toString())
-
-                // Here we have received the document snapshot which is converted into the User Data model object.
-                val user = document.toObject(User::class.java)!!
-
-                val sharedPreferences =
-                    fragment.requireContext().getSharedPreferences(
-                        Constants.EMARKET_PREFERENCES,
-                        Context.MODE_PRIVATE
-                    )
-
-                // Create an instance of the editor which is help us to edit the SharedPreference.
-                val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                editor.putString(
-                    Constants.LOGGED_IN_USERNAME,
-                    user.fullName
-                )
-                editor.apply()
-
-                when (fragment) {
-                    is MyAccountFragment -> {
-                        fragment.userDetailsSuccess(user)
-                    }
-                }
-            }
-            .addOnFailureListener { e ->
-
-                when (fragment) {
-                    is MyAccountFragment -> {
-                        fragment.unveilDetails()
-                        // TODO Show error
-                        /*fragment.hideProgressDialog()*/
-                    }
-                }
-
-                Log.e(
-                    fragment.javaClass.simpleName,
                     "Error while getting user details.",
                     e
                 )

@@ -187,7 +187,7 @@
     <string name="txt_users">Users</string>
     <string name="txt_my_account">My Account</string>
 
-    <!-- ~~~~~~~NAV BAR~~~~~~~ -->
+    <!-- Drawer Navigation Bar -->
     <string name="nav_drawer_open_menu">Open Side Menu</string>
     <string name="drawer_nav_bar_category_general">General</string>
     <string name="drawer_nav_bar_item_products">Products</string>
@@ -303,6 +303,8 @@
     <string name="add_address">Add Address</string>
     <string name="text_update_address">Update Address</string>
     <string name="text_client">Client</string>
+    <string name="txt_an_error_has_occurred">Error has occurred!</string>
+    <string name="txt_an_error_has_occurred_2">An error has appeared when retrieving details from database! Please try again!</string>
 
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 

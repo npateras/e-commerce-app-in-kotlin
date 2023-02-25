@@ -7,12 +7,12 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -36,12 +36,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setContentView(binding.root)
 
         setupUI()
-
         init()
     }
 
     private fun setupUI() {
-        setUpTabs()
+        setupTabs()
         setupActionBar()
         setupNavDrawer()
 
@@ -84,12 +83,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
 
         if (intent.hasExtra(Constants.EXTRA_SNACKBAR_TYPE)) {
-            if (intent.getStringExtra(Constants.EXTRA_SNACKBAR_TYPE) == "success") {
+            if (intent.getStringExtra(Constants.EXTRA_SNACKBAR_TYPE) == Constants.STATUS_SUCCESS) {
                 SnackBarSuccessClass
                     .make(binding.root, intent.getStringExtra(Constants.EXTRA_SNACKBAR_MESSAGE)!!)
                     .show()
             }
-            else if (intent.getStringExtra(Constants.EXTRA_SNACKBAR_TYPE) == "error") {
+            else if (intent.getStringExtra(Constants.EXTRA_SNACKBAR_TYPE) == Constants.STATUS_ERROR) {
                 SnackBarErrorClass
                     .make(binding.root, intent.getStringExtra(Constants.EXTRA_SNACKBAR_MESSAGE)!!)
                     .show()
@@ -98,22 +97,27 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
-    private fun setUpTabs() {
+    private fun setupTabs() {
         val adapter = ViewPagerMainAdapter(supportFragmentManager, lifecycle)
 
         binding.apply {
-            viewPagerHomeActivity.adapter = adapter
+            viewPager.adapter = adapter
+            viewPager.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    tabLayout.getTabAt(position)?.select()
+                }
+            })
 
-            TabLayoutMediator(tabs, viewPagerHomeActivity){tab, position ->
+            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 when (position) {
                     0 -> tab.setIcon(R.drawable.svg_food_stand_products)
                     1 -> tab.setIcon(R.drawable.svg_orders)
                     2 -> tab.setIcon(R.drawable.svg_users)
-                    3 -> tab.setIcon(R.drawable.svg_user_circle)
                 }
             }.attach()
 
-            tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
                     when (tab.position) {
                         0 -> {
@@ -128,11 +132,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                             toolbar.textViewActionBarHeader.text = getString(R.string.txt_users)
                             navView.setCheckedItem(R.id.nav_drawer_item_users)
                         }
-                        3 -> {
-                            toolbar.textViewActionBarHeader.text = getString(R.string.txt_my_account)
-                            navView.setCheckedItem(R.id.nav_drawer_item_profile)
-                        }
                     }
+                    viewPager.currentItem = tab.position
                 }
                 override fun onTabUnselected(tab: TabLayout.Tab) {}
                 override fun onTabReselected(tab: TabLayout.Tab) {}
@@ -143,15 +144,20 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
 
-        when (item.itemId) {
-            R.id.nav_drawer_item_products -> binding.tabs.getTabAt(0)?.select()
-            R.id.nav_drawer_item_orders -> binding.tabs.getTabAt(1)?.select()
-            R.id.nav_drawer_item_users -> binding.tabs.getTabAt(2)?.select()
-            R.id.nav_drawer_item_profile -> binding.tabs.getTabAt(3)?.select()
-            R.id.nav_drawer_item_exit -> ActivityCompat.finishAffinity(this)
+        binding.apply {
+            when (item.itemId) {
+                R.id.nav_drawer_item_products -> tabLayout.getTabAt(0)?.select()
+                R.id.nav_drawer_item_orders -> tabLayout.getTabAt(1)?.select()
+                R.id.nav_drawer_item_users -> tabLayout.getTabAt(2)?.select()
+                R.id.nav_drawer_item_profile -> {
+                    IntentUtils().goToMyAccountActivity(this@MainActivity)
+                    return false
+                }
+                R.id.nav_drawer_item_exit -> ActivityCompat.finishAffinity(this@MainActivity)
+            }
         }
 
-        val drawer = findViewById<DrawerLayout>(R.id.drawer_Layout)
+        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         drawer.closeDrawer(GravityCompat.START)
         return true
     }
@@ -192,10 +198,5 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     fun userFcmRegistrationTokenSuccess(token: String) {
         MyFirebaseMessagingService.addTokenToFirestore(token)
         Log.e(Constants.TAG, "New token: $token")
-    }
-
-    override fun getOnBackInvokedDispatcher(): OnBackInvokedDispatcher {
-        // doubleBackToExit()
-        return super.getOnBackInvokedDispatcher()
     }
 }

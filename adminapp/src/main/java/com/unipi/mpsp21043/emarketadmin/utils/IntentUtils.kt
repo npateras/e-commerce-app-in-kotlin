@@ -17,6 +17,12 @@ class IntentUtils {
         context.startActivity(intent)
     }
 
+    fun goToMyAccountActivity(context: Context) {
+        val intent = Intent(context, MyAccountActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        context.applicationContext.startActivity(intent)
+    }
+
     fun goToUpdateUserDetailsActivity(context: Context, user: User) {
         val intent = Intent(context, EditProfileActivity::class.java)
         intent.putExtra(Constants.EXTRA_USER_DETAILS, user)

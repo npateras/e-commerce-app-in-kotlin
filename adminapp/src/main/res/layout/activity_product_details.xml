@@ -200,7 +200,6 @@
 
                     </com.google.android.material.card.MaterialCardView>
 
-
                     <TextView
                         android:id="@+id/txtView_Description"
                         android:layout_width="0dp"
@@ -275,9 +274,22 @@
 
             </com.skydoves.androidveil.VeilLayout>
 
-
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/layout_state_error"
+        layout="@layout/layout_state_error"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingStart="16dp"
+        android:paddingEnd="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

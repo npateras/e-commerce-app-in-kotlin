@@ -101,7 +101,6 @@ class UsersFragment : Fragment() {
      */
     override fun onResume() {
         super.onResume()
-
         init()
     }
 
@@ -110,7 +109,6 @@ class UsersFragment : Fragment() {
      */
     override fun onDestroyView() {
         super.onDestroyView()
-
         _binding = null
     }
 }

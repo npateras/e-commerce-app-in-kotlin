@@ -53,14 +53,14 @@ class OrdersFragment : Fragment() {
             hideShimmerUI()
 
             binding.apply {
-                // sets RecyclerView's properties
+                // Sets RecyclerView's properties
                 recyclerViewItems.run {
                     adapter = OrdersListAdapter(
                         requireActivity(),
                         ordersList
                     )
-                    layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
                     setHasFixedSize(true)
+                    layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
                 }
             }
         }
@@ -100,7 +100,6 @@ class OrdersFragment : Fragment() {
      */
     override fun onResume() {
         super.onResume()
-
         init()
     }
 
@@ -109,7 +108,6 @@ class OrdersFragment : Fragment() {
      */
     override fun onDestroyView() {
         super.onDestroyView()
-
         _binding = null
     }
 }
