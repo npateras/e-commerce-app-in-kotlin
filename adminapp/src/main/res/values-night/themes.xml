@@ -15,6 +15,9 @@
         <item name="colorError">@color/colorSnackBarErrorBg</item>
         <item name="snackbarStyle">@style/Widget.MyApp.Snackbar</item>
         <item name="android:windowBackground">@color/colorBackground</item>
+
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:actionOverflowButtonStyle">@style/CustomActionButtonOverflow</item>
     </style>
 
     <style name="Theme.EMarket.NoActionBar">

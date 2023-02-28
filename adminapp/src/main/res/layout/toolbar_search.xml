@@ -25,6 +25,7 @@
             android:focusable="true"
             android:scaleType="fitCenter"
             android:src="@drawable/svg_search"
+            android:contentDescription="@string/text_search_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

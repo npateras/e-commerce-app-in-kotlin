@@ -43,7 +43,9 @@ class ProductsFragment : Fragment() {
     }
 
     private fun setupUI() {
-        binding.fabAdd.setOnClickListener { IntentUtils().goToAddNewProductActivity(this@ProductsFragment.requireContext())}
+        binding.apply {
+            fabAdd.setOnClickListener { IntentUtils().goToAddNewProductActivity(this@ProductsFragment.requireContext())}
+        }
     }
 
     private fun getProducts() {

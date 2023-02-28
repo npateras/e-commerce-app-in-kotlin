@@ -360,6 +360,38 @@ class FirestoreHelper {
             }
     }
 
+    fun getProductsList(fragment: Fragment, orderBy: String, direction: Query.Direction) {
+        // The collection name for PRODUCTS
+        dbFirestore.collection(Constants.COLLECTION_PRODUCTS)
+            .orderBy(orderBy, direction)
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+
+                // Here we get the list of boards in the form of documents.
+                Log.d("Products List (Sorted)", document.documents.toString())
+
+                // Here we have created a new instance for Products ArrayList.
+                val productsList: ArrayList<Product> = ArrayList()
+
+                // A for loop as per the list of documents to convert them into Products ArrayList.
+                for (i in document.documents) {
+
+                    val product = i.toObject(Product::class.java)
+                    product!!.id = i.id
+
+                    productsList.add(product)
+                }
+                when (fragment) {
+                    is ProductsFragment -> {
+                        fragment.successProductsListFromFirestore(productsList)
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("Get Products List (Sorted)", "Error while getting products list.", e)
+            }
+    }
+
     fun getProductsList(fragment: Fragment) {
         // The collection name for PRODUCTS
         dbFirestore.collection(Constants.COLLECTION_PRODUCTS)

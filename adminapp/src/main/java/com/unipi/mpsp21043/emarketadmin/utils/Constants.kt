@@ -37,6 +37,8 @@ object Constants {
     const val ROLE_ADMIN = "admin"
     const val STATUS_SUCCESS = "success"
     const val STATUS_ERROR = "error"
+    const val ASCENDING = "asc"
+    const val DESCENDING = "desc"
     val standardSimpleDateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.ENGLISH)
 
     // Firebase Constants

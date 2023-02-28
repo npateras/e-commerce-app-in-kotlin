@@ -187,6 +187,11 @@
     <string name="txt_users">Users</string>
     <string name="txt_my_account">My Account</string>
 
+    <string-array name="text_array_sorting_order">
+        <item>Ascending</item>
+        <item>Descending</item>
+    </string-array>
+    
     <!-- Drawer Navigation Bar -->
     <string name="nav_drawer_open_menu">Open Side Menu</string>
     <string name="drawer_nav_bar_category_general">General</string>
@@ -305,6 +310,19 @@
     <string name="text_client">Client</string>
     <string name="txt_an_error_has_occurred">Error has occurred!</string>
     <string name="txt_an_error_has_occurred_2">An error has appeared when retrieving details from database! Please try again!</string>
+    <string name="text_search_button">Search button</string>
+    <string name="text_search">Search something</string>
+    <string name="text_filter">Filter</string>
+    <string name="text_sort">Sort</string>
+    <string name="text_sort_results">Sort Results</string>
+    <string name="text_name">Name</string>
+    <string name="text_date_added">Date Added</string>
+    <string name="text_category">Category</string>
+    <string name="text_popularity">Popularity</string>
+    <string name="text_price">Price</string>
+    <string name="text_stock">Stock</string>
+    <string name="text_sale">Sale</string>
+    <string name="input_txt_hint_sort_type">Order of sorting</string>
 
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 

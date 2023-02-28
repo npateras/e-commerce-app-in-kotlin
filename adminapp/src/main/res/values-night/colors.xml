@@ -11,6 +11,7 @@
 
     <color name="colorText">#F3F4F6</color>
     <color name="colorText2">#D8DAE0</color>
+    <color name="colorActionBarOverflowIcon">#F3F4F6</color>
 
     <color name="colorPrimaryLightLowOpacity">#4D5D51</color>
     <color name="colorSecondary">#272A3F</color>

@@ -5,8 +5,14 @@
         <item name="boxStrokeWidth">1dp</item>
     </style>
 
-    <!-- TextViews -->
+    <!-- Style to replace actionbar overflow icon. set item 'android:actionOverflowButtonStyle' in AppTheme -->
+    <style name="CustomActionButtonOverflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+        <item name="android:src">@drawable/svg_sliders</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:contentDescription">@string/text_options</item>
+    </style>
 
+    <!-- TextViews -->
     <style name="TextView_Header_Main_Dark_14">
         <item name="android:fontFamily">@font/core_sans_cr_55_medium</item>
         <item name="android:textColor">@color/colorSecondary</item>
@@ -122,4 +128,5 @@
         <item name="android:padding">0dp</item>
     </style>
 
+    <string name="text_options">Options</string>
 </resources>

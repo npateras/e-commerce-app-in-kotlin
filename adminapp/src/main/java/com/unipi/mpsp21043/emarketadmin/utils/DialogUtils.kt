@@ -37,6 +37,17 @@ class DialogUtils {
         return dialog
     }
 
+    fun showDialogSelectSortProducts(context: Context): Dialog {
+        val dialog = Dialog(context)
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_select_sort_products)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        return dialog
+    }
+
     fun showDialogDeleteConfirmation(context: Context): Dialog {
         val dialog = Dialog(context)
 

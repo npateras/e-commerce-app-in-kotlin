@@ -17,6 +17,7 @@
     <color name="colorText">@color/colorSecondary</color>
     <color name="colorText2">@color/colorSecondary2</color>
     <color name="colorText3">@color/colorSecondary3</color>
+    <color name="colorActionBarOverflowIcon">@color/colorSecondary</color>
 
     <color name="colorStatusBar">@color/colorPrimary</color>
 

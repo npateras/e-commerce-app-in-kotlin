@@ -2,32 +2,38 @@ package com.unipi.mpsp21043.emarketadmin.ui.activities
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
+import android.widget.AdapterView.OnItemClickListener
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.firestore.Query
 import com.unipi.mpsp21043.emarketadmin.R
 import com.unipi.mpsp21043.emarketadmin.adapters.ViewPagerMainAdapter
 import com.unipi.mpsp21043.emarketadmin.database.FirestoreHelper
 import com.unipi.mpsp21043.emarketadmin.databinding.ActivityMainBinding
 import com.unipi.mpsp21043.emarketadmin.models.User
 import com.unipi.mpsp21043.emarketadmin.service.MyFirebaseMessagingService
+import com.unipi.mpsp21043.emarketadmin.ui.fragments.ProductsFragment
 import com.unipi.mpsp21043.emarketadmin.utils.*
 
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
+    private var sortingOrder: Query.Direction = Query.Direction.DESCENDING
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -198,5 +204,120 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     fun userFcmRegistrationTokenSuccess(token: String) {
         MyFirebaseMessagingService.addTokenToFirestore(token)
         Log.e(Constants.TAG, "New token: $token")
+    }
+
+    private fun showSelectSortProductsDialog() {
+
+        val fragment: ProductsFragment = getVisibleFragment() as ProductsFragment
+
+        binding.apply {
+            val dialog = DialogUtils().showDialogSelectSortProducts(this@MainActivity)
+            dialog.show()
+
+            val arrayAdapter = ArrayAdapter(this@MainActivity,
+                R.layout.dropdown_item_sorting,
+                resources.getStringArray(R.array.text_array_sorting_order)
+            )
+            val dialogDropdownBox = dialog.findViewById<AutoCompleteTextView>(R.id.auto_complete_text_view_sort_products_order)
+            dialogDropdownBox.setAdapter(arrayAdapter)
+
+            dialogDropdownBox.onItemClickListener =
+                OnItemClickListener { _, _, position, _ ->
+                    // val selectedValue = arrayAdapter.getItem(position)
+                    if (arrayAdapter.getItemId(position).toString() == "0")
+                        sortingOrder = Query.Direction.ASCENDING
+                    else if (arrayAdapter.getItemId(position).toString() == "1")
+                        sortingOrder = Query.Direction.DESCENDING
+                }
+
+            val dialogSelectButton = dialog.findViewById<MaterialButton>(R.id.button_dialog_select_sort_products)
+            dialogSelectButton.setOnClickListener {
+                /* Name */
+                if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_products_name).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(fragment, Constants.FIELD_NAME, sortingOrder)
+
+                /* Category */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_products_category).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(fragment, Constants.FIELD_CATEGORY, sortingOrder)
+
+                /* Date Added */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_products_date_added).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(fragment, Constants.FIELD_DATE_ADDED, sortingOrder)
+
+                /* Category */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_products_category).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(fragment, Constants.FIELD_CATEGORY, sortingOrder)
+
+                /* Popularity */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_products_popularity).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(fragment, Constants.FIELD_POPULARITY, sortingOrder)
+
+                /* Price */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_products_price).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(fragment, Constants.FIELD_PRICE, sortingOrder)
+
+                /* Stock */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_products_stock).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(fragment, Constants.FIELD_STOCK, sortingOrder)
+
+                /* Sale */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_products_sale).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(fragment, Constants.FIELD_SALE, sortingOrder)
+
+                dialog.dismiss()
+            }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.sort_and_filter_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+
+        R.id.action_bar_overflow_sort -> {
+            binding.apply {
+                tabLayout.selectedTabPosition.let {
+                    when (it) {
+                        0 -> showSelectSortProductsDialog()
+                        /*1 -> showSelectSortOrdersDialog()
+                        2 -> showSelectSortUsersDialog()*/
+                    }
+                }
+
+                /*if (tabLayout.selectedTabPosition == 0)
+                    showSelectSortProductsDialog()
+                else if (tabLayout.selectedTabPosition == 1)
+                    showSelectSortProductsDialog()
+                else if (tabLayout.selectedTabPosition == 2)
+                    showSelectSortProductsDialog()*/
+            }
+            true
+        }
+
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun getVisibleFragment(): Fragment? {
+        val fragmentManager: FragmentManager = this@MainActivity.supportFragmentManager
+        val fragments: List<Fragment> = fragmentManager.fragments
+        for (fragment in fragments) {
+            if (fragment.isVisible) return fragment
+        }
+        return null
     }
 }
