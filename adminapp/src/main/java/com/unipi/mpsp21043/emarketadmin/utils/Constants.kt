@@ -65,7 +65,9 @@ object Constants {
     const val FIELD_COMPLETE_PROFILE: String = "profileCompleted"
     const val FIELD_DATE_ADDED: String = "dateAdded"
     const val FIELD_FULL_NAME: String = "fullName"
+    const val FIELD_EMAIL: String = "email"
     const val FIELD_NAME: String = "name"
+    const val FIELD_ROLE: String = "role"
     const val FIELD_NOTIFICATIONS: String = "notifications"
     const val FIELD_PHONE_CODE: String = "phoneCode"
     const val FIELD_PHONE_NUMBER: String = "phoneNumber"
@@ -75,6 +77,12 @@ object Constants {
     const val FIELD_REGISTRATION_TOKENS: String = "registrationTokens"
     const val FIELD_SALE: String = "sale"
     const val FIELD_STOCK: String = "stock"
+    const val FIELD_TITLE: String = "title"
+    const val FIELD_ORDER_DATE: String = "orderDate"
+    const val FIELD_ORDER_STATUS: String = "orderStatus"
+    const val FIELD_PAYMENT_METHOD: String = "paymentMethod"
+    const val FIELD_SUB_TOTAL_AMOUNT: String = "subTotalAmount"
+    const val FIELD_TOTAL_AMOUNT: String = "totalAmount"
     const val FIELD_USER_ID: String = "userId"
 
     // Intent Extras

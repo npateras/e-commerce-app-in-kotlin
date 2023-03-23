@@ -48,6 +48,28 @@ class DialogUtils {
         return dialog
     }
 
+    fun showDialogSelectSortOrders(context: Context): Dialog {
+        val dialog = Dialog(context)
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_select_sort_orders)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        return dialog
+    }
+
+    fun showDialogSelectSortUsers(context: Context): Dialog {
+        val dialog = Dialog(context)
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_select_sort_users)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        return dialog
+    }
+
     fun showDialogDeleteConfirmation(context: Context): Dialog {
         val dialog = Dialog(context)
 

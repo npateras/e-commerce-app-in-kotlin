@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_bar_overflow_search"
+        android:title="@string/text_sort"
+        android:icon="@drawable/svg_search"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+
+    <item
         android:id="@+id/action_bar_overflow_sort"
         android:title="@string/text_sort"
         android:icon="@drawable/svg_sort"

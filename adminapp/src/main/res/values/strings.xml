@@ -323,6 +323,20 @@
     <string name="text_stock">Stock</string>
     <string name="text_sale">Sale</string>
     <string name="input_txt_hint_sort_type">Order of sorting</string>
+    <string name="text_order_number">Order Number</string>
+    <string name="text_order_date_created">Order Date Created</string>
+    <string name="text_order_status">Order Status</string>
+    <string name="text_payment_method">Payment Method</string>
+    <string name="text_sub_total_amount">Sub Total Amount</string>
+    <string name="text_total_amount">Total Amount</string>
+    <string name="text_user_id">User ID</string>
+    <string name="text_profile_completed">Profile Completed</string>
+    <string name="text_role">Role</string>
+    <string name="text_notifications">Notifications</string>
+    <string name="text_phone_number">Phone Number</string>
+    <string name="text_phone_code">Phone Number Code</string>
+    <string name="text_email">Email</string>
+    <string name="text_full_name">Full Name</string>
 
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageButton
+<!--        <ImageButton
             android:id="@+id/action_bar_button_search"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -30,7 +30,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/colorWhite" />
+            app:tint="@color/colorWhite" />-->
 
         <TextView
             android:id="@+id/textView_ActionBar_Header"

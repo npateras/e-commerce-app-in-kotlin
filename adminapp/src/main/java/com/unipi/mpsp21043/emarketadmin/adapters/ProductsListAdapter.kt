@@ -4,13 +4,18 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.DiffUtil.DiffResult
 import androidx.recyclerview.widget.RecyclerView
 import com.unipi.mpsp21043.emarketadmin.R
 import com.unipi.mpsp21043.emarketadmin.databinding.ItemProductBinding
 import com.unipi.mpsp21043.emarketadmin.models.Product
 import com.unipi.mpsp21043.emarketadmin.utils.GlideLoader
 import com.unipi.mpsp21043.emarketadmin.utils.IntentUtils
+import java.util.*
 
 
 /**
@@ -19,7 +24,9 @@ import com.unipi.mpsp21043.emarketadmin.utils.IntentUtils
 open class ProductsListAdapter(
     private val context: Context,
     private var list: ArrayList<Product>
-) : RecyclerView.Adapter<ProductsListAdapter.ProductsViewHolder>() {
+) : RecyclerView.Adapter<ProductsListAdapter.ProductsViewHolder>(), Filterable {
+
+    var listFiltered: ArrayList<Product> = list
 
     /**
      * Inflates the item views which is designed in xml layout file
@@ -37,6 +44,27 @@ open class ProductsListAdapter(
         )
     }
 
+    open fun setList(context: Context?, productList: ArrayList<Product>){
+        val  result: DiffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback(){
+            override fun getOldListSize(): Int{
+                return this@ProductsListAdapter.list.size
+            }
+            override fun getNewListSize(): Int{
+                return list.size
+            }
+            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean{
+                return this@ProductsListAdapter.list[oldItemPosition].name === list[newItemPosition].name
+            }
+            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean{
+                val newProduct: Product = this@ProductsListAdapter .list[oldItemPosition]
+                val oldProduct: Product = list[newItemPosition]
+                return newProduct.name === oldProduct.name
+            }
+        })
+        this.listFiltered = list
+        result.dispatchUpdatesTo(this)
+    }
+    
     /**
      * Binds each item in the ArrayList to a view
      *
@@ -95,11 +123,44 @@ open class ProductsListAdapter(
      * Gets the number of items in the list
      */
     override fun getItemCount(): Int {
-        return list.size
+        return listFiltered.size
     }
 
     /**
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      */
     class ProductsViewHolder(val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root)
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val charString: String = constraint.toString()
+                listFiltered = if (charString.isEmpty()) {
+                    list
+                } else {
+                    val filteredList: ArrayList<Product> = ArrayList()
+                    for (movie in list) {
+                        if (movie.name.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(movie)
+                        }
+                    }
+                    filteredList
+                }
+
+                val filterResults = FilterResults()
+                filterResults.values = listFiltered
+                return filterResults
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+
+                listFiltered = results?.values as ArrayList<Product>
+
+                notifyDataSetChanged()
+            }
+        }
+    }
+
 }

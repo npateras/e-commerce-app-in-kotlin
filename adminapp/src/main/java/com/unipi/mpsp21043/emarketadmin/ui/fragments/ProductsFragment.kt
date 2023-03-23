@@ -21,6 +21,7 @@ class ProductsFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    lateinit var productsListAdapter: ProductsListAdapter
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     override fun onCreateView(
@@ -58,16 +59,17 @@ class ProductsFragment : Fragment() {
      * @param productsList Will receive the product list from cloud firestore.
      */
     fun successProductsListFromFirestore(productsList: ArrayList<Product>) {
-
         if (productsList.size > 0) {
             hideShimmerUI()
 
+            productsListAdapter = ProductsListAdapter(
+                requireActivity(),
+                productsList
+            )
+            productsListAdapter.setList(this@ProductsFragment.requireContext(), productsList)
             // Sets RecyclerView's properties
             binding.recyclerViewItems.run {
-                adapter = ProductsListAdapter(
-                    requireActivity(),
-                    productsList
-                )
+                adapter = productsListAdapter
                 hasFixedSize()
                 layoutManager = GridLayoutManager(this@ProductsFragment.requireContext(), 3, GridLayoutManager.VERTICAL, false)
             }
@@ -103,6 +105,13 @@ class ProductsFragment : Fragment() {
             recyclerViewItems.visibility = View.GONE
             shimmerViewContainer.visibility = View.GONE
             shimmerViewContainer.stopShimmer()
+        }
+    }
+
+    private fun hideEmptyStateUI() {
+        binding.apply {
+            layoutEmptyState.root.visibility = View.GONE
+            recyclerViewItems.visibility = View.VISIBLE
         }
     }
 

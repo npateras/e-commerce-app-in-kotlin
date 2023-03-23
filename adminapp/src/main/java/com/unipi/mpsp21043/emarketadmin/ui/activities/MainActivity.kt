@@ -1,5 +1,7 @@
 package com.unipi.mpsp21043.emarketadmin.ui.activities
 
+import android.app.SearchManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -7,7 +9,12 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
+import android.widget.SearchView.OnQueryTextListener
+import android.window.OnBackInvokedCallback
+import androidx.activity.OnBackPressedCallback
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
@@ -26,14 +33,18 @@ import com.unipi.mpsp21043.emarketadmin.database.FirestoreHelper
 import com.unipi.mpsp21043.emarketadmin.databinding.ActivityMainBinding
 import com.unipi.mpsp21043.emarketadmin.models.User
 import com.unipi.mpsp21043.emarketadmin.service.MyFirebaseMessagingService
+import com.unipi.mpsp21043.emarketadmin.ui.fragments.OrdersFragment
 import com.unipi.mpsp21043.emarketadmin.ui.fragments.ProductsFragment
+import com.unipi.mpsp21043.emarketadmin.ui.fragments.UsersFragment
 import com.unipi.mpsp21043.emarketadmin.utils.*
+import java.util.*
 
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
     private var sortingOrder: Query.Direction = Query.Direction.DESCENDING
+    private lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +61,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setupActionBar()
         setupNavDrawer()
 
-        binding.toolbar.actionBarButtonSearch.setOnClickListener { IntentUtils().goToSearchActivity(this) }
+        // binding.toolbar.actionBarButtonSearch.setOnClickListener { IntentUtils().goToSearchActivity(this) }
     }
 
     private fun setupActionBar() {
@@ -83,7 +94,23 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun init() {
+        // Handle Back Button Press.
+        onBackPressedDispatcher.addCallback(this,onBackPressedCallback)
+
+        /*onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (!searchView.isIconified) {
+                    searchView.isIconified = true
+                    return
+                }
+                @Suppress("DEPRECATION")
+                this@MainActivity.onBackPressed();
+            }
+
+        })*/
+
         if (FirestoreHelper().getCurrentUserID() != "") {
             FirestoreHelper().getUserFCMRegistrationToken(this)
         }
@@ -208,7 +235,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     private fun showSelectSortProductsDialog() {
 
-        val fragment: ProductsFragment = getVisibleFragment() as ProductsFragment
+        val productsFragment: ProductsFragment = getVisibleFragment() as ProductsFragment
 
         binding.apply {
             val dialog = DialogUtils().showDialogSelectSortProducts(this@MainActivity)
@@ -235,42 +262,174 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 /* Name */
                 if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_products_name).isChecked)
                     FirestoreHelper()
-                        .getProductsList(fragment, Constants.FIELD_NAME, sortingOrder)
+                        .getProductsList(productsFragment, Constants.FIELD_NAME, sortingOrder)
 
                 /* Category */
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_products_category).isChecked)
                     FirestoreHelper()
-                        .getProductsList(fragment, Constants.FIELD_CATEGORY, sortingOrder)
+                        .getProductsList(productsFragment, Constants.FIELD_CATEGORY, sortingOrder)
 
                 /* Date Added */
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_products_date_added).isChecked)
                     FirestoreHelper()
-                        .getProductsList(fragment, Constants.FIELD_DATE_ADDED, sortingOrder)
+                        .getProductsList(productsFragment, Constants.FIELD_DATE_ADDED, sortingOrder)
 
                 /* Category */
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_products_category).isChecked)
                     FirestoreHelper()
-                        .getProductsList(fragment, Constants.FIELD_CATEGORY, sortingOrder)
+                        .getProductsList(productsFragment, Constants.FIELD_CATEGORY, sortingOrder)
 
                 /* Popularity */
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_products_popularity).isChecked)
                     FirestoreHelper()
-                        .getProductsList(fragment, Constants.FIELD_POPULARITY, sortingOrder)
+                        .getProductsList(productsFragment, Constants.FIELD_POPULARITY, sortingOrder)
 
                 /* Price */
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_products_price).isChecked)
                     FirestoreHelper()
-                        .getProductsList(fragment, Constants.FIELD_PRICE, sortingOrder)
+                        .getProductsList(productsFragment, Constants.FIELD_PRICE, sortingOrder)
 
                 /* Stock */
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_products_stock).isChecked)
                     FirestoreHelper()
-                        .getProductsList(fragment, Constants.FIELD_STOCK, sortingOrder)
+                        .getProductsList(productsFragment, Constants.FIELD_STOCK, sortingOrder)
 
                 /* Sale */
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_products_sale).isChecked)
                     FirestoreHelper()
-                        .getProductsList(fragment, Constants.FIELD_SALE, sortingOrder)
+                        .getProductsList(productsFragment, Constants.FIELD_SALE, sortingOrder)
+
+                dialog.dismiss()
+            }
+        }
+    }
+
+    private fun showSelectSortOrdersDialog() {
+
+        val ordersFragment: OrdersFragment = getVisibleFragment() as OrdersFragment
+
+        binding.apply {
+            val dialog = DialogUtils().showDialogSelectSortOrders(this@MainActivity)
+            dialog.show()
+
+            val arrayAdapter = ArrayAdapter(this@MainActivity,
+                R.layout.dropdown_item_sorting,
+                resources.getStringArray(R.array.text_array_sorting_order)
+            )
+            val dialogDropdownBox = dialog.findViewById<AutoCompleteTextView>(R.id.auto_complete_text_view_sort_orders)
+            dialogDropdownBox.setAdapter(arrayAdapter)
+
+            dialogDropdownBox.onItemClickListener =
+                OnItemClickListener { _, _, position, _ ->
+                    // val selectedValue = arrayAdapter.getItem(position)
+                    if (arrayAdapter.getItemId(position).toString() == "0")
+                        sortingOrder = Query.Direction.ASCENDING
+                    else if (arrayAdapter.getItemId(position).toString() == "1")
+                        sortingOrder = Query.Direction.DESCENDING
+                }
+
+            val dialogSelectButton = dialog.findViewById<MaterialButton>(R.id.button_dialog_select_sort_orders)
+            dialogSelectButton.setOnClickListener {
+                /* Order Number */
+                if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_order_number).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(ordersFragment, Constants.FIELD_TITLE, sortingOrder)
+
+                /* Order Date Created */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_order_date_created).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(ordersFragment, Constants.FIELD_ORDER_DATE, sortingOrder)
+
+                /* Order Status */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_order_status).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(ordersFragment, Constants.FIELD_ORDER_STATUS, sortingOrder)
+
+                /* Payment Method */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_order_payment_method).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(ordersFragment, Constants.FIELD_PAYMENT_METHOD, sortingOrder)
+
+                /* Sub Total Amount */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_order_sub_total_amount).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(ordersFragment, Constants.FIELD_SUB_TOTAL_AMOUNT, sortingOrder)
+
+                /* Total Amount */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_order_total_amount).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(ordersFragment, Constants.FIELD_TOTAL_AMOUNT, sortingOrder)
+
+                /* User ID */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_order_user_id).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(ordersFragment, Constants.FIELD_USER_ID, sortingOrder)
+
+                dialog.dismiss()
+            }
+        }
+    }
+
+    private fun showSelectSortUsersDialog() {
+
+        val usersFragment: UsersFragment = getVisibleFragment() as UsersFragment
+
+        binding.apply {
+            val dialog = DialogUtils().showDialogSelectSortUsers(this@MainActivity)
+            dialog.show()
+
+            val arrayAdapter = ArrayAdapter(this@MainActivity,
+                R.layout.dropdown_item_sorting,
+                resources.getStringArray(R.array.text_array_sorting_order)
+            )
+            val dialogDropdownBox = dialog.findViewById<AutoCompleteTextView>(R.id.auto_complete_text_view_sort_users)
+            dialogDropdownBox.setAdapter(arrayAdapter)
+
+            dialogDropdownBox.onItemClickListener =
+                OnItemClickListener { _, _, position, _ ->
+                    // val selectedValue = arrayAdapter.getItem(position)
+                    if (arrayAdapter.getItemId(position).toString() == "0")
+                        sortingOrder = Query.Direction.ASCENDING
+                    else if (arrayAdapter.getItemId(position).toString() == "1")
+                        sortingOrder = Query.Direction.DESCENDING
+                }
+
+            val dialogSelectButton = dialog.findViewById<MaterialButton>(R.id.button_dialog_select_sort_users)
+            dialogSelectButton.setOnClickListener {
+                /* Order Number */
+                if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_users_full_name).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(usersFragment, Constants.FIELD_FULL_NAME, sortingOrder)
+
+                /* Email */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_users_email).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(usersFragment, Constants.FIELD_EMAIL, sortingOrder)
+
+                /* Phone Number Code */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_users_phone_code).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(usersFragment, Constants.FIELD_PHONE_CODE, sortingOrder)
+
+                /* Phone Number */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_users_phone).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(usersFragment, Constants.FIELD_PHONE_NUMBER, sortingOrder)
+
+                /* Notifications */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_users_notifications).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(usersFragment, Constants.FIELD_NOTIFICATIONS, sortingOrder)
+
+                /* Role */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_users_role).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(usersFragment, Constants.FIELD_ROLE, sortingOrder)
+
+                /* Profile Completed */
+                else if (dialog.findViewById<RadioButton>(R.id.radio_button_sort_users_profile_completed).isChecked)
+                    FirestoreHelper()
+                        .getProductsList(usersFragment, Constants.FIELD_COMPLETE_PROFILE, sortingOrder)
 
                 dialog.dismiss()
             }
@@ -279,7 +438,68 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.sort_and_filter_menu, menu)
+        menuInflater.inflate(R.menu.action_bar_overflow_menu, menu)
+
+        val searchItem = menu!!.findItem(R.id.action_bar_overflow_search)
+        searchView = searchItem.actionView as SearchView
+        val searchManager = getSystemService(SEARCH_SERVICE) as SearchManager
+        searchView.setSearchableInfo(searchManager
+            .getSearchableInfo(componentName))
+        searchView.maxWidth = Integer.MAX_VALUE
+        searchView.queryHint = getString(R.string.txt_search_something)
+
+        // below line is to call set on query text listener method.
+        searchView.setOnQueryTextListener(object : OnQueryTextListener, SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                binding.apply {
+                    tabLayout.selectedTabPosition.let {
+                        when (it) {
+                            0 -> {
+                                val fragment: ProductsFragment = getVisibleFragment() as ProductsFragment
+                                fragment.productsListAdapter.filter.filter(query)
+                            }
+                            1 -> {
+                                val fragment: ProductsFragment = getVisibleFragment() as ProductsFragment
+                                fragment.productsListAdapter.filter.filter(query)
+                            }
+                            2 -> {
+                                val fragment: ProductsFragment = getVisibleFragment() as ProductsFragment
+                                fragment.productsListAdapter.filter.filter(query)
+                            }
+                        }
+                    }
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                // inside on query text change method we are
+                // calling a method to filter our recycler view.
+                binding.apply {
+                    tabLayout.selectedTabPosition.let {
+                        when (it) {
+                            0 -> {
+                                val fragment: ProductsFragment = getVisibleFragment() as ProductsFragment
+
+                                fragment.productsListAdapter.filter.filter(newText)
+                            }
+                            1 -> {
+                                val fragment: ProductsFragment = getVisibleFragment() as ProductsFragment
+
+                                fragment.productsListAdapter.filter.filter(newText)
+                            }
+                            2 -> {
+                                val fragment: ProductsFragment = getVisibleFragment() as ProductsFragment
+
+                                fragment.productsListAdapter.filter.filter(newText)
+                            }
+                        }
+                    }
+                }
+                return false
+            }
+        })
+
         return true
     }
 
@@ -290,17 +510,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 tabLayout.selectedTabPosition.let {
                     when (it) {
                         0 -> showSelectSortProductsDialog()
-                        /*1 -> showSelectSortOrdersDialog()
-                        2 -> showSelectSortUsersDialog()*/
+                        1 -> showSelectSortOrdersDialog()
+                        2 -> showSelectSortUsersDialog()
                     }
                 }
-
-                /*if (tabLayout.selectedTabPosition == 0)
-                    showSelectSortProductsDialog()
-                else if (tabLayout.selectedTabPosition == 1)
-                    showSelectSortProductsDialog()
-                else if (tabLayout.selectedTabPosition == 2)
-                    showSelectSortProductsDialog()*/
             }
             true
         }
@@ -319,5 +532,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             if (fragment.isVisible) return fragment
         }
         return null
+    }
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (!searchView.isIconified) {
+                searchView.isIconified = true
+                return
+            }
+            ActivityCompat.finishAffinity(this@MainActivity)
+        }
     }
 }
