@@ -139,11 +139,46 @@ open class ProductsListAdapter(
                     list
                 } else {
                     val filteredList: ArrayList<Product> = ArrayList()
-                    for (movie in list) {
-                        if (movie.name.lowercase()
+                    for (item in list) {
+                        if (item.name.lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
-                            filteredList.add(movie)
+                            filteredList.add(item)
+                        }
+                        if (item.addedByUser.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.category.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.dateAdded.toString().lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.description.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.id.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.weightUnit.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.price.toString().lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
                         }
                     }
                     filteredList

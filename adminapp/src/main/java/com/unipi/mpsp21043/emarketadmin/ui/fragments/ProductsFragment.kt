@@ -108,13 +108,6 @@ class ProductsFragment : Fragment() {
         }
     }
 
-    private fun hideEmptyStateUI() {
-        binding.apply {
-            layoutEmptyState.root.visibility = View.GONE
-            recyclerViewItems.visibility = View.VISIBLE
-        }
-    }
-
     /**
      * The fragment's onResume() will be called only when the Activity's onResume() is called.
      */

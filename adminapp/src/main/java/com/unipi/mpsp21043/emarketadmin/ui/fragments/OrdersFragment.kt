@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unipi.mpsp21043.emarketadmin.adapters.OrdersListAdapter
+import com.unipi.mpsp21043.emarketadmin.adapters.ProductsListAdapter
 import com.unipi.mpsp21043.emarketadmin.database.FirestoreHelper
 import com.unipi.mpsp21043.emarketadmin.databinding.FragmentOrdersBinding
 import com.unipi.mpsp21043.emarketadmin.models.Order
@@ -18,6 +19,7 @@ class OrdersFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    lateinit var ordersListAdapter: OrdersListAdapter
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     override fun onCreateView(
@@ -53,12 +55,14 @@ class OrdersFragment : Fragment() {
             hideShimmerUI()
 
             binding.apply {
+                ordersListAdapter = OrdersListAdapter(
+                    requireActivity(),
+                    ordersList
+                )
+                ordersListAdapter.setList(this@OrdersFragment.requireContext(), ordersList)
                 // Sets RecyclerView's properties
                 recyclerViewItems.run {
-                    adapter = OrdersListAdapter(
-                        requireActivity(),
-                        ordersList
-                    )
+                    adapter = ordersListAdapter
                     setHasFixedSize(true)
                     layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
                 }

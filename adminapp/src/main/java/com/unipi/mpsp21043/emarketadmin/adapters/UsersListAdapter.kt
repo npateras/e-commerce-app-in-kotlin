@@ -3,11 +3,15 @@ package com.unipi.mpsp21043.emarketadmin.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.unipi.mpsp21043.emarketadmin.databinding.ItemUserBinding
 import com.unipi.mpsp21043.emarketadmin.models.User
 import com.unipi.mpsp21043.emarketadmin.utils.GlideLoader
 import com.unipi.mpsp21043.emarketadmin.utils.IntentUtils
+import java.util.*
 
 
 /**
@@ -16,7 +20,9 @@ import com.unipi.mpsp21043.emarketadmin.utils.IntentUtils
 open class UsersListAdapter(
     private val context: Context,
     private var list: ArrayList<User>
-) : RecyclerView.Adapter<UsersListAdapter.UsersViewHolder>() {
+) : RecyclerView.Adapter<UsersListAdapter.UsersViewHolder>(), Filterable {
+
+    var listFiltered: ArrayList<User> = list
 
     /**
      * Inflates the item views which is designed in xml layout file
@@ -34,6 +40,30 @@ open class UsersListAdapter(
         )
     }
 
+    open fun setList(context: Context?, UsersList: ArrayList<User>){
+        val  result: DiffUtil.DiffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback(){
+            override fun getOldListSize(): Int{
+                return this@UsersListAdapter.list.size
+            }
+
+            override fun getNewListSize(): Int{
+                return list.size
+            }
+
+            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean{
+                return this@UsersListAdapter.list[oldItemPosition].email === list[newItemPosition].email
+            }
+
+            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean{
+                val newUser: User = this@UsersListAdapter.list[oldItemPosition]
+                val oldUser: User = list[newItemPosition]
+                return newUser.email === oldUser.email
+            }
+        })
+        this.listFiltered = list
+        result.dispatchUpdatesTo(this)
+    }
+    
     /**
      * Binds each item in the ArrayList to a view
      *
@@ -71,4 +101,61 @@ open class UsersListAdapter(
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      */
     class UsersViewHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root)
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val charString: String = constraint.toString()
+                listFiltered = if (charString.isEmpty()) {
+                    list
+                } else {
+                    val filteredList: ArrayList<User> = ArrayList()
+                    for (item in list) {
+                        if (item.email.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.fullName.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.phoneNumber.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.phoneCode.toString().lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.role.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.id.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                    }
+                    filteredList
+                }
+
+                val filterResults = FilterResults()
+                filterResults.values = listFiltered
+                return filterResults
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+
+                listFiltered = results?.values as ArrayList<User>
+
+                notifyDataSetChanged()
+            }
+        }
+    }
 }

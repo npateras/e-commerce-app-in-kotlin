@@ -2,34 +2,34 @@
     <string name="app_name">eMarket Admin</string>
 
     <!-- Currency -->
-    <string name="curr_eur" translatable="false">€</string>
-    <string name="curr_gbp" translatable="false">£</string>
-    <string name="curr_usd" translatable="false">$</string>
+    <string name="curr_eur">€</string>
+    <string name="curr_gbp">£</string>
+    <string name="curr_usd">$</string>
 
     <!-- Activity/Fragment Labels -->
-    <string name="label_activity_sign_in_with_phone_number">Add a number</string>
-    <string name="label_activity_sign_in_with_phone_number_verification">Verify number</string>
-    <string name="label_activity_notifications">Notifications</string>
+    <string name="label_activity_sign_in_with_phone_number">Καταχώρισε αρ. τηλεφώνου</string>
+    <string name="label_activity_sign_in_with_phone_number_verification">Επιβεβαίωση αρ. τηλεφώνου</string>
+    <string name="label_activity_notifications">Ειδοποιήσεις</string>
 
     <!-- Tabs -->
-    <string name="tab_pending">Pending</string>
-    <string name="tab_completed">Completed</string>
+    <string name="tab_pending">Εκκρεμεί</string>
+    <string name="tab_completed">Ολοκληρώθηκε</string>
 
     <!-- Buttons -->
-    <string name="button_sign_in">Sign In</string>
-    <string name="button_sign_up">Sign Up</string>
-    <string name="button_sign_in_phone">Continue with phone number</string>
-    <string name="button_sign_in_google">Continue with google account</string>
-    <string name="button_send">Send</string>
-    <string name="button_verify">Verify</string>
-    <string name="button_resend">Resend</string>
-    <string name="button_dismiss">Dismiss</string>
-    <string name="button_try_again">Try Again</string>
-    <string name="button_resend_in">Resend in %1$ss</string>
+    <string name="button_sign_in">Συνδεθείτε</string>
+    <string name="button_sign_up">Εγγραφείτε</string>
+    <string name="button_sign_in_phone">Συνέχεια με αρ. τηλεφώνου</string>
+    <string name="button_sign_in_google">Συνέχεια με λογαριασμό Google</string>
+    <string name="button_send">Αποστολή</string>
+    <string name="button_verify">Επιβεβαίωση</string>
+    <string name="button_resend">Εκ νέου αποστολή</string>
+    <string name="button_dismiss">Παράβλεψη</string>
+    <string name="button_try_again">Προσπάθησε ξανά</string>
+    <string name="button_resend_in">Αποστολή εκ νέου σε %1$ss</string>
 
 
     <!-- Text Views -->
-    <string name="txt_congratulations">Congratulations!</string>
+    <string name="txt_congratulations">Συγχαρητήρια!</string>
     <string name="txt_congratulations_2">Your account has been
         created successfully! You can now
         continue using eMarket.</string>
@@ -186,7 +186,7 @@
         <item>Ascending</item>
         <item>Descending</item>
     </string-array>
-    
+
     <!-- Drawer Navigation Bar -->
     <string name="nav_drawer_open_menu">Open Side Menu</string>
     <string name="drawer_nav_bar_category_general">General</string>

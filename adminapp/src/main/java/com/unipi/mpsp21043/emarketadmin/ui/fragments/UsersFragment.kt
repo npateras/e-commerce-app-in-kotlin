@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.unipi.mpsp21043.emarketadmin.adapters.OrdersListAdapter
 import com.unipi.mpsp21043.emarketadmin.adapters.UsersListAdapter
 import com.unipi.mpsp21043.emarketadmin.database.FirestoreHelper
 import com.unipi.mpsp21043.emarketadmin.databinding.FragmentUsersBinding
@@ -21,6 +22,7 @@ class UsersFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    lateinit var usersListAdapter: UsersListAdapter
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     override fun onCreateView(
@@ -55,12 +57,13 @@ class UsersFragment : Fragment() {
         if (usersList.size > 0) {
             hideShimmerUI()
 
+            usersListAdapter = UsersListAdapter(
+                requireActivity(),
+                usersList
+            )
             // Sets RecyclerView's properties
             binding.recyclerViewItems.run {
-                adapter = UsersListAdapter(
-                    requireActivity(),
-                    usersList
-                )
+                adapter = usersListAdapter
                 hasFixedSize()
                 layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
             }

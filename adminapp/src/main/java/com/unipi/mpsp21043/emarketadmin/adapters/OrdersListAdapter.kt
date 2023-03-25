@@ -3,12 +3,18 @@ package com.unipi.mpsp21043.emarketadmin.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.unipi.mpsp21043.emarketadmin.R
 import com.unipi.mpsp21043.emarketadmin.databinding.ItemOrderBinding
 import com.unipi.mpsp21043.emarketadmin.models.Order
+import com.unipi.mpsp21043.emarketadmin.models.Product
 import com.unipi.mpsp21043.emarketadmin.utils.Constants
 import com.unipi.mpsp21043.emarketadmin.utils.IntentUtils
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 /**
@@ -17,7 +23,9 @@ import com.unipi.mpsp21043.emarketadmin.utils.IntentUtils
 open class OrdersListAdapter(
     private val context: Context,
     private var list: ArrayList<Order>
-) : RecyclerView.Adapter<OrdersListAdapter.OrdersViewHolder>() {
+) : RecyclerView.Adapter<OrdersListAdapter.OrdersViewHolder>(), Filterable {
+
+    var listFiltered: ArrayList<Order> = list
 
     /**
      * Inflates the item views which is designed in xml layout file
@@ -33,6 +41,30 @@ open class OrdersListAdapter(
                 false
             )
         )
+    }
+
+    open fun setList(context: Context?, ordersList: ArrayList<Order>){
+        val  result: DiffUtil.DiffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback(){
+            override fun getOldListSize(): Int{
+                return this@OrdersListAdapter.list.size
+            }
+
+            override fun getNewListSize(): Int{
+                return list.size
+            }
+
+            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean{
+                return this@OrdersListAdapter.list[oldItemPosition].title === list[newItemPosition].title
+            }
+
+            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean{
+                val newOrder: Order = this@OrdersListAdapter.list[oldItemPosition]
+                val oldOrder: Order = list[newItemPosition]
+                return newOrder.title === oldOrder.title
+            }
+        })
+        this.listFiltered = list
+        result.dispatchUpdatesTo(this)
     }
 
     /**
@@ -84,11 +116,91 @@ open class OrdersListAdapter(
      * Gets the number of items in the list
      */
     override fun getItemCount(): Int {
-        return list.size
+        return listFiltered.size
     }
 
     /**
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      */
     class OrdersViewHolder(val binding: ItemOrderBinding) : RecyclerView.ViewHolder(binding.root)
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val charString: String = constraint.toString()
+                listFiltered = if (charString.isEmpty()) {
+                    list
+                } else {
+                    val filteredList: ArrayList<Order> = ArrayList()
+                    for (item in list) {
+                        if (item.title.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.orderDate.toString().lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.address.fullName.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.address.phoneNumber.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.address.zipCode.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.paymentMethod.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.id.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.userId.lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        if (item.totalAmount.toString().lowercase()
+                                .contains(charString.lowercase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(item)
+                        }
+                        for (product in item.cartItems) {
+                            if (product.name.lowercase()
+                                   .contains(charString.lowercase(Locale.getDefault()))
+                            ) {
+                                filteredList.add(item)
+                            }
+                        }
+                    }
+                    filteredList
+                }
+
+                val filterResults = FilterResults()
+                filterResults.values = listFiltered
+                return filterResults
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+
+                listFiltered = results?.values as ArrayList<Order>
+
+                notifyDataSetChanged()
+            }
+        }
+    }
+
 }

@@ -484,14 +484,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                                 fragment.productsListAdapter.filter.filter(newText)
                             }
                             1 -> {
-                                val fragment: ProductsFragment = getVisibleFragment() as ProductsFragment
+                                val fragment: OrdersFragment = getVisibleFragment() as OrdersFragment
 
-                                fragment.productsListAdapter.filter.filter(newText)
+                                fragment.ordersListAdapter.filter.filter(newText)
                             }
                             2 -> {
-                                val fragment: ProductsFragment = getVisibleFragment() as ProductsFragment
+                                val fragment: UsersFragment = getVisibleFragment() as UsersFragment
 
-                                fragment.productsListAdapter.filter.filter(newText)
+                                fragment.usersListAdapter.filter.filter(newText)
                             }
                         }
                     }
