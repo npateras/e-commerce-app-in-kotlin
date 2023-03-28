@@ -25,6 +25,7 @@ class AddEditAddressActivity : BaseActivity() {
 
         init()
         setupUI()
+        setupClickListeners()
     }
 
     private fun init() {
@@ -46,6 +47,15 @@ class AddEditAddressActivity : BaseActivity() {
                 buttonAddAddress.visibility = View.GONE
                 buttonEditAddress.visibility = View.VISIBLE
             }
+        }
+    }
+
+    private fun setupClickListeners() {
+        binding.apply {
+            listOf(buttonAddAddress, buttonEditAddress, toolbar.imgBtnSave)
+                .forEach {
+                    it.setOnClickListener { saveAddressToFirestore() }
+                }
         }
     }
 
@@ -183,7 +193,7 @@ class AddEditAddressActivity : BaseActivity() {
                     loadInputTextDetails()
                     textViewActionBarLabel.text = getString(R.string.txt_edit_address)
                 }
-                imgBtnSave.setOnClickListener{ saveAddressToFirestore() }
+                imgBtnSave.setOnClickListener { saveAddressToFirestore() }
             }
         }
 

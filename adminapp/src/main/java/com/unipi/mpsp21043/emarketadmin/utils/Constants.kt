@@ -125,18 +125,6 @@ object Constants {
 
     // Storage Paths
     const val STORAGE_PATH_USERS: String = "Users/"
-    const val STORAGE_PATH_CATEGORY_BEVERAGES: String = "Beverages/"
-    const val STORAGE_PATH_CATEGORY_CHILLED: String = "Chilled/"
-    const val STORAGE_PATH_CATEGORY_FISH: String = "Fish/"
-    const val STORAGE_PATH_CATEGORY_FROZEN: String = "Frozen/"
-    const val STORAGE_PATH_CATEGORY_FRUITS: String = "Fruits/"
-    const val STORAGE_PATH_CATEGORY_GROCERY: String = "Grocery/"
-    const val STORAGE_PATH_CATEGORY_HOMEWARE: String = "Homeware/"
-    const val STORAGE_PATH_CATEGORY_HOUSEHOLD: String = "Household/"
-    const val STORAGE_PATH_CATEGORY_LIQUOR: String = "Liquor/"
-    const val STORAGE_PATH_CATEGORY_MEAT: String = "Meat/"
-    const val STORAGE_PATH_CATEGORY_PHARMACY: String = "Pharmacy/"
-    const val STORAGE_PATH_CATEGORY_VEGETABLES: String = "Vegetables/"
 
     /**
      * A function for user profile image selection from phone storage.

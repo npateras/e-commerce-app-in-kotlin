@@ -93,7 +93,7 @@ class EditProfileActivity : BaseActivity() {
                 FirestoreHelper().uploadImageToCloudStorage(
                     this@EditProfileActivity,
                     mSelectedImageFileUri,
-                    STORAGE_PATH_USERS + Constants.FIELD_PROF_IMG_URL
+                    STORAGE_PATH_USERS + FirestoreHelper().getCurrentUserID() + "/" + Constants.FIELD_PROF_IMG_URL
                 )
             } else {
                 updateProfileToFirestore()
