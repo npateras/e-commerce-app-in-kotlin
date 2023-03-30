@@ -278,7 +278,7 @@
 
     <include
         android:id="@+id/layout_Must_Be_Signed_In"
-        layout="@layout/layout_must_sign_in"
+        layout="@layout/layout_error_must_sign_in"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone"

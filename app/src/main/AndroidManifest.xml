@@ -76,7 +76,7 @@
                 android:name=".ui.activities.SignInActivity"
                 android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustResize"
-                android:theme="@style/Theme.EMarket.NoActionBar4"
+                android:theme="@style/Theme.EMarket.NoActionBar3"
                 android:parentActivityName=".ui.activities.MainActivity"
                 android:exported="true">
 

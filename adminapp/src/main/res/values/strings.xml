@@ -27,6 +27,11 @@
     <string name="button_try_again">Try Again</string>
     <string name="button_resend_in">Resend in %1$ss</string>
 
+    <!-- Sign In Activity -->
+    <string name="text_welcome_back">Welcome Back! 👋</string>
+
+    <!-- Orders Fragment -->
+
 
     <!-- Text Views -->
     <string name="txt_congratulations">Congratulations!</string>
@@ -48,8 +53,6 @@
     <string name="txt_no_orders_2">You have no pending or previous orders.</string>
     <string name="txt_no_orders_pending">You have no pending or previous orders.</string>
     <string name="txt_no_orders_previous">You have no previous orders.</string>
-    <string name="txt_search_not_found">No search result found!</string>
-    <string name="txt_search_not_found_2">Try again with another entry or contact us if you think this is an error.</string>
     <string name="txt_clear_all">Clear all</string>
     <string name="txt_clear">Clear</string>
     <string name="txt_today">Today</string>

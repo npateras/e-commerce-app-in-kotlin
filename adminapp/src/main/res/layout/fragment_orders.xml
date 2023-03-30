@@ -36,16 +36,28 @@
                         layout="@layout/shimmer_order" />
 
                     <include
-                        layout="@layout/shimmer_order" />
+                        layout="@layout/shimmer_order"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
 
                     <include
-                        layout="@layout/shimmer_order" />
+                        layout="@layout/shimmer_order"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
                     <include
-                        layout="@layout/shimmer_order" />
+                        layout="@layout/shimmer_order"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
                     <include
-                        layout="@layout/shimmer_order" />
+                        layout="@layout/shimmer_order"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 

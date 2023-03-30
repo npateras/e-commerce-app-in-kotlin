@@ -1,0 +1,11 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="16"
+    android:viewportHeight="16">
+  <path
+      android:pathData="M14,3v-1h1.5a0.5,0.5 0,0 1,0.5 0.5,0.5 0.5,0 0,1 -0.5,0.5ZM0.5,3L12,3v1.5a0.5,0.5 0,0 0,0.5 0.5,0.5 0.5,0 0,0 0.5,-0.5v-4a0.5,0.5 0,0 0,-0.5 -0.5,0.5 0.5,0 0,0 -0.5,0.5v1.5L0.5,2a0.5,0.5 0,0 0,-0.5 0.5A0.5,0.5 0,0 0,0.5 3ZM15.5,7.5L3,7.5v1h12.5a0.5,0.5 0,0 0,0.5 -0.5A0.5,0.5 0,0 0,15.5 7.5ZM15.5,13L10,13v1h5.5a0.5,0.5 0,0 0,0.5 -0.5A0.5,0.5 0,0 0,15.5 13ZM9,12v-0.5a0.5,0.5 0,0 0,-0.5 -0.5,0.5 0.5,0 0,0 -0.5,0.5v1.5h-7.5a0.5,0.5 0,0 0,-0.5 0.5,0.5 0.5,0 0,0 0.5,0.5L8,14v1.5a0.5,0.5 0,0 0,0.5 0.5,0.5 0.5,0 0,0 0.5,-0.5ZM2,6a0.5,0.5 0,0 0,-0.5 -0.5,0.5 0.5,0 0,0 -0.5,0.5v1.5h-0.5a0.5,0.5 0,0 0,-0.5 0.5,0.5 0.5,0 0,0 0.5,0.5h0.5v1.5a0.5,0.5 0,0 0,0.5 0.5,0.5 0.5,0 0,0 0.5,-0.5Z"
+      android:strokeWidth="0"
+      android:fillColor="@color/colorActionBarOverflowIcon"
+      android:strokeColor="@color/colorActionBarOverflowIcon"/>
+</vector>

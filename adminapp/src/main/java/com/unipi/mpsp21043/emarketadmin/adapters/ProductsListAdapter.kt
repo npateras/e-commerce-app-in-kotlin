@@ -145,37 +145,37 @@ open class ProductsListAdapter(
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.addedByUser.lowercase()
+                        else if (item.addedByUser.lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.category.lowercase()
+                        else if (item.category.lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.dateAdded.toString().lowercase()
+                        else if (item.dateAdded.toString().lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.description.lowercase()
+                        else if (item.description.lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.id.lowercase()
+                        else if (item.id.lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.weightUnit.lowercase()
+                        else if (item.weightUnit.lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.price.toString().lowercase()
+                        else if (item.price.toString().lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)

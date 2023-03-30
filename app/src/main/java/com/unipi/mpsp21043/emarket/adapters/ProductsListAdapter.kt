@@ -54,11 +54,11 @@ open class ProductsListAdapter(
         holder.binding.apply {
             GlideLoader(context).loadProductPictureWide(
                 model.iconUrl,
-                imgViewIcon
+                imageViewPicture
             )
-            txtViewName.text = model.name
+            textViewName.text = model.name
             if (model.sale != 0.0) {
-                txtViewPriceReduced.apply {
+                textViewPriceReduced.apply {
                     visibility = View.VISIBLE
                     foreground =
                         AppCompatResources.getDrawable(context, R.drawable.striking_red_text)
@@ -70,7 +70,7 @@ open class ProductsListAdapter(
                 }
                 priceReduced = model.price - (model.price * model.sale)
             }
-            txtViewPrice.apply {
+            textViewPrice.apply {
                 text = String.format(
                     context.getString(R.string.txt_format_price),
                     context.getString(R.string.curr_eur),
@@ -78,7 +78,7 @@ open class ProductsListAdapter(
                 )
             }
 
-            txtViewWeight.text = String.format(
+            textViewWeight.text = String.format(
                 context.getString(R.string.txt_format_weight),
                 model.weight,
                 model.weightUnit

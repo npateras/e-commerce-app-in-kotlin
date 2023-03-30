@@ -52,7 +52,7 @@
 
                     <TextView
                         android:id="@+id/textView_Header_Selected_Address"
-                        style="@style/TextView_Header_14"
+                        style="@style/TextView_14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -155,7 +155,7 @@
 
                     <TextView
                         android:id="@+id/txtView_Header_Items_Receipt"
-                        style="@style/TextView_Header_14"
+                        style="@style/TextView_14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
@@ -261,7 +261,7 @@
 
                     <TextView
                         android:id="@+id/txtView_Header_Payment_Method"
-                        style="@style/TextView_Header_14"
+                        style="@style/TextView_14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"

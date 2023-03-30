@@ -30,14 +30,12 @@
 
         <TextView
             android:id="@+id/txt_Header_2"
+            style="@style/TextView_16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/core_sans_cr_55_medium"
-            android:text="@string/txt_nav_header_sign_in"
-            android:textAlignment="textStart"
             android:textColor="@color/colorText"
-            android:textSize="@dimen/txt_font_size_header_16"
+            android:text="@string/txt_nav_header_sign_in"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_Header_1" />
 

@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- Base application theme. -->
     <style name="Theme.EMarket" parent="Theme.MaterialComponents.Light.DarkActionBar">
@@ -12,24 +12,28 @@
         <item name="colorSecondaryVariant">@color/colorPrimaryLight</item>
         <item name="colorOnSecondary">@color/colorSecondary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/colorStatusBar</item>
+        <item name="android:statusBarColor">@color/colorStatusBar</item>
         <item name="android:navigationBarColor">@color/colorNavigationBar</item>
 
         <item name="colorError">@color/colorSnackBarErrorBg</item>
         <item name="snackbarStyle">@style/Widget.MyApp.Snackbar</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:actionOverflowButtonStyle">@style/CustomActionButtonOverflow</item>
     </style>
 
     <style name="Theme.EMarket.NoActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <item name="android:statusBarColor" tools:targetApi="l">@color/colorStatusBar</item>
+        <item name="android:statusBarColor">@color/colorStatusBar</item>
         <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
     </style>
 
     <style name="Theme.EMarket.NoActionBar2">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <item name="android:statusBarColor" tools:targetApi="l">@color/colorBackground</item>
+        <item name="android:statusBarColor">@color/colorBackground</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:navigationBarColor">@color/colorNavigationBar</item>
     </style>
@@ -37,7 +41,7 @@
     <style name="Theme.EMarket.NoActionBar3">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <item name="android:statusBarColor" tools:targetApi="l">@color/colorStatusBar</item>
+        <item name="android:statusBarColor">@color/colorStatusBar</item>
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:navigationBarColor">@color/colorSecondary3</item>
     </style>
@@ -45,7 +49,7 @@
     <style name="Theme.EMarket.NoActionBar4">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <item name="android:statusBarColor" tools:targetApi="l">@color/colorStatusBar</item>
+        <item name="android:statusBarColor">@color/colorStatusBar</item>
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:navigationBarColor">@color/colorNavigationBar</item>
     </style>

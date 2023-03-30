@@ -72,16 +72,16 @@
     <TextView
         android:id="@+id/txtView_Sign_Up"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="@dimen/btn_width_small_134"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:background="@android:color/transparent"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:fontFamily="@font/core_sans_cr_55_medium"
         android:text="@string/button_sign_up"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/btn_font_size_small_14"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btn_Sign_In"
+        app:layout_constraintStart_toStartOf="@+id/btn_Sign_In"
         app:layout_constraintTop_toBottomOf="@+id/btn_Sign_In" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

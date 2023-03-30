@@ -150,7 +150,7 @@
 
     <!-- Sign In Activity -->
     <string name="sign_in_act_header">Sign-In</string>
-    <string name="sign_in_act_header_2">Enter your email and password to continue.</string>
+    <string name="sign_in_act_header_2">Enter your email and password to continue to eMarket.</string>
     <string name="sign_in_act_or">Or login with</string>
 
     <!-- Sign In With Phone Activity -->
@@ -218,7 +218,7 @@
     <string name="txt_enter_email_address_to_send_reset_code">Enter email address to send reset code.</string>
     <string name="txt_password_reset">Password Reset</string>
     <string name="txt_already_have_an_account">Already have an account? <b>Sign In</b></string>
-    <string name="txt_don_t_have_an_account">Don\'t have an account? <b>Sign Up</b></string>
+    <string name="txt_don_t_have_an_account">Don\'t have an account? <b><font color='#29C17E'>Sign Up</font></b></string>
     <string name="txt_update_profile">Update Profile</string>
     <string name="txt_must_sign_in_2">You must sign in to see this.</string>
     <string name="txt_must_sign_in">Sign In!</string>
@@ -226,12 +226,17 @@
     <string name="txt_full_name">Full Name</string>
     <string name="txt_email">Email</string>
 
+    <!-- Error States -->
+    <string name="txt_an_error_has_occurred">Error has occurred!</string>
+    <string name="txt_an_error_has_occurred_2">An error has appeared when retrieving details from database! Please try again!</string>
 
-    // Categories
+    <!-- Categories -->
     <string name="txt_all_categories">All Categories</string>
     <string name="txt_add_new_address">Add address</string>
     <string name="txt_edit_address">Edit address</string>
 
+    <!-- Sign In Page -->
+    <string name="text_welcome_back">Welcome Back 👋</string>
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="notification_favorites">Favorites</string>
@@ -271,6 +276,38 @@
     <string name="txt_order_placed_successfully">Your order has been placed successfully!</string>
     <string name="txt_pay_invoice">Pay Invoice</string>
     <string name="txt_my_orders">My Orders</string>
+
+    <string name="text_options">Options</string>
+    <string name="select">Select</string>
+    <string name="text_an_error_has_occurred">Error has occurred!</string>
+    <string name="text_an_error_has_occurred_2">An error has appeared when retrieving details from database! Please try again!</string>
+    <string name="text_search_button">Search button</string>
+    <string name="text_search_something">Search something</string>
+    <string name="text_filter">Filter</string>
+    <string name="text_sort">Sort</string>
+    <string name="text_sort_results">Sort Results</string>
+    <string name="text_name">Name</string>
+    <string name="text_date_added">Date Added</string>
+    <string name="text_category">Category</string>
+    <string name="text_popularity">Popularity</string>
+    <string name="text_price">Price</string>
+    <string name="text_stock">Stock</string>
+    <string name="text_sale">Sale</string>
+    <string name="input_txt_hint_sort_type">Order of sorting</string>
+    <string name="text_order_number">Order Number</string>
+    <string name="text_order_date_created">Order Date Created</string>
+    <string name="text_order_status">Order Status</string>
+    <string name="text_payment_method">Payment Method</string>
+    <string name="text_sub_total_amount">Sub Total Amount</string>
+    <string name="text_total_amount">Total Amount</string>
+    <string name="text_user_id">User ID</string>
+    <string name="text_profile_completed">Profile Completed</string>
+    <string name="text_role">Role</string>
+    <string name="text_notifications">Notifications</string>
+    <string name="text_phone_number">Phone Number</string>
+    <string name="text_phone_code">Phone Number Code</string>
+    <string name="text_email">Email</string>
+    <string name="text_full_name">Full Name</string>
 
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 

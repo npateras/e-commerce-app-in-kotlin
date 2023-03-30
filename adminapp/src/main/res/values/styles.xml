@@ -128,5 +128,4 @@
         <item name="android:padding">0dp</item>
     </style>
 
-    <string name="text_options">Options</string>
 </resources>

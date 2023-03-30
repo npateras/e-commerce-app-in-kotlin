@@ -53,16 +53,16 @@ open class AddressListAdapter(
         val model = list[position]
 
         holder.binding.apply {
-            txtViewFullName.text = model.fullName
+            textViewFullName.text = model.fullName
             if (model.phoneCode.toString() != "")
-                txtViewPhoneNumber.text = String.format(
+                textViewPhoneNumber.text = String.format(
                     context.getString(R.string.txt_format_phone),
                     model.phoneCode,
                     model.phoneNumber
                 )
             else
-                txtViewPhoneNumber.text = model.phoneNumber
-            txtViewAddress.text = String.format(
+                textViewPhoneNumber.text = model.phoneNumber
+            textViewAddress.text = String.format(
                 context.getString(R.string.txt_format_address),
                 model.address,
                 model.zipCode

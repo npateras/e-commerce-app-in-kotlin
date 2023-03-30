@@ -26,16 +26,16 @@
         android:textColor="@color/colorSecondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""/>
+        android:text="@string/txt_loading"/>
 
     <TextView
         android:id="@+id/navDrawer_SignedIn_Email"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         style="@style/TextView_16.Secondary"
-        android:textColor="@color/colorSecondary3"
+        android:textColor="@color/colorWhiteLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""/>
+        android:text="@string/txt_loading"/>
 
 </LinearLayout>

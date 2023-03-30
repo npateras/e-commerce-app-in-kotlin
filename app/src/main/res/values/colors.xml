@@ -12,17 +12,21 @@
 
     <color name="colorContainer">@color/colorWhite</color>
     <color name="colorBackground">@color/colorWhiteLight</color>
+    <color name="colorImageViewBackground">#E1E1E1</color>
+    <color name="colorTextInputBackground">#f3f6ff</color>
 
     <color name="colorText">@color/colorSecondary</color>
     <color name="colorText2">@color/colorSecondary2</color>
     <color name="colorText3">@color/colorSecondary3</color>
+    <color name="colorText4">@color/colorSecondary4</color>
+    <color name="colorActionBarOverflowIcon">@color/colorSecondary</color>
 
-    <color name="colorStatusBar">@color/colorPrimaryLight</color>
+    <color name="colorStatusBar">@color/colorPrimary</color>
 
     <color name="colorSecondary">#272A3F</color>
     <color name="colorSecondary2">#6E7989</color>
     <color name="colorSecondary3">#D8DAE0</color>
-    <color name="colorSecondary4">#99A0B0</color>
+    <color name="colorSecondary4">#AFB1B6</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/colorSecondary3</color>
 
     <color name="colorWhite">#FFFFFF</color>

@@ -54,11 +54,11 @@ open class OrderCartProductListAdapter(
         holder.binding.apply {
             GlideLoader(context).loadProductPictureWide(
                 model.imgUrl,
-                imgViewProduct
+                imageViewPicture
             )
-            txtViewName.text = model.name
+            textViewName.text = model.name
             if (model.sale != 0.0) {
-                txtViewPriceReduced.apply {
+                textViewPriceReduced.apply {
                     visibility = View.VISIBLE
                     foreground =
                         AppCompatResources.getDrawable(context, R.drawable.striking_red_text)
@@ -70,14 +70,14 @@ open class OrderCartProductListAdapter(
                 }
                 priceReduced = model.price - (model.price * model.sale)
             }
-            txtViewPrice.apply {
+            textViewPrice.apply {
                 text = String.format(
                     context.getString(R.string.txt_format_price),
                     context.getString(R.string.curr_eur),
                     priceReduced
                 )
             }
-            txtViewQuantity.text = model.cartQuantity.toString()
+            textViewQuantity.text = model.cartQuantity.toString()
         }
         // Click listener on list item click
         holder.itemView.setOnClickListener {

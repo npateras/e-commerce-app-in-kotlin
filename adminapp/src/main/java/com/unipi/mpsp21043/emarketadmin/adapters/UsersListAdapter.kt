@@ -116,27 +116,27 @@ open class UsersListAdapter(
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.fullName.lowercase()
+                        else if (item.fullName.lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.phoneNumber.lowercase()
+                        else if (item.phoneNumber.lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.phoneCode.toString().lowercase()
+                        else if (item.phoneCode.toString().lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.role.lowercase()
+                        else if (item.role.lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.id.lowercase()
+                        else if (item.id.lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)

@@ -138,47 +138,47 @@ open class OrdersListAdapter(
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.orderDate.toString().lowercase()
+                        else if (item.orderDate.toString().lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.address.fullName.lowercase()
+                        else if (item.address.fullName.lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.address.phoneNumber.lowercase()
+                        else if (item.address.phoneNumber.lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.address.zipCode.lowercase()
+                        else if (item.address.zipCode.lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.paymentMethod.lowercase()
+                        else if (item.paymentMethod.lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.id.lowercase()
+                        else if (item.id.lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.userId.lowercase()
+                        else if (item.userId.lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        if (item.totalAmount.toString().lowercase()
+                        else if (item.totalAmount.toString().lowercase()
                                 .contains(charString.lowercase(Locale.getDefault()))
                         ) {
                             filteredList.add(item)
                         }
-                        for (product in item.cartItems) {
+                        else for (product in item.cartItems) {
                             if (product.name.lowercase()
                                    .contains(charString.lowercase(Locale.getDefault()))
                             ) {
