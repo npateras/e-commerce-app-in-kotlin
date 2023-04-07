@@ -63,7 +63,7 @@ open class OrderCartProductListAdapter(
                     foreground =
                         AppCompatResources.getDrawable(context, R.drawable.striking_red_text)
                     text = String.format(
-                        context.getString(R.string.txt_format_price),
+                        context.getString(R.string.text_format_price),
                         context.getString(R.string.curr_eur),
                         model.price
                     )
@@ -72,7 +72,7 @@ open class OrderCartProductListAdapter(
             }
             textViewPrice.apply {
                 text = String.format(
-                    context.getString(R.string.txt_format_price),
+                    context.getString(R.string.text_format_price),
                     context.getString(R.string.curr_eur),
                     priceReduced
                 )

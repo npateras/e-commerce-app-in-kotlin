@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".ui.activities.ListSettingsActivity"
+    tools:ignore="ContentDescription" >
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_title_only" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_container_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_header_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="29dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/core_sans_cr_45_regular"
+                android:text="@string/text_settings"
+                android:textAlignment="textStart"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/text_font_size_header_24"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="39dp"
+                android:layout_marginBottom="36dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/text_view_header_1"
+                app:layout_constraintStart_toStartOf="@+id/text_view_header_1"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_header_1">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_view_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    app:drawableStartCompat="@drawable/svg_user_20dp"
+                    app:drawableTint="@color/colorPrimary"
+                    android:fontFamily="@font/core_sans_cr_55_medium"
+                    android:text="@string/text_account"
+                    android:textColor="@color/colorText"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/view_divider_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="?android:attr/listDivider" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_change_password"
+                    style="@style/ButtonText.Secondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:text="@string/text_change_password"
+                    app:icon="@drawable/svg_chevron_right_12dp"
+                    app:iconGravity="end" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_addresses"
+                    style="@style/ButtonText.Secondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:text="@string/text_addresses"
+                    app:icon="@drawable/svg_chevron_right_12dp"
+                    app:iconGravity="end" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_view_application"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:fontFamily="@font/core_sans_cr_55_medium"
+                    android:gravity="center_vertical"
+                    android:text="@string/text_application"
+                    android:textColor="@color/colorText"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:drawablePadding="8dp"
+                    app:drawableStartCompat="@drawable/svg_settings_outline_20dp"
+                    app:drawableTint="@color/colorPrimary" />
+
+                <View
+                    android:id="@+id/view_divider_application"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="?android:attr/listDivider" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_button_night_mode"
+                    style="@style/ButtonText.Secondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:text="@string/text_night_mode"
+                    app:icon="@drawable/svg_chevron_right_12dp"
+                    app:iconGravity="end" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_language"
+                    style="@style/ButtonText.Secondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:text="@string/text_language"
+                    app:icon="@drawable/svg_chevron_right_12dp"
+                    app:iconGravity="end" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_view_notifications"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:drawablePadding="8dp"
+                    app:drawableStartCompat="@drawable/svg_notifications_20dp"
+                    app:drawableTint="@color/colorPrimary"
+                    android:fontFamily="@font/core_sans_cr_55_medium"
+                    android:text="@string/text_notifications"
+                    android:textColor="@color/colorText"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/view_divider_notifications"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="?android:attr/listDivider" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_button_favorites"
+                    style="@style/ButtonText.Secondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:text="@string/text_notification_favorites"
+                    app:icon="@drawable/svg_chevron_right_12dp"
+                    app:iconGravity="end" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_button_orders"
+                    style="@style/ButtonText.Secondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:text="@string/text_notification_orders"
+                    app:icon="@drawable/svg_chevron_right_12dp"
+                    app:iconGravity="end" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_sign_out"
+                    style="@style/ButtonStyle.Error"
+                    android:layout_width="match_parent"
+                    android:layout_height="68dp"
+                    android:layout_marginTop="39dp"
+                    android:background="@drawable/button_negative"
+                    android:text="@string/text_sign_out"
+                    app:icon="@drawable/svg_door_exit"
+                    app:iconGravity="textStart"
+                    app:iconPadding="10dp"
+                    app:iconSize="24dp"
+                    app:iconTint="@color/colorWhite" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,7 @@ import com.unipi.mpsp21043.emarket.databinding.FragmentMyAccountBinding
 import com.unipi.mpsp21043.emarket.models.User
 import com.unipi.mpsp21043.emarket.ui.activities.MainActivity
 import com.unipi.mpsp21043.emarket.utils.Constants
+import com.unipi.mpsp21043.emarket.utils.GlideLoader
 import com.unipi.mpsp21043.emarket.utils.IntentUtils
 
 class MyAccountFragment : BaseFragment() {
@@ -30,6 +31,7 @@ class MyAccountFragment : BaseFragment() {
         _binding = FragmentMyAccountBinding.inflate(inflater, container, false)
 
         init()
+        setupUI()
 
         return binding.root
     }
@@ -38,42 +40,50 @@ class MyAccountFragment : BaseFragment() {
      * A function to execute all the initializations needed.
      */
     private fun init() {
-        setupUI()
+        showShimmerUI()
+
+        // Check if the user is logged in, otherwise show the sign in state.
+        if (FirestoreHelper().getCurrentUserID() != "") {
+            // Apply click listeners
+
+
+            // GET user details
+            getUserDetails()
+        }
     }
 
     /**
      * A function to setup all the UI requirements to be viewable-ready.
      */
     private fun setupUI() {
-        // Veil the veiled layouts until we load our data.
-        veilDetails()
+        // If user is signed in
+        if (FirestoreHelper().getCurrentUserID() != "")
+            userLoggedInUI()
+        // If user is NOT signed in
+        else
+            userNotLoggedInUI()
+    }
 
-        // Check if the user is logged in, otherwise show the sign in state.
-        if (FirestoreHelper().getCurrentUserID() != "") {
-            // Apply click listeners
-            binding.apply {
-                btnUpdateProfile.setOnClickListener { IntentUtils().goToUpdateUserDetailsActivity(this@MyAccountFragment.requireContext(), mUserDetails) }
-                btnAddresses.setOnClickListener { IntentUtils().goToListAddressesActivity(this@MyAccountFragment.requireContext()) }
-                btnLogOut.setOnClickListener{
-                    FirebaseAuth.getInstance().signOut()
-                    val intent = Intent(context, MainActivity::class.java)
-                    requireActivity().finishAffinity()
-                    startActivity(intent)
-                }
+    private fun userNotLoggedInUI() {
+        binding.apply {
+            // We make the sign in layout visible and add the button click listeners accordingly.
+            layoutMustBeSignedIn.apply {
+                root.visibility = View.VISIBLE
+                btnSignIn.setOnClickListener{ goToSignInActivity(this@MyAccountFragment.requireContext()) }
+                txtViewSignUp.setOnClickListener{ goToSignInActivity(this@MyAccountFragment.requireContext()) }
             }
-
-            // GET user details
-            getUserDetails()
         }
-        else // If user is not signed in
-            binding.apply {
-                // We make the sign in layout visible and add the button click listeners accordingly.
-                layoutMustBeSignedIn.apply {
-                    root.visibility = View.VISIBLE
-                    btnSignIn.setOnClickListener{ goToSignInActivity(this@MyAccountFragment.requireContext()) }
-                    txtViewSignUp.setOnClickListener{ goToSignInActivity(this@MyAccountFragment.requireContext()) }
-                }
+    }
+
+    private fun userLoggedInUI() {
+        binding.apply {
+            btnUpdateProfile.setOnClickListener { IntentUtils().goToUpdateUserDetailsActivity(this@MyAccountFragment, mUserDetails) }
+            btnAddresses.setOnClickListener { IntentUtils().goToListAddressesActivity(this@MyAccountFragment) }
+            btnLogOut.setOnClickListener {
+                FirebaseAuth.getInstance().signOut()
+                IntentUtils().createNewMainActivity(this@MyAccountFragment.requireActivity())
             }
+        }
     }
 
     /**
@@ -90,6 +100,7 @@ class MyAccountFragment : BaseFragment() {
      */
     fun userDetailsSuccess(mUser: User) {
         mUserDetails = mUser
+        setupUI()
 
         // Set user details.
         binding.apply {
@@ -101,32 +112,44 @@ class MyAccountFragment : BaseFragment() {
             // showing a blank view.
             if (mUserDetails.phoneNumber != "")
                 if (mUserDetails.phoneCode.toString() != "")
-                    textViewPhoneValue.text = String.format(getString(R.string.txt_format_phone), mUserDetails.phoneCode, mUserDetails.phoneNumber)
+                    textViewPhoneValue.text = String.format(getString(R.string.text_format_phone), mUserDetails.phoneCode, mUserDetails.phoneNumber)
                 else
                     textViewPhoneValue.text = mUserDetails.phoneNumber
-            else textViewPhoneValue.text = getString(R.string.txt_none)
+            else textViewPhoneValue.text = getString(R.string.text_none)
+
+            if (mUserDetails.profImgUrl.isNotEmpty()) {
+                GlideLoader(this@MyAccountFragment.requireContext()).loadUserPicture(
+                    mUserDetails.profImgUrl,
+                    imgViewUserPicture
+                )
+            }
         }
 
-        unveilDetails()
+        hideShimmerUI()
     }
 
-    /**
-     * A function to UNVEIL all the veiled layouts in the fragment.
-     */
-    fun unveilDetails() {
+    private fun showShimmerUI() {
         binding.apply {
-            vLayoutHead.unVeil()
-            vLayoutBody.unVeil()
+            layoutStateError.root.visibility = View.GONE
+            constraintLayoutContainer.visibility = View.GONE
+            shimmerLayout.visibility = View.VISIBLE
+            shimmerLayout.startShimmer()
         }
     }
 
-    /**
-     * A function to VEIL all the veiled layouts in the fragment.
-     */
-    private fun veilDetails() {
+    private fun hideShimmerUI() {
         binding.apply {
-            vLayoutHead.veil()
-            vLayoutBody.veil()
+            constraintLayoutContainer.visibility = View.VISIBLE
+            shimmerLayout.visibility = View.GONE
+            shimmerLayout.stopShimmer()
+        }
+    }
+
+    fun showErrorUI() {
+        binding.apply {
+            layoutStateError.root.visibility = View.VISIBLE
+            shimmerLayout.visibility = View.GONE
+            shimmerLayout.stopShimmer()
         }
     }
 

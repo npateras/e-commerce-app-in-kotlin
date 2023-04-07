@@ -13,6 +13,7 @@
     <color name="colorContainer">@color/colorWhite</color>
     <color name="colorBackground">@color/colorWhiteLight</color>
     <color name="colorImageViewBackground">#E1E1E1</color>
+    <color name="colorTextInputBackground">#f3f6ff</color>
 
     <color name="colorText">@color/colorSecondary</color>
     <color name="colorText2">@color/colorSecondary2</color>

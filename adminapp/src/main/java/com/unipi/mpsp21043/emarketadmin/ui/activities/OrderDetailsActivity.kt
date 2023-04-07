@@ -82,10 +82,10 @@ class OrderDetailsActivity : BaseActivity() {
         binding.apply {
 
             txtViewAddressValue.text = String.format(
-                getString(R.string.txt_format_order_address),
+                getString(R.string.text_format_order_address),
                 mOrderDetails.address.fullName,
                 String.format(
-                    getString(R.string.txt_format_phone),
+                    getString(R.string.text_format_phone),
                     mOrderDetails.address.phoneCode,
                     mOrderDetails.address.phoneNumber
                 ),
@@ -95,7 +95,7 @@ class OrderDetailsActivity : BaseActivity() {
             )
 
             txtViewTotalAmtValue.text = String.format(
-                getString(R.string.txt_format_price),
+                getString(R.string.text_format_price),
                 Constants.DEFAULT_CURRENCY,
                 mOrderDetails.totalAmount
             )
@@ -104,15 +104,15 @@ class OrderDetailsActivity : BaseActivity() {
 
             when (mOrderDetails.orderStatus) {
                 0 -> {
-                    textViewOrderStatusValue.text = getString(R.string.txt_pending)
+                    textViewOrderStatusValue.text = getString(R.string.text_pending)
                     textViewOrderStatusValue.setTextColor(getColor(R.color.colorRed))
                 }
                 1 -> {
-                    textViewOrderStatusValue.text = getString(R.string.txt_processing)
+                    textViewOrderStatusValue.text = getString(R.string.text_processing)
                     textViewOrderStatusValue.setTextColor(getColor(R.color.colorYellowOrange))
                 }
                 2 -> {
-                    textViewOrderStatusValue.text = getString(R.string.txt_completed)
+                    textViewOrderStatusValue.text = getString(R.string.text_completed)
                     textViewOrderStatusValue.setTextColor(getColor(R.color.colorGreen))
                 }
             }
@@ -132,6 +132,7 @@ class OrderDetailsActivity : BaseActivity() {
             it.setCustomView(R.layout.toolbar_product_details)
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 

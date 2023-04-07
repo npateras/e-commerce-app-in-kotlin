@@ -36,6 +36,13 @@
     <color name="colorYellowOrange">#FDC600</color>
     <color name="colorGrey">#6E7989</color>
     <color name="colorGreyLight">#AAAAAA</color>
+    <color name="colorBlue">#31a7fb</color>
+    <color name="colorBlueLight">#64b9fc</color>
+    <color name="colorBlueDark">#2274ae</color>
+    <color name="colorCyan">#70d9e6</color>
+    <color name="colorCyanLight">#a8e7ef</color>
+    <color name="colorGreen2">#99d53b</color>
+    <color name="colorGreen2Light">#bcea73</color>
 
     <color name="colorSnackBarErrorBg">#F34949</color>
     <color name="colorSnackBarErrorAction">#B63737</color>

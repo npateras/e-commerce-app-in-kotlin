@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_bar_overflow_search"
-        android:title="@string/text_sort"
+        android:title="@string/text_search"
         android:icon="@drawable/svg_search"
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />

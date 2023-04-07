@@ -49,21 +49,21 @@ open class OrdersListAdapter(
         val model = list[position]
 
         holder.binding.apply {
-            txtViewName.text = model.title
-            txtViewPriceValue.text = model.totalAmount
-            txtViewDate.text = Constants.standardSimpleDateFormat.format(model.orderDate)
+            textViewOrderSerialNumber.text = model.title
+            textViewTotalAmountValue.text = model.totalAmount
+            textViewDate.text = Constants.standardSimpleDateFormat.format(model.orderDate)
             when (model.orderStatus) {
                 0 -> {
-                    txtViewStatusValue.text = context.getString(R.string.txt_pending)
-                    txtViewStatusValue.setTextColor(context.getColor(R.color.colorSecondary2))
+                    textViewOrderStatusValue.text = context.getString(R.string.text_pending)
+                    textViewOrderStatusValue.setTextColor(context.getColor(R.color.colorSecondary2))
                 }
                 1 -> {
-                    txtViewStatusValue.text = context.getString(R.string.txt_processing)
-                    txtViewStatusValue.setTextColor(context.getColor(R.color.colorYellowOrange))
+                    textViewOrderStatusValue.text = context.getString(R.string.text_processing)
+                    textViewOrderStatusValue.setTextColor(context.getColor(R.color.colorYellowOrange))
                 }
                 2 -> {
-                    txtViewStatusValue.text = context.getString(R.string.txt_completed)
-                    txtViewStatusValue.setTextColor(context.getColor(R.color.colorPrimary))
+                    textViewOrderStatusValue.text = context.getString(R.string.text_completed)
+                    textViewOrderStatusValue.setTextColor(context.getColor(R.color.colorPrimary))
                 }
             }
         }

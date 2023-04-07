@@ -100,7 +100,7 @@ open class BaseActivity : AppCompatActivity() {
 
         Toast.makeText(
             this,
-            resources.getString(R.string.txt_please_click_back_again_to_exit),
+            resources.getString(R.string.text_please_click_back_again_to_exit),
             Toast.LENGTH_SHORT
         ).show()
 

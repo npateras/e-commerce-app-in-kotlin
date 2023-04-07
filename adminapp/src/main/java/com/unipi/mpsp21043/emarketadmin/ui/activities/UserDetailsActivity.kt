@@ -81,7 +81,7 @@ class UserDetailsActivity : BaseActivity() {
         // Set user details.
         binding.apply {
             toolbar.textViewActionBarLabel.text = String.format(
-                getString(R.string.txt_format_user_details),
+                getString(R.string.text_format_user_details),
                 mUserDetails.fullName
             )
 
@@ -100,29 +100,29 @@ class UserDetailsActivity : BaseActivity() {
 
             if (mUserDetails.phoneNumber.isNotEmpty())
                 if (mUserDetails.phoneCode.toString().isNotEmpty())
-                    textViewPhoneValue.text = String.format(getString(R.string.txt_format_phone), mUserDetails.phoneCode, mUserDetails.phoneNumber)
+                    textViewPhoneValue.text = String.format(getString(R.string.text_format_phone), mUserDetails.phoneCode, mUserDetails.phoneNumber)
                 else
                     textViewPhoneValue.text = mUserDetails.phoneNumber
-            else textViewPhoneValue.text = getString(R.string.txt_none)
+            else textViewPhoneValue.text = getString(R.string.text_none)
 
             if (mUserDetails.role.isNotEmpty())
                 if (mUserDetails.role == Constants.ROLE_USER)
                     textViewRoleValue.text = getString(R.string.text_user)
                 else if (mUserDetails.role == Constants.ROLE_ADMIN)
-                    textViewRoleValue.text = getString(R.string.txt_admin)
+                    textViewRoleValue.text = getString(R.string.text_admin)
 
             if (mUserDetails.notifications)
-                textViewNotificationsValue.text = getString(R.string.yes)
+                textViewNotificationsValue.text = getString(R.string.text_yes)
             else
-                textViewNotificationsValue.text = getString(R.string.no)
+                textViewNotificationsValue.text = getString(R.string.text_no)
 
             if (mUserDetails.registrationTokens.isNotEmpty())
                 textViewActiveDevicesValue.text = mUserDetails.registrationTokens.size.toString()
 
             if (mUserDetails.profileCompleted)
-                textViewProfileCompletedValue.text = getString(R.string.yes)
+                textViewProfileCompletedValue.text = getString(R.string.text_yes)
             else
-                textViewProfileCompletedValue.text = getString(R.string.no)
+                textViewProfileCompletedValue.text = getString(R.string.text_no)
 
         }
 
@@ -141,6 +141,7 @@ class UserDetailsActivity : BaseActivity() {
             it.setCustomView(R.layout.toolbar_tick_check)
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 

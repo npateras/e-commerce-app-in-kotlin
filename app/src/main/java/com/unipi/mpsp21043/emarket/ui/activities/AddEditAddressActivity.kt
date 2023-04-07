@@ -90,9 +90,9 @@ class AddEditAddressActivity : BaseActivity() {
         hideProgressDialog()
 
         val notifySuccessMessage: String = if (mUserAddress != null && mUserAddress!!.id.isNotEmpty()) {
-            resources.getString(R.string.txt_your_address_updated_successfully)
+            resources.getString(R.string.text_your_address_updated_successfully)
         } else {
-            resources.getString(R.string.txt_your_address_added_successfully)
+            resources.getString(R.string.text_your_address_added_successfully)
         }
 
         Toast.makeText(
@@ -110,41 +110,41 @@ class AddEditAddressActivity : BaseActivity() {
             return when {
                 TextUtils.isEmpty(inputTxtFullName.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_name))
+                        .make(root, getString(R.string.text_error_empty_name))
                         .setBehavior(Constants.SNACKBAR_BEHAVIOR)
                         .show()
                     inputTxtLayoutFullName.requestFocus()
-                    inputTxtLayoutFullName.error = getString(R.string.txt_error_empty_name)
+                    inputTxtLayoutFullName.error = getString(R.string.text_error_empty_name)
                     false
                 }
 
                 TextUtils.isEmpty(inputTxtPhoneNumber.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_email))
+                        .make(root, getString(R.string.text_error_empty_email))
                         .setBehavior(Constants.SNACKBAR_BEHAVIOR)
                         .show()
                     inputTxtLayoutPhoneNumber.requestFocus()
-                    inputTxtLayoutPhoneNumber.error = getString(R.string.txt_error_empty_phone)
+                    inputTxtLayoutPhoneNumber.error = getString(R.string.text_error_empty_phone)
                     false
                 }
 
                 TextUtils.isEmpty(inputTxtAddress.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_email))
+                        .make(root, getString(R.string.text_error_empty_email))
                         .setBehavior(Constants.SNACKBAR_BEHAVIOR)
                         .show()
                     inputTxtLayoutAddress.requestFocus()
-                    inputTxtLayoutAddress.error = getString(R.string.txt_error_empty_address)
+                    inputTxtLayoutAddress.error = getString(R.string.text_error_empty_address)
                     false
                 }
 
                 TextUtils.isEmpty(inputTxtZipCode.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_email))
+                        .make(root, getString(R.string.text_error_empty_email))
                         .setBehavior(Constants.SNACKBAR_BEHAVIOR)
                         .show()
                     inputTxtLayoutZipCode.requestFocus()
-                    inputTxtLayoutZipCode.error = getString(R.string.txt_error_empty_zip_code)
+                    inputTxtLayoutZipCode.error = getString(R.string.text_error_empty_zip_code)
                     false
                 }
 
@@ -170,10 +170,10 @@ class AddEditAddressActivity : BaseActivity() {
         binding.apply {
             toolbar.apply {
                 if (mUserAddress == null)
-                    textViewActionBarLabel.text = getString(R.string.txt_add_new_address)
+                    textViewActionBarLabel.text = getString(R.string.text_add_new_address)
                 else {
                     loadInputTextDetails()
-                    textViewActionBarLabel.text = getString(R.string.txt_edit_address)
+                    textViewActionBarLabel.text = getString(R.string.text_edit_address)
                 }
                 imgBtnSave.setOnClickListener{ saveAddressToFirestore() }
             }
@@ -183,7 +183,8 @@ class AddEditAddressActivity : BaseActivity() {
             it.setDisplayShowCustomEnabled(true)
             it.setCustomView(R.layout.toolbar_product_details)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 

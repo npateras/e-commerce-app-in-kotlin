@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    tools:context=".ui.activities.FillAccInfoActivity"
+    tools:context=".ui.activities."
     android:clickable="true"
     tools:ignore="ContentDescription" >
 
@@ -36,10 +36,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="29dp"
             android:fontFamily="@font/core_sans_cr_45_regular"
-            android:text="@string/txt_Step_1"
+            android:text="@string/text_Step_1"
             android:textAlignment="textStart"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/txt_font_size_header_16"
+            android:textSize="@dimen/text_font_size_header_16"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/imageView_Progress"
             app:layout_constraintTop_toTopOf="parent" />
@@ -51,10 +51,10 @@
             android:layout_marginTop="36dp"
             android:fontFamily="@font/core_sans_cr_45_regular"
             android:gravity="center"
-            android:text="@string/txt_Step_2"
+            android:text="@string/text_Step_2"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/txt_font_size_header_16"
+            android:textSize="@dimen/text_font_size_header_16"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView_Step_1"
             app:layout_constraintEnd_toStartOf="@+id/textView_Step_3"
@@ -68,10 +68,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
             android:fontFamily="@font/core_sans_cr_45_regular"
-            android:text="@string/txt_Step_3"
+            android:text="@string/text_Step_3"
             android:textAlignment="textEnd"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/txt_font_size_header_16"
+            android:textSize="@dimen/text_font_size_header_16"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView_Step_2"
             app:layout_constraintEnd_toEndOf="@+id/imageView_Progress"
@@ -80,7 +80,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
-            android:id="@+id/txt_Header_1"
+            android:id="@+id/text_Header_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="29dp"
@@ -88,7 +88,7 @@
             android:text="@string/fill_acc_info_act_header"
             android:textAlignment="textStart"
             android:textColor="@color/colorText"
-            android:textSize="@dimen/txt_font_size_header_24"
+            android:textSize="@dimen/text_font_size_header_24"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/imageView_Progress"
             app:layout_constraintHorizontal_bias="0.0"
@@ -96,7 +96,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView_Progress" />
 
         <TextView
-            android:id="@+id/txt_Header_2"
+            android:id="@+id/text_Header_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -106,11 +106,11 @@
             android:text="@string/fill_acc_info_act_header_2"
             android:textAlignment="textStart"
             android:textColor="@color/colorSecondary2"
-            android:textSize="@dimen/txt_font_size_header_16"
+            android:textSize="@dimen/text_font_size_header_16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_Header_1" />
+            app:layout_constraintTop_toBottomOf="@+id/text_Header_1" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputTxtLayout_First_Name"
@@ -120,9 +120,9 @@
             android:layout_marginTop="39dp"
             app:boxStrokeColor="@color/colorSecondary3"
             app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="@+id/txt_Header_2"
-            app:layout_constraintStart_toStartOf="@+id/txt_Header_2"
-            app:layout_constraintTop_toBottomOf="@+id/txt_Header_2">
+            app:layout_constraintEnd_toEndOf="@+id/text_Header_2"
+            app:layout_constraintStart_toStartOf="@+id/text_Header_2"
+            app:layout_constraintTop_toBottomOf="@+id/text_Header_2">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inputTxt_First_Name"
@@ -170,7 +170,7 @@
             android:layout_marginBottom="36dp"
             android:background="@drawable/ripple_btn_primary_color_selector"
             android:fontFamily="@font/core_sans_cr_55_medium"
-            android:text="@string/button_send"
+            android:text="@string/text_send"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/btn_font_size_small_14"
             app:backgroundTint="@null"

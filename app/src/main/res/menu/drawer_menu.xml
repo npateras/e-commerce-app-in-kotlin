@@ -4,14 +4,14 @@
     <item android:title="@string/drawer_nav_bar_category_general">
         <menu>
             <group android:checkableBehavior="single">
-            <item
-                android:id="@+id/nav_drawer_item_products"
-                android:icon="@drawable/ic_food_stand"
-                android:title="@string/drawer_nav_bar_item_products" />
-            <item
-                android:id="@+id/nav_drawer_item_cart"
-                android:icon="@drawable/ic_shopping_cart"
-                android:title="@string/drawer_nav_bar_item_cart" />
+                <item
+                    android:id="@+id/nav_drawer_item_products"
+                    android:icon="@drawable/ic_food_stand"
+                    android:title="@string/drawer_nav_bar_item_products" />
+                <item
+                    android:id="@+id/nav_drawer_item_cart"
+                    android:icon="@drawable/ic_shopping_cart"
+                    android:title="@string/drawer_nav_bar_item_cart" />
             </group>
         </menu>
     </item>
@@ -21,7 +21,7 @@
                 <item
                     android:id="@+id/nav_drawer_item_favorites"
                     android:icon="@drawable/ic_heart"
-                    android:title="@string/txt_favorite_products" />
+                    android:title="@string/text_favorites" />
                 <item
                     android:id="@+id/nav_drawer_item_orders"
                     android:icon="@drawable/ic_shopping_bag"
@@ -29,21 +29,21 @@
                 <item
                     android:id="@+id/nav_drawer_item_profile"
                     android:icon="@drawable/ic_user_circle"
-                    android:title="@string/drawer_nav_bar_item_my_account" />
+                    android:title="@string/drawer_nav_bar_item_profile" />
             </group>
         </menu>
     </item>
     <item android:title="@string/drawer_nav_bar_category_other">
         <menu>
             <group android:checkableBehavior="single">
-            <item
-                android:id="@+id/nav_drawer_item_settings"
-                android:icon="@drawable/ic_gear"
-                android:title="@string/drawer_nav_bar_item_settings" />
-            <item
-                android:id="@+id/nav_drawer_item_exit"
-                android:icon="@drawable/ic_exit"
-                android:title="@string/drawer_nav_bar_item_exit" />
+                <item
+                    android:id="@+id/nav_drawer_item_settings"
+                    android:icon="@drawable/svg_settings_outline"
+                    android:title="@string/drawer_nav_bar_item_settings" />
+                <item
+                    android:id="@+id/nav_drawer_item_exit"
+                    android:icon="@drawable/ic_exit"
+                    android:title="@string/drawer_nav_bar_item_exit" />
             </group>
         </menu>
     </item>

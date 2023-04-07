@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="17dp"
-                android:text="@string/txt_categories"
+                android:text="@string/text_categories"
                 app:layout_constraintStart_toStartOf="@+id/image_button_category_household"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,8 +40,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:text="@string/txt_view_all"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:text="@string/text_view_all"
                 app:drawableEndCompat="@drawable/svg_chevron_right_12dp"
                 android:drawablePadding="8dp"
                 app:drawableTint="@color/colorSecondary4"
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:layout_marginBottom="20dp"
-                android:text="@string/txt_household"
+                android:text="@string/text_category_household"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/image_button_category_household"
                 app:layout_constraintStart_toStartOf="@+id/image_button_category_household"
@@ -148,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:gravity="center"
-                android:text="@string/txt_grocery"
+                android:text="@string/text_category_grocery"
                 app:layout_constraintBottom_toBottomOf="@+id/text_view_category_household"
                 app:layout_constraintEnd_toEndOf="@+id/image_button_category_grocery"
                 app:layout_constraintStart_toStartOf="@+id/image_button_category_grocery"
@@ -161,7 +161,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:gravity="center"
-                android:text="@string/txt_liquor"
+                android:text="@string/text_category_liquor"
                 app:layout_constraintBottom_toBottomOf="@+id/text_view_category_household"
                 app:layout_constraintEnd_toEndOf="@+id/image_button_category_liquor"
                 app:layout_constraintStart_toStartOf="@+id/image_button_category_liquor"
@@ -174,7 +174,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:gravity="center"
-                android:text="@string/txt_chilled"
+                android:text="@string/text_category_chilled"
                 app:layout_constraintBottom_toBottomOf="@+id/text_view_category_household"
                 app:layout_constraintEnd_toEndOf="@+id/image_button_category_chilled"
                 app:layout_constraintStart_toStartOf="@+id/image_button_category_chilled"
@@ -201,7 +201,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="29dp"
-                    android:text="@string/txt_deals"
+                    android:text="@string/text_deals"
                     app:layout_constraintStart_toStartOf="@+id/recycler_view_deals"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -212,15 +212,59 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="24dp"
                     android:drawablePadding="8dp"
-                    android:foreground="?android:attr/selectableItemBackground"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:gravity="center"
-                    android:text="@string/txt_view_all"
+                    android:text="@string/text_view_all"
                     app:drawableEndCompat="@drawable/svg_chevron_right_12dp"
                     app:drawableTint="@color/colorSecondary4"
                     app:layout_constraintBottom_toBottomOf="@+id/text_view_deals"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/text_view_deals"
                     app:layout_constraintVertical_bias="0.0" />
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer_view_container_deals"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_deals"
+                    tools:listitem="@layout/item_product" >
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:clipToPadding="false"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <include
+                            layout="@layout/shimmer_product"
+                            android:layout_width="115dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp" />
+
+                        <include
+                            layout="@layout/shimmer_product"
+                            android:layout_width="115dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp" />
+
+                        <include
+                            layout="@layout/shimmer_product"
+                            android:layout_width="115dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp" />
+
+                        <include
+                            layout="@layout/shimmer_product"
+                            android:layout_width="115dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_deals"
@@ -260,7 +304,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="19dp"
-                    android:text="@string/txt_popular"
+                    android:text="@string/text_popular"
                     app:layout_constraintStart_toStartOf="@+id/text_view_deals"
                     app:layout_constraintTop_toBottomOf="@+id/recycler_view_deals" />
 
@@ -270,14 +314,58 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="8dp"
-                    android:foreground="?android:attr/selectableItemBackground"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:gravity="center"
-                    android:text="@string/txt_view_all"
+                    android:text="@string/text_view_all"
                     app:drawableEndCompat="@drawable/svg_chevron_right_12dp"
                     app:drawableTint="@color/colorSecondary4"
                     app:layout_constraintBottom_toBottomOf="@+id/txtView_Popular"
                     app:layout_constraintEnd_toEndOf="@+id/text_view_deals_view_all"
                     app:layout_constraintTop_toTopOf="@+id/txtView_Popular" />
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer_view_container_popular"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtView_Popular"
+                    tools:listitem="@layout/item_product" >
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:clipToPadding="false"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <include
+                            layout="@layout/shimmer_product"
+                            android:layout_width="115dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp" />
+
+                        <include
+                            layout="@layout/shimmer_product"
+                            android:layout_width="115dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp" />
+
+                        <include
+                            layout="@layout/shimmer_product"
+                            android:layout_width="115dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp" />
+
+                        <include
+                            layout="@layout/shimmer_product"
+                            android:layout_width="115dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_popular"

@@ -34,149 +34,182 @@
 
         <!-- region [START Activities] -->
         
-            <!-- Home/Main Activity -->
-            <activity
-                android:name=".ui.activities.MainActivity"
-                android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:exported="true">
-                
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
-            </activity>
-
-            <!-- Product Details Activity -->
-            <activity
-                android:name=".ui.activities.ProductDetailsActivity"
-                android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName=".ui.activities.MainActivity"
-                android:exported="true">
-
-                <intent-filter>
-                    <action android:name="ProductDetailsActivity"/>
-                    <category android:name="android.intent.category.DEFAULT"/>
-                </intent-filter>
-
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.activities.MainActivity" />
-            </activity>
-
-            <!-- List Products Activity -->
-            <activity
-                android:name=".ui.activities.ListProductsActivity"
-                android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:exported="true">
-            </activity>
-
-            <!-- Sign In activity -->
-            <activity
-                android:name=".ui.activities.SignInActivity"
-                android:launchMode="singleTask"
-                android:windowSoftInputMode="adjustResize"
-                android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName=".ui.activities.MainActivity"
-                android:exported="true">
-
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.activities.MainActivity" />
-            </activity>
-
-            <!-- Sign Up activity -->
-            <activity
-                android:name=".ui.activities.SignUpActivity"
-                android:launchMode="singleTask"
-                android:windowSoftInputMode="adjustResize"
-                android:theme="@style/Theme.EMarket.NoActionBar4"
-                android:parentActivityName=".ui.activities.SignInActivity"
-                android:exported="true">
-
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.activities.SignInActivity" />
-            </activity>
-
-            <!-- Forgot Password activity -->
-            <activity
-                android:name=".ui.activities.ForgotPasswordActivity"
-                android:launchMode="singleTask"
-                android:windowSoftInputMode="adjustResize"
-                android:theme="@style/Theme.EMarket.NoActionBar4"
-                android:parentActivityName=".ui.activities.SignInActivity"
-                android:exported="true">
-
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.activities.SignInActivity" />
-            </activity>
-
-            <!-- Update Profile activity -->
-            <activity
-                android:name=".ui.activities.EditProfileActivity"
-                android:launchMode="singleTask"
-                android:windowSoftInputMode="adjustResize"
-                android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName=".ui.activities.SignInActivity"
-                android:exported="true">
-
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.activities.SignInActivity" />
-            </activity>
-
-            <!-- All Categories activity -->
-            <activity
-                android:name=".ui.activities.AllCategoriesActivity"
-                android:launchMode="singleTask"
-                android:windowSoftInputMode="adjustResize"
-                android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName=".ui.activities.MainActivity"
-                android:exported="true">
-
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.activities.MainActivity" />
-            </activity>
-
-            <!-- List Addresses activity -->
-            <activity
-                android:name=".ui.activities.ListAddressActivity"
-                android:launchMode="singleTask"
-                android:windowSoftInputMode="adjustResize"
-                android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName=".ui.activities.MainActivity"
-                android:exported="true">
-
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.activities.MainActivity" />
-            </activity>
-
-            <!-- Add/Edit Addresses activity -->
-            <activity
-                android:name=".ui.activities.AddEditAddressActivity"
-                android:launchMode="singleTask"
-                android:windowSoftInputMode="adjustResize"
-                android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName=".ui.activities.ListAddressActivity"
-                android:exported="true">
-
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.activities.ListAddressActivity" />
-            </activity>
-
-        <!-- Checkout activity -->
+        <!-- Home/Main Activity -->
         <activity
-            android:name=".ui.activities.CheckoutActivity"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustResize"
+            android:name=".ui.activities.MainActivity"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Product Details Activity -->
+        <activity
+            android:name=".ui.activities.ProductDetailsActivity"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:parentActivityName=".ui.activities.MainActivity"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="ProductDetailsActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.MainActivity" />
+        </activity>
+
+        <!-- List Products Activity -->
+        <activity
+            android:name=".ui.activities.ListProductsActivity"
             android:theme="@style/Theme.EMarket.NoActionBar3"
             android:exported="true">
         </activity>
+
+        <!-- List Settings Activity -->
+        <activity
+            android:name=".ui.activities.ListSettingsActivity"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:exported="true"/>
+
+        <!-- Sign In activity -->
+        <activity
+            android:name=".ui.activities.SignInActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:parentActivityName=".ui.activities.MainActivity"
+            android:exported="true">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.MainActivity" />
+        </activity>
+
+        <!-- Sign Up activity -->
+        <activity
+            android:name=".ui.activities.SignUpActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:parentActivityName=".ui.activities.SignInActivity"
+            android:exported="true">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.SignInActivity" />
+        </activity>
+
+        <!-- Forgot Password activity -->
+        <activity
+            android:name=".ui.activities.ForgotPasswordActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:parentActivityName=".ui.activities.SignInActivity"
+            android:exported="true">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.SignInActivity" />
+        </activity>
+
+        <!-- Authenticate activity -->
+        <activity
+            android:name=".ui.activities.profile.AuthenticateActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:parentActivityName=".ui.activities.ListSettingsActivity"
+            android:exported="true">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.ListSettingsActivity" />
+        </activity>
+
+        <!-- Change Password activity -->
+        <activity
+            android:name=".ui.activities.profile.ChangePasswordActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:parentActivityName=".ui.activities.ListSettingsActivity"
+            android:exported="true">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.ListSettingsActivity" />
+        </activity>
+
+        <!-- Update Profile activity -->
+        <activity
+            android:name=".ui.activities.profile.EditProfileActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:parentActivityName=".ui.activities.SignInActivity"
+            android:exported="true">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.SignInActivity" />
+        </activity>
+
+        <!-- All Categories activity -->
+        <activity
+            android:name=".ui.activities.AllCategoriesActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:parentActivityName=".ui.activities.MainActivity"
+            android:exported="true">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.MainActivity" />
+        </activity>
+
+        <!-- List Addresses activity -->
+        <activity
+            android:name=".ui.activities.ListAddressActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:parentActivityName=".ui.activities.MainActivity"
+            android:exported="true">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.MainActivity" />
+        </activity>
+
+        <!-- Add/Edit Addresses activity -->
+        <activity
+            android:name=".ui.activities.AddEditAddressActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:parentActivityName=".ui.activities.ListAddressActivity"
+            android:exported="true">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.ListAddressActivity" />
+        </activity>
+
+       <!-- Checkout activity -->
+       <activity
+           android:name=".ui.activities.CheckoutActivity"
+           android:launchMode="singleTask"
+           android:windowSoftInputMode="adjustResize"
+           android:theme="@style/Theme.EMarket.NoActionBar3"
+           android:exported="true">
+       </activity>
 
         <!-- My Cart Items List activity -->
         <activity

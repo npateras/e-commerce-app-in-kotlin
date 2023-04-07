@@ -52,22 +52,22 @@ open class FavoritesListAdapter(
         var priceReduced = 0.00
 
         holder.binding.apply {
-            GlideLoader(context).loadProductPictureWide(model.imgUrl, imgViewProduct)
-            txtViewName.text = model.name
+            GlideLoader(context).loadProductPictureWide(model.imgUrl, imageViewIcon)
+            textViewProductName.text = model.name
             if (model.sale != 0.0) {
-                txtViewPriceReduced.apply {
+                textViewProductPriceReduced.apply {
                     visibility = View.VISIBLE
                     foreground = AppCompatResources.getDrawable(context, R.drawable.striking_red_text)
                     text = String.format(
-                        context.getString(R.string.txt_format_price),
+                        context.getString(R.string.text_format_price_reduced),
                         context.getString(R.string.curr_eur),
                         model.price
                     )
                 }
                 priceReduced = model.price - (model.price * model.sale)
             }
-            txtViewPrice.text = String.format(
-                context.getString(R.string.txt_format_price),
+            textViewProductPrice.text = String.format(
+                context.getString(R.string.text_format_price),
                 context.getString(R.string.curr_eur),
                 priceReduced
             )

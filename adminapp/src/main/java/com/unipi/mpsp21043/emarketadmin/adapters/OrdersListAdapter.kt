@@ -83,7 +83,7 @@ open class OrdersListAdapter(
         holder.binding.apply {
             txtViewName.text = model.title
             textViewTotalAmountValue.text = String.format(
-                context.getString(R.string.txt_format_price),
+                context.getString(R.string.text_format_price),
                 Constants.DEFAULT_CURRENCY,
                 model.totalAmount
             )
@@ -91,15 +91,15 @@ open class OrdersListAdapter(
             txtViewDate.text = Constants.standardSimpleDateFormat.format(model.orderDate)
             when (model.orderStatus) {
                 0 -> {
-                    textViewOrderStatusValue.text = context.getString(R.string.txt_pending)
+                    textViewOrderStatusValue.text = context.getString(R.string.text_pending)
                     textViewOrderStatusValue.setTextColor(context.getColor(R.color.colorRed))
                 }
                 1 -> {
-                    textViewOrderStatusValue.text = context.getString(R.string.txt_processing)
+                    textViewOrderStatusValue.text = context.getString(R.string.text_processing)
                     textViewOrderStatusValue.setTextColor(context.getColor(R.color.colorYellowOrange))
                 }
                 2 -> {
-                    textViewOrderStatusValue.text = context.getString(R.string.txt_completed)
+                    textViewOrderStatusValue.text = context.getString(R.string.text_completed)
                     textViewOrderStatusValue.setTextColor(context.getColor(R.color.colorGreen))
                 }
             }

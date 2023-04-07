@@ -52,11 +52,9 @@ class MyAccountActivity : BaseActivity() {
 
     private fun setupClickListeners() {
         binding.apply {
-            btnUpdateProfile.setOnClickListener { IntentUtils().goToUpdateUserDetailsActivity(this@MyAccountActivity, mUserDetails) }
-            btnAddresses.setOnClickListener { IntentUtils().goToListAddressesActivity(this@MyAccountActivity) }
-            btnLogOut.setOnClickListener {
+            buttonUpdate.setOnClickListener { IntentUtils().goToUpdateUserDetailsActivity(this@MyAccountActivity, mUserDetails) }
+            buttonSignOut.setOnClickListener {
                 FirebaseAuth.getInstance().signOut()
-                finish()
                 IntentUtils().goToSignInActivity(this@MyAccountActivity)
             }
         }
@@ -88,18 +86,16 @@ class MyAccountActivity : BaseActivity() {
             // showing a blank view.
             if (mUserDetails.phoneNumber != "")
                 if (mUserDetails.phoneCode.toString() != "")
-                    textViewPhoneValue.text = String.format(getString(R.string.txt_format_phone), mUserDetails.phoneCode, mUserDetails.phoneNumber)
+                    textViewPhoneNumberValue.text = String.format(getString(R.string.text_format_phone), mUserDetails.phoneCode, mUserDetails.phoneNumber)
                 else
-                    textViewPhoneValue.text = mUserDetails.phoneNumber
-            else textViewPhoneValue.text = getString(R.string.txt_none)
+                    textViewPhoneNumberValue.text = mUserDetails.phoneNumber
+            else textViewPhoneNumberValue.text = getString(R.string.text_none)
 
             if (mUserDetails.profImgUrl.isNotEmpty()) {
-                progressBarProfImgLoading.visibility = View.VISIBLE
                 GlideLoader(this@MyAccountActivity).loadUserPicture(
                     mUserDetails.profImgUrl,
-                    imgViewUserPicture
+                    circleImageViewUserPicture
                 )
-                progressBarProfImgLoading.visibility = View.GONE
             }
         }
 
@@ -108,7 +104,7 @@ class MyAccountActivity : BaseActivity() {
 
     private fun showShimmerUI() {
         binding.apply {
-            layoutStateError.root.visibility = View.GONE
+            layoutErrorState.root.visibility = View.GONE
             constraintLayoutContainer.visibility = View.GONE
             shimmerLayout.visibility = View.VISIBLE
             shimmerLayout.startShimmer()
@@ -125,7 +121,7 @@ class MyAccountActivity : BaseActivity() {
 
     fun showErrorUI() {
         binding.apply {
-            layoutStateError.root.visibility = View.VISIBLE
+            layoutErrorState.root.visibility = View.VISIBLE
             shimmerLayout.visibility = View.GONE
             shimmerLayout.stopShimmer()
         }
@@ -136,7 +132,7 @@ class MyAccountActivity : BaseActivity() {
 
         val actionBar = supportActionBar
         binding.apply {
-            toolbar.textViewActionBarLabel.text = getString(R.string.txt_my_account)
+            toolbar.textViewActionBarLabel.text = getString(R.string.text_my_account)
         }
 
         actionBar?.let {
@@ -144,6 +140,7 @@ class MyAccountActivity : BaseActivity() {
             it.setCustomView(R.layout.toolbar_product_details)
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 

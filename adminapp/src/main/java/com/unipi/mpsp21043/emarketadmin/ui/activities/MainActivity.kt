@@ -3,14 +3,12 @@ package com.unipi.mpsp21043.emarketadmin.ui.activities
 import android.app.SearchManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.SearchView.OnQueryTextListener
-import android.window.OnBackInvokedCallback
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -32,7 +30,6 @@ import com.unipi.mpsp21043.emarketadmin.adapters.ViewPagerMainAdapter
 import com.unipi.mpsp21043.emarketadmin.database.FirestoreHelper
 import com.unipi.mpsp21043.emarketadmin.databinding.ActivityMainBinding
 import com.unipi.mpsp21043.emarketadmin.models.User
-import com.unipi.mpsp21043.emarketadmin.service.MyFirebaseMessagingService
 import com.unipi.mpsp21043.emarketadmin.ui.fragments.OrdersFragment
 import com.unipi.mpsp21043.emarketadmin.ui.fragments.ProductsFragment
 import com.unipi.mpsp21043.emarketadmin.ui.fragments.UsersFragment
@@ -60,8 +57,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setupTabs()
         setupActionBar()
         setupNavDrawer()
-
-        // binding.toolbar.actionBarButtonSearch.setOnClickListener { IntentUtils().goToSearchActivity(this) }
     }
 
     private fun setupActionBar() {
@@ -77,7 +72,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         binding.apply {
             val toggle = ActionBarDrawerToggle(
                 this@MainActivity, drawerLayout, toolbar.root,
-                R.string.nav_drawer_open_menu, R.string.nav_drawer_open_menu
+                R.string.nav_drawer_open_menu, R.string.nav_drawer_close_menu
             )
             drawerLayout.addDrawerListener(toggle)
             // Change drawer arrow icon
@@ -97,23 +92,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun init() {
         // Handle Back Button Press.
-        onBackPressedDispatcher.addCallback(this,onBackPressedCallback)
-
-        /*onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (!searchView.isIconified) {
-                    searchView.isIconified = true
-                    return
-                }
-                @Suppress("DEPRECATION")
-                this@MainActivity.onBackPressed();
-            }
-
-        })*/
-
-        if (FirestoreHelper().getCurrentUserID() != "") {
-            FirestoreHelper().getUserFCMRegistrationToken(this)
-        }
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 
         if (intent.hasExtra(Constants.EXTRA_SNACKBAR_TYPE)) {
             if (intent.getStringExtra(Constants.EXTRA_SNACKBAR_TYPE) == Constants.STATUS_SUCCESS) {
@@ -154,15 +133,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 override fun onTabSelected(tab: TabLayout.Tab) {
                     when (tab.position) {
                         0 -> {
-                            toolbar.textViewActionBarHeader.text = getString(R.string.txt_products)
+                            toolbar.textViewActionBarHeader.text = getString(R.string.text_products)
                             navView.setCheckedItem(R.id.nav_drawer_item_products)
                         }
                         1 -> {
-                            toolbar.textViewActionBarHeader.text = getString(R.string.txt_orders)
+                            toolbar.textViewActionBarHeader.text = getString(R.string.text_orders)
                             navView.setCheckedItem(R.id.nav_drawer_item_orders)
                         }
                         2 -> {
-                            toolbar.textViewActionBarHeader.text = getString(R.string.txt_users)
+                            toolbar.textViewActionBarHeader.text = getString(R.string.text_users)
                             navView.setCheckedItem(R.id.nav_drawer_item_users)
                         }
                     }
@@ -226,11 +205,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
         }
 
-    }
-
-    fun userFcmRegistrationTokenSuccess(token: String) {
-        MyFirebaseMessagingService.addTokenToFirestore(token)
-        Log.e(Constants.TAG, "New token: $token")
     }
 
     private fun showSelectSortProductsDialog() {
@@ -446,7 +420,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         searchView.setSearchableInfo(searchManager
             .getSearchableInfo(componentName))
         searchView.maxWidth = Integer.MAX_VALUE
-        searchView.queryHint = getString(R.string.txt_search_something)
+        searchView.queryHint = getString(R.string.text_search_something)
 
         // below line is to call set on query text listener method.
         searchView.setOnQueryTextListener(object : OnQueryTextListener, SearchView.OnQueryTextListener {

@@ -54,8 +54,6 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     private fun getProductDetails() {
-        showProgressDialog()
-
         FirestoreHelper().getProductDetails(this, productId)
     }
 
@@ -78,25 +76,25 @@ class ProductDetailsActivity : BaseActivity() {
                 foreground =
                     AppCompatResources.getDrawable(context, R.drawable.striking_red_text)
                 text = String.format(
-                    context.getString(R.string.txt_format_price),
+                    context.getString(R.string.text_format_price),
                     context.getString(R.string.curr_eur),
                     modelProduct.price
                 )
             }
             priceReduced = modelProduct.price - (modelProduct.price * modelProduct.sale)
             txtViewPrice.text = String.format(
-                getString(R.string.txt_format_price),
+                getString(R.string.text_format_price),
                 Constants.DEFAULT_CURRENCY,
                 priceReduced
             )
             txtViewWeight.text = String.format(
-                getString(R.string.txt_format_weight),
+                getString(R.string.text_format_weight),
                 modelProduct.weight,
                 modelProduct.weightUnit
             )
 
             if (modelProduct.stock > 0)
-                txtViewStock.text = getString(R.string.txt_available)
+                txtViewStock.text = getString(R.string.text_available)
         }
 
         checkIfProductIsInFavorites()
@@ -130,8 +128,7 @@ class ProductDetailsActivity : BaseActivity() {
             updateCart()
         }
 
-        hideProgressDialog()
-        unveilDetails()
+        hideShimmerUI()
     }
 
     private fun hideAddToCart() {
@@ -144,13 +141,6 @@ class ProductDetailsActivity : BaseActivity() {
         binding.apply {
             btnAddToCart.visibility = View.VISIBLE
             btnRemoveFromCart.visibility = View.GONE
-        }
-    }
-
-    private fun unveilDetails() {
-        binding.apply {
-            vLayoutHead.unVeil()
-            vLayoutBody.unVeil()
         }
     }
 
@@ -192,15 +182,11 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     fun successItemAddedToCart() {
-        hideProgressDialog()
         hideAddToCart()
-
-       binding.txtViewQuantityValue.text = cartProductQuantity.toString()
+        binding.txtViewQuantityValue.text = cartProductQuantity.toString()
     }
 
     private fun updateItemToCart() {
-        showProgressDialog()
-
         modelCart = Cart(
             userId = FirestoreHelper().getCurrentUserID(),
             productId = modelProduct.id,
@@ -218,13 +204,10 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     private fun deleteItemFromCard() {
-        showProgressDialog()
-
         FirestoreHelper().deleteItemFromCart(this, modelProduct.id)
     }
 
     fun successItemDeletedFromCart() {
-        hideProgressDialog()
         showAddToCart()
 
         modelCart = null
@@ -246,8 +229,8 @@ class ProductDetailsActivity : BaseActivity() {
                             else {
                                 // If it does, show a snackbar and explain the issue.
                                 SnackBarErrorClass
-                                    .make(view, getString(R.string.txt_error_max_stock))
-                                    .setAnchorView(binding.constraintLayoutBottom)
+                                    .make(view, getString(R.string.text_error_max_stock))
+                                    .setAnchorView(constraintLayoutAddToCart)
                                     .show()
                                 return
                             }
@@ -255,8 +238,8 @@ class ProductDetailsActivity : BaseActivity() {
                             // If the user is trying to select a quantity of more than 99,
                             // Show a snackbar and explain the issue.
                             SnackBarErrorClass
-                                .make(view, getString(R.string.txt_error_max_quantity))
-                                .setAnchorView(binding.constraintLayoutBottom)
+                                .make(view, getString(R.string.text_error_max_quantity))
+                                .setAnchorView(constraintLayoutAddToCart)
                                 .show()
                             return
                         }
@@ -277,8 +260,8 @@ class ProductDetailsActivity : BaseActivity() {
                         }
                         else -> {
                             SnackBarErrorClass
-                                .make(view, getString(R.string.txt_error_selecting_below_zero))
-                                .setAnchorView(binding.constraintLayoutBottom)
+                                .make(view, getString(R.string.text_error_selecting_below_zero))
+                                .setAnchorView(constraintLayoutAddToCart)
                                 .show()
                             return
                         }
@@ -292,14 +275,36 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     private fun setupUI() {
-        // Veil the layout until all data is loaded
-        binding.apply {
-            vLayoutHead.veil()
-            vLayoutBody.veil()
-        }
+        // Display shimmer effect until all data is loaded
+        showShimmerUI()
 
         setupActionBar()
         setupClickListeners()
+    }
+
+    private fun showShimmerUI() {
+        binding.apply {
+            layoutStateError.root.visibility = View.GONE
+            constraintLayoutDetails.visibility = View.INVISIBLE
+            shimmerLayout.visibility = View.VISIBLE
+            shimmerLayout.startShimmer()
+        }
+    }
+
+    private fun hideShimmerUI() {
+        binding.apply {
+            constraintLayoutDetails.visibility = View.VISIBLE
+            shimmerLayout.visibility = View.GONE
+            shimmerLayout.stopShimmer()
+        }
+    }
+
+    fun showErrorUI() {
+        binding.apply {
+            layoutStateError.root.visibility = View.VISIBLE
+            shimmerLayout.visibility = View.GONE
+            shimmerLayout.stopShimmer()
+        }
     }
 
     private fun setupClickListeners() {
@@ -315,7 +320,7 @@ class ProductDetailsActivity : BaseActivity() {
                 toolbar.actionBarImgBtnMyCart.setOnClickListener { IntentUtils().goToListCartItemsActivity(this@ProductDetailsActivity) }
                 toolbar.actionBarCheckboxFavorite.setOnClickListener {
                     if (!toolbar.actionBarCheckboxFavorite.isChecked) {
-                        FirestoreHelper().deleteFavoriteProduct(
+                        FirestoreHelper().removeProductFromUserFavorites(
                             this@ProductDetailsActivity,
                             modelProduct.id
                         )
@@ -329,7 +334,7 @@ class ProductDetailsActivity : BaseActivity() {
                             modelProduct.price,
                             modelProduct.sale
                         )
-                        FirestoreHelper().addToFavorites(
+                        FirestoreHelper().addProductToUserFavorites(
                             this@ProductDetailsActivity,
                             favorite
                         )
@@ -356,7 +361,8 @@ class ProductDetailsActivity : BaseActivity() {
             it.setDisplayShowCustomEnabled(true)
             it.setCustomView(R.layout.toolbar_product_details)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 

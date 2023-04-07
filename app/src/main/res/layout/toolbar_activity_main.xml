@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-                <ImageButton
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/actionBar_ImgBtn_My_Cart"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
@@ -35,8 +35,8 @@
                     android:id="@+id/textView_ActionBar_Header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/txt_store"
-                    android:textSize="@dimen/txt_font_size_action_bar_20"
+                    android:text="@string/text_store"
+                    android:textSize="@dimen/text_font_size_action_bar_20"
                     android:textColor="@color/colorWhite"
                     android:fontFamily="@font/core_sans_cr_55_medium"
                     android:textStyle="bold"

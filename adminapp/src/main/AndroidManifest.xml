@@ -14,26 +14,7 @@
         android:theme="@style/Theme.EMarket.Starting"
         android:usesCleartextTraffic="true">
 
-        <!-- [START fcm_default_icon] -->
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
-             See README(https://goo.gl/l4GJaQ) for more. -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_stat_name" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorAccent" />
-        <!-- [END fcm_default_icon] -->
-        <!-- [START fcm_default_channel] -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="@string/default_notification_channel_id" />
-        <!-- [END fcm_default_channel] -->
-
         <!-- region [START Activities] -->
-        
             <!-- Home/Main Activity -->
             <activity
                 android:name=".ui.activities.MainActivity"
@@ -85,7 +66,7 @@
                 android:name=".ui.activities.ForgotPasswordActivity"
                 android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustResize"
-                android:theme="@style/Theme.EMarket.NoActionBar4"
+                android:theme="@style/Theme.EMarket.NoActionBar3"
                 android:parentActivityName=".ui.activities.SignInActivity"
                 android:exported="true">
 
@@ -106,34 +87,6 @@
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ui.activities.MainActivity" />
-            </activity>
-
-            <!-- List Addresses activity -->
-            <activity
-                android:name=".ui.activities.ListAddressActivity"
-                android:launchMode="singleTask"
-                android:windowSoftInputMode="adjustResize"
-                android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName=".ui.activities.MainActivity"
-                android:exported="true">
-
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.activities.MainActivity" />
-            </activity>
-
-            <!-- Add/Edit Addresses activity -->
-            <activity
-                android:name=".ui.activities.AddEditAddressActivity"
-                android:launchMode="singleTask"
-                android:windowSoftInputMode="adjustResize"
-                android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName=".ui.activities.ListAddressActivity"
-                android:exported="true">
-
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.activities.ListAddressActivity" />
             </activity>
 
             <!-- Add/Edit Products activity -->
@@ -191,34 +144,7 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ui.activities.MainActivity" />
             </activity>
-
-            <!-- Search activity -->
-            <activity
-                android:name=".ui.activities.SearchActivity"
-                android:launchMode="singleTask"
-                android:windowSoftInputMode="adjustResize"
-                android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName=".ui.activities.MainActivity"
-                android:exported="true">
-
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.activities.MainActivity" />
-            </activity>
-
         <!-- endregion [END Activities] -->
-
-        <!-- [START firebase_service] -->
-            <service
-                android:name=".service.MyFirebaseMessagingService"
-                android:exported="false">
-                <intent-filter>
-                    <action android:name="com.google.firebase.MESSAGING_EVENT" />
-                </intent-filter>
-            </service>
-        <!-- [END firebase_service] -->
-
-        <receiver android:name=".service.NotificationReceiver"/>
 
     </application>
 </manifest>

@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
+    app:layout_scrollFlags="scroll|enterAlways"
     android:background="@color/colorPrimary"
     tools:ignore="ContentDescription">
 
@@ -18,8 +19,8 @@
                     android:id="@+id/textView_ActionBar_Label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="title"
-                    android:textSize="@dimen/txt_font_size_action_bar_20"
+                    android:text="@string/text_loading"
+                    android:textSize="@dimen/text_font_size_action_bar_20"
                     android:textColor="@color/colorWhite"
                     android:fontFamily="@font/core_sans_cr_55_medium"
                     android:textStyle="bold"

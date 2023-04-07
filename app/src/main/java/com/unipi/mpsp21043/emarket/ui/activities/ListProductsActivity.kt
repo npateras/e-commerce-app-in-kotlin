@@ -82,33 +82,33 @@ class ListProductsActivity : BaseActivity() {
     private fun getFilterTranslated(filter: String): String {
         when (filter) {
             "Vegetables" ->
-                return getString(R.string.txt_category_vegetables)
+                return getString(R.string.text_category_vegetables)
             "Fruits" ->
-                return getString(R.string.txt_category_Fruits)
+                return getString(R.string.text_category_fruits)
             "Liquor" ->
-                return getString(R.string.txt_category_Liquor)
+                return getString(R.string.text_category_liquor)
             "Pharmacy" ->
-                return getString(R.string.txt_category_Pharmacy)
+                return getString(R.string.text_category_pharmacy)
             "Household" ->
-                return getString(R.string.txt_category_household)
+                return getString(R.string.text_category_household)
             "Homeware" ->
-                return getString(R.string.txt_category_homeware)
+                return getString(R.string.text_category_homeware)
             "Grocery" ->
-                return getString(R.string.txt_category_grocery)
+                return getString(R.string.text_category_grocery)
             "Meat" ->
-                return getString(R.string.txt_category_meat)
+                return getString(R.string.text_category_meat)
             "Frozen" ->
-                return getString(R.string.txt_category_frozen)
+                return getString(R.string.text_category_frozen)
             "Chilled" ->
-                return getString(R.string.txt_category_chilled)
+                return getString(R.string.text_category_chilled)
             "Fish" ->
-                return getString(R.string.txt_category_fish)
+                return getString(R.string.text_category_fish)
             "Beverages" ->
-                return getString(R.string.txt_category_beverages)
+                return getString(R.string.text_category_beverages)
             "Deals" ->
-                return getString(R.string.txt_deals)
+                return getString(R.string.text_deals)
             "Popular" ->
-                return getString(R.string.txt_popular)
+                return getString(R.string.text_popular)
         }
         return filter
     }
@@ -127,7 +127,8 @@ class ListProductsActivity : BaseActivity() {
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 

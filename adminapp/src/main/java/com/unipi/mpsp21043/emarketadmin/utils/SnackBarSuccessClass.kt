@@ -18,7 +18,7 @@ class SnackBarSuccessClass(
         getView().setBackgroundColor(ContextCompat.getColor(view.context, android.R.color.transparent))
         getView().setPadding(0, 0, 0, 0)
 
-        getView().findViewById<TextView>(R.id.btn_SnackBar_Success_Dismiss).setOnClickListener { dismiss() }
+        getView().findViewById<TextView>(R.id.button_snackbar_success_dismiss).setOnClickListener { dismiss() }
         animationMode = ANIMATION_MODE_SLIDE
     }
 
@@ -39,7 +39,7 @@ class SnackBarSuccessClass(
             ) as SnackBarSuccessView
 
             customView.apply {
-                findViewById<TextView>(R.id.txt_SnackBar_Success_Header_2).text = contentTxt
+                findViewById<TextView>(R.id.text_view_snackbar_success_label_2).text = contentTxt
             }
 
             // We create and return our Snack-bar

@@ -219,63 +219,63 @@ class AddEditProductActivity : BaseActivity() {
             val dialogSelectButton = dialog.findViewById<MaterialButton>(R.id.btn_Dialog_Select)
             dialogSelectButton.setOnClickListener {
                 if (dialog.findViewById<RadioButton>(R.id.radio_button_beverages).isChecked) {
-                    mProductSelectedCategory = getString(R.string.txt_category_beverages)
-                    autoCompleteTextViewProductCategory.setText(getString(R.string.txt_category_beverages))
+                    mProductSelectedCategory = getString(R.string.text_category_beverages)
+                    autoCompleteTextViewProductCategory.setText(getString(R.string.text_category_beverages))
                 }
 
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_chilled).isChecked) {
-                    mProductSelectedCategory = getString(R.string.txt_category_chilled)
-                    autoCompleteTextViewProductCategory.setText(getString(R.string.txt_category_chilled))
+                    mProductSelectedCategory = getString(R.string.text_category_chilled)
+                    autoCompleteTextViewProductCategory.setText(getString(R.string.text_category_chilled))
                 }
 
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_fish).isChecked) {
-                    mProductSelectedCategory = getString(R.string.txt_category_fish)
-                    autoCompleteTextViewProductCategory.setText(getString(R.string.txt_category_fish))
+                    mProductSelectedCategory = getString(R.string.text_category_fish)
+                    autoCompleteTextViewProductCategory.setText(getString(R.string.text_category_fish))
                 }
 
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_frozen).isChecked) {
-                    mProductSelectedCategory = getString(R.string.txt_category_frozen)
-                    autoCompleteTextViewProductCategory.setText(getString(R.string.txt_category_frozen))
+                    mProductSelectedCategory = getString(R.string.text_category_frozen)
+                    autoCompleteTextViewProductCategory.setText(getString(R.string.text_category_frozen))
                 }
 
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_fruits).isChecked) {
-                    mProductSelectedCategory = getString(R.string.txt_category_fruits)
-                    autoCompleteTextViewProductCategory.setText(getString(R.string.txt_category_fruits))
+                    mProductSelectedCategory = getString(R.string.text_category_fruits)
+                    autoCompleteTextViewProductCategory.setText(getString(R.string.text_category_fruits))
                 }
 
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_grocery).isChecked) {
-                    mProductSelectedCategory = getString(R.string.txt_category_grocery)
-                    autoCompleteTextViewProductCategory.setText(getString(R.string.txt_category_grocery))
+                    mProductSelectedCategory = getString(R.string.text_category_grocery)
+                    autoCompleteTextViewProductCategory.setText(getString(R.string.text_category_grocery))
                 }
 
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_homeware).isChecked) {
-                    mProductSelectedCategory = getString(R.string.txt_category_homeware)
-                    autoCompleteTextViewProductCategory.setText(getString(R.string.txt_category_homeware))
+                    mProductSelectedCategory = getString(R.string.text_category_homeware)
+                    autoCompleteTextViewProductCategory.setText(getString(R.string.text_category_homeware))
                 }
 
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_household).isChecked) {
-                    mProductSelectedCategory = getString(R.string.txt_category_household)
-                    autoCompleteTextViewProductCategory.setText(getString(R.string.txt_category_household))
+                    mProductSelectedCategory = getString(R.string.text_category_household)
+                    autoCompleteTextViewProductCategory.setText(getString(R.string.text_category_household))
                 }
 
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_liquor).isChecked) {
-                    mProductSelectedCategory = getString(R.string.txt_category_liquor)
-                    autoCompleteTextViewProductCategory.setText(getString(R.string.txt_category_liquor))
+                    mProductSelectedCategory = getString(R.string.text_category_liquor)
+                    autoCompleteTextViewProductCategory.setText(getString(R.string.text_category_liquor))
                 }
 
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_meat).isChecked) {
-                    mProductSelectedCategory = getString(R.string.txt_category_meat)
-                    autoCompleteTextViewProductCategory.setText(getString(R.string.txt_category_meat))
+                    mProductSelectedCategory = getString(R.string.text_category_meat)
+                    autoCompleteTextViewProductCategory.setText(getString(R.string.text_category_meat))
                 }
 
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_pharmacy).isChecked) {
-                    mProductSelectedCategory = getString(R.string.txt_category_pharmacy)
-                    autoCompleteTextViewProductCategory.setText(getString(R.string.txt_category_pharmacy))
+                    mProductSelectedCategory = getString(R.string.text_category_pharmacy)
+                    autoCompleteTextViewProductCategory.setText(getString(R.string.text_category_pharmacy))
                 }
 
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_vegetables).isChecked) {
-                    mProductSelectedCategory = getString(R.string.txt_category_vegetables)
-                    autoCompleteTextViewProductCategory.setText(getString(R.string.txt_category_vegetables))
+                    mProductSelectedCategory = getString(R.string.text_category_vegetables)
+                    autoCompleteTextViewProductCategory.setText(getString(R.string.text_category_vegetables))
                 }
 
                 dialog.dismiss()
@@ -292,16 +292,16 @@ class AddEditProductActivity : BaseActivity() {
             val dialogSelectButton = dialog.findViewById<MaterialButton>(R.id.btn_Dialog_Select)
             dialogSelectButton.setOnClickListener {
                 if (dialog.findViewById<RadioButton>(R.id.radio_button_grams).isChecked)
-                    autoCompleteTextViewWeightUnit.setText(getString(R.string.txt_weight_unit_shortcut_grams))
+                    autoCompleteTextViewWeightUnit.setText(getString(R.string.text_weight_unit_shortcut_grams))
 
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_kg).isChecked)
-                    autoCompleteTextViewWeightUnit.setText(getString(R.string.txt_weight_unit_shortcut_kg))
+                    autoCompleteTextViewWeightUnit.setText(getString(R.string.text_weight_unit_shortcut_kg))
 
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_liters).isChecked)
-                    autoCompleteTextViewWeightUnit.setText(getString(R.string.txt_weight_unit_shortcut_liters))
+                    autoCompleteTextViewWeightUnit.setText(getString(R.string.text_weight_unit_shortcut_liters))
 
                 else if (dialog.findViewById<RadioButton>(R.id.radio_button_pills).isChecked)
-                    autoCompleteTextViewWeightUnit.setText(getString(R.string.txt_weight_unit_shortcut_pills))
+                    autoCompleteTextViewWeightUnit.setText(getString(R.string.text_weight_unit_shortcut_pills))
 
                 dialog.dismiss()
             }
@@ -317,55 +317,55 @@ class AddEditProductActivity : BaseActivity() {
                 /* Product Category */
                 TextUtils.isEmpty(autoCompleteTextViewProductCategory.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_product_category))
+                        .make(root, getString(R.string.text_error_empty_product_category))
                         .setBehavior(Constants.SNACKBAR_BEHAVIOR)
                         .show()
                     textInputLayoutProductCategory.requestFocus()
-                    textInputLayoutProductCategory.error = getString(R.string.txt_error_empty_product_category)
+                    textInputLayoutProductCategory.error = getString(R.string.text_error_empty_product_category)
                     false
                 }
 
                 /* Product Name */
                 TextUtils.isEmpty(textInputEditTextProductName.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_product_name))
+                        .make(root, getString(R.string.text_error_empty_product_name))
                         .setBehavior(Constants.SNACKBAR_BEHAVIOR)
                         .show()
                     textInputLayoutProductName.requestFocus()
-                    textInputLayoutProductName.error = getString(R.string.txt_error_empty_product_name)
+                    textInputLayoutProductName.error = getString(R.string.text_error_empty_product_name)
                     false
                 }
 
                 /* Product Price */
                 TextUtils.isEmpty(textInputEditTextProductPrice.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_product_price))
+                        .make(root, getString(R.string.text_error_empty_product_price))
                         .setBehavior(Constants.SNACKBAR_BEHAVIOR)
                         .show()
                     textInputLayoutProductPrice.requestFocus()
-                    textInputLayoutProductPrice.error = getString(R.string.txt_error_empty_product_price)
+                    textInputLayoutProductPrice.error = getString(R.string.text_error_empty_product_price)
                     false
                 }
 
                 /* Product Stock */
                 TextUtils.isEmpty(textInputEditTextProductStock.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_product_stock))
+                        .make(root, getString(R.string.text_error_empty_product_stock))
                         .setBehavior(Constants.SNACKBAR_BEHAVIOR)
                         .show()
                     textInputLayoutProductStock.requestFocus()
-                    textInputLayoutProductStock.error = getString(R.string.txt_error_empty_product_stock)
+                    textInputLayoutProductStock.error = getString(R.string.text_error_empty_product_stock)
                     false
                 }
 
                 /* Product Description */
                 TextUtils.isEmpty(textInputEditTextProductDescription.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_product_description))
+                        .make(root, getString(R.string.text_error_empty_product_description))
                         .setBehavior(Constants.SNACKBAR_BEHAVIOR)
                         .show()
                     textInputLayoutProductDescription.requestFocus()
-                    textInputLayoutProductDescription.error = getString(R.string.txt_error_empty_product_description)
+                    textInputLayoutProductDescription.error = getString(R.string.text_error_empty_product_description)
                     false
                 }
 
@@ -431,9 +431,9 @@ class AddEditProductActivity : BaseActivity() {
         hideProgressDialog()
 
         val notifySuccessMessage: String = if (mProduct != null && mProduct!!.id.isNotEmpty()) {
-            String.format(getString(R.string.txt_product_updated_successfully), mProduct?.name)
+            String.format(getString(R.string.text_product_updated_successfully), mProduct?.name)
         } else {
-            String.format(getString(R.string.txt_product_added_successfully), mProduct?.name)
+            String.format(getString(R.string.text_product_added_successfully), mProduct?.name)
         }
 
         SnackBarSuccessClass
@@ -499,7 +499,7 @@ class AddEditProductActivity : BaseActivity() {
             textInputEditTextProductDescription.setText(mProduct?.description)
 
             toolbar.textViewActionBarLabel.text = String.format(
-                getString(R.string.txt_format_update),
+                getString(R.string.text_format_update),
                 mProduct?.name
             )
 
@@ -530,7 +530,7 @@ class AddEditProductActivity : BaseActivity() {
             else {
                 // Displaying another snackbar if permission is not granted
                 SnackBarErrorClass
-                    .make(binding.root, getString(R.string.read_storage_permission_denied))
+                    .make(binding.root, getString(R.string.text_read_storage_permission_denied))
                     .setBehavior(Constants.SNACKBAR_BEHAVIOR)
                     .show()
             }
@@ -568,7 +568,7 @@ class AddEditProductActivity : BaseActivity() {
                     } catch (e: IOException) {
                         e.printStackTrace()
                         SnackBarErrorClass
-                            .make(binding.root, getString(R.string.image_selection_failed))
+                            .make(binding.root, getString(R.string.text_image_selection_failed))
                             .setBehavior(Constants.SNACKBAR_BEHAVIOR)
                             .show()
                     }
@@ -594,6 +594,7 @@ class AddEditProductActivity : BaseActivity() {
             it.setDisplayShowCustomEnabled(true)
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 

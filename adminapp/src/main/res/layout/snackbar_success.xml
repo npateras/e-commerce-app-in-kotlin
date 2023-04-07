@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/btn_SnackBar_Success_Dismiss"
+            android:id="@+id/button_snackbar_success_dismiss"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="38dp"
@@ -26,49 +26,49 @@
             android:background="@android:color/transparent"
             android:fontFamily="@font/core_sans_cr_55_medium"
             android:gravity="start|center_vertical"
-            android:text="@string/button_dismiss"
+            android:text="@string/text_dismiss"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/btn_font_size_small_14"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/txt_SnackBar_Success_Header_2"
-            app:layout_constraintTop_toBottomOf="@+id/txt_SnackBar_Success_Header_2"
+            app:layout_constraintEnd_toEndOf="@+id/text_view_snackbar_success_label_2"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_snackbar_success_label_2"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/txt_SnackBar_Success_Header_2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/core_sans_cr_45_regular"
-            android:text="@string/txt_loading"
-            android:textAlignment="textStart"
-            android:textColor="@color/colorText2"
-            android:textSize="@dimen/txt_font_size_header_16"
-            app:layout_constraintEnd_toEndOf="@+id/txt_Header_1"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/txt_Header_1"
-            app:layout_constraintTop_toBottomOf="@+id/txt_Header_1" />
-
-        <TextView
-            android:id="@+id/txt_Header_1"
+            android:id="@+id/text_view_snackbar_success_label_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/core_sans_cr_45_regular"
-            android:text="@string/txt_congratulations"
+            android:text="@string/text_congratulations"
             android:textAlignment="textStart"
             android:textColor="@color/colorText"
-            android:textSize="@dimen/txt_font_size_header_24"
+            android:textSize="@dimen/text_font_size_header_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/imgView_Icon"
+            app:layout_constraintStart_toEndOf="@+id/image_view_icon"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/text_view_snackbar_success_label_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/core_sans_cr_45_regular"
+            android:text="@string/text_loading"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorText2"
+            android:textSize="@dimen/text_font_size_header_16"
+            app:layout_constraintEnd_toEndOf="@+id/text_view_snackbar_success_label_1"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/text_view_snackbar_success_label_1"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_snackbar_success_label_1" />
+
         <ImageView
-            android:id="@+id/imgView_Icon"
+            android:id="@+id/image_view_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -76,5 +76,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/svg_tick_check_circle" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

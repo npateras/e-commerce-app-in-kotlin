@@ -83,7 +83,7 @@ class ProductDetailsActivity : BaseActivity() {
                     foreground =
                         AppCompatResources.getDrawable(context, R.drawable.shape_striking_red_text)
                     text = String.format(
-                        context.getString(R.string.txt_format_price),
+                        context.getString(R.string.text_format_price),
                         context.getString(R.string.curr_eur),
                         modelProduct.price
                     )
@@ -92,18 +92,18 @@ class ProductDetailsActivity : BaseActivity() {
 
             priceReduced = modelProduct.price - (modelProduct.price * modelProduct.sale)
             txtViewPrice.text = String.format(
-                getString(R.string.txt_format_price),
+                getString(R.string.text_format_price),
                 Constants.DEFAULT_CURRENCY,
                 priceReduced
             )
             txtViewWeight.text = String.format(
-                getString(R.string.txt_format_weight),
+                getString(R.string.text_format_weight),
                 modelProduct.weight,
                 modelProduct.weightUnit
             )
 
             if (modelProduct.stock > 0)
-                txtViewStock.text = getString(R.string.txt_available)
+                txtViewStock.text = getString(R.string.text_available)
         }
 
         binding.apply {
@@ -135,7 +135,7 @@ class ProductDetailsActivity : BaseActivity() {
     fun successAddedByUserDetailsFromFirestore(user: User) {
         mAddedByUser = user
 
-        binding.textViewAddedByUser.text = String.format(getString(R.string.txt_format_added_by_user), mAddedByUser.fullName)
+        binding.textViewAddedByUser.text = String.format(getString(R.string.text_format_added_by_user), mAddedByUser.fullName)
 
         if (modelProduct.lastModifiedBy.isNotEmpty()) {
             FirestoreHelper().getUserDetails(this@ProductDetailsActivity, modelProduct.lastModifiedBy, "modified")
@@ -153,14 +153,14 @@ class ProductDetailsActivity : BaseActivity() {
         // Hide progress dialog.
         hideProgressDialog()
 
-        goToMainActivity(this@ProductDetailsActivity, "success", getString(R.string.product_deleted_successfully))
+        goToMainActivity(this@ProductDetailsActivity, "success", getString(R.string.text_product_deleted))
     }
 
     fun successLastModifiedByUserDetailsFromFirestore(user: User) {
         mLastModifiedByUser = user
 
         binding.apply {
-            textViewLastModifiedByUser.text = String.format(getString(R.string.txt_format_last_modified_by_user), mLastModifiedByUser.fullName)
+            textViewLastModifiedByUser.text = String.format(getString(R.string.text_format_last_modified_by_user), mLastModifiedByUser.fullName)
             textViewLastModifiedByUser.visibility = View.VISIBLE
             imageViewArrowModifiedBy.visibility = View.VISIBLE
         }
@@ -226,6 +226,7 @@ class ProductDetailsActivity : BaseActivity() {
             it.setCustomView(R.layout.toolbar_product_details)
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 

@@ -10,7 +10,6 @@ import com.unipi.mpsp21043.emarket.R
 import com.unipi.mpsp21043.emarket.databinding.ActivityForgotPasswordBinding
 import com.unipi.mpsp21043.emarket.utils.SnackBarErrorClass
 import com.unipi.mpsp21043.emarket.utils.SnackBarSuccessClass
-import java.util.*
 
 class ForgotPasswordActivity : BaseActivity() {
     private lateinit var binding: ActivityForgotPasswordBinding
@@ -32,11 +31,11 @@ class ForgotPasswordActivity : BaseActivity() {
 
     private fun setupUI() {
         binding.apply {
-            inputTxtEmail.addTextChangedListener(object: TextWatcher {
+            textInputEditTextEmail.addTextChangedListener(object: TextWatcher {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    inputTxtLayoutEmail.isErrorEnabled = false
+                    textInputLayoutEmail.isErrorEnabled = false
                 }
 
                 override fun afterTextChanged(s: Editable?) {}
@@ -46,7 +45,7 @@ class ForgotPasswordActivity : BaseActivity() {
 
     private fun setUpClickListeners() {
         binding.apply {
-            btnSend.setOnClickListener{ resetPassword() }
+            buttonSend.setOnClickListener{ resetPassword() }
         }
     }
 
@@ -58,7 +57,7 @@ class ForgotPasswordActivity : BaseActivity() {
                 showProgressDialog()
 
                 // This piece of code is used to send the reset password link to the user's email id if the user is registered.
-                FirebaseAuth.getInstance().sendPasswordResetEmail(inputTxtEmail.text.toString())
+                FirebaseAuth.getInstance().sendPasswordResetEmail(textInputEditTextEmail.text.toString())
                     .addOnCompleteListener { task ->
 
                         // Hide the progress dialog
@@ -66,7 +65,7 @@ class ForgotPasswordActivity : BaseActivity() {
 
                         if (task.isSuccessful) {
                             SnackBarSuccessClass
-                                .make(root, getString(R.string.txt_password_reset_mail_sent))
+                                .make(root, getString(R.string.text_password_reset_mail_sent))
                                 .show()
 
                             finish()
@@ -78,19 +77,19 @@ class ForgotPasswordActivity : BaseActivity() {
                     }
             }
             else
-                btnSend.startAnimation(AnimationUtils.loadAnimation(this@ForgotPasswordActivity, R.anim.shake))
+                buttonSend.startAnimation(AnimationUtils.loadAnimation(this@ForgotPasswordActivity, R.anim.shake))
         }
     }
 
     private fun validateFields(): Boolean {
         binding.apply {
             return when {
-                TextUtils.isEmpty(inputTxtEmail.text.toString().trim { it <= ' ' }) -> {
+                TextUtils.isEmpty(textInputEditTextEmail.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_email))
+                        .make(root, getString(R.string.text_error_empty_email))
                         .show()
-                    inputTxtLayoutEmail.requestFocus()
-                    inputTxtLayoutEmail.error = getString(R.string.txt_error_empty_email)
+                    textInputLayoutEmail.requestFocus()
+                    textInputLayoutEmail.error = getString(R.string.text_error_empty_email)
                     false
                 }
 
@@ -102,14 +101,15 @@ class ForgotPasswordActivity : BaseActivity() {
     private fun setUpActionBar() {
         binding.toolbar.apply {
             setSupportActionBar(root)
-            textViewActionBarLabel.text = getString(R.string.txt_forgot_password)
+            textViewActionBarLabel.text = getString(R.string.text_forgot_password)
         }
 
         val actionBar = supportActionBar
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 }

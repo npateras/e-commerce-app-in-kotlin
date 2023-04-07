@@ -67,7 +67,7 @@ open class CartItemsListAdapter(
                     foreground =
                         AppCompatResources.getDrawable(context, R.drawable.striking_red_text)
                     text = String.format(
-                        context.getString(R.string.txt_format_price),
+                        context.getString(R.string.text_format_price),
                         context.getString(R.string.curr_eur),
                         model.price
                     )
@@ -77,7 +77,7 @@ open class CartItemsListAdapter(
             // Product final price
             txtViewPrice.apply {
                 text = String.format(
-                    context.getString(R.string.txt_format_price),
+                    context.getString(R.string.text_format_price),
                     context.getString(R.string.curr_eur),
                     priceReduced
                 )
@@ -108,7 +108,7 @@ open class CartItemsListAdapter(
                     if (context is ListCartItemsActivity) {
                         Toast.makeText(
                             context,
-                            context.getString(R.string.txt_error_max_stock),
+                            context.getString(R.string.text_error_max_stock),
                             Toast.LENGTH_LONG
                         ).show()
                     }

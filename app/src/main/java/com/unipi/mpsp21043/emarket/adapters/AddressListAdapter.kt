@@ -56,14 +56,14 @@ open class AddressListAdapter(
             textViewFullName.text = model.fullName
             if (model.phoneCode.toString() != "")
                 textViewPhoneNumber.text = String.format(
-                    context.getString(R.string.txt_format_phone),
+                    context.getString(R.string.text_format_phone),
                     model.phoneCode,
                     model.phoneNumber
                 )
             else
                 textViewPhoneNumber.text = model.phoneNumber
             textViewAddress.text = String.format(
-                context.getString(R.string.txt_format_address),
+                context.getString(R.string.text_format_address),
                 model.address,
                 model.zipCode
             )

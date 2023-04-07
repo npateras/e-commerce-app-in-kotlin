@@ -91,7 +91,7 @@ open class ProductsListAdapter(
                     foreground =
                         AppCompatResources.getDrawable(context, R.drawable.shape_striking_red_text)
                     text = String.format(
-                        context.getString(R.string.txt_format_price),
+                        context.getString(R.string.text_format_price),
                         context.getString(R.string.curr_eur),
                         model.price
                     )
@@ -100,14 +100,14 @@ open class ProductsListAdapter(
             }
             textViewPrice.apply {
                 text = String.format(
-                    context.getString(R.string.txt_format_price),
+                    context.getString(R.string.text_format_price),
                     context.getString(R.string.curr_eur),
                     priceReduced
                 )
             }
 
             txtViewWeight.text = String.format(
-                context.getString(R.string.txt_format_weight),
+                context.getString(R.string.text_format_weight),
                 model.weight,
                 model.weightUnit
             )

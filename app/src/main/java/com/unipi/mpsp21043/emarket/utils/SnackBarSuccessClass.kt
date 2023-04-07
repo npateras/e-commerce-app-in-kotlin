@@ -39,7 +39,7 @@ class SnackBarSuccessClass(
             ) as SnackBarSuccessView
 
             customView.apply {
-                findViewById<TextView>(R.id.txt_SnackBar_Success_Header_2).text = contentTxt
+                findViewById<TextView>(R.id.text_SnackBar_Success_Header_2).text = contentTxt
             }
 
             // We create and return our Snack-bar

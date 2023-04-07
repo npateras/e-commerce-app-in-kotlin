@@ -158,7 +158,7 @@ class ListAddressActivity : BaseActivity() {
 
         Toast.makeText(
             this,
-            resources.getString(R.string.txt_address_deleted_confirmation),
+            resources.getString(R.string.text_address_deleted_confirmation),
             Toast.LENGTH_SHORT
         ).show()
 
@@ -181,13 +181,14 @@ class ListAddressActivity : BaseActivity() {
 
         val actionBar = supportActionBar
         binding.apply {
-            toolbar.textViewActionBarLabel.text = getString(R.string.txt_addresses)
+            toolbar.textViewActionBarLabel.text = getString(R.string.text_addresses)
         }
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setCustomView(R.layout.toolbar_product_details)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 }

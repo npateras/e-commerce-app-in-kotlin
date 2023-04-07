@@ -21,6 +21,7 @@
                 android:id="@+id/shimmer_view_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -170,9 +171,10 @@
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:orientation="vertical"
-                android:visibility="gone"
                 android:paddingTop="28dp"
                 android:paddingBottom="8dp"
+                app:spanCount="3"
+                app:layoutManager="GridLayoutManager"
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -194,7 +196,7 @@
 
             <include
                 android:id="@+id/layout_state_error"
-                layout="@layout/layout_state_error"
+                layout="@layout/layout_error_state"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"

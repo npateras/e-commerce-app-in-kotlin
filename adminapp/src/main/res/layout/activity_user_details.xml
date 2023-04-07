@@ -63,7 +63,7 @@
                     android:layout_marginBottom="40dp"
                     android:fontFamily="@font/core_sans_cr_55_medium"
                     android:textColor="@color/colorText"
-                    android:textSize="@dimen/txt_font_size_header_24"
+                    android:textSize="@dimen/text_font_size_header_24"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/frame_layout_user_picture"
@@ -91,7 +91,7 @@
                     android:fontFamily="@font/core_sans_cr_55_medium"
                     android:text="@string/user_info"
                     android:textColor="@color/colorText"
-                    android:textSize="@dimen/txt_font_size_header_24"
+                    android:textSize="@dimen/text_font_size_header_24"
                     android:textStyle="bold"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -116,9 +116,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/core_sans_cr_55_medium"
-                        android:text="@string/txt_email"
+                        android:text="@string/text_email"
                         android:textColor="@color/colorText"
-                        android:textSize="@dimen/txt_font_size_header_16"
+                        android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold" />
 
                     <TextView
@@ -128,7 +128,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/core_sans_cr_55_medium"
                         android:textColor="@color/colorText2"
-                        android:textSize="@dimen/txt_font_size_header_16"
+                        android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold" />
 
                     <!-- Phone -->
@@ -138,9 +138,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/core_sans_cr_55_medium"
-                        android:text="@string/txt_phone_number"
+                        android:text="@string/text_phone_number"
                         android:textColor="@color/colorText"
-                        android:textSize="@dimen/txt_font_size_header_16"
+                        android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold" />
 
                     <TextView
@@ -150,7 +150,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/core_sans_cr_55_medium"
                         android:textColor="@color/colorText2"
-                        android:textSize="@dimen/txt_font_size_header_16"
+                        android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold" />
 
                     <!-- Role -->
@@ -162,7 +162,7 @@
                         android:fontFamily="@font/core_sans_cr_55_medium"
                         android:text="@string/role"
                         android:textColor="@color/colorText"
-                        android:textSize="@dimen/txt_font_size_header_16"
+                        android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold" />
 
                     <TextView
@@ -172,7 +172,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/core_sans_cr_55_medium"
                         android:textColor="@color/colorText2"
-                        android:textSize="@dimen/txt_font_size_header_16"
+                        android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold" />
 
                     <!-- Notifications -->
@@ -184,7 +184,7 @@
                         android:fontFamily="@font/core_sans_cr_55_medium"
                         android:text="@string/notifications_enabled"
                         android:textColor="@color/colorText"
-                        android:textSize="@dimen/txt_font_size_header_16"
+                        android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold" />
 
                     <TextView
@@ -194,7 +194,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/core_sans_cr_55_medium"
                         android:textColor="@color/colorText2"
-                        android:textSize="@dimen/txt_font_size_header_16"
+                        android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold" />
 
                     <!-- Date Reg -->
@@ -204,9 +204,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/core_sans_cr_55_medium"
-                        android:text="@string/txt_date_registered"
+                        android:text="@string/text_date_registered"
                         android:textColor="@color/colorText"
-                        android:textSize="@dimen/txt_font_size_header_16"
+                        android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold" />
 
                     <TextView
@@ -216,7 +216,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/core_sans_cr_55_medium"
                         android:textColor="@color/colorText2"
-                        android:textSize="@dimen/txt_font_size_header_16"
+                        android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold" />
 
                     <!-- Active Devices -->
@@ -228,7 +228,7 @@
                         android:fontFamily="@font/core_sans_cr_55_medium"
                         android:text="@string/active_devices"
                         android:textColor="@color/colorText"
-                        android:textSize="@dimen/txt_font_size_header_16"
+                        android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold" />
 
                     <TextView
@@ -238,7 +238,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/core_sans_cr_55_medium"
                         android:textColor="@color/colorText2"
-                        android:textSize="@dimen/txt_font_size_header_16"
+                        android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold" />
 
                     <!-- Profile Completed -->
@@ -250,7 +250,7 @@
                         android:fontFamily="@font/core_sans_cr_55_medium"
                         android:text="@string/is_profile_completed"
                         android:textColor="@color/colorText"
-                        android:textSize="@dimen/txt_font_size_header_16"
+                        android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold" />
 
                     <TextView
@@ -260,7 +260,7 @@
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/core_sans_cr_55_medium"
                         android:textColor="@color/colorText2"
-                        android:textSize="@dimen/txt_font_size_header_16"
+                        android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -289,7 +289,7 @@
 
     <include
         android:id="@+id/layout_state_error"
-        layout="@layout/layout_state_error"
+        layout="@layout/layout_error_state"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false"

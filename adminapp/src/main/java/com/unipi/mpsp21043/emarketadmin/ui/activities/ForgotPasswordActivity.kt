@@ -66,7 +66,7 @@ class ForgotPasswordActivity : BaseActivity() {
 
                         if (task.isSuccessful) {
                             SnackBarSuccessClass
-                                .make(root, getString(R.string.txt_password_reset_mail_sent))
+                                .make(root, getString(R.string.text_password_reset_mail_sent))
                                 .show()
 
                             finish()
@@ -87,10 +87,10 @@ class ForgotPasswordActivity : BaseActivity() {
             return when {
                 TextUtils.isEmpty(inputTxtEmail.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_email))
+                        .make(root, getString(R.string.text_error_empty_email))
                         .show()
                     inputTxtLayoutEmail.requestFocus()
-                    inputTxtLayoutEmail.error = getString(R.string.txt_error_empty_email)
+                    inputTxtLayoutEmail.error = getString(R.string.text_error_empty_email)
                     false
                 }
 
@@ -102,7 +102,7 @@ class ForgotPasswordActivity : BaseActivity() {
     private fun setUpActionBar() {
         binding.toolbar.apply {
             setSupportActionBar(root)
-            textViewActionBarLabel.text = getString(R.string.txt_forgot_password)
+            textViewActionBarLabel.text = getString(R.string.text_forgot_password)
         }
 
         val actionBar = supportActionBar
@@ -110,6 +110,7 @@ class ForgotPasswordActivity : BaseActivity() {
             it.setDisplayShowCustomEnabled(true)
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 }

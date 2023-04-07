@@ -36,6 +36,8 @@ class ListOrdersActivity : BaseActivity() {
     }
 
     private fun getOrdersList() {
+        showShimmerUI()
+
         FirestoreHelper().getMyOrdersList(this)
     }
 
@@ -43,40 +45,54 @@ class ListOrdersActivity : BaseActivity() {
 
         if (ordersList.size > 0) {
             // Show the recycler and remove the empty state layout completely.
-            binding.apply {
-                veilRecyclerView.visibility = View.VISIBLE
-                layoutEmptyState.root.visibility = View.GONE
-            }
+            hideShimmerUI()
 
             // Sets RecyclerView's properties
-            binding.veilRecyclerView.run {
-                setVeilLayout(R.layout.shimmer_item_product)
-                setAdapter(
-                    OrdersListAdapter(
-                        this@ListOrdersActivity,
-                        ordersList
-                    )
+            binding.recyclerView.run {
+                adapter = OrdersListAdapter(
+                    this@ListOrdersActivity,
+                    ordersList
                 )
-                setLayoutManager(LinearLayoutManager(this@ListOrdersActivity, LinearLayoutManager.VERTICAL, false))
-                getRecyclerView().setHasFixedSize(true)
-                addVeiledItems(7)
-                // delay-auto-unveil
-                Handler(Looper.getMainLooper()).postDelayed(
-                    {
-                        unVeil()
-                    },
-                    1000
-                )
+                hasFixedSize()
+                layoutManager = LinearLayoutManager(this@ListOrdersActivity, LinearLayoutManager.VERTICAL, false)
             }
         }
-        else {
-            // Hide the recycler and show the empty state layout.
-            binding.apply {
-                veilRecyclerView.unVeil()
-                veilRecyclerView.visibility = View.INVISIBLE
-                layoutEmptyState.root.visibility = View.VISIBLE
-            }
+        else
+            showEmptyStateUI()
+    }
 
+    private fun showShimmerUI() {
+        binding.apply {
+            layoutEmptyState.root.visibility = View.GONE
+            recyclerView.visibility = View.GONE
+            shimmerViewContainer.visibility = View.VISIBLE
+            shimmerViewContainer.startShimmer()
+        }
+    }
+
+    private fun hideShimmerUI() {
+        binding.apply {
+            layoutEmptyState.root.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
+            shimmerViewContainer.visibility = View.GONE
+            shimmerViewContainer.stopShimmer()
+        }
+    }
+
+    private fun showEmptyStateUI() {
+        binding.apply {
+            layoutEmptyState.root.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+            shimmerViewContainer.visibility = View.GONE
+            shimmerViewContainer.stopShimmer()
+        }
+    }
+
+    fun showErrorUI() {
+        binding.apply {
+            layoutStateError.root.visibility = View.VISIBLE
+            shimmerViewContainer.visibility = View.GONE
+            shimmerViewContainer.stopShimmer()
         }
     }
 
@@ -85,13 +101,14 @@ class ListOrdersActivity : BaseActivity() {
 
         val actionBar = supportActionBar
         binding.apply {
-            toolbar.textViewActionBarLabel.text = getString(R.string.txt_my_orders)
+            toolbar.textViewActionBarLabel.text = getString(R.string.text_my_orders)
         }
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setCustomView(R.layout.toolbar_product_details)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 

@@ -85,13 +85,14 @@ class AllCategoriesActivity : BaseActivity() {
 
         val actionBar = supportActionBar
         binding.apply {
-            toolbar.textViewActionBarLabel.text = getString(R.string.txt_all_categories)
+            toolbar.textViewActionBarLabel.text = getString(R.string.text_all_categories)
         }
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setCustomView(R.layout.toolbar_product_details)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 }

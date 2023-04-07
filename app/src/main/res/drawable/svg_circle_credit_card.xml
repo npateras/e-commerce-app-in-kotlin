@@ -6,21 +6,21 @@
   <path
       android:pathData="M20,20m-20,0a20,20 0,1 1,40 0a20,20 0,1 1,-40 0"
       android:strokeAlpha="0.2"
-      android:fillColor="#fe7523"
+      android:fillColor="@color/colorPrimary"
       android:fillAlpha="0.2"/>
   <path
       android:pathData="M27.92,13.331L12.08,13.331A2.087,2.087 0,0 0,9.996 15.415v9.17a2.087,2.087 0,0 0,2.084 2.084h15.84a2.087,2.087 0,0 0,2.084 -2.084v-9.17A2.087,2.087 0,0 0,27.92 13.331ZM29.171,24.586a1.252,1.252 0,0 1,-1.251 1.251L12.08,25.837A1.252,1.252 0,0 1,10.83 24.586v-9.17a1.252,1.252 0,0 1,1.251 -1.251h15.84a1.252,1.252 0,0 1,1.251 1.251v9.17Z"
-      android:fillColor="#fe7523"/>
+      android:fillColor="@color/colorPrimary"/>
   <path
       android:pathData="M29.587,15.832L10.413,15.832A0.417,0.417 0,0 0,9.996 16.249v2.5a0.417,0.417 0,0 0,0.417 0.417L29.587,19.166a0.417,0.417 0,0 0,0.417 -0.417v-2.5A0.417,0.417 0,0 0,29.587 15.832ZM29.17,18.332L10.83,18.332v-1.667L29.171,16.665v1.667Z"
-      android:fillColor="#fe7523"/>
+      android:fillColor="@color/colorPrimary"/>
   <path
       android:pathData="M17.916,21.668h-5a0.417,0.417 0,1 0,0 0.834h5a0.417,0.417 0,1 0,0 -0.834Z"
-      android:fillColor="#fe7523"/>
+      android:fillColor="@color/colorPrimary"/>
   <path
       android:pathData="M17.916,23.335h-5a0.417,0.417 0,1 0,0 0.834h5a0.417,0.417 0,1 0,0 -0.834Z"
-      android:fillColor="#fe7523"/>
+      android:fillColor="@color/colorPrimary"/>
   <path
       android:pathData="M26.253,20.834h-0.834a1.252,1.252 0,0 0,-1.251 1.251v0.834a1.252,1.252 0,0 0,1.251 1.25h0.834a1.252,1.252 0,0 0,1.25 -1.25v-0.834A1.252,1.252 0,0 0,26.253 20.834ZM26.67,22.918a0.417,0.417 0,0 1,-0.417 0.417h-0.834a0.417,0.417 0,0 1,-0.417 -0.417v-0.834a0.417,0.417 0,0 1,0.417 -0.417h0.834a0.417,0.417 0,0 1,0.417 0.417Z"
-      android:fillColor="#fe7523"/>
+      android:fillColor="@color/colorPrimary"/>
 </vector>

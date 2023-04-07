@@ -36,9 +36,12 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun init() {
-        veilRecyclers()
+        showShimmerDealsUI()
+        showShimmerPopularUI()
+
         loadDeals()
         loadPopular()
+
         setupClickListeners()
     }
 
@@ -49,114 +52,108 @@ class HomeFragment : BaseFragment() {
     fun successDealsListFromFireStore(productsList: ArrayList<Product>) {
 
         if (productsList.size > 0) {
-
-            // Show the recycler and remove the empty state layout completely.
-            binding.apply {
-                veilRecyclerViewDeals.visibility = View.VISIBLE
-                layoutEmptyStateDeals.root.visibility = View.GONE
-            }
+            hideShimmerDealsUI()
 
             // Sets RecyclerView's properties
-            binding.veilRecyclerViewDeals.run {
-                setVeilLayout(R.layout.shimmer_item_product)
-                setAdapter(
-                    ProductsListAdapter(
-                        requireContext(),
-                        productsList
-                    )
+            binding.recyclerViewDeals.run {
+                adapter = ProductsListAdapter(
+                    requireActivity(),
+                    productsList
                 )
-                setLayoutManager(LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false))
-                getRecyclerView().setHasFixedSize(true)
-                addVeiledItems(Constants.DEFAULT_VEILED_ITEMS_HORIZONTAL)
-                // delay-auto-unveil
-                Handler(Looper.getMainLooper()).postDelayed(
-                    {
-                        unveilRecyclers()
-                    },
-                    1000
-                )
+                hasFixedSize()
+                layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             }
-        } else {
-            unveilRecyclers()
-            // Hide the recycler and show the empty state layout.
-            binding.apply {
-                veilRecyclerViewDeals.visibility = View.INVISIBLE
-                layoutEmptyStateDeals.root.visibility = View.VISIBLE
-            }
-
         }
+        else
+            showEmptyStateDealsUI()
     }
 
     private fun loadPopular() {
         FirestoreHelper().getPopularList(this@HomeFragment)
     }
 
-    fun successPopularListFromFireStore(popularProductsList: ArrayList<Product>) {
+    fun successPopularListFromFireStore(productsList: ArrayList<Product>) {
 
-        if (popularProductsList.size > 0) {
-
-            // Show the recycler and remove the empty state layout completely.
-            binding.apply {
-                veilRecyclerViewPopular.visibility = View.VISIBLE
-                layoutEmptyStatePopular.root.visibility = View.GONE
-            }
+        if (productsList.size > 0) {
+            hideShimmerPopularUI()
 
             // Sets RecyclerView's properties
-            binding.veilRecyclerViewPopular.run {
-                setVeilLayout(R.layout.shimmer_item_product)
-                setAdapter(
-                    ProductsListAdapter(
-                        requireContext(),
-                        popularProductsList
-                    )
+            binding.recyclerViewPopular.run {
+                adapter = ProductsListAdapter(
+                    requireActivity(),
+                    productsList
                 )
-                setLayoutManager(LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false))
-                getRecyclerView().setHasFixedSize(true)
-                addVeiledItems(Constants.DEFAULT_VEILED_ITEMS_HORIZONTAL)
-                // delay-auto-unveil
-                Handler(Looper.getMainLooper()).postDelayed(
-                    {
-                        unveilRecyclers()
-                    },
-                    1000
-                )
+                hasFixedSize()
+                layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             }
-        } else {
-            unveilRecyclers()
-            // Hide the recycler and show the empty state layout.
-            binding.apply {
-                veilRecyclerViewPopular.visibility = View.INVISIBLE
-                layoutEmptyStatePopular.root.visibility = View.VISIBLE
-            }
+        }
+        else
+            showEmptyStatePopularUI()
+    }
 
+    private fun showShimmerDealsUI() {
+        binding.apply {
+            layoutEmptyStateDeals.root.visibility = View.GONE
+            recyclerViewDeals.visibility = View.INVISIBLE
+            shimmerViewContainerDeals.visibility = View.VISIBLE
+            shimmerViewContainerDeals.startShimmer()
         }
     }
 
-    private fun veilRecyclers() {
+    private fun hideShimmerDealsUI() {
         binding.apply {
-            veilRecyclerViewDeals.veil()
-            veilRecyclerViewPopular.veil()
-
-            veilRecyclerViewDeals.addVeiledItems(Constants.DEFAULT_VEILED_ITEMS_HORIZONTAL)
-            veilRecyclerViewPopular.addVeiledItems(Constants.DEFAULT_VEILED_ITEMS_HORIZONTAL)
+            layoutEmptyStateDeals.root.visibility = View.GONE
+            recyclerViewDeals.visibility = View.VISIBLE
+            shimmerViewContainerDeals.visibility = View.GONE
+            shimmerViewContainerDeals.stopShimmer()
         }
     }
-    private fun unveilRecyclers() {
+
+    private fun showEmptyStateDealsUI() {
         binding.apply {
-            veilRecyclerViewDeals.unVeil()
-            veilRecyclerViewPopular.unVeil()
+            layoutEmptyStateDeals.root.visibility = View.VISIBLE
+            recyclerViewDeals.visibility = View.INVISIBLE
+            shimmerViewContainerDeals.visibility = View.GONE
+            shimmerViewContainerDeals.stopShimmer()
+        }
+    }
+
+    private fun showShimmerPopularUI() {
+        binding.apply {
+            layoutEmptyStateDeals.root.visibility = View.GONE
+            recyclerViewDeals.visibility = View.INVISIBLE
+            shimmerViewContainerDeals.visibility = View.VISIBLE
+            shimmerViewContainerDeals.startShimmer()
+        }
+    }
+
+    private fun hideShimmerPopularUI() {
+        binding.apply {
+            layoutEmptyStateDeals.root.visibility = View.GONE
+            recyclerViewDeals.visibility = View.VISIBLE
+            shimmerViewContainerDeals.visibility = View.GONE
+            shimmerViewContainerDeals.stopShimmer()
+        }
+    }
+
+    private fun showEmptyStatePopularUI() {
+        binding.apply {
+            layoutEmptyStateDeals.root.visibility = View.VISIBLE
+            recyclerViewDeals.visibility = View.INVISIBLE
+            shimmerViewContainerDeals.visibility = View.GONE
+            shimmerViewContainerDeals.stopShimmer()
         }
     }
 
     private fun setupClickListeners() {
         binding.apply {
-            txtViewCategoriesViewAll.setOnClickListener { IntentUtils().goToCategoriesActivity(requireActivity()) }
-            txtViewDealsViewAll.setOnClickListener { IntentUtils().goToListProductsActivity(requireActivity(), "Deals") }
-            txtViewPopularViewAll.setOnClickListener { IntentUtils().goToListProductsActivity(requireActivity(), "popular") }
-            imgBtnCategoryChilled.setOnClickListener{ IntentUtils().goToListProductsActivity(requireActivity(), "Chilled") }
-            imgBtnCategoryGrocery.setOnClickListener{ IntentUtils().goToListProductsActivity(requireActivity(), "Grocery") }
-            imgBtnCategoryHousehold.setOnClickListener{ IntentUtils().goToListProductsActivity(requireActivity(), "Household") }
-            imgBtnCategoryLiquor.setOnClickListener{ IntentUtils().goToListProductsActivity(requireActivity(), "Liquor") }
+            textViewCategoriesViewAll.setOnClickListener { IntentUtils().goToCategoriesActivity(requireActivity()) }
+            textViewDealsViewAll.setOnClickListener { IntentUtils().goToListProductsActivity(requireActivity(), "Deals") }
+            textViewPopularViewAll.setOnClickListener { IntentUtils().goToListProductsActivity(requireActivity(), "popular") }
+            imageButtonCategoryChilled.setOnClickListener{ IntentUtils().goToListProductsActivity(requireActivity(), "Chilled") }
+            imageButtonCategoryGrocery.setOnClickListener{ IntentUtils().goToListProductsActivity(requireActivity(), "Grocery") }
+            imageButtonCategoryHousehold.setOnClickListener{ IntentUtils().goToListProductsActivity(requireActivity(), "Household") }
+            imageButtonCategoryLiquor.setOnClickListener{ IntentUtils().goToListProductsActivity(requireActivity(), "Liquor") }
         }
     }
 

@@ -151,7 +151,7 @@ class EditProfileActivity : BaseActivity() {
 
         Toast.makeText(
             this,
-            resources.getString(R.string.txt_profile_updated),
+            resources.getString(R.string.text_profile_updated),
             Toast.LENGTH_SHORT
         ).show()
 
@@ -164,21 +164,21 @@ class EditProfileActivity : BaseActivity() {
             return when {
                 TextUtils.isEmpty(inputTxtFullName.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_name))
+                        .make(root, getString(R.string.text_error_empty_name))
                         .setBehavior(Constants.SNACKBAR_BEHAVIOR)
                         .show()
                     inputTxtLayoutFullName.requestFocus()
-                    inputTxtLayoutFullName.error = getString(R.string.txt_error_empty_name)
+                    inputTxtLayoutFullName.error = getString(R.string.text_error_empty_name)
                     false
                 }
 
                 TextUtils.isEmpty(inputTxtPhoneNumber.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_phone))
+                        .make(root, getString(R.string.text_error_empty_phone))
                         .setBehavior(Constants.SNACKBAR_BEHAVIOR)
                         .show()
                     inputTxtLayoutPhoneNumber.requestFocus()
-                    inputTxtLayoutPhoneNumber.error = getString(R.string.txt_error_empty_phone)
+                    inputTxtLayoutPhoneNumber.error = getString(R.string.text_error_empty_phone)
                     false
                 }
 
@@ -230,7 +230,7 @@ class EditProfileActivity : BaseActivity() {
                     e.printStackTrace()
                     Toast.makeText(
                         this@EditProfileActivity,
-                        resources.getString(R.string.image_selection_failed),
+                        resources.getString(R.string.text_image_selection_failed),
                         Toast.LENGTH_SHORT
                     )
                         .show()
@@ -264,7 +264,7 @@ class EditProfileActivity : BaseActivity() {
                 // Displaying another toast if permission is not granted
                 Toast.makeText(
                     this,
-                    resources.getString(R.string.read_storage_permission_denied),
+                    resources.getString(R.string.text_read_storage_permission_denied),
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -288,7 +288,7 @@ class EditProfileActivity : BaseActivity() {
 
         val actionBar = supportActionBar
         binding.apply {
-            toolbar.textViewActionBarLabel.text = getString(R.string.txt_edit_profile)
+            toolbar.textViewActionBarLabel.text = getString(R.string.text_edit_profile)
             toolbar.imgBtnSave.setOnClickListener {
                 uploadPicture()
             }
@@ -298,6 +298,7 @@ class EditProfileActivity : BaseActivity() {
             it.setCustomView(R.layout.toolbar_tick_check)
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 

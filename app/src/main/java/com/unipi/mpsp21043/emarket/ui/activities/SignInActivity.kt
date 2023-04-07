@@ -1,6 +1,5 @@
 package com.unipi.mpsp21043.emarket.ui.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -12,9 +11,7 @@ import com.unipi.mpsp21043.emarket.R
 import com.unipi.mpsp21043.emarket.database.FirestoreHelper
 import com.unipi.mpsp21043.emarket.databinding.ActivitySignInBinding
 import com.unipi.mpsp21043.emarket.models.User
-import com.unipi.mpsp21043.emarket.utils.Constants
-import com.unipi.mpsp21043.emarket.utils.SnackBarErrorClass
-import com.unipi.mpsp21043.emarket.utils.SnackBarSuccessClass
+import com.unipi.mpsp21043.emarket.utils.*
 
 
 class SignInActivity : BaseActivity() {
@@ -31,12 +28,12 @@ class SignInActivity : BaseActivity() {
 
     private fun init() {
         if (intent.hasExtra(Constants.EXTRA_REG_USERS_SNACKBAR)) {
-            if (intent.extras?.getBoolean(Constants.EXTRA_REG_USERS_SNACKBAR) == true) {
-                SnackBarSuccessClass
-                    .make(binding.root, getString(R.string.txt_congratulations_2))
-                    .show()
+            binding.apply {
+                if (intent.extras?.getBoolean(Constants.EXTRA_REG_USERS_SNACKBAR) == true)
+                    snackBarSuccessClass(root, getString(R.string.text_account_created))
+                // If we just returned from sign up activity, we set the email input to the one that has just been created.
+                textInputEditTextEmail.setText(intent.getStringExtra(Constants.EXTRA_USER_EMAIL))
             }
-            binding.inputTxtEmail.setText(intent.getStringExtra(Constants.EXTRA_USER_EMAIL))
         }
 
         setupUI()
@@ -46,41 +43,29 @@ class SignInActivity : BaseActivity() {
 
     private fun setupUI() {
         binding.apply {
-            inputTxtEmail.addTextChangedListener(object: TextWatcher {
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    inputTxtLayoutEmail.isErrorEnabled = false
-                }
-
+            textInputEditTextEmail.addTextChangedListener(object: TextWatcher {
                 override fun afterTextChanged(s: Editable?) {}
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    textInputLayoutNormal(textInputLayoutEmail)
+                }
             })
 
-            inputTxtPassword.addTextChangedListener(object: TextWatcher {
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    inputTxtLayoutPassword.isErrorEnabled = false
-                }
-
+            textInputEditTextPassword.addTextChangedListener(object: TextWatcher {
                 override fun afterTextChanged(s: Editable?) {}
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    textInputLayoutNormal(textInputLayoutPassword)
+                }
             })
         }
     }
 
     private fun setupClickListeners() {
         binding.apply {
-            txtViewSignUp.setOnClickListener {
-                // Launch the sign up screen when the user clicks on the sign up text.
-                val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
-                startActivity(intent)
-            }
-            txtViewForgotPassword.setOnClickListener {
-                // Launch the forgot password screen when the user clicks on the forgot password text.
-                val intent = Intent(this@SignInActivity, ForgotPasswordActivity::class.java)
-                startActivity(intent)
-            }
-            btnSignIn.setOnClickListener { signInUser() }
+            textViewSignUp.setOnClickListener { IntentUtils().goToSignUpActivity(this@SignInActivity) }
+            textViewForgotPassword.setOnClickListener { IntentUtils().goToForgotPasswordActivity(this@SignInActivity) }
+            buttonSignIn.setOnClickListener { signInUser() }
         }
     }
 
@@ -91,8 +76,8 @@ class SignInActivity : BaseActivity() {
 
             binding.apply {
                 // Get the text from editText and trim the space
-                val email = inputTxtEmail.text.toString().trim { it <= ' ' }
-                val password = inputTxtPassword.text.toString().trim { it <= ' ' }
+                val email = textInputEditTextEmail.text.toString().trim { it <= ' ' }
+                val password = textInputEditTextPassword.text.toString().trim { it <= ' ' }
 
                 // Log-In using FirebaseAuth
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
@@ -100,18 +85,17 @@ class SignInActivity : BaseActivity() {
 
                         if (task.isSuccessful) {
                             FirestoreHelper().getUserDetails(this@SignInActivity)
-                        } else {
+                        }
+                        else {
                             // Hide the progress dialog
                             hideProgressDialog()
-                            SnackBarErrorClass
-                                .make(root, task.exception!!.message.toString())
-                                .show()
+                            snackBarErrorClass(root, task.exception!!.message.toString())
                         }
                     }
             }
         }
         else
-            binding.btnSignIn.startAnimation(AnimationUtils.loadAnimation(this@SignInActivity, R.anim.shake))
+            binding.buttonSignIn.startAnimation(AnimationUtils.loadAnimation(this@SignInActivity, R.anim.shake))
     }
 
     /**
@@ -123,16 +107,10 @@ class SignInActivity : BaseActivity() {
         hideProgressDialog()
 
         if (!user.profileCompleted) {
-            // todo
-            // If the user profile is incomplete then launch the UserProfileActivity.
-
-            /*val intent = Intent(this@SignInActivity, UserProfileActivity::class.java)
-            intent.putExtra(Constants.EXTRA_USER_DETAILS, user)
-            startActivity(intent)*/
-
             goToMainActivity(this@SignInActivity, true)
             finish()
-        } else {
+        }
+        else {
             // Redirect the user to Dashboard Screen after log in.
             goToMainActivity(this@SignInActivity)
             finish()
@@ -143,21 +121,15 @@ class SignInActivity : BaseActivity() {
     private fun validateFields(): Boolean {
         binding.apply {
             return when {
-                TextUtils.isEmpty(inputTxtEmail.text.toString().trim { it <= ' ' }) -> {
-                    SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_email))
-                        .show()
-                    inputTxtLayoutEmail.requestFocus()
-                    inputTxtLayoutEmail.error = getString(R.string.txt_error_empty_email)
+                TextUtils.isEmpty(textInputEditTextEmail.text.toString().trim { it <= ' ' }) -> {
+                    snackBarErrorClass(root, getString(R.string.text_error_empty_email))
+                    textInputLayoutError(textInputLayoutEmail, getString(R.string.text_error_empty_email))
                     false
                 }
 
-                TextUtils.isEmpty(inputTxtPassword.text.toString().trim { it <= ' ' }) -> {
-                    SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_password))
-                        .show()
-                    inputTxtLayoutPassword.requestFocus()
-                    inputTxtLayoutPassword.error = getString(R.string.txt_error_empty_password)
+                TextUtils.isEmpty(textInputEditTextPassword.text.toString().trim { it <= ' ' }) -> {
+                    snackBarErrorClass(root, getString(R.string.text_error_empty_password))
+                    textInputLayoutError(textInputLayoutPassword, getString(R.string.text_error_empty_password))
                     false
                 }
 
@@ -169,14 +141,15 @@ class SignInActivity : BaseActivity() {
     private fun setupActionBar() {
         binding.toolbar.apply {
             setSupportActionBar(root)
-            textViewActionBarLabel.text = getString(R.string.txt_login)
+            textViewActionBarLabel.text = getString(R.string.text_login)
         }
 
         val actionBar = supportActionBar
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 

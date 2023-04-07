@@ -39,7 +39,7 @@
                     android:text="@string/category"
                     android:textAlignment="center"
                     android:textColor="@color/colorText"
-                    android:textSize="@dimen/txt_font_size_header_24"
+                    android:textSize="@dimen/text_font_size_header_24"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +65,7 @@
                         android:drawableStart="@drawable/svg_category_beverages"
                         android:drawablePadding="16dp"
                         android:fontFamily="@font/core_sans_cr_45_regular"
-                        android:text="@string/txt_category_beverages"
+                        android:text="@string/text_category_beverages"
                         android:textColor="@color/colorText"
                         android:textSize="18sp" />
 
@@ -79,7 +79,7 @@
                         android:drawableStart="@drawable/svg_category_chilled"
                         android:drawablePadding="16dp"
                         android:fontFamily="@font/core_sans_cr_45_regular"
-                        android:text="@string/txt_category_chilled"
+                        android:text="@string/text_category_chilled"
                         android:textColor="@color/colorText"
                         android:textSize="18sp" />
 
@@ -93,7 +93,7 @@
                         android:drawableStart="@drawable/svg_category_fish"
                         android:drawablePadding="16dp"
                         android:fontFamily="@font/core_sans_cr_45_regular"
-                        android:text="@string/txt_category_fish"
+                        android:text="@string/text_category_fish"
                         android:textColor="@color/colorText"
                         android:textSize="18sp" />
 
@@ -107,7 +107,7 @@
                         android:drawableStart="@drawable/svg_category_frozen"
                         android:drawablePadding="16dp"
                         android:fontFamily="@font/core_sans_cr_45_regular"
-                        android:text="@string/txt_category_frozen"
+                        android:text="@string/text_category_frozen"
                         android:textColor="@color/colorText"
                         android:textSize="18sp" />
 
@@ -121,7 +121,7 @@
                         android:drawableStart="@drawable/svg_category_fruits"
                         android:drawablePadding="16dp"
                         android:fontFamily="@font/core_sans_cr_45_regular"
-                        android:text="@string/txt_category_fruits"
+                        android:text="@string/text_category_fruits"
                         android:textColor="@color/colorText"
                         android:textSize="18sp" />
 
@@ -135,7 +135,7 @@
                         android:drawableStart="@drawable/svg_category_grocery_cart"
                         android:drawablePadding="16dp"
                         android:fontFamily="@font/core_sans_cr_45_regular"
-                        android:text="@string/txt_category_grocery"
+                        android:text="@string/text_category_grocery"
                         android:textColor="@color/colorText"
                         android:textSize="18sp" />
 
@@ -149,7 +149,7 @@
                         android:drawableStart="@drawable/svg_category_homeware"
                         android:drawablePadding="16dp"
                         android:fontFamily="@font/core_sans_cr_45_regular"
-                        android:text="@string/txt_category_homeware"
+                        android:text="@string/text_category_homeware"
                         android:textColor="@color/colorText"
                         android:textSize="18sp" />
 
@@ -163,7 +163,7 @@
                         android:drawableStart="@drawable/svg_category_household"
                         android:drawablePadding="16dp"
                         android:fontFamily="@font/core_sans_cr_45_regular"
-                        android:text="@string/txt_category_household"
+                        android:text="@string/text_category_household"
                         android:textColor="@color/colorText"
                         android:textSize="18sp" />
 
@@ -177,7 +177,7 @@
                         android:drawableStart="@drawable/svg_category_liquor"
                         android:drawablePadding="16dp"
                         android:fontFamily="@font/core_sans_cr_45_regular"
-                        android:text="@string/txt_category_liquor"
+                        android:text="@string/text_category_liquor"
                         android:textColor="@color/colorText"
                         android:textSize="18sp" />
 
@@ -191,7 +191,7 @@
                         android:drawableStart="@drawable/svg_category_meat"
                         android:drawablePadding="16dp"
                         android:fontFamily="@font/core_sans_cr_45_regular"
-                        android:text="@string/txt_category_meat"
+                        android:text="@string/text_category_meat"
                         android:textColor="@color/colorText"
                         android:textSize="18sp" />
 
@@ -205,7 +205,7 @@
                         android:drawableStart="@drawable/svg_category_pharmacy"
                         android:drawablePadding="16dp"
                         android:fontFamily="@font/core_sans_cr_45_regular"
-                        android:text="@string/txt_category_pharmacy"
+                        android:text="@string/text_category_pharmacy"
                         android:textColor="@color/colorText"
                         android:textSize="18sp" />
 
@@ -219,7 +219,7 @@
                         android:drawableStart="@drawable/svg_category_vegetables"
                         android:drawablePadding="16dp"
                         android:fontFamily="@font/core_sans_cr_45_regular"
-                        android:text="@string/txt_category_vegetables"
+                        android:text="@string/text_category_vegetables"
                         android:textColor="@color/colorText"
                         android:textSize="18sp" />
                 </RadioGroup>
@@ -231,7 +231,7 @@
                     android:layout_height="@dimen/btn_height_small_37"
                     android:layout_marginBottom="36dp"
                     android:layout_marginTop="24dp"
-                    android:text="@string/select"
+                    android:text="@string/text_select"
                     app:backgroundTint="@null"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/radio_group"

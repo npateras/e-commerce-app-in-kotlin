@@ -68,7 +68,7 @@ class CheckoutActivity : BaseActivity() {
                 if (mAddressDetails?.phoneCode != 0)
                     txtViewSelectedAddressPhoneValue.text =
                         String.format(
-                            getString(R.string.txt_format_phone),
+                            getString(R.string.text_format_phone),
                             mAddressDetails?.phoneCode,
                             mAddressDetails?.phoneNumber
                         )
@@ -76,7 +76,7 @@ class CheckoutActivity : BaseActivity() {
                     txtViewSelectedAddressPhoneValue.text = mAddressDetails?.phoneNumber
                 txtViewSelectedAddressValue.text =
                     String.format(
-                        getString(R.string.txt_format_address),
+                        getString(R.string.text_format_address),
                         mAddressDetails!!.address,
                         mAddressDetails!!.zipCode
                     )
@@ -153,17 +153,17 @@ class CheckoutActivity : BaseActivity() {
 
         binding.apply {
             txtViewSubTotalValue.text =
-                String.format(getString(R.string.txt_format_price),
+                String.format(getString(R.string.text_format_price),
                     getString(R.string.curr_eur),
                     mSubTotal
                 )
             txtViewDeliveryChargeValue.text =
-                String.format(getString(R.string.txt_format_price),
+                String.format(getString(R.string.text_format_price),
                     getString(R.string.curr_eur),
                     Constants.DEFAULT_DELIVERY_COST
                 )
             txtViewTotalAmountValue.text =
-                String.format(getString(R.string.txt_format_price),
+                String.format(getString(R.string.text_format_price),
                     getString(R.string.curr_eur),
                     mSubTotal + Constants.DEFAULT_DELIVERY_COST
                 )
@@ -186,7 +186,7 @@ class CheckoutActivity : BaseActivity() {
             mSubTotal.toString(),
             Constants.DEFAULT_DELIVERY_COST.toString(), // The Shipping Charge is fixed as $10 for now in our case.
             mTotalAmount.toString(),
-            getString(R.string.txt_cash_on_delivery)
+            getString(R.string.text_cash_on_delivery)
         )
 
         FirestoreHelper().placeOrder(this@CheckoutActivity, mOrderDetails)
@@ -223,9 +223,9 @@ class CheckoutActivity : BaseActivity() {
             /*radioGroupPaymentMethod.setOnCheckedChangeListener { group, checkedId ->
                 // val rb = findViewById<View>(checkedId) as RadioButton
                 paymentMethod = if (checkedId == 0)
-                    getString(R.string.txt_cash_on_delivery)
+                    getString(R.string.text_cash_on_delivery)
                 else {
-                    getString(R.string.txt_credit_card)
+                    getString(R.string.text_credit_card)
                 }
             }*/
             btnContinue.setOnClickListener{
@@ -245,7 +245,7 @@ class CheckoutActivity : BaseActivity() {
         binding.apply {
             if (!radioBtnCashOnDelivery.isChecked && !radioBtnCreditCard.isChecked) {
                 SnackBarErrorClass
-                    .make(root, getString(R.string.txt_error_payment_method_not_selected))
+                    .make(root, getString(R.string.text_error_payment_method_not_selected))
                     .setAnchorView(constraintLayoutBottom)
                     .show()
                 radioGroupPaymentMethod.requestFocus()
@@ -261,14 +261,15 @@ class CheckoutActivity : BaseActivity() {
 
         val actionBar = supportActionBar
         binding.apply {
-            toolbar.textViewActionBarLabel.text = getString(R.string.button_checkout)
+            toolbar.textViewActionBarLabel.text = getString(R.string.text_checkout)
         }
 
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setCustomView(R.layout.toolbar_product_details)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 
@@ -291,11 +292,11 @@ class CheckoutActivity : BaseActivity() {
             when (view.getId()) {
                 R.id.radioBtn_Cash_On_Delivery ->
                     if (checked) {
-                        binding.txtViewPaymentMethodValue.text = getString(R.string.txt_cash_on_delivery)
+                        binding.txtViewPaymentMethodValue.text = getString(R.string.text_cash_on_delivery)
                     }
                 R.id.radioBtn_Credit_Card ->
                     if (checked) {
-                        binding.txtViewPaymentMethodValue.text = getString(R.string.txt_credit_card)
+                        binding.txtViewPaymentMethodValue.text = getString(R.string.text_credit_card)
                     }
             }
         }

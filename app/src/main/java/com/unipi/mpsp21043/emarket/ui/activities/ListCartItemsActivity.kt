@@ -113,9 +113,9 @@ class ListCartItemsActivity : BaseActivity() {
                 constraintLayoutBottom.visibility = View.VISIBLE
                 layoutEmptyState.root.visibility = View.GONE
                 // Costs
-                txtViewSubtotalValue.text = String.format(getString(R.string.txt_format_price), getString(R.string.curr_eur), subTotal)
-                txtViewDeliveryChargeValue.text = String.format(getString(R.string.txt_format_price), getString(R.string.curr_eur), Constants.DEFAULT_DELIVERY_COST)
-                txtViewTotalAmountValue.text = String.format(getString(R.string.txt_format_price), getString(R.string.curr_eur), subTotal + Constants.DEFAULT_DELIVERY_COST)
+                txtViewSubtotalValue.text = String.format(getString(R.string.text_format_price), getString(R.string.curr_eur), subTotal)
+                txtViewDeliveryChargeValue.text = String.format(getString(R.string.text_format_price), getString(R.string.curr_eur), Constants.DEFAULT_DELIVERY_COST)
+                txtViewTotalAmountValue.text = String.format(getString(R.string.text_format_price), getString(R.string.curr_eur), subTotal + Constants.DEFAULT_DELIVERY_COST)
             }
 
             // Sets RecyclerView's properties
@@ -165,7 +165,7 @@ class ListCartItemsActivity : BaseActivity() {
 
         hideProgressDialog()
 
-        Toast.makeText(this, getString(R.string.txt_item_removed_from_cart), Toast.LENGTH_LONG).show()
+        Toast.makeText(this, getString(R.string.text_item_removed_from_cart), Toast.LENGTH_LONG).show()
 
         getCartItemsList()
     }
@@ -201,13 +201,14 @@ class ListCartItemsActivity : BaseActivity() {
 
         val actionBar = supportActionBar
         binding.apply {
-            toolbar.textViewActionBarLabel.text = getString(R.string.txt_my_cart)
+            toolbar.textViewActionBarLabel.text = getString(R.string.text_my_cart)
         }
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setCustomView(R.layout.toolbar_product_details)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 

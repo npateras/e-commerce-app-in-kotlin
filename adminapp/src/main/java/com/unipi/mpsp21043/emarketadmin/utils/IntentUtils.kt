@@ -3,7 +3,7 @@ package com.unipi.mpsp21043.emarketadmin.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import com.unipi.mpsp21043.emarketadmin.models.Address
+import androidx.core.content.ContextCompat.startActivity
 import com.unipi.mpsp21043.emarketadmin.models.Order
 import com.unipi.mpsp21043.emarketadmin.models.Product
 import com.unipi.mpsp21043.emarketadmin.models.User
@@ -12,9 +12,10 @@ import com.unipi.mpsp21043.emarketadmin.ui.activities.*
 class IntentUtils {
 
     fun goToSignInActivity(context: Context) {
-        // Launch add/edit product screen.
         val intent = Intent(context, SignInActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         context.startActivity(intent)
+        (context as Activity).finish()
     }
 
     fun goToMyAccountActivity(context: Context) {
@@ -26,12 +27,6 @@ class IntentUtils {
     fun goToUpdateUserDetailsActivity(context: Context, user: User) {
         val intent = Intent(context, EditProfileActivity::class.java)
         intent.putExtra(Constants.EXTRA_USER_DETAILS, user)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        context.applicationContext.startActivity(intent)
-    }
-
-    fun goToListAddressesActivity(context: Context) {
-        val intent = Intent(context, ListAddressActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         context.applicationContext.startActivity(intent)
     }
@@ -49,24 +44,6 @@ class IntentUtils {
         context.startActivity(intent)
     }
 
-    fun goToAddNewAddressActivity(context: Context) {
-        // Launch add/edit user address screen.
-        val intent = Intent(context, AddEditAddressActivity::class.java)
-        context.startActivity(intent)
-    }
-
-    fun goToEditAddressActivity(context: Context, mUserAddress: Address) {
-        // Launch add/edit user address screen.
-        val intent = Intent(context, AddEditAddressActivity::class.java)
-        intent.putExtra(Constants.EXTRA_ADDRESS_MODEL, mUserAddress)
-        context.startActivity(intent)
-    }
-
-    fun goToSearchActivity(context: Context) {
-        val intent = Intent(context, SearchActivity::class.java)
-        context.startActivity(intent)
-    }
-
     fun goToProductDetailsActivity(context: Context, productId: String) {
         // Launch Product details screen.
         val intent = Intent(context, ProductDetailsActivity::class.java)
@@ -78,13 +55,6 @@ class IntentUtils {
         // Launch Product details screen.
         val intent = Intent(context, UserDetailsActivity::class.java)
         intent.putExtra(Constants.EXTRA_USER_ID, userId)
-        context.startActivity(intent)
-    }
-
-    fun goToMainActivity(context: Context, showOrderPlacedSnackbar: Boolean) {
-        val intent = Intent(context, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        intent.putExtra(Constants.EXTRA_SHOW_ORDER_PLACED_SNACKBAR, showOrderPlacedSnackbar)
         context.startActivity(intent)
     }
 

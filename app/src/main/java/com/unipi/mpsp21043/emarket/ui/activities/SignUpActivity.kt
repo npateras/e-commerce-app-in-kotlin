@@ -82,31 +82,31 @@ class SignUpActivity : BaseActivity() {
             return when {
                 TextUtils.isEmpty(inputTxtName.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_name))
+                        .make(root, getString(R.string.text_error_empty_name))
                         .setBehavior(Constants.SNACKBAR_BEHAVIOR)
                         .show()
                     inputTxtLayoutName.requestFocus()
-                    inputTxtLayoutName.error = getString(R.string.txt_error_empty_name)
+                    inputTxtLayoutName.error = getString(R.string.text_error_empty_name)
                     false
                 }
 
                 TextUtils.isEmpty(inputTxtEmail.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_email))
+                        .make(root, getString(R.string.text_error_empty_email))
                         .setBehavior(Constants.SNACKBAR_BEHAVIOR)
                         .show()
                     inputTxtLayoutEmail.requestFocus()
-                    inputTxtLayoutEmail.error = getString(R.string.txt_error_empty_email)
+                    inputTxtLayoutEmail.error = getString(R.string.text_error_empty_email)
                     false
                 }
 
                 TextUtils.isEmpty(inputTxtPassword.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_password))
+                        .make(root, getString(R.string.text_error_empty_password))
                         .setBehavior(Constants.SNACKBAR_BEHAVIOR)
                         .show()
                     inputTxtLayoutPassword.requestFocus()
-                    inputTxtLayoutPassword.error = getString(R.string.txt_error_empty_password)
+                    inputTxtLayoutPassword.error = getString(R.string.text_error_empty_password)
                     false
                 }
 
@@ -194,14 +194,15 @@ class SignUpActivity : BaseActivity() {
     private fun setupActionBar() {
         binding.toolbar.apply {
             setSupportActionBar(root)
-            textViewActionBarLabel.text = getString(R.string.txt_register)
+            textViewActionBarLabel.text = getString(R.string.text_sign_up)
         }
 
         val actionBar = supportActionBar
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 }

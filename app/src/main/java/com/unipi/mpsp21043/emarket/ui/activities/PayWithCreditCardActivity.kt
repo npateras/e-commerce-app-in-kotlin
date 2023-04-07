@@ -1,8 +1,11 @@
 package com.unipi.mpsp21043.emarket.ui.activities
 
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.MenuItem
+import androidx.core.widget.addTextChangedListener
 import com.unipi.mpsp21043.emarket.R
 import com.unipi.mpsp21043.emarket.database.FirestoreHelper
 import com.unipi.mpsp21043.emarket.databinding.ActivityPayCreditCardBinding
@@ -11,6 +14,7 @@ import com.unipi.mpsp21043.emarket.models.Cart
 import com.unipi.mpsp21043.emarket.models.Order
 import com.unipi.mpsp21043.emarket.models.Product
 import com.unipi.mpsp21043.emarket.utils.Constants
+import com.unipi.mpsp21043.emarket.utils.CreditCardUtils
 import com.unipi.mpsp21043.emarket.utils.IntentUtils
 import com.unipi.mpsp21043.emarket.utils.SnackBarErrorClass
 
@@ -120,9 +124,9 @@ class PayWithCreditCardActivity : BaseActivity() {
         }
 
         binding.apply {
-            btnAuthorize.text =
+            buttonAuthorize.text =
                 String.format(
-                    getString(R.string.txt_format_price_button_authorize),
+                    getString(R.string.text_format_price_button_authorize),
                     getString(R.string.curr_eur),
                     mSubTotal + Constants.DEFAULT_DELIVERY_COST
                 )
@@ -145,7 +149,7 @@ class PayWithCreditCardActivity : BaseActivity() {
             mSubTotal.toString(),
             Constants.DEFAULT_DELIVERY_COST.toString(), // The Shipping Charge is fixed as $10 for now in our case.
             mTotalAmount.toString(),
-            getString(R.string.txt_credit_card)
+            getString(R.string.text_credit_card)
         )
 
         FirestoreHelper().placeOrder(this@PayWithCreditCardActivity, mOrderDetails)
@@ -174,14 +178,37 @@ class PayWithCreditCardActivity : BaseActivity() {
     private fun setupUI() {
         setupActionBar()
         setupClickListeners()
+
+        binding.apply {
+            textInputEditTextCardNumber.addTextChangedListener(object: TextWatcher {
+                override fun afterTextChanged(s: Editable?) {}
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    textInputLayoutCardNumber.apply {
+                        when (CreditCardUtils().identifyCardScheme(s.toString())) {
+                            CreditCardUtils.CardScheme.VISA -> setStartIconDrawable(R.drawable.svg_credit_card_visa)
+                            CreditCardUtils.CardScheme.MASTERCARD -> setStartIconDrawable(R.drawable.svg_credit_card_mastercard)
+                            CreditCardUtils.CardScheme.MAESTRO -> setStartIconDrawable(R.drawable.svg_credit_card_maestro)
+                            CreditCardUtils.CardScheme.DISCOVER -> setStartIconDrawable(R.drawable.svg_credit_card_discover)
+                            CreditCardUtils.CardScheme.DINERS_CLUB -> setStartIconDrawable(R.drawable.svg_credit_card_diners)
+                            CreditCardUtils.CardScheme.AMEX -> setStartIconDrawable(R.drawable.svg_credit_card_amex)
+                            CreditCardUtils.CardScheme.JCB -> setStartIconDrawable(R.drawable.svg_credit_card_jcb)
+                            else -> setStartIconDrawable(R.drawable.svg_credit_card)
+                        }
+                    }
+
+                }
+
+            })
+        }
     }
 
     private fun setupClickListeners() {
         binding.apply {
-            btnAuthorize.setOnClickListener {
-                if (validateFields()) {
+            buttonAuthorize.setOnClickListener {
+                if (validateFields())
                     placeAnOrder()
-                }
             }
         }
     }
@@ -189,39 +216,39 @@ class PayWithCreditCardActivity : BaseActivity() {
     private fun validateFields(): Boolean {
         binding.apply {
             return when {
-                TextUtils.isEmpty(inputTxtCreditCardNumber.text.toString().trim { it <= ' ' }) -> {
+                TextUtils.isEmpty(textInputEditTextCardNumber.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_password))
+                        .make(root, getString(R.string.text_error_empty_password))
                         .show()
-                    inputTxtLayoutCreditCardNumber.requestFocus()
-                    inputTxtLayoutCreditCardNumber.error = getString(R.string.txt_error_empty_card_number)
+                    textInputLayoutCardNumber.requestFocus()
+                    textInputLayoutCardNumber.error = getString(R.string.text_error_empty_card_number)
                     false
                 }
 
-                TextUtils.isEmpty(inputTxtCreditCardFullName.text.toString().trim { it <= ' ' }) -> {
+                TextUtils.isEmpty(textInputEditTextCardholderName.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_email))
+                        .make(root, getString(R.string.text_error_empty_email))
                         .show()
-                    inputTxtLayoutCreditCardFullName.requestFocus()
-                    inputTxtLayoutCreditCardFullName.error = getString(R.string.txt_error_empty_card_full_name)
+                    textInputLayoutCardholderName.requestFocus()
+                    textInputLayoutCardholderName.error = getString(R.string.text_error_empty_card_full_name)
                     false
                 }
 
-                TextUtils.isEmpty(inputTxtCreditCardExpDate.text.toString().trim { it <= ' ' }) -> {
+                TextUtils.isEmpty(textInputEditTextExpirationDate.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_email))
+                        .make(root, getString(R.string.text_error_empty_email))
                         .show()
-                    inputTxtLayoutCreditCardExpDate.requestFocus()
-                    inputTxtLayoutCreditCardExpDate.error = getString(R.string.txt_error_empty_card_exp_date)
+                    textInputLayoutExpirationDate.requestFocus()
+                    textInputLayoutExpirationDate.error = getString(R.string.text_error_empty_card_exp_date)
                     false
                 }
 
-                TextUtils.isEmpty(inputTxtCreditCardCVV.text.toString().trim { it <= ' ' }) -> {
+                TextUtils.isEmpty(textInputEditTextCvv.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
-                        .make(root, getString(R.string.txt_error_empty_email))
+                        .make(root, getString(R.string.text_error_empty_email))
                         .show()
-                    inputTxtLayoutCreditCardCVV.requestFocus()
-                    inputTxtLayoutCreditCardCVV.error = getString(R.string.txt_error_empty_card_cvv)
+                    textInputLayoutCvv.requestFocus()
+                    textInputLayoutCvv.error = getString(R.string.text_error_empty_card_cvv)
                     false
                 }
 
@@ -236,13 +263,14 @@ class PayWithCreditCardActivity : BaseActivity() {
 
         val actionBar = supportActionBar
         binding.apply {
-            toolbar.textViewActionBarLabel.text = getString(R.string.txt_pay_invoice)
+            toolbar.textViewActionBarLabel.text = getString(R.string.text_pay_invoice)
         }
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setCustomView(R.layout.toolbar_product_details)
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.ic_chevron_left_24dp)
+            it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
+            it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
     }
 

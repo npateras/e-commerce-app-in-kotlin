@@ -18,7 +18,7 @@ class SnackBarErrorClass(
     init {
         getView().setBackgroundColor(ContextCompat.getColor(view.context, android.R.color.transparent))
         getView().setPadding(0, 0, 0, 0)
-        getView().findViewById<MaterialButton>(R.id.btn_Dismiss).setOnClickListener { dismiss() }
+        getView().findViewById<MaterialButton>(R.id.button_snackbar_error_dismiss).setOnClickListener { dismiss() }
         animationMode = ANIMATION_MODE_SLIDE
         behavior = Constants.SNACKBAR_BEHAVIOR
     }
@@ -40,7 +40,7 @@ class SnackBarErrorClass(
             ) as SnackBarErrorView
 
             customView.apply {
-                findViewById<TextView>(R.id.txtView_Content).text = contentTxt
+                findViewById<TextView>(R.id.text_view_snackbar_error_label).text = contentTxt
             }
 
             // We create and return our Snack-bar

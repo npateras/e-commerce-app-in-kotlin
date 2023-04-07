@@ -12,7 +12,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar_title_only"
+        layout="@layout/toolbar_order_details"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="17dp"
-                    android:src="@drawable/ic_location_filled"
+                    android:src="@drawable/svg_circle_location"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,9 +55,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:fontFamily="@font/core_sans_cr_55_medium"
-                    android:text="@string/txt_address"
+                    android:text="@string/text_address"
                     android:textColor="@color/colorText"
-                    android:textSize="@dimen/txt_font_size_header_16"
+                    android:textSize="@dimen/text_font_size_header_16"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/imgView_Address"
                     app:layout_constraintTop_toTopOf="@+id/imgView_Address" />
@@ -68,11 +68,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/core_sans_cr_45_regular"
-                    android:text="@string/txt_loading"
+                    android:text="@string/text_loading"
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:textColor="@color/colorText2"
-                    android:textSize="@dimen/txt_font_size_header_16"
+                    android:textSize="@dimen/text_font_size_header_16"
                     app:layout_constraintBottom_toBottomOf="@+id/imgView_Address"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -85,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_coins_filled"
+                    android:src="@drawable/svg_circle_coins"
                     app:layout_constraintStart_toStartOf="@+id/imgView_Address"
                     app:layout_constraintTop_toBottomOf="@+id/txtView_Address_Value" />
 
@@ -94,9 +94,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/core_sans_cr_55_medium"
-                    android:text="@string/txt_total_amount"
+                    android:text="@string/text_total_amount"
                     android:textColor="@color/colorText"
-                    android:textSize="@dimen/txt_font_size_header_16"
+                    android:textSize="@dimen/text_font_size_header_16"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/txtView_Address_Value"
                     app:layout_constraintTop_toTopOf="@+id/imgView_Total_Amt" />
@@ -108,9 +108,9 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/core_sans_cr_45_regular"
                     android:maxLines="1"
-                    android:text="@string/txt_loading"
+                    android:text="@string/text_loading"
                     android:textColor="@color/colorText2"
-                    android:textSize="@dimen/txt_font_size_header_16"
+                    android:textSize="@dimen/text_font_size_header_16"
                     app:layout_constraintBottom_toBottomOf="@+id/imgView_Total_Amt"
                     app:layout_constraintEnd_toEndOf="@+id/txtView_Address_Value"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -122,7 +122,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_credit_card_filled"
+                    android:src="@drawable/svg_circle_credit_card"
                     app:layout_constraintStart_toStartOf="@+id/imgView_Total_Amt"
                     app:layout_constraintTop_toBottomOf="@+id/imgView_Total_Amt" />
 
@@ -131,9 +131,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/core_sans_cr_55_medium"
-                    android:text="@string/txt_payment_method"
+                    android:text="@string/text_payment_method"
                     android:textColor="@color/colorText"
-                    android:textSize="@dimen/txt_font_size_header_16"
+                    android:textSize="@dimen/text_font_size_header_16"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/txtView_Total_Amt_Value"
                     app:layout_constraintTop_toTopOf="@+id/imgView_Payment_Method" />
@@ -145,9 +145,9 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/core_sans_cr_45_regular"
                     android:maxLines="1"
-                    android:text="@string/txt_loading"
+                    android:text="@string/text_loading"
                     android:textColor="@color/colorText2"
-                    android:textSize="@dimen/txt_font_size_header_16"
+                    android:textSize="@dimen/text_font_size_header_16"
                     app:layout_constraintBottom_toBottomOf="@+id/imgView_Payment_Method"
                     app:layout_constraintEnd_toEndOf="@+id/txtView_Address_Value"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -155,12 +155,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/txtView_Payment_Method_Header" />
 
                 <ImageView
-                    android:id="@+id/imageView8"
+                    android:id="@+id/image_view_order_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="17dp"
-                    android:src="@drawable/ic_delivery_truck_filled"
+                    android:src="@drawable/svg_circle_delivery_truck"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/imgView_Payment_Method"
                     app:layout_constraintTop_toBottomOf="@+id/imgView_Payment_Method" />
@@ -170,24 +170,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/core_sans_cr_55_medium"
-                    android:text="@string/txt_order_status"
+                    android:text="@string/text_order_status"
                     android:textColor="@color/colorText"
-                    android:textSize="@dimen/txt_font_size_header_16"
+                    android:textSize="@dimen/text_font_size_header_16"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/txtView_Payment_Method_Value"
-                    app:layout_constraintTop_toTopOf="@+id/imageView8" />
+                    app:layout_constraintTop_toTopOf="@+id/image_view_order_status" />
 
                 <TextView
-                    android:id="@+id/txtView_Order_Status_Value"
+                    android:id="@+id/text_view_order_status_value"
                     android:layout_width="0dp"
                     android:layout_height="20dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/core_sans_cr_45_regular"
                     android:maxLines="1"
-                    android:text="@string/txt_loading"
+                    android:text="@string/text_loading"
                     android:textColor="@color/colorText2"
-                    android:textSize="@dimen/txt_font_size_header_16"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+                    android:textSize="@dimen/text_font_size_header_16"
+                    app:layout_constraintBottom_toBottomOf="@+id/image_view_order_status"
                     app:layout_constraintEnd_toEndOf="@+id/txtView_Address_Value"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/txtView_Order_Status_Header"
@@ -211,35 +211,48 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/core_sans_cr_55_medium"
-                    android:text="@string/txt_items"
+                    android:text="@string/text_items_ordered"
                     android:textColor="@color/colorText"
-                    android:textSize="@dimen/txt_font_size_header_24"
+                    android:textSize="@dimen/text_font_size_header_24"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.skydoves.androidveil.VeilRecyclerFrameView
-                    android:id="@+id/veilRecyclerView"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_order_items"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:clipToPadding="false"
-                    android:paddingTop="29dp"
-                    android:paddingBottom="21dp"
+                    android:paddingTop="28dp"
+                    android:paddingBottom="16dp"
+                    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
+                    tools:listitem="@layout/item_product_wide"
+                    tools:itemCount="3"
                     app:layout_constraintTop_toBottomOf="@+id/txtView_Items"
                     app:layout_constraintVertical_bias="0.0"
-                    app:veilFrame_baseAlpha="0.6"
-                    app:veilFrame_baseColor="@color/colorSecondary2"
-                    app:veilFrame_defaultChildVisible="false"
-                    app:veilFrame_highlightAlpha="1.0"
-                    app:veilFrame_highlightColor="@color/colorWhite"
-                    app:veilFrame_radius="8dp"
-                    app:veilFrame_shimmerEnable="true"
-                    app:veilFrame_veiled="true" />
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <include
+                android:id="@+id/shimmer_layout"
+                android:visibility="gone"
+                layout="@layout/shimmer_order_details"/>
+
+            <include
+                android:id="@+id/layout_state_error"
+                layout="@layout/layout_error_state"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingStart="16dp"
+                android:paddingEnd="0dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

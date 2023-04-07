@@ -93,7 +93,7 @@
 
             <include
                 android:id="@+id/layout_state_error"
-                layout="@layout/layout_state_error"
+                layout="@layout/layout_error_state"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"

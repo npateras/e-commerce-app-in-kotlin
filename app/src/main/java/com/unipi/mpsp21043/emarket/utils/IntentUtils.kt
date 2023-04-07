@@ -7,8 +7,36 @@ import com.unipi.mpsp21043.emarket.models.Address
 import com.unipi.mpsp21043.emarket.models.Order
 import com.unipi.mpsp21043.emarket.models.User
 import com.unipi.mpsp21043.emarket.ui.activities.*
+import com.unipi.mpsp21043.emarket.ui.activities.profile.AuthenticateActivity
+import com.unipi.mpsp21043.emarket.ui.activities.profile.ChangePasswordActivity
+import com.unipi.mpsp21043.emarket.ui.activities.profile.EditProfileActivity
 
 class IntentUtils {
+
+    fun createNewMainActivity(context: Context) {
+        val intent = Intent(context, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        (context as Activity).finishAffinity()
+        context.startActivity(intent)
+    }
+
+    fun goToAuthenticateActivity(context: Context) {
+        val intent = Intent(context, AuthenticateActivity::class.java)
+        context.startActivity(intent)
+    }
+
+    fun goToForgotPasswordActivity(context: Context) {
+        // Launch the forgot password screen when the user clicks on the forgot password text.
+        val intent = Intent(context, ForgotPasswordActivity::class.java)
+        context.startActivity(intent)
+    }
+
+    fun goToSignUpActivity(context: Context) {
+        // Launch the sign up screen when the user clicks on the sign up text.
+        val intent = Intent(context, SignUpActivity::class.java)
+        context.startActivity(intent)
+    }
+
     fun goToListProductsActivity(context: Context, filter: String) {
         // Launch List Products screen.
         val intent = Intent(context, ListProductsActivity::class.java)
@@ -25,6 +53,16 @@ class IntentUtils {
         val intent = Intent(context, EditProfileActivity::class.java)
         intent.putExtra(Constants.EXTRA_USER_DETAILS, user)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        context.applicationContext.startActivity(intent)
+    }
+
+    fun goToListSettingsActivity(context: Context) {
+        val intent = Intent(context, ListSettingsActivity::class.java)
+        context.applicationContext.startActivity(intent)
+    }
+
+    fun goToChangePasswordActivity(context: Context) {
+        val intent = Intent(context, ChangePasswordActivity::class.java)
         context.applicationContext.startActivity(intent)
     }
 

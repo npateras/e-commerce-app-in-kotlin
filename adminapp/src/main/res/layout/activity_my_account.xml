@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorBackground"
     android:fillViewport="true"
     tools:context=".ui.activities.MyAccountActivity"
@@ -33,7 +33,7 @@
                 android:id="@+id/constraint_layout_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -45,54 +45,59 @@
 
                     <FrameLayout
                         android:id="@+id/frameLayout_User_Picture"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="185dp"
+                        android:layout_height="170dp"
+                        android:layout_gravity="center"
                         android:layout_marginTop="40dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <View
-                            android:id="@+id/view_User_Picture"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/svg_picture_user_sample" />
-
-                        <ProgressBar
-                            android:id="@+id/progressBarProfImgLoading"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_gravity="center"
-                            android:indeterminate="true"
-                            android:indeterminateTint="@color/colorPrimaryDark"
-                            android:indeterminateTintMode="src_atop"
-                            android:visibility="gone"
-                            app:layout_constraintVertical_bias="0.0" />
-
                         <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/imgViewUserPicture"
+                            android:id="@+id/circle_image_view_user_picture"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
+                            android:layout_gravity="center"
                             android:elevation="3dp"
-                            android:src="@drawable/shape_user_profile_frame" />
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/svg_picture_user_sample" />
 
+                        <View
+                            android:id="@+id/view_user_picture_border"
+                            android:layout_width="156dp"
+                            android:layout_height="156dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/shape_user_profile_frame" />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/circle_image_view_camera"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:elevation="3dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:layout_gravity="center_vertical|end"
+                            android:src="@drawable/svg_camera_circle"
+                            android:tint="@color/colorPrimary" />
                     </FrameLayout>
 
                     <TextView
-                        android:id="@+id/textView_Full_Name"
+                        android:id="@+id/text_view_full_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="16dp"
                         android:layout_marginBottom="40dp"
                         android:fontFamily="@font/core_sans_cr_55_medium"
                         android:textColor="@color/colorText"
-                        android:textSize="@dimen/txt_font_size_header_24"
+                        android:textSize="@dimen/text_font_size_header_24"
                         android:textStyle="bold"
+                        android:text="@string/text_loading"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/frameLayout_User_Picture"
                         app:layout_constraintStart_toStartOf="@+id/frameLayout_User_Picture"
                         app:layout_constraintTop_toBottomOf="@+id/frameLayout_User_Picture" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -106,123 +111,178 @@
                     app:layout_constraintTop_toBottomOf="@+id/constraint_layout_head_container">
 
                     <TextView
-                        android:id="@+id/textView_Account_Info"
+                        android:id="@+id/text_view_account_info"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="29dp"
                         android:fontFamily="@font/core_sans_cr_55_medium"
-                        android:text="@string/txt_account_info"
+                        android:text="@string/text_account_info"
                         android:textColor="@color/colorText"
-                        android:textSize="@dimen/txt_font_size_header_24"
+                        android:textSize="@dimen/text_font_size_header_24"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@+id/btn_Update_Profile"
+                        app:layout_constraintEnd_toStartOf="@+id/button_update"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <LinearLayout
-                        android:id="@+id/linearLayout"
+                        android:id="@+id/linear_layout_user_details"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="38dp"
                         android:layout_marginEnd="16dp"
                         android:orientation="vertical"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/textView_Account_Info"
-                        app:layout_constraintTop_toBottomOf="@+id/textView_Account_Info">
+                        app:layout_constraintStart_toStartOf="@+id/text_view_account_info"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_account_info">
 
-                        <TextView
-                            android:id="@+id/textView_Email"
+                        <!-- Email -->
+                        <androidx.appcompat.widget.LinearLayoutCompat
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
-                            android:fontFamily="@font/core_sans_cr_55_medium"
-                            android:text="@string/txt_email"
-                            android:textColor="@color/colorText"
-                            android:textSize="@dimen/txt_font_size_header_16"
-                            android:textStyle="bold" />
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@drawable/shape_oval"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:scaleType="center"
+                                android:elevation="1dp"
+                                app:srcCompat="@drawable/svg_multicolor_email_mail" />
+
+                            <TextView
+                                android:id="@+id/text_view_email"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/core_sans_cr_55_medium"
+                                android:text="@string/text_email"
+                                android:textColor="@color/colorText"
+                                android:textSize="@dimen/text_font_size_header_16"
+                                android:textStyle="bold" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
 
                         <TextView
-                            android:id="@+id/textView_Email_Value"
+                            android:id="@+id/text_view_email_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="40dp"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/core_sans_cr_55_medium"
+                            android:text="@string/text_loading"
                             android:textColor="@color/colorText2"
-                            android:textSize="@dimen/txt_font_size_header_16"
+                            android:textSize="@dimen/text_font_size_header_16"
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/textView_Phone"
+                        <!-- Phone -->
+                        <androidx.appcompat.widget.LinearLayoutCompat
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
-                            android:fontFamily="@font/core_sans_cr_55_medium"
-                            android:text="@string/txt_phone_number"
-                            android:textColor="@color/colorText"
-                            android:textSize="@dimen/txt_font_size_header_16"
-                            android:textStyle="bold" />
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@drawable/shape_oval"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:scaleType="center"
+                                android:elevation="1dp"
+                                app:srcCompat="@drawable/svg_multicolor_phone" />
+
+                            <TextView
+                                android:id="@+id/text_view_phone_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/core_sans_cr_55_medium"
+                                android:text="@string/text_phone_number"
+                                android:textColor="@color/colorText"
+                                android:textSize="@dimen/text_font_size_header_16"
+                                android:textStyle="bold" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
 
                         <TextView
-                            android:id="@+id/textView_Phone_Value"
+                            android:id="@+id/text_view_phone_number_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="40dp"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/core_sans_cr_55_medium"
+                            android:text="@string/text_loading"
                             android:textColor="@color/colorText2"
-                            android:textSize="@dimen/txt_font_size_header_16"
+                            android:textSize="@dimen/text_font_size_header_16"
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/textView_Date_Registered"
+                        <!-- Date Registered -->
+                        <androidx.appcompat.widget.LinearLayoutCompat
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
-                            android:fontFamily="@font/core_sans_cr_55_medium"
-                            android:text="@string/txt_date_registered"
-                            android:textColor="@color/colorText"
-                            android:textSize="@dimen/txt_font_size_header_16"
-                            android:textStyle="bold" />
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@drawable/shape_oval"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:scaleType="center"
+                                android:elevation="1dp"
+                                app:srcCompat="@drawable/svg_multicolor_calendar" />
+
+                            <TextView
+                                android:id="@+id/text_view_date_registered"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/core_sans_cr_55_medium"
+                                android:text="@string/text_date_registered"
+                                android:textColor="@color/colorText"
+                                android:textSize="@dimen/text_font_size_header_16"
+                                android:textStyle="bold" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
 
                         <TextView
-                            android:id="@+id/textView_Date_Registered_Value"
+                            android:id="@+id/text_view_date_registered_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="40dp"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/core_sans_cr_55_medium"
+                            android:text="@string/text_loading"
                             android:textColor="@color/colorText2"
-                            android:textSize="@dimen/txt_font_size_header_16"
+                            android:textSize="@dimen/text_font_size_header_16"
                             android:textStyle="bold" />
                     </LinearLayout>
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_Addresses"
-                        style="@style/Widget.AppCompat.Button"
+                        android:id="@+id/button_sign_out"
+                        style="@style/ButtonStyle.Error"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/btn_height_medium_45"
-                        android:layout_marginStart="16dp"
+                        android:layout_height="68dp"
                         android:layout_marginTop="38dp"
-                        android:layout_marginEnd="16dp"
-                        android:background="@drawable/ripple_btn_primary_color_selector"
-                        android:fontFamily="@font/core_sans_cr_65_bold"
-                        android:gravity="center"
-                        android:text="@string/txt_addresses"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/btn_font_size_small_14"
-                        app:backgroundTint="@null"
-                        app:icon="@drawable/svg_home_location_outline"
+                        android:layout_marginBottom="24dp"
+                        android:background="@drawable/button_negative"
+                        android:text="@string/text_sign_out"
+                        app:icon="@drawable/svg_door_exit"
                         app:iconGravity="textStart"
                         app:iconPadding="10dp"
                         app:iconSize="24dp"
                         app:iconTint="@color/colorWhite"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/linear_layout_user_details"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="@+id/linear_layout_user_details"
+                        app:layout_constraintTop_toBottomOf="@+id/linear_layout_user_details" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_Update_Profile"
+                        android:id="@+id/button_update"
                         style="@style/Widget.AppCompat.Button"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
@@ -230,45 +290,18 @@
                         android:background="@drawable/ripple_btn_primary_color_selector"
                         android:fontFamily="@font/core_sans_cr_65_bold"
                         android:gravity="center"
-                        android:text="@string/txt_edit"
+                        android:text="@string/text_edit"
                         android:textAlignment="center"
                         android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/txt_font_size_header_12"
+                        android:textSize="@dimen/text_font_size_header_12"
                         app:backgroundTint="@null"
-                        app:icon="@drawable/svg_edit_pencil_outline"
+                        app:icon="@drawable/svg_edit_pencil"
                         app:iconGravity="textStart"
                         app:iconSize="16dp"
                         app:iconTint="@color/colorWhite"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView_Account_Info"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_view_account_info"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView_Account_Info" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_Log_Out"
-                        style="@style/Widget.AppCompat.Button"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/btn_height_medium_45"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="24dp"
-                        android:background="@drawable/ripple_btn_negative_color_selector"
-                        android:fontFamily="@font/core_sans_cr_65_bold"
-                        android:gravity="center"
-                        android:text="@string/txt_sign_out"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/btn_font_size_small_14"
-                        app:backgroundTint="@null"
-                        app:icon="@drawable/svg_door_exit"
-                        app:iconGravity="textStart"
-                        app:iconPadding="10dp"
-                        app:iconSize="24dp"
-                        app:iconTint="@color/colorWhite"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/btn_Addresses"
-                        app:layout_constraintStart_toStartOf="@+id/btn_Addresses"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_Addresses"
-                        app:layout_constraintVertical_bias="0.0" />
-
+                        app:layout_constraintTop_toTopOf="@+id/text_view_account_info" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -277,7 +310,7 @@
                 android:id="@+id/shimmer_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -289,8 +322,8 @@
             </com.facebook.shimmer.ShimmerFrameLayout>
 
             <include
-                android:id="@+id/layout_state_error"
-                layout="@layout/layout_state_error"
+                android:id="@+id/layout_error_state"
+                layout="@layout/layout_error_state"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"

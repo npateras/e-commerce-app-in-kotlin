@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawablePadding="8dp"
-        android:text="@string/txt_loading"/>
+        android:text="@string/text_loading"/>
 
     <TextView
         android:id="@+id/navDrawer_SignedIn_Email"
@@ -62,6 +62,6 @@
         android:textColor="@color/colorWhiteLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_loading"/>
+        android:text="@string/text_loading"/>
 
 </LinearLayout>
