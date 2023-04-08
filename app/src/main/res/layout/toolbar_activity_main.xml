@@ -14,7 +14,7 @@
             android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/actionBar_ImgBtn_My_Cart"
+                    android:id="@+id/image_button_my_cart"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_alignParentTop="true"
@@ -32,7 +32,7 @@
                     app:tint="@color/colorWhite" />
 
                 <TextView
-                    android:id="@+id/textView_ActionBar_Header"
+                    android:id="@+id/text_view_action_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/text_store"

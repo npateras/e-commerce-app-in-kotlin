@@ -54,9 +54,9 @@ open class OrderCartProductListAdapter(
         holder.binding.apply {
             GlideLoader(context).loadProductPictureWide(
                 model.imgUrl,
-                imageViewPicture
+                imageViewIcon
             )
-            textViewName.text = model.name
+            textViewProductName.text = model.name
             if (model.sale != 0.0) {
                 textViewPriceReduced.apply {
                     visibility = View.VISIBLE
@@ -70,7 +70,7 @@ open class OrderCartProductListAdapter(
                 }
                 priceReduced = model.price - (model.price * model.sale)
             }
-            textViewPrice.apply {
+            textViewProductPrice.apply {
                 text = String.format(
                     context.getString(R.string.text_format_price),
                     context.getString(R.string.curr_eur),

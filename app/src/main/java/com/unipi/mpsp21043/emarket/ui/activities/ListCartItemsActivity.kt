@@ -124,8 +124,7 @@ class ListCartItemsActivity : BaseActivity() {
                 setAdapter(
                     CartItemsListAdapter(
                         this@ListCartItemsActivity,
-                        cartItemsList,
-                        true
+                        cartItemsList
                     )
                 )
                 setLayoutManager(LinearLayoutManager(this@ListCartItemsActivity, LinearLayoutManager.VERTICAL, false))

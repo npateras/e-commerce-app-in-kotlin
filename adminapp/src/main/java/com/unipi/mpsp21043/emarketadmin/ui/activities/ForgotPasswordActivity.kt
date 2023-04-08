@@ -102,7 +102,7 @@ class ForgotPasswordActivity : BaseActivity() {
     private fun setUpActionBar() {
         binding.toolbar.apply {
             setSupportActionBar(root)
-            textViewActionBarLabel.text = getString(R.string.text_forgot_password)
+            textViewActionHeader.text = getString(R.string.text_forgot_password)
         }
 
         val actionBar = supportActionBar

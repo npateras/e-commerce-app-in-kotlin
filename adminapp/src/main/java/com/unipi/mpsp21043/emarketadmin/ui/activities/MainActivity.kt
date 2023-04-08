@@ -133,15 +133,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 override fun onTabSelected(tab: TabLayout.Tab) {
                     when (tab.position) {
                         0 -> {
-                            toolbar.textViewActionBarHeader.text = getString(R.string.text_products)
+                            toolbar.textViewActionHeader.text = getString(R.string.text_products)
                             navView.setCheckedItem(R.id.nav_drawer_item_products)
                         }
                         1 -> {
-                            toolbar.textViewActionBarHeader.text = getString(R.string.text_orders)
+                            toolbar.textViewActionHeader.text = getString(R.string.text_orders)
                             navView.setCheckedItem(R.id.nav_drawer_item_orders)
                         }
                         2 -> {
-                            toolbar.textViewActionBarHeader.text = getString(R.string.text_users)
+                            toolbar.textViewActionHeader.text = getString(R.string.text_users)
                             navView.setCheckedItem(R.id.nav_drawer_item_users)
                         }
                     }

@@ -28,10 +28,7 @@ import com.unipi.mpsp21043.emarket.databinding.ActivityMainBinding
 import com.unipi.mpsp21043.emarket.models.Cart
 import com.unipi.mpsp21043.emarket.models.User
 import com.unipi.mpsp21043.emarket.service.MyFirebaseMessagingService
-import com.unipi.mpsp21043.emarket.utils.Constants
-import com.unipi.mpsp21043.emarket.utils.GlideLoader
-import com.unipi.mpsp21043.emarket.utils.IntentUtils
-import com.unipi.mpsp21043.emarket.utils.SnackBarSuccessClass
+import com.unipi.mpsp21043.emarket.utils.*
 
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -67,7 +64,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             // Check if user has items in his cart
             FirestoreHelper().getCartItemsList(this@MainActivity)
 
-        binding.toolbar.actionBarImgBtnMyCart.setOnClickListener { IntentUtils().goToListCartItemsActivity(this) }
+        binding.toolbar.imageButtonMyCart.setOnClickListener { IntentUtils().goToListCartItemsActivity(this) }
     }
 
     private fun setupActionBar() {
@@ -116,9 +113,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         if (intent.hasExtra(Constants.EXTRA_SHOW_ORDER_PLACED_SNACKBAR)
             && intent.getBooleanExtra(Constants.EXTRA_SHOW_ORDER_PLACED_SNACKBAR, false)) {
-            SnackBarSuccessClass
-                .make(binding.root, getString(R.string.text_order_placed_successfully))
-                .show()
+            snackBarSuccessClass(binding.root, getString(R.string.text_order_placed_successfully))
         }
 
         // Splash screen can go away since the tasks are completed
@@ -143,15 +138,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 override fun onTabSelected(tab: TabLayout.Tab) {
                     when (tab.position) {
                         0 -> {
-                            toolbar.textViewActionBarHeader.text = getString(R.string.text_store)
+                            toolbar.textViewActionHeader.text = getString(R.string.text_store)
                             navView.setCheckedItem(R.id.nav_drawer_item_products)
                         }
                         1 -> {
-                            toolbar.textViewActionBarHeader.text = getString(R.string.text_favorites)
+                            toolbar.textViewActionHeader.text = getString(R.string.text_favorites)
                             navView.setCheckedItem(R.id.nav_drawer_item_favorites)
                         }
                         2 -> {
-                            toolbar.textViewActionBarHeader.text = getString(R.string.text_my_account)
+                            toolbar.textViewActionHeader.text = getString(R.string.text_my_account)
                             navView.setCheckedItem(R.id.nav_drawer_item_profile)
                         }
                     }
@@ -164,23 +159,25 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
-        when (item.itemId) {
-            R.id.nav_drawer_item_products -> binding.tabs.getTabAt(0)?.select()
-            R.id.nav_drawer_item_favorites -> binding.tabs.getTabAt(1)?.select()
-            R.id.nav_drawer_item_cart -> {
-                IntentUtils().goToListCartItemsActivity(this@MainActivity)
-                return false
+        binding.apply {
+            when (item.itemId) {
+                R.id.nav_drawer_item_products -> tabs.getTabAt(0)?.select()
+                R.id.nav_drawer_item_favorites -> tabs.getTabAt(1)?.select()
+                R.id.nav_drawer_item_cart -> {
+                    IntentUtils().goToListCartItemsActivity(this@MainActivity)
+                    return false
+                }
+                R.id.nav_drawer_item_profile -> tabs.getTabAt(2)?.select()
+                R.id.nav_drawer_item_orders -> {
+                    IntentUtils().goToListOrdersActivity(this@MainActivity)
+                    return false
+                }
+                R.id.nav_drawer_item_settings -> {
+                    IntentUtils().goToListSettingsActivity(this@MainActivity)
+                    return false
+                }
+                R.id.nav_drawer_item_exit -> ActivityCompat.finishAffinity(this@MainActivity)
             }
-            R.id.nav_drawer_item_profile -> binding.tabs.getTabAt(2)?.select()
-            R.id.nav_drawer_item_orders -> {
-                IntentUtils().goToListOrdersActivity(this@MainActivity)
-                return false
-            }
-            R.id.nav_drawer_item_settings -> {
-                IntentUtils().goToListSettingsActivity(this@MainActivity)
-                return false
-            }
-            R.id.nav_drawer_item_exit -> ActivityCompat.finishAffinity(this)
         }
 
         val drawer = findViewById<DrawerLayout>(R.id.drawer_Layout)
@@ -218,13 +215,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 val badgeDrawable: BadgeDrawable = BadgeDrawable.create(this@MainActivity)
                 badgeDrawable.number = cartItems.size
                 badgeDrawable.isVisible = true
-                BadgeUtils.attachBadgeDrawable(badgeDrawable, toolbar.actionBarImgBtnMyCart)
+                BadgeUtils.attachBadgeDrawable(badgeDrawable, toolbar.imageButtonMyCart)
             }
         }
-    }
-
-    override fun getOnBackInvokedDispatcher(): OnBackInvokedDispatcher {
-        doubleBackToExit()
-        return super.getOnBackInvokedDispatcher()
     }
 }

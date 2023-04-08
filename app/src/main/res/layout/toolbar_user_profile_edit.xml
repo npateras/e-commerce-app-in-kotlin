@@ -50,7 +50,7 @@
                     app:tint="@color/colorWhite" />
                 
                 <TextView
-                    android:id="@+id/textView_ActionBar_Label"
+                    android:id="@+id/text_view_action_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/text_edit_profile"

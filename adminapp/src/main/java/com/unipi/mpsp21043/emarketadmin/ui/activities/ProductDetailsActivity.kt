@@ -73,7 +73,7 @@ class ProductDetailsActivity : BaseActivity() {
                 imgViewPicture
             )
 
-            toolbar.textViewActionBarLabel.text = modelProduct.name
+            toolbar.textViewActionHeader.text = modelProduct.name
             txtViewName.text = modelProduct.name
             txtViewDescription.text = modelProduct.description
 

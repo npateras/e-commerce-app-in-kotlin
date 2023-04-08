@@ -147,20 +147,6 @@ class FirestoreHelper {
                 // Here we have received the document snapshot which is converted into the User Data model object.
                 val user = document.toObject(User::class.java)!!
 
-                val sharedPreferences =
-                    activity.getSharedPreferences(
-                        Constants.EMARKET_PREFERENCES,
-                        Context.MODE_PRIVATE
-                    )
-
-                // Create an instance of the editor which is help us to edit the SharedPreference.
-                val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                editor.putString(
-                    Constants.LOGGED_IN_USERNAME,
-                    user.fullName
-                )
-                editor.apply()
-
                 when (activity) {
                     is MainActivity -> {
                         activity.userDetailsSuccess(user)

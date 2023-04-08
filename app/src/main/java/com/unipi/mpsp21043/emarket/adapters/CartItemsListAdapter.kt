@@ -2,10 +2,8 @@ package com.unipi.mpsp21043.emarket.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.unipi.mpsp21043.emarket.R
 import com.unipi.mpsp21043.emarket.database.FirestoreHelper
@@ -21,8 +19,7 @@ import com.unipi.mpsp21043.emarket.utils.GlideLoader
  */
 open class CartItemsListAdapter(
     private val context: Context,
-    private var list: ArrayList<Cart>,
-    private val updateCartItems: Boolean
+    private var list: ArrayList<Cart>
 ) : RecyclerView.Adapter<CartItemsListAdapter.CartItemsViewHolder>() {
 
     /**
@@ -57,23 +54,12 @@ open class CartItemsListAdapter(
 
         holder.binding.apply {
             // Product img
-            GlideLoader(context).loadProductPictureWide(model.imgUrl, imgViewProduct)
+            GlideLoader(context).loadProductPictureWide(model.imgUrl, imageViewIcon)
             // Product name
             txtViewName.text = model.name
             // Check if product has off sale
-            if (model.sale != 0.0) {
-                txtViewPriceReduced.apply {
-                    visibility = View.VISIBLE
-                    foreground =
-                        AppCompatResources.getDrawable(context, R.drawable.striking_red_text)
-                    text = String.format(
-                        context.getString(R.string.text_format_price),
-                        context.getString(R.string.curr_eur),
-                        model.price
-                    )
-                }
+            if (model.sale != 0.0)
                 priceReduced = model.price - (model.price * model.sale)
-            }
             // Product final price
             txtViewPrice.apply {
                 text = String.format(

@@ -123,7 +123,7 @@ class ChangePasswordActivity : BaseActivity() {
         binding.toolbar.apply {
             setSupportActionBar(root)
             imageButtonSave.setOnClickListener { saveNewPassword() }
-            textViewActionLabel.text = ""
+            textViewActionHeader.text = ""
         }
 
         val actionBar = supportActionBar

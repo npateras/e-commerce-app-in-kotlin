@@ -30,7 +30,7 @@
                     app:tint="@color/colorWhite" />
 
                 <TextView
-                    android:id="@+id/text_view_action_label"
+                    android:id="@+id/text_view_action_header"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"

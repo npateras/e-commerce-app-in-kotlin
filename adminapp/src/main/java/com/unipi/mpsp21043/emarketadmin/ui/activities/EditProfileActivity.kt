@@ -288,7 +288,7 @@ class EditProfileActivity : BaseActivity() {
 
         val actionBar = supportActionBar
         binding.apply {
-            toolbar.textViewActionBarLabel.text = getString(R.string.text_edit_profile)
+            toolbar.textViewActionHeader.text = getString(R.string.text_edit_profile)
             toolbar.imgBtnSave.setOnClickListener {
                 uploadPicture()
             }

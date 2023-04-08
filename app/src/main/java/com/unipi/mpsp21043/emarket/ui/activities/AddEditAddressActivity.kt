@@ -8,8 +8,7 @@ import com.unipi.mpsp21043.emarket.R
 import com.unipi.mpsp21043.emarket.database.FirestoreHelper
 import com.unipi.mpsp21043.emarket.databinding.ActivityAddEditAddressBinding
 import com.unipi.mpsp21043.emarket.models.Address
-import com.unipi.mpsp21043.emarket.utils.Constants
-import com.unipi.mpsp21043.emarket.utils.SnackBarErrorClass
+import com.unipi.mpsp21043.emarket.utils.*
 
 class AddEditAddressActivity : BaseActivity() {
 
@@ -52,12 +51,12 @@ class AddEditAddressActivity : BaseActivity() {
 
         // Here we get the text from editText and trim the space
         binding.run {
-            fullName = inputTxtFullName.text.toString().trim { it <= ' ' }
+            fullName = textInputEditTextFullName.text.toString().trim { it <= ' ' }
             phoneCode = countryCodePicker.selectedCountryCodeAsInt
-            phoneNumber = inputTxtPhoneNumber.text.toString().trim { it <= ' ' }
-            address = inputTxtAddress.text.toString().trim { it <= ' ' }
-            zipCode = inputTxtZipCode.text.toString().trim { it <= ' ' }
-            additionalNotes = inputTxtAdditionalNotes.text.toString().trim { it <= ' ' }
+            phoneNumber = textInputEditTextPhoneNumber.text.toString().trim { it <= ' ' }
+            address = textInputEditTextAddress.text.toString().trim { it <= ' ' }
+            zipCode = textInputEditTextZipCode.text.toString().trim { it <= ' ' }
+            additionalNotes = textInputEditTextAdditionalNotes.text.toString().trim { it <= ' ' }
         }
 
         if (validateFields()) {
@@ -89,17 +88,12 @@ class AddEditAddressActivity : BaseActivity() {
         // Hide progress dialog
         hideProgressDialog()
 
-        val notifySuccessMessage: String = if (mUserAddress != null && mUserAddress!!.id.isNotEmpty()) {
+        val notifySuccessMessage: String = if (mUserAddress != null && mUserAddress!!.id.isNotEmpty())
             resources.getString(R.string.text_your_address_updated_successfully)
-        } else {
+        else
             resources.getString(R.string.text_your_address_added_successfully)
-        }
 
-        Toast.makeText(
-            this@AddEditAddressActivity,
-            notifySuccessMessage,
-            Toast.LENGTH_SHORT
-        ).show()
+        snackBarSuccessClass(binding.root, notifySuccessMessage)
 
         setResult(RESULT_OK)
         finish()
@@ -108,43 +102,27 @@ class AddEditAddressActivity : BaseActivity() {
     private fun validateFields(): Boolean {
         binding.apply {
             return when {
-                TextUtils.isEmpty(inputTxtFullName.text.toString().trim { it <= ' ' }) -> {
-                    SnackBarErrorClass
-                        .make(root, getString(R.string.text_error_empty_name))
-                        .setBehavior(Constants.SNACKBAR_BEHAVIOR)
-                        .show()
-                    inputTxtLayoutFullName.requestFocus()
-                    inputTxtLayoutFullName.error = getString(R.string.text_error_empty_name)
+                TextUtils.isEmpty(textInputEditTextFullName.text.toString().trim { it <= ' ' }) -> {
+                    snackBarErrorClass(root, getString(R.string.text_error_empty_name))
+                    textInputLayoutError(textInputLayoutFullName, getString(R.string.text_error_empty_name))
                     false
                 }
 
-                TextUtils.isEmpty(inputTxtPhoneNumber.text.toString().trim { it <= ' ' }) -> {
-                    SnackBarErrorClass
-                        .make(root, getString(R.string.text_error_empty_email))
-                        .setBehavior(Constants.SNACKBAR_BEHAVIOR)
-                        .show()
-                    inputTxtLayoutPhoneNumber.requestFocus()
-                    inputTxtLayoutPhoneNumber.error = getString(R.string.text_error_empty_phone)
+                TextUtils.isEmpty(textInputEditTextPhoneNumber.text.toString().trim { it <= ' ' }) -> {
+                    snackBarErrorClass(root, getString(R.string.text_error_empty_phone))
+                    textInputLayoutError(textInputLayoutPhoneNumber, getString(R.string.text_error_empty_phone))
                     false
                 }
 
-                TextUtils.isEmpty(inputTxtAddress.text.toString().trim { it <= ' ' }) -> {
-                    SnackBarErrorClass
-                        .make(root, getString(R.string.text_error_empty_email))
-                        .setBehavior(Constants.SNACKBAR_BEHAVIOR)
-                        .show()
-                    inputTxtLayoutAddress.requestFocus()
-                    inputTxtLayoutAddress.error = getString(R.string.text_error_empty_address)
+                TextUtils.isEmpty(textInputEditTextAddress.text.toString().trim { it <= ' ' }) -> {
+                    snackBarErrorClass(root, getString(R.string.text_error_empty_address))
+                    textInputLayoutError(textInputLayoutAddress, getString(R.string.text_error_empty_address))
                     false
                 }
 
-                TextUtils.isEmpty(inputTxtZipCode.text.toString().trim { it <= ' ' }) -> {
-                    SnackBarErrorClass
-                        .make(root, getString(R.string.text_error_empty_email))
-                        .setBehavior(Constants.SNACKBAR_BEHAVIOR)
-                        .show()
-                    inputTxtLayoutZipCode.requestFocus()
-                    inputTxtLayoutZipCode.error = getString(R.string.text_error_empty_zip_code)
+                TextUtils.isEmpty(textInputEditTextZipCode.text.toString().trim { it <= ' ' }) -> {
+                    snackBarErrorClass(root, getString(R.string.text_error_empty_zip_code))
+                    textInputLayoutError(textInputLayoutZipCode, getString(R.string.text_error_empty_zip_code))
                     false
                 }
 
@@ -155,11 +133,11 @@ class AddEditAddressActivity : BaseActivity() {
 
     private fun loadInputTextDetails() {
         binding.apply {
-            inputTxtFullName.setText(mUserAddress?.fullName)
+            textInputEditTextFullName.setText(mUserAddress?.fullName)
             mUserAddress?.phoneCode?.let { countryCodePicker.setCountryForPhoneCode(it) }
-            inputTxtAddress.setText(mUserAddress?.address)
-            inputTxtZipCode.setText(mUserAddress?.zipCode)
-            inputTxtAdditionalNotes.setText(mUserAddress?.additionalNote)
+            textInputEditTextAddress.setText(mUserAddress?.address)
+            textInputEditTextZipCode.setText(mUserAddress?.zipCode)
+            textInputEditTextAdditionalNotes.setText(mUserAddress?.additionalNote)
         }
     }
 
@@ -170,18 +148,17 @@ class AddEditAddressActivity : BaseActivity() {
         binding.apply {
             toolbar.apply {
                 if (mUserAddress == null)
-                    textViewActionBarLabel.text = getString(R.string.text_add_new_address)
+                    textViewActionHeader.text = getString(R.string.text_add_new_address)
                 else {
                     loadInputTextDetails()
-                    textViewActionBarLabel.text = getString(R.string.text_edit_address)
+                    textViewActionHeader.text = getString(R.string.text_edit_address)
                 }
-                imgBtnSave.setOnClickListener{ saveAddressToFirestore() }
+                imageButtonSave.setOnClickListener{ saveAddressToFirestore() }
             }
         }
 
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
-            it.setCustomView(R.layout.toolbar_product_details)
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
             it.setHomeActionContentDescription(getString(R.string.text_go_back))

@@ -14,7 +14,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/actionBar_ImgBtn_My_Cart"
+                android:id="@+id/image_button_my_cart"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_alignParentTop="true"
@@ -32,7 +32,7 @@
                 app:tint="@color/colorWhite" />
 
             <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/actionBar_Checkbox_Favorite"
+                android:id="@+id/checkbox_favorite"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
@@ -43,7 +43,7 @@
                 android:button="@drawable/selector_toolbar_img_btn_favorite"
                 android:buttonTint="@color/colorWhite"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/actionBar_ImgBtn_My_Cart"
+                app:layout_constraintEnd_toStartOf="@+id/image_button_my_cart"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -80,7 +80,7 @@ class UserDetailsActivity : BaseActivity() {
 
         // Set user details.
         binding.apply {
-            toolbar.textViewActionBarLabel.text = String.format(
+            toolbar.textViewActionHeader.text = String.format(
                 getString(R.string.text_format_user_details),
                 mUserDetails.fullName
             )
@@ -134,7 +134,7 @@ class UserDetailsActivity : BaseActivity() {
 
         val actionBar = supportActionBar
         binding.apply {
-            toolbar.textViewActionBarLabel.text = getString(R.string.user_details)
+            toolbar.textViewActionHeader.text = getString(R.string.user_details)
         }
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)

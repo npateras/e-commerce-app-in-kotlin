@@ -49,12 +49,11 @@ open class CategoriesListAdapter(
         val model = list[position]
 
         holder.binding.apply {
-            GlideLoader(context).loadCategoryIcon(model.imgUrl, imgViewIcon)
-            txtViewHeader.text = model.name
-            txtViewDescription.text = model.description
+            GlideLoader(context).loadCategoryIcon(model.imgUrl, imageViewIcon)
+            textViewCategoryName.text = model.name
+            textViewCategoryDescription.text = model.description
         }
         holder.itemView.setOnClickListener {
-            Log.d("", "test")
             IntentUtils().goToListProductsActivity(context, model.name)
         }
     }

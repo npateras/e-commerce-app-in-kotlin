@@ -498,7 +498,7 @@ class AddEditProductActivity : BaseActivity() {
             autoCompleteTextViewWeightUnit.setText(mProduct?.weightUnit)
             textInputEditTextProductDescription.setText(mProduct?.description)
 
-            toolbar.textViewActionBarLabel.text = String.format(
+            toolbar.textViewActionHeader.text = String.format(
                 getString(R.string.text_format_update),
                 mProduct?.name
             )
@@ -584,7 +584,7 @@ class AddEditProductActivity : BaseActivity() {
         binding.toolbar.apply {
             setSupportActionBar(root)
             if (mProduct == null)
-                textViewActionBarLabel.text = getString(R.string.add_product)
+                textViewActionHeader.text = getString(R.string.add_product)
             else
                 loadInputTextDetails()
         }

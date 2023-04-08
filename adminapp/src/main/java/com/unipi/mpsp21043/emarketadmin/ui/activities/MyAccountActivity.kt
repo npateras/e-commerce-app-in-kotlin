@@ -132,7 +132,7 @@ class MyAccountActivity : BaseActivity() {
 
         val actionBar = supportActionBar
         binding.apply {
-            toolbar.textViewActionBarLabel.text = getString(R.string.text_my_account)
+            toolbar.textViewActionHeader.text = getString(R.string.text_my_account)
         }
 
         actionBar?.let {
