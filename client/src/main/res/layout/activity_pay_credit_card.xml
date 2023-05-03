@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".ui.activities.PayWithCreditCardActivity"
+    tools:ignore="ContentDescription" >
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_title_only" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_container_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <TextView
+            android:id="@+id/text_view_header_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/core_sans_cr_45_regular"
+            android:text="@string/text_credit_card_details"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/text_font_size_header_24"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_header_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/core_sans_cr_45_regular"
+            android:text="@string/text_credit_card_details_2"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorText2"
+            android:textSize="@dimen/text_font_size_header_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_header_1" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_layout_card_number"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/text_input_68"
+            android:layout_marginTop="39dp"
+            android:background="@drawable/text_input_background"
+            app:boxBackgroundMode="none"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:boxStrokeErrorColor="@color/colorRedLight"
+            app:counterMaxLength="16"
+            app:errorTextColor="@color/colorRedLight"
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/text_view_header_2"
+            app:layout_constraintStart_toStartOf="@+id/text_view_header_2"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_header_2"
+            app:startIconDrawable="@drawable/svg_credit_card">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_input_edit_text_card_number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/core_sans_cr_55_medium"
+                android:gravity="start|center_vertical"
+                android:hint="@string/input_text_hint_card_number"
+                android:inputType="numberPassword"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorSecondary4"
+                android:textSize="@dimen/text_font_size_header_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_layout_cardholder_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/text_input_68"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/text_input_background"
+            app:boxBackgroundMode="none"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:boxStrokeErrorColor="@color/colorRedLight"
+            app:counterMaxLength="747"
+            app:errorTextColor="@color/colorRedLight"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="@+id/text_view_header_2"
+            app:layout_constraintStart_toStartOf="@+id/text_view_header_2"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_card_number"
+            app:startIconDrawable="@drawable/svg_user_card_id">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_input_edit_text_cardholder_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/core_sans_cr_55_medium"
+                android:gravity="start|center_vertical"
+                android:hint="@string/input_text_hint_card_name"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorSecondary4"
+                android:textSize="@dimen/text_font_size_header_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_layout_expiration_date"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/text_input_68"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/text_input_background"
+            app:boxBackgroundMode="none"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:boxStrokeErrorColor="@color/colorRedLight"
+            app:counterMaxLength="4"
+            app:errorTextColor="@color/colorRedLight"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toStartOf="@+id/text_input_layout_cvv"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/text_input_layout_cardholder_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_cardholder_name"
+            app:startIconDrawable="@drawable/svg_calendar">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_input_edit_text_expiration_date"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/core_sans_cr_55_medium"
+                android:gravity="start|center_vertical"
+                android:hint="@string/input_text_hint_card_exp_date"
+                android:inputType="date"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorSecondary4"
+                android:textSize="@dimen/text_font_size_header_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_layout_cvv"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/text_input_68"
+            android:background="@drawable/text_input_background"
+            app:boxBackgroundMode="none"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:boxStrokeErrorColor="@color/colorRedLight"
+            app:counterMaxLength="3"
+            app:errorTextColor="@color/colorRedLight"
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/text_input_layout_cardholder_name"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/text_input_layout_expiration_date"
+            app:layout_constraintTop_toTopOf="@+id/text_input_layout_expiration_date"
+            app:startIconDrawable="@drawable/svg_cvv">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_input_edit_text_cvv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/core_sans_cr_55_medium"
+                android:gravity="start|center_vertical"
+                android:hint="@string/input_text_hint_card_cvv"
+                android:inputType="numberPassword"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorSecondary4"
+                android:textSize="@dimen/text_font_size_header_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_authorize"
+            style="@style/ButtonStyle.PrimaryColor"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_primary_68"
+            android:layout_marginTop="29dp"
+            android:layout_marginBottom="36dp"
+            android:background="@drawable/button_primary"
+            android:text="@string/text_authorize"
+            app:icon="@drawable/svg_tick_check"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/text_view_header_1"
+            app:layout_constraintStart_toStartOf="@+id/text_view_header_1"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_expiration_date" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
