@@ -104,7 +104,7 @@ class MyAccountFragment : BaseFragment() {
         binding.apply {
             textViewFullName.text = mUserDetails.fullName
             textViewEmailValue.text = mUserDetails.email
-            textViewDateRegisteredValue.text = Constants.simpleDateTimeFormat.format(mUserDetails.dateRegistered)
+            textViewDateRegisteredValue.text = Constants.DATE_TIME_FORMAT.format(mUserDetails.dateRegistered)
 
             // If some details aren't set by the user we completely remove the view instead of
             // showing a blank view.

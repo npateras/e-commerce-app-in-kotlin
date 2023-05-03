@@ -30,9 +30,11 @@ object Constants {
     // General Constants
     const val TAG: String = "[eMarket]"
     const val EMARKET_PREFERENCES: String = "eMarketPrefs"
-    const val LOGGED_IN_USERNAME: String = "logged_in_username"
-    val simpleDateTimeFormat = SimpleDateFormat("dd MMMM yyyy, HH:mm", Locale.ENGLISH)
-    val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+    const val PREF_NIGHT_MODE: String = "NIGHT_MODE"
+    const val PREF_LANGUAGE: String = "LANGUAGE"
+
+    val DATE_TIME_FORMAT = SimpleDateFormat("dd MMMM yyyy, HH:mm", Locale.ENGLISH)
+    val DATE_FORMAT = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
 
     // Firebase Constants
     // This is used for the collection name for USERS.

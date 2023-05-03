@@ -127,7 +127,7 @@ class OrderDetailsActivity : BaseActivity() {
 
         val actionBar = supportActionBar
         binding.apply {
-            toolbar.textViewActionLabel.text = Constants.simpleDateTimeFormat.format(mOrderDetails.orderDate)
+            toolbar.textViewActionLabel.text = Constants.DATE_TIME_FORMAT.format(mOrderDetails.orderDate)
         }
 
         actionBar?.let {

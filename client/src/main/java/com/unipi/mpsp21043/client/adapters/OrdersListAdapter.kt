@@ -56,7 +56,7 @@ open class OrdersListAdapter(
                     Constants.DEFAULT_CURRENCY,
                     model.totalAmount
                 )
-            textViewDate.text = Constants.simpleDateFormat.format(model.orderDate)
+            textViewDate.text = Constants.DATE_FORMAT.format(model.orderDate)
             when (model.orderStatus) {
                 0 -> {
                     textViewOrderStatusValue.text = context.getString(R.string.text_pending)

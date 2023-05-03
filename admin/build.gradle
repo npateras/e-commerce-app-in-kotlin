@@ -156,6 +156,7 @@ dependencies {
     // Country Code Picker
     implementation 'com.hbb20:ccp:2.7.0'
     implementation 'androidx.core:core-ktx:1.10.0'
+    implementation 'androidx.core:core-ktx:+'
 
     /**
      * Annotations

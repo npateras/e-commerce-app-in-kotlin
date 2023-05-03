@@ -1,5 +1,6 @@
 package com.unipi.mpsp21043.client.ui.activities
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.window.OnBackInvokedDispatcher
@@ -16,6 +17,7 @@ class ListSettingsActivity : BaseActivity() {
      * @see binding
      * */
     private lateinit var binding: ActivityListSettingsBinding
+    private lateinit var sharedPreferences: SharedPreferences =
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
