@@ -49,7 +49,6 @@ object PreferenceHelper {
         get() = run { }
         set(value) {
             editMe {
-                it.nightMode(Constants.PREF_NIGHT_MODE)
                 it.clear()
             }
         }
