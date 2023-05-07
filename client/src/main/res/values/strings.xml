@@ -382,6 +382,10 @@
     <!-- Content Description -->
     <string name="text_cd_my_cart_button">My cart button</string>
     <string name="text_cd_tick_image">Tick image</string>
+    <string name="text_night">Night</string>
+    <string name="text_light">Light</string>
+    <string name="text_match_system">Match System</string>
+    <string name="text_theme">Theme</string>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 </resources>

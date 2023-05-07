@@ -32,6 +32,7 @@ object Constants {
     const val EMARKET_PREFERENCES: String = "eMarketPrefs"
     const val PREF_NIGHT_MODE: String = "NIGHT_MODE"
     const val PREF_LANGUAGE: String = "LANGUAGE"
+    const val PREF_IS_FIRST_TIME_OPENING: String = "IS_FIRST_TIME_OPENING"
 
     val DATE_TIME_FORMAT = SimpleDateFormat("dd MMMM yyyy, HH:mm", Locale.ENGLISH)
     val DATE_FORMAT = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)

@@ -2,7 +2,6 @@ package com.unipi.mpsp21043.client.database
 
 import android.app.Activity
 import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
@@ -189,20 +188,6 @@ class FirestoreHelper {
 
                 // Here we have received the document snapshot which is converted into the User Data model object.
                 val user = document.toObject(User::class.java)!!
-
-                val sharedPreferences =
-                    fragment.requireContext().getSharedPreferences(
-                        Constants.EMARKET_PREFERENCES,
-                        Context.MODE_PRIVATE
-                    )
-
-                // Create an instance of the editor which is help us to edit the SharedPreference.
-                val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                editor.putString(
-                    Constants.LOGGED_IN_USERNAME,
-                    user.fullName
-                )
-                editor.apply()
 
                 when (fragment) {
                     is MyAccountFragment -> {
@@ -923,7 +908,7 @@ class FirestoreHelper {
 
                 if (task.result!!.isEmpty) {
                     when (activity) {
-                        is ProductDetailsActivity -> activity.successCartItem(Cart())
+                        is ProductDetailsActivity -> activity.successCheckProductInCart(Cart())
                     }
                     return@addOnCompleteListener
                 }
@@ -935,7 +920,7 @@ class FirestoreHelper {
                         val cartItem: Cart = document.toObject(Cart::class.java)
 
                         when (activity) {
-                            is ProductDetailsActivity -> activity.successCartItem(cartItem)
+                            is ProductDetailsActivity -> activity.successCheckProductInCart(cartItem)
                         }
                     }
                 }
@@ -1060,7 +1045,7 @@ class FirestoreHelper {
             .addOnCompleteListener { task ->
 
                 if (task.result!!.isEmpty) {
-                    productDetailsActivity.successProductFavorite(Favorite())
+                    productDetailsActivity.successCheckProductFavorite(Favorite())
                     return@addOnCompleteListener
                 }
                 if (task.isSuccessful) {
@@ -1070,7 +1055,7 @@ class FirestoreHelper {
 
                         val favoriteProduct: Favorite = document.toObject(Favorite::class.java)
 
-                        productDetailsActivity.successProductFavorite(favoriteProduct)
+                        productDetailsActivity.successCheckProductFavorite(favoriteProduct)
                     }
                 }
             }

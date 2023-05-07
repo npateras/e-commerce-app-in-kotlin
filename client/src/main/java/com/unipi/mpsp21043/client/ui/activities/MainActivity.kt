@@ -49,6 +49,24 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         init()
     }
 
+
+    private fun init() {
+
+        if (FirestoreHelper().getCurrentUserID() != "") {
+            FirebaseMessaging.getInstance().token.addOnSuccessListener { token ->
+                FirebaseService.token = token
+            }
+        }
+
+        if (intent.hasExtra(Constants.EXTRA_SHOW_ORDER_PLACED_SNACKBAR)
+            && intent.getBooleanExtra(Constants.EXTRA_SHOW_ORDER_PLACED_SNACKBAR, false)) {
+            snackBarSuccessLargeClass(binding.root, getString(R.string.text_order_placed_successfully))
+        }
+
+        // Splash screen can go away since the tasks are completed
+        isLoading = false
+    }
+
     private fun setupUI() {
         setupTabs()
         setupActionBar()
@@ -95,22 +113,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             // Set home page as default
             navView.setCheckedItem(R.id.nav_drawer_item_products)
         }
-    }
-
-    private fun init() {
-        if (FirestoreHelper().getCurrentUserID() != "") {
-            FirebaseMessaging.getInstance().token.addOnSuccessListener { token ->
-                FirebaseService.token = token
-            }
-        }
-
-        if (intent.hasExtra(Constants.EXTRA_SHOW_ORDER_PLACED_SNACKBAR)
-            && intent.getBooleanExtra(Constants.EXTRA_SHOW_ORDER_PLACED_SNACKBAR, false)) {
-            snackBarSuccessLargeClass(binding.root, getString(R.string.text_order_placed_successfully))
-        }
-
-        // Splash screen can go away since the tasks are completed
-        isLoading = false
     }
 
     private fun setupTabs() {

@@ -17,7 +17,7 @@ import com.unipi.mpsp21043.client.utils.createBadge
 import com.unipi.mpsp21043.client.utils.snackBarErrorClass
 import com.unipi.mpsp21043.client.utils.snackBarSuccessClass
 
-class ProductDetailsActivity : BaseActivity() {
+class ProductDetailsActivity2 : BaseActivity() {
 
     /**
      * Class variables
@@ -30,12 +30,11 @@ class ProductDetailsActivity : BaseActivity() {
 
     private lateinit var modelProduct: Product
     private var modelCart: Cart? = null
-    private var cartItemList: ArrayList<Cart>? = null
     private lateinit var modelFavorite: Favorite
 
     private var isInFavorites: Boolean = false
     private var priceReduced: Double = 0.00
-    // private var cartProductQuantity = 0
+    private var cartProductQuantity = 0
 
     private lateinit var cartBadge: BadgeDrawable
 
@@ -63,12 +62,10 @@ class ProductDetailsActivity : BaseActivity() {
         FirestoreHelper().getProductDetails(this, productId)
     }
 
-    fun successProductDetailsFromFirestore(product: Product) {
-        modelProduct = product
-
+    private fun loadProductDetails() {
         binding.apply {
             // Populate the product details in the UI.
-            GlideLoader(this@ProductDetailsActivity).loadProductPictureWide(
+            GlideLoader(this@ProductDetailsActivity2).loadProductPictureWide(
                 modelProduct.iconUrl,
                 imgViewPicture
             )
@@ -106,11 +103,24 @@ class ProductDetailsActivity : BaseActivity() {
             hideShimmerUI()
     }
 
+    private fun getTotalCartItems() {
+        FirestoreHelper().getCartItemsList(this@ProductDetailsActivity2)
+    }
+
     private fun checkIfProductIsInFavorites() {
         FirestoreHelper().getFavoriteProduct(this, modelProduct.id)
     }
 
-    fun successCheckProductFavorite(favoriteProduct: Favorite) {
+    private fun checkIfProductIsInCart() {
+        FirestoreHelper().checkIfProductIsInCart(this, modelProduct.id)
+    }
+
+    fun successProductDetailsFromFirestore(product: Product) {
+        modelProduct = product
+        loadProductDetails()
+    }
+
+    fun successProductFavorite(favoriteProduct: Favorite) {
         modelFavorite = favoriteProduct
 
         if (modelFavorite.productId != "") {
@@ -118,47 +128,8 @@ class ProductDetailsActivity : BaseActivity() {
             binding.toolbar.checkboxFavorite.isChecked = true
         }
 
-        getTotalCartItems()
+        checkIfProductIsInCart()
     }
-
-    private fun getTotalCartItems() {
-        FirestoreHelper().getCartItemsList(this@ProductDetailsActivity)
-    }
-
-    @androidx.annotation.OptIn(com.google.android.material.badge.ExperimentalBadgeUtils::class)
-    fun successUserTotalCartItems(cartItems: ArrayList<Cart>) {
-        cartItemList = cartItems
-
-        if (cartItems.isNotEmpty()) {
-            cartBadge = createBadge(this@ProductDetailsActivity, binding.toolbar.imageButtonMyCart, cartItems.size)
-        }
-
-        val productInCart = let {
-            cartItems.filter { it.name.contains(modelProduct.id) }.toString() != ""
-        }
-
-        if (productInCart) {
-            hideAddToCart()
-        }
-
-        hideShimmerUI()
-    }
-
-    private fun checkIfProductIsInCart() {
-        FirestoreHelper().checkIfProductIsInCart(this, modelProduct.id)
-    }
-
-    fun successCheckProductInCart(cartItem: Cart) {
-        modelCart = cartItem
-
-        // If model isn't null
-        if (modelCart?.userId != "")
-            updateCart()
-
-        getTotalCartItems()
-    }
-
-
 
     fun successProductAddedToFavorites() {
         snackBarSuccessClass(binding.root, getString(R.string.text_product_added_to_favorites), binding.constraintLayoutAddToCart)
@@ -166,6 +137,27 @@ class ProductDetailsActivity : BaseActivity() {
 
     fun successProductRemovedFromFavorites() {
         snackBarSuccessClass(binding.root, getString(R.string.text_product_removed_from_favorites), binding.constraintLayoutAddToCart)
+    }
+
+    fun successCartItem(cartItem: Cart) {
+
+        modelCart = cartItem
+
+        if (modelCart?.userId != "") {
+            cartProductQuantity = modelCart!!.cartQuantity
+            updateCart()
+        }
+
+        getTotalCartItems()
+    }
+
+    @androidx.annotation.OptIn(com.google.android.material.badge.ExperimentalBadgeUtils::class)
+    fun successUserTotalCartItems(cartItems: ArrayList<Cart>) {
+        if (cartItems.isNotEmpty()) {
+            cartBadge = createBadge(this@ProductDetailsActivity2, binding.toolbar.imageButtonMyCart, cartItems.size)
+        }
+
+        hideShimmerUI()
     }
 
     private fun hideAddToCart() {
@@ -182,27 +174,26 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     private fun updateCart() {
-        // If user is logged in and has item in cart.
         if (modelCart != null && modelCart?.userId != "") {
-            // If item cart quantity is 0 then it's basically removed from cart.
             if (modelCart?.cartQuantity == 0)
                 showAddToCart()
-            // If user is increasing or decreasing the quantity but it's not 0.
             else if (modelCart?.cartQuantity!! >= 1) {
-                // 1) Hide add to cart since it's added
-                // 2) Show the updated total items in cart as a number with a badge over the cart.
-                // 3) Update item quantity text view.
                 hideAddToCart()
-                cartBadge.number = cartItemList!!.size
+                cartBadge.number += cartProductQuantity
                 binding.txtViewQuantityValue.text = modelCart?.cartQuantity.toString()
             }
         }
-        else
+        else {
             addItemToCart()
+        }
     }
 
     private fun addItemToCart() {
+        showProgressDialog()
         hideAddToCart()
+
+        if (cartProductQuantity == 0)
+            cartProductQuantity++
 
         modelCart = Cart(
             userId = FirestoreHelper().getCurrentUserID(),
@@ -214,13 +205,14 @@ class ProductDetailsActivity : BaseActivity() {
             stock = modelProduct.stock,
             weight = modelProduct.weight,
             weightUnit = modelProduct.weightUnit,
-            cartQuantity = modelCart!!.cartQuantity++
+            cartQuantity = cartProductQuantity
         )
 
         FirestoreHelper().addItemToCart(this, modelCart!!)
     }
 
     fun successItemAddedToCart() {
+        hideProgressDialog()
 
         hideAddToCart()
         cartBadge.number += cartProductQuantity
@@ -349,11 +341,11 @@ class ProductDetailsActivity : BaseActivity() {
                 imgBtnMinus.setOnClickListener { changeItemQuantity(imgBtnMinus) }
 
                 // ActionBar
-                toolbar.imageButtonMyCart.setOnClickListener { IntentUtils().goToListCartItemsActivity(this@ProductDetailsActivity) }
+                toolbar.imageButtonMyCart.setOnClickListener { IntentUtils().goToListCartItemsActivity(this@ProductDetailsActivity2) }
                 toolbar.checkboxFavorite.setOnClickListener {
                     if (!toolbar.checkboxFavorite.isChecked) {
                         FirestoreHelper().removeProductFromUserFavorites(
-                            this@ProductDetailsActivity,
+                            this@ProductDetailsActivity2,
                             modelProduct.id
                         )
                     }
@@ -367,7 +359,7 @@ class ProductDetailsActivity : BaseActivity() {
                             modelProduct.sale
                         )
                         FirestoreHelper().addProductToUserFavorites(
-                            this@ProductDetailsActivity,
+                            this@ProductDetailsActivity2,
                             favorite
                         )
                     }
@@ -379,7 +371,7 @@ class ProductDetailsActivity : BaseActivity() {
                     .forEach {
                         it.setOnClickListener {
                             toolbar.checkboxFavorite.isChecked = false
-                            goToSignInActivity(this@ProductDetailsActivity)
+                            goToSignInActivity(this@ProductDetailsActivity2)
                         }
                     }
             }

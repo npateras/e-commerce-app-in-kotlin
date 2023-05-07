@@ -12,6 +12,7 @@ import com.unipi.mpsp21043.client.models.User
 import com.unipi.mpsp21043.client.utils.Constants
 import com.unipi.mpsp21043.client.utils.GlideLoader
 import com.unipi.mpsp21043.client.utils.IntentUtils
+import com.unipi.mpsp21043.client.utils.showMustSignInUI
 
 class MyAccountFragment : BaseFragment() {
     // Scoped to the lifecycle of the fragment's view (between onCreateView and onDestroyView)
@@ -42,8 +43,6 @@ class MyAccountFragment : BaseFragment() {
 
         // Check if the user is logged in, otherwise show the sign in state.
         if (FirestoreHelper().getCurrentUserID() != "") {
-            // Apply click listeners
-
 
             // GET user details
             getUserDetails()
@@ -59,7 +58,7 @@ class MyAccountFragment : BaseFragment() {
             userLoggedInUI()
         // If user is NOT signed in
         else
-            userNotLoggedInUI()
+            showMustSignInUI(this.requireContext(), binding)
     }
 
     private fun userNotLoggedInUI() {
@@ -67,8 +66,8 @@ class MyAccountFragment : BaseFragment() {
             // We make the sign in layout visible and add the button click listeners accordingly.
             layoutErrorStateMustSignIn.apply {
                 root.visibility = View.VISIBLE
-                buttonSignIn.setOnClickListener{ goToSignInActivity(this@MyAccountFragment.requireContext()) }
-                buttonSignUp.setOnClickListener{ goToSignInActivity(this@MyAccountFragment.requireContext()) }
+                buttonSignIn.setOnClickListener { goToSignInActivity(this@MyAccountFragment.requireContext()) }
+                buttonSignUp.setOnClickListener { goToSignInActivity(this@MyAccountFragment.requireContext()) }
             }
         }
     }

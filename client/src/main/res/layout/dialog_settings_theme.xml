@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    tools:ignore="ContentDescription">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view_body"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_container_all_corners"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/text_view_header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/core_sans_cr_45_regular"
+                    android:text="@string/text_theme"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorText"
+                    android:textSize="@dimen/text_font_size_header_24"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioGroup
+                    android:id="@+id/radio_group"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:weightSum="1"
+                    app:layout_constraintEnd_toEndOf="@+id/text_view_header"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_header"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_header">
+
+                    <RadioButton
+                        android:id="@+id/radio_button_theme_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="start"
+                        android:checked="false"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:text="@string/text_light"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_theme_night"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="8dp"
+                        android:checked="false"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:text="@string/text_night"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_theme_match_system"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="8dp"
+                        android:checked="false"
+                        android:fontFamily="@font/core_sans_cr_45_regular"
+                        android:text="@string/text_match_system"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp" />
+
+                </RadioGroup>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_dialog_select_theme"
+                    style="@style/ButtonStyle.PrimaryColor"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/button_primary_68"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="36dp"
+                    android:background="@drawable/button_primary"
+                    android:text="@string/text_select"
+                    app:icon="@drawable/svg_tick_check"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/radio_group"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/radio_group"
+                    app:layout_constraintTop_toBottomOf="@+id/radio_group" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>

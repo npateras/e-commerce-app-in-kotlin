@@ -1,6 +1,5 @@
 package com.unipi.mpsp21043.client.ui.activities
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.window.OnBackInvokedDispatcher
@@ -8,6 +7,8 @@ import com.unipi.mpsp21043.client.R
 import com.unipi.mpsp21043.client.database.FirestoreHelper
 import com.unipi.mpsp21043.client.databinding.ActivityListSettingsBinding
 import com.unipi.mpsp21043.client.utils.IntentUtils
+import com.unipi.mpsp21043.client.utils.showMustSignInUI
+
 
 class ListSettingsActivity : BaseActivity() {
 
@@ -17,7 +18,6 @@ class ListSettingsActivity : BaseActivity() {
      * @see binding
      * */
     private lateinit var binding: ActivityListSettingsBinding
-    private lateinit var sharedPreferences: SharedPreferences =
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,39 +31,28 @@ class ListSettingsActivity : BaseActivity() {
 
     private fun setupUI() {
         setUpActionBar()
-        setupClickListeners()
 
         if (FirestoreHelper().getCurrentUserID() != "")
-            setupClickListenersLoggedIn()
+            setupClickListeners()
         else
-            hideNotLoggedInContent()
-    }
-
-    private fun setupClickListenersLoggedIn() {
-        binding.apply {
-            buttonChangePassword.setOnClickListener { IntentUtils().goToAuthenticateActivity(this@ListSettingsActivity) }
-            buttonAddresses.setOnClickListener { IntentUtils().goToListAddressesActivity(this@ListSettingsActivity) }
-            switchButtonFavorites.setOnClickListener {  }
-            switchButtonOrders.setOnClickListener {  }
-        }
+            showMustSignInUI(this, binding)
     }
 
     private fun setupClickListeners() {
         binding.apply {
-            switchButtonNightMode.setOnClickListener {  }
-            buttonLanguage.setOnClickListener {  }
-        }
-    }
+            buttonChangePassword.setOnClickListener { IntentUtils().goToAuthenticateActivity(this@ListSettingsActivity) }
+            buttonAddresses.setOnClickListener { IntentUtils().goToListAddressesActivity(this@ListSettingsActivity) }
+            switchButtonFavorites.apply {
+                /*setOnClickListener {
+                    FirestoreHelper().updateUserSettingsNotifications("type", true)
+                }*/
+                setOnCheckedChangeListener { _, isChecked ->
+                    // FirestoreHelper().updateUserSettingsNotifications("type", isChecked)
+                }
+            }
+            switchButtonOrders.setOnClickListener {
 
-    private fun hideNotLoggedInContent() {
-        binding.apply {
-            textViewAccount.visibility = View.GONE
-            textViewNotifications.visibility = View.GONE
-            switchButtonFavorites.visibility = View.GONE
-            switchButtonOrders.visibility = View.GONE
-            buttonAddresses.visibility = View.GONE
-            buttonChangePassword.visibility = View.GONE
-            buttonSignOut.visibility = View.GONE
+            }
         }
     }
 
@@ -72,7 +61,8 @@ class ListSettingsActivity : BaseActivity() {
 
         val actionBar = supportActionBar
         binding.apply {
-            toolbar.textViewActionLabel.text = getString(R.string.text_settings)
+            toolbar.textViewActionLabel.text =
+                getString(R.string.text_settings)
         }
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)

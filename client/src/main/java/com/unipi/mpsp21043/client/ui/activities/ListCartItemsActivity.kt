@@ -12,6 +12,7 @@ import com.unipi.mpsp21043.client.models.Cart
 import com.unipi.mpsp21043.client.models.Product
 import com.unipi.mpsp21043.client.utils.Constants
 import com.unipi.mpsp21043.client.utils.IntentUtils
+import com.unipi.mpsp21043.client.utils.showMustSignInUI
 import com.unipi.mpsp21043.client.utils.snackBarErrorClass
 
 class ListCartItemsActivity : BaseActivity() {
@@ -40,7 +41,7 @@ class ListCartItemsActivity : BaseActivity() {
         if (FirestoreHelper().getCurrentUserID() != "")
             getProductList()
         else
-            showErrorMustSignInUI()
+            showMustSignInUI(this, binding)
         setupUI()
     }
     
@@ -163,13 +164,6 @@ class ListCartItemsActivity : BaseActivity() {
         hideShimmerUI()
         binding.apply {
             layoutErrorState.root.visibility = View.VISIBLE
-        }
-    }
-
-    private fun showErrorMustSignInUI() {
-        hideShimmerUI()
-        binding.apply {
-            layoutErrorStateMustSignIn.root.visibility = View.VISIBLE
         }
     }
 

@@ -35,7 +35,7 @@ class FavoritesFragment : Fragment() {
             loadFavorites()
         }
         else
-            showMustSignInUI()
+            com.unipi.mpsp21043.client.utils.showMustSignInUI(this.requireContext(), binding)
     }
 
     private fun loadFavorites() {
@@ -98,12 +98,6 @@ class FavoritesFragment : Fragment() {
             recyclerView.visibility = View.GONE
             shimmerViewContainer.visibility = View.GONE
             shimmerViewContainer.stopShimmer()
-        }
-    }
-
-    private fun showMustSignInUI() {
-        binding.apply {
-            layoutErrorStateMustSignIn.root.visibility = View.VISIBLE
         }
     }
 

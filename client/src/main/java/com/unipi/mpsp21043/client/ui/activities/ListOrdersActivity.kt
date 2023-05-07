@@ -36,7 +36,7 @@ class ListOrdersActivity : BaseActivity() {
             getOrdersList()
         }
         else
-            showMustSignInUI()
+            com.unipi.mpsp21043.client.utils.showMustSignInUI(this, binding)
     }
     private fun setupUI() {
         setUpActionBar()
@@ -92,12 +92,6 @@ class ListOrdersActivity : BaseActivity() {
             recyclerView.visibility = View.GONE
             shimmerViewContainer.visibility = View.GONE
             shimmerViewContainer.stopShimmer()
-        }
-    }
-
-    private fun showMustSignInUI() {
-        binding.apply {
-            layoutErrorStateMustSignIn.root.visibility = View.VISIBLE
         }
     }
 
