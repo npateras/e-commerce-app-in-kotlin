@@ -12,6 +12,7 @@ import com.unipi.mpsp21043.client.models.Cart
 import com.unipi.mpsp21043.client.ui.activities.ListCartItemsActivity
 import com.unipi.mpsp21043.client.utils.Constants
 import com.unipi.mpsp21043.client.utils.GlideLoader
+import com.unipi.mpsp21043.client.utils.IntentUtils
 import com.unipi.mpsp21043.client.utils.snackBarErrorClass
 
 
@@ -109,6 +110,10 @@ open class CartItemsListAdapter(
 
                     FirestoreHelper().updateMyCart(context, model.id, itemHashMap)
                 }
+            }
+
+            holder.itemView.setOnClickListener {
+                IntentUtils().goToProductDetailsActivity(context, model.productId)
             }
         }
     }

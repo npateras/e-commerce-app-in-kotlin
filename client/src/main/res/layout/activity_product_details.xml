@@ -82,9 +82,9 @@
                         android:textColor="@color/colorSecondary2"
                         android:textSize="@dimen/text_font_size_header_16"
                         android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="@+id/txtView_Name"
+                        app:layout_constraintBottom_toBottomOf="@+id/txtView_Price"
                         app:layout_constraintEnd_toStartOf="@+id/txtView_Price"
-                        app:layout_constraintTop_toTopOf="@+id/txtView_Name"
+                        app:layout_constraintTop_toTopOf="@+id/txtView_Price"
                         tools:ignore="HardcodedText" />
 
                     <TextView
@@ -229,7 +229,7 @@
                 android:textAlignment="textStart"
                 android:textColor="@color/colorText"
                 android:textSize="@dimen/text_font_size_header_24"
-                app:layout_constraintBottom_toTopOf="@+id/btn_Add_To_Cart"
+                app:layout_constraintBottom_toTopOf="@+id/button_add_to_cart"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -241,6 +241,7 @@
                 android:layout_marginEnd="9dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/ic_minus"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="8dp"
@@ -273,6 +274,7 @@
                 android:layout_height="30dp"
                 android:layout_marginEnd="20dp"
                 android:adjustViewBounds="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:background="@drawable/ic_plus"
                 android:clickable="true"
                 android:focusable="true"
@@ -284,52 +286,36 @@
                 app:layout_constraintTop_toTopOf="@+id/txtView_Quantity_Value" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_Remove_From_Cart"
-                style="@style/Widget.AppCompat.Button"
+                android:id="@+id/button_remove_from_cart"
+                style="@style/ButtonStyle.PrimaryColor"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/btn_height_medium_45"
                 android:layout_marginBottom="24dp"
-                android:background="@drawable/ripple_btn_negative_color_selector"
-                android:fontFamily="@font/core_sans_cr_65_bold"
-                android:gravity="center"
-                android:text="@string/text_remove_from_cart"
-                android:textAlignment="center"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/btn_font_size_small_14"
+                android:layout_height="@dimen/button_primary_68"
+                android:layout_marginTop="29dp"
                 android:visibility="gone"
-                app:backgroundTint="@null"
                 app:icon="@drawable/ic_remove_from_cart"
-                app:iconGravity="textStart"
-                app:iconPadding="10dp"
-                app:iconSize="24dp"
-                app:iconTint="@color/colorWhite"
+                android:background="@drawable/button_negative"
+                android:text="@string/text_remove_from_cart"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/imgBtn_Plus"
                 app:layout_constraintStart_toStartOf="@+id/txtView_Quantity" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_Add_To_Cart"
-                style="@style/Widget.AppCompat.Button"
+                android:id="@+id/button_add_to_cart"
+                style="@style/ButtonStyle.PrimaryColor"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/btn_height_medium_45"
                 android:layout_marginBottom="24dp"
-                android:background="@drawable/ripple_btn_primary_color_selector"
-                android:fontFamily="@font/core_sans_cr_65_bold"
-                android:gravity="center"
-                android:text="@string/text_add_to_cart"
-                android:textAlignment="center"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/btn_font_size_small_14"
-                app:backgroundTint="@null"
+                android:layout_height="@dimen/button_primary_68"
+                android:layout_marginTop="29dp"
                 app:icon="@drawable/ic_add_to_cart"
-                app:iconGravity="textStart"
-                app:iconPadding="10dp"
-                app:iconSize="24dp"
-                app:iconTint="@color/colorWhite"
+                android:background="@drawable/button_primary"
+                android:text="@string/text_add_to_cart"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/imgBtn_Plus"
                 app:layout_constraintStart_toStartOf="@+id/txtView_Quantity" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.facebook.shimmer.ShimmerFrameLayout

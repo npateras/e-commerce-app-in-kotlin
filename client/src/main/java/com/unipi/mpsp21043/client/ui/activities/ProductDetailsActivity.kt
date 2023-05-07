@@ -2,7 +2,9 @@ package com.unipi.mpsp21043.client.ui.activities
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.isVisible
 import com.google.android.material.badge.BadgeDrawable
 import com.unipi.mpsp21043.client.R
 import com.unipi.mpsp21043.client.database.FirestoreHelper
@@ -26,16 +28,14 @@ class ProductDetailsActivity : BaseActivity() {
      * @see modelProduct
      * */
     private lateinit var binding: ActivityProductDetailsBinding
-    private lateinit var productId: String
 
     private lateinit var modelProduct: Product
-    private var modelCart: Cart? = null
-    private var cartItemList: ArrayList<Cart>? = null
     private lateinit var modelFavorite: Favorite
+    private var modelCart: Cart? = null
 
-    private var isInFavorites: Boolean = false
+    private lateinit var productId: String
+    private var totalCartItems: Int = 0
     private var priceReduced: Double = 0.00
-    // private var cartProductQuantity = 0
 
     private lateinit var cartBadge: BadgeDrawable
 
@@ -60,6 +60,8 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     private fun getProductDetails() {
+        showShimmerUI()
+
         FirestoreHelper().getProductDetails(this, productId)
     }
 
@@ -74,15 +76,18 @@ class ProductDetailsActivity : BaseActivity() {
             )
             txtViewName.text = modelProduct.name
             txtViewDescription.text = modelProduct.description
-            txtViewPriceReduced.apply {
-                visibility = View.VISIBLE
-                foreground =
-                    AppCompatResources.getDrawable(context, R.drawable.striking_red_text)
-                text = String.format(
-                    context.getString(R.string.text_format_price),
-                    context.getString(R.string.curr_eur),
-                    modelProduct.price
-                )
+            // If item is on sale
+            if (modelProduct.sale > 0) {
+                txtViewPriceReduced.apply {
+                    visibility = View.VISIBLE
+                    foreground =
+                        AppCompatResources.getDrawable(context, R.drawable.striking_red_text)
+                    text = String.format(
+                        context.getString(R.string.text_format_price),
+                        context.getString(R.string.curr_eur),
+                        modelProduct.price
+                    )
+                }
             }
             priceReduced = modelProduct.price - (modelProduct.price * modelProduct.sale)
             txtViewPrice.text = String.format(
@@ -102,8 +107,9 @@ class ProductDetailsActivity : BaseActivity() {
 
         if (FirestoreHelper().getCurrentUserID() != "")
             checkIfProductIsInFavorites()
-        else
+        else {
             hideShimmerUI()
+        }
     }
 
     private fun checkIfProductIsInFavorites() {
@@ -113,10 +119,8 @@ class ProductDetailsActivity : BaseActivity() {
     fun successCheckProductFavorite(favoriteProduct: Favorite) {
         modelFavorite = favoriteProduct
 
-        if (modelFavorite.productId != "") {
-            isInFavorites = true
+        if (modelFavorite.productId != "")
             binding.toolbar.checkboxFavorite.isChecked = true
-        }
 
         getTotalCartItems()
     }
@@ -127,83 +131,60 @@ class ProductDetailsActivity : BaseActivity() {
 
     @androidx.annotation.OptIn(com.google.android.material.badge.ExperimentalBadgeUtils::class)
     fun successUserTotalCartItems(cartItems: ArrayList<Cart>) {
-        cartItemList = cartItems
+
+        totalCartItems = cartItems.size
 
         if (cartItems.isNotEmpty()) {
-            cartBadge = createBadge(this@ProductDetailsActivity, binding.toolbar.imageButtonMyCart, cartItems.size)
-        }
+            cartBadge = createBadge(
+                this@ProductDetailsActivity,
+                binding.toolbar.imageButtonMyCart,
+                totalCartItems
+            )
+        } else
+            cartBadge.clearNumber()
+
+        val filteredCartItem = cartItems.filter { (key, value) -> key.contains(modelProduct.id) }
 
         val productInCart = let {
-            cartItems.filter { it.name.contains(modelProduct.id) }.toString() != ""
+            filteredCartItem.isNotEmpty()
         }
 
         if (productInCart) {
-            hideAddToCart()
+            modelCart = filteredCartItem[0]
+
+            cartBadge.number = totalCartItems
+            binding.txtViewQuantityValue.text = modelCart!!.cartQuantity.toString()
         }
 
+        updateButtonsUI()
         hideShimmerUI()
     }
 
-    private fun checkIfProductIsInCart() {
-        FirestoreHelper().checkIfProductIsInCart(this, modelProduct.id)
+    fun successCartItemUpdated() {
+        updateButtonsUI()
+
+        binding.apply {
+            txtViewQuantityValue.text = modelCart!!.cartQuantity.toString()
+        }
     }
-
-    fun successCheckProductInCart(cartItem: Cart) {
-        modelCart = cartItem
-
-        // If model isn't null
-        if (modelCart?.userId != "")
-            updateCart()
-
-        getTotalCartItems()
-    }
-
-
 
     fun successProductAddedToFavorites() {
-        snackBarSuccessClass(binding.root, getString(R.string.text_product_added_to_favorites), binding.constraintLayoutAddToCart)
+        snackBarSuccessClass(
+            binding.root,
+            getString(R.string.text_product_added_to_favorites),
+            binding.constraintLayoutAddToCart
+        )
     }
 
     fun successProductRemovedFromFavorites() {
-        snackBarSuccessClass(binding.root, getString(R.string.text_product_removed_from_favorites), binding.constraintLayoutAddToCart)
-    }
-
-    private fun hideAddToCart() {
-        binding.apply {
-            btnAddToCart.visibility = View.INVISIBLE
-            btnRemoveFromCart.visibility = View.VISIBLE
-        }
-    }
-    private fun showAddToCart() {
-        binding.apply {
-            btnAddToCart.visibility = View.VISIBLE
-            btnRemoveFromCart.visibility = View.GONE
-        }
-    }
-
-    private fun updateCart() {
-        // If user is logged in and has item in cart.
-        if (modelCart != null && modelCart?.userId != "") {
-            // If item cart quantity is 0 then it's basically removed from cart.
-            if (modelCart?.cartQuantity == 0)
-                showAddToCart()
-            // If user is increasing or decreasing the quantity but it's not 0.
-            else if (modelCart?.cartQuantity!! >= 1) {
-                // 1) Hide add to cart since it's added
-                // 2) Show the updated total items in cart as a number with a badge over the cart.
-                // 3) Update item quantity text view.
-                hideAddToCart()
-                cartBadge.number = cartItemList!!.size
-                binding.txtViewQuantityValue.text = modelCart?.cartQuantity.toString()
-            }
-        }
-        else
-            addItemToCart()
+        snackBarSuccessClass(
+            binding.root,
+            getString(R.string.text_product_removed_from_favorites),
+            binding.constraintLayoutAddToCart
+        )
     }
 
     private fun addItemToCart() {
-        hideAddToCart()
-
         modelCart = Cart(
             userId = FirestoreHelper().getCurrentUserID(),
             productId = modelProduct.id,
@@ -214,17 +195,21 @@ class ProductDetailsActivity : BaseActivity() {
             stock = modelProduct.stock,
             weight = modelProduct.weight,
             weightUnit = modelProduct.weightUnit,
-            cartQuantity = modelCart!!.cartQuantity++
+            cartQuantity = when (modelCart) {
+                null -> 1
+                else -> modelCart!!.cartQuantity++
+            }
         )
+
+        totalCartItems++
 
         FirestoreHelper().addItemToCart(this, modelCart!!)
     }
 
     fun successItemAddedToCart() {
-
-        hideAddToCart()
-        cartBadge.number += cartProductQuantity
-        binding.txtViewQuantityValue.text = cartProductQuantity.toString()
+        updateButtonsUI()
+        cartBadge.number = totalCartItems
+        binding.txtViewQuantityValue.text = modelCart!!.cartQuantity.toString()
     }
 
     private fun updateItemToCart() {
@@ -238,72 +223,140 @@ class ProductDetailsActivity : BaseActivity() {
             stock = modelProduct.stock,
             weight = modelProduct.weight,
             weightUnit = modelProduct.weightUnit,
-            cartQuantity = cartProductQuantity
+            cartQuantity = modelCart!!.cartQuantity++
         )
 
         FirestoreHelper().updateItemFromCart(this, modelCart!!, modelProduct.id)
     }
 
     private fun deleteItemFromCard() {
+        totalCartItems--
         FirestoreHelper().deleteItemFromCart(this, modelProduct.id)
     }
 
     fun successItemDeletedFromCart() {
-        showAddToCart()
-        snackBarSuccessClass(binding.root, getString(R.string.text_product_removed_from_cart), binding.constraintLayoutAddToCart)
+        snackBarSuccessClass(
+            binding.root,
+            getString(R.string.text_product_removed_from_cart),
+            binding.constraintLayoutAddToCart
+        )
 
+        // Remove cart model
         modelCart = null
+
+        binding.apply {
+            // Set text view's quantity to zero.
+            txtViewQuantityValue.text = "0"
+        }
+
+        updateButtonsUI()
+    }
+
+    private fun updateButtonsUI() {
+        binding.apply {
+            if (modelCart == null && buttonRemoveFromCart.isVisible) {
+                buttonRemoveFromCart.visibility = View.GONE
+                buttonRemoveFromCart.isEnabled = true
+                buttonAddToCart.visibility = View.VISIBLE
+                when {
+                    cartBadge.number - 1 == 0 -> cartBadge.clearNumber()
+                    cartBadge.number - 1 != 0 -> cartBadge.number--
+                }
+            } else if (modelCart != null && buttonAddToCart.isVisible) {
+                buttonAddToCart.visibility = View.INVISIBLE
+                buttonAddToCart.isEnabled = true
+                buttonRemoveFromCart.visibility = View.VISIBLE
+                cartBadge.number = modelCart!!.cartQuantity
+            }
+        }
     }
 
     private fun changeItemQuantity(view: View) {
         binding.apply {
             when (view) {
+                buttonAddToCart -> {
+                    if (modelProduct.stock == 0) {
+                        // If product isn't in stock.
+                        snackBarErrorClass(
+                            root,
+                            getString(R.string.text_error_out_of_stock),
+                            constraintLayoutAddToCart
+                        )
+                        return
+                    }
+                    addItemToCart()
+                }
+
+                buttonRemoveFromCart -> {
+                    deleteItemFromCard()
+                }
+
                 imgBtnPlus -> {
-                    if (modelCart != null)  {
+                    if (modelCart != null) {
+                        if (modelProduct.stock == 0) {
+                            // If product isn't in stock.
+                            snackBarErrorClass(
+                                root,
+                                getString(R.string.text_error_out_of_stock),
+                                constraintLayoutAddToCart
+                            )
+                            return
+                        }
                         // If next item quantity is not exceeding the max stock quantity and max default item number.
                         // Basically, it let's you pick a max quantity of 99 for the same product.
-                        if (cartProductQuantity + 1 <= Constants.DEFAULT_MAX_ITEM_CART_QUANTITY)
+                        if (modelCart!!.cartQuantity + 1 <= Constants.DEFAULT_MAX_ITEM_CART_QUANTITY)
                         // If the selected quantity doesn't exceed the max stock number.
-                            if (cartProductQuantity + 1 <= modelProduct.stock) {
-                                cartProductQuantity++
+                            if (modelCart!!.cartQuantity + 1 <= modelProduct.stock) {
+                                modelCart!!.cartQuantity++
                                 updateItemToCart()
-                            }
-                            else {
+                            } else {
                                 // If it does, show a snackbar and explain the issue.
-                                snackBarErrorClass(root, getString(R.string.text_error_max_stock), constraintLayoutAddToCart)
+                                snackBarErrorClass(
+                                    root,
+                                    getString(R.string.text_error_max_stock),
+                                    constraintLayoutAddToCart
+                                )
                                 return
                             }
                         else {
                             // If the user is trying to select a quantity of more than 99,
                             // Show a snackbar and explain the issue.
-                            snackBarErrorClass(root, getString(R.string.text_error_max_quantity), constraintLayoutAddToCart)
+                            snackBarErrorClass(
+                                root,
+                                getString(R.string.text_error_max_quantity),
+                                constraintLayoutAddToCart
+                            )
                             return
                         }
-                    }
-                    else {
+                    } else
                         addItemToCart()
-                    }
                 }
+
                 imgBtnMinus -> {
-                    when {
-                        cartProductQuantity - 1 == 0 -> {
-                            cartProductQuantity = 0
-                            deleteItemFromCard()
-                        }
-                        cartProductQuantity > 0 -> {
-                            cartProductQuantity--
-                            updateItemToCart()
-                        }
-                        else -> {
-                            snackBarErrorClass(root, getString(R.string.text_error_selecting_below_zero), constraintLayoutAddToCart)
-                            return
+                    if (modelCart != null) {
+                        when {
+                            modelCart!!.cartQuantity - 1 == 0 -> {
+                                modelCart!!.cartQuantity = 0
+                                deleteItemFromCard()
+                            }
+
+                            modelCart!!.cartQuantity > 0 -> {
+                                modelCart!!.cartQuantity--
+                                updateItemToCart()
+                            }
+
+                            else -> {
+                                snackBarErrorClass(
+                                    root,
+                                    getString(R.string.text_error_selecting_below_zero),
+                                    constraintLayoutAddToCart
+                                )
+                                return
+                            }
                         }
                     }
                 }
             }
-            updateCart()
-            cartBadge.number += cartProductQuantity
-            txtViewQuantityValue.text = cartProductQuantity.toString()
         }
     }
 
@@ -343,21 +396,26 @@ class ProductDetailsActivity : BaseActivity() {
         // If user IS logged in
         if (FirestoreHelper().getCurrentUserID() != "")
             binding.apply {
-                btnAddToCart.setOnClickListener { changeItemQuantity(btnAddToCart) }
-                btnRemoveFromCart.setOnClickListener { deleteItemFromCard() }
-                imgBtnPlus.setOnClickListener { changeItemQuantity(imgBtnPlus) }
-                imgBtnMinus.setOnClickListener { changeItemQuantity(imgBtnMinus) }
+                listOf(buttonAddToCart, buttonRemoveFromCart, imgBtnPlus, imgBtnMinus)
+                    .forEach { button ->
+                        button.setOnClickListener {
+                            changeItemQuantity(button)
+                        }
+                    }
 
                 // ActionBar
-                toolbar.imageButtonMyCart.setOnClickListener { IntentUtils().goToListCartItemsActivity(this@ProductDetailsActivity) }
+                toolbar.imageButtonMyCart.setOnClickListener {
+                    IntentUtils().goToListCartItemsActivity(
+                        this@ProductDetailsActivity
+                    )
+                }
                 toolbar.checkboxFavorite.setOnClickListener {
                     if (!toolbar.checkboxFavorite.isChecked) {
                         FirestoreHelper().removeProductFromUserFavorites(
                             this@ProductDetailsActivity,
                             modelProduct.id
                         )
-                    }
-                    else {
+                    } else {
                         val favorite = Favorite(
                             FirestoreHelper().getCurrentUserID(),
                             modelProduct.id,
@@ -375,7 +433,13 @@ class ProductDetailsActivity : BaseActivity() {
             }
         else
             binding.apply {
-                listOf(btnAddToCart, imgBtnPlus, imgBtnMinus, toolbar.checkboxFavorite, toolbar.imageButtonMyCart)
+                listOf(
+                    buttonAddToCart,
+                    imgBtnPlus,
+                    imgBtnMinus,
+                    toolbar.checkboxFavorite,
+                    toolbar.imageButtonMyCart
+                )
                     .forEach {
                         it.setOnClickListener {
                             toolbar.checkboxFavorite.isChecked = false
@@ -400,6 +464,9 @@ class ProductDetailsActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
 
+        // Reset these just in case user deletes them from cart and comes back.
+        modelCart = null
+        binding.txtViewQuantityValue.text = "0"
         getProductDetails()
     }
 }

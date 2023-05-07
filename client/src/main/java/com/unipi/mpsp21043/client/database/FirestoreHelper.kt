@@ -722,7 +722,6 @@ class FirestoreHelper {
                 activity.successItemAddedToCart()
             }
             .addOnFailureListener { e ->
-                activity.hideProgressDialog()
                 Log.e(
                     activity.javaClass.simpleName,
                     "Error while adding item to cart.",
@@ -738,7 +737,7 @@ class FirestoreHelper {
      * @param cartItem Which fields are to be updated.
      * @param productId product id of the item.
      */
-    fun updateItemFromCart(activity: ProductDetailsActivity, cartItem: Cart, productId: String) {
+    fun updateItemFromCart(activity: Activity, cartItem: Cart, productId: String) {
 
         dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
             .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
@@ -746,18 +745,16 @@ class FirestoreHelper {
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    if (task.result!!.isEmpty)
-                        activity.hideProgressDialog()
-
                     for (document in task.result!!) {
                         dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
                             .document(document.id)
                             .set(cartItem, SetOptions.merge())
-                            .addOnSuccessListener {
-                                activity.hideProgressDialog()
+                            .addOnCompleteListener {
+                                when (activity) {
+                                    is ProductDetailsActivity -> activity.successCartItemUpdated()
+                                }
                             }
                             .addOnFailureListener { e ->
-                                activity.hideProgressDialog()
                                 Log.e(
                                     activity.javaClass.simpleName,
                                     "Error while updating the cart item.",
@@ -768,7 +765,6 @@ class FirestoreHelper {
                 }
             }
             .addOnFailureListener { e ->
-                activity.hideProgressDialog()
                 Log.e(
                     activity.javaClass.simpleName,
                     "Error while getting cart item while updating.",
@@ -793,8 +789,8 @@ class FirestoreHelper {
                 if (task.isSuccessful) {
                     when (context) {
                         is ProductDetailsActivity -> {
-                            if (task.result!!.isEmpty)
-                                context.hideProgressDialog()
+                            /*if (task.result!!.isEmpty)
+                                context.hideProgressDialog()*/
 
                             for (document in task.result!!) {
                                 dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
@@ -896,37 +892,6 @@ class FirestoreHelper {
                     "Error while updating the cart item.",
                     e
                 )
-            }
-    }
-
-    fun checkIfProductIsInCart(activity: Activity, productId: String) {
-        dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)
-            .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
-            .whereEqualTo(Constants.FIELD_PRODUCT_ID, productId)
-            .get() // Will get the documents snapshots.
-            .addOnCompleteListener { task ->
-
-                if (task.result!!.isEmpty) {
-                    when (activity) {
-                        is ProductDetailsActivity -> activity.successCheckProductInCart(Cart())
-                    }
-                    return@addOnCompleteListener
-                }
-                if (task.isSuccessful) {
-                    for (document in task.result!!) {
-                        // Here we get the list of boards in the form of documents.
-                        Log.d("Cart Item", document.toString())
-
-                        val cartItem: Cart = document.toObject(Cart::class.java)
-
-                        when (activity) {
-                            is ProductDetailsActivity -> activity.successCheckProductInCart(cartItem)
-                        }
-                    }
-                }
-            }
-            .addOnFailureListener { e ->
-                Log.e("Get Favorites", "Error while getting favorites of product.", e)
             }
     }
     // endregion
@@ -1148,7 +1113,7 @@ class FirestoreHelper {
             val productHashMap = HashMap<String, Any>()
 
             productHashMap[Constants.FIELD_STOCK] =
-                (cart.stock - cart.stock)
+                (cart.stock - cart.cartQuantity)
 
             val documentReference = dbFirestore.collection(Constants.COLLECTION_PRODUCTS)
                 .document(cart.productId)

@@ -3,6 +3,7 @@ package com.unipi.mpsp21043.client.ui.activities
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.window.OnBackInvokedDispatcher
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unipi.mpsp21043.client.R
 import com.unipi.mpsp21043.client.adapters.CartItemsListAdapter
@@ -224,5 +225,15 @@ class ListCartItemsActivity : BaseActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
+
+    override fun getOnBackInvokedDispatcher(): OnBackInvokedDispatcher {
+        finish()
+        return super.getOnBackInvokedDispatcher()
     }
 }

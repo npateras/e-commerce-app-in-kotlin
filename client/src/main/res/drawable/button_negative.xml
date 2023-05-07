@@ -5,16 +5,9 @@
 
     <item>
         <selector>
-            <item android:state_selected="true">
+            <item android:state_enabled="false">
                 <shape android:shape="rectangle">
-                    <gradient android:startColor="@color/colorRed" android:endColor="@color/colorRedLight"/>
-                    <corners android:radius="19dp"/>
-                </shape>
-            </item>
-
-            <item android:state_activated="true">
-                <shape android:shape="rectangle">
-                    <gradient android:startColor="@color/colorRedDark" android:endColor="@color/colorRed"/>
+                    <gradient android:startColor="@color/colorSecondary2" android:endColor="@color/colorSecondary3"/>
                     <corners android:radius="19dp"/>
                 </shape>
             </item>
