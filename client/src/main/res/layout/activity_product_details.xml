@@ -240,15 +240,31 @@
                 android:layout_height="30dp"
                 android:layout_marginEnd="9dp"
                 android:adjustViewBounds="true"
-                android:background="@drawable/ic_minus"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_minus"
                 android:clickable="true"
                 android:focusable="true"
-                android:padding="8dp"
                 android:scaleType="fitCenter"
                 app:iconGravity="textStart"
                 app:layout_constraintEnd_toStartOf="@+id/txtView_Quantity_Value"
                 app:layout_constraintTop_toTopOf="@+id/txtView_Quantity" />
+
+            <ImageButton
+                android:id="@+id/imgBtn_Plus"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="20dp"
+                android:adjustViewBounds="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_plus"
+                android:clickable="true"
+                android:focusable="true"
+                android:scaleType="fitCenter"
+                app:iconGravity="textStart"
+                app:layout_constraintBottom_toBottomOf="@+id/txtView_Quantity_Value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtView_Quantity_Value" />
 
             <TextView
                 android:id="@+id/txtView_Quantity_Value"
@@ -266,24 +282,6 @@
                 app:layout_constraintEnd_toStartOf="@+id/imgBtn_Plus"
                 app:layout_constraintTop_toTopOf="@+id/imgBtn_Minus"
                 tools:ignore="HardcodedText" />
-
-            <ImageButton
-                android:id="@+id/imgBtn_Plus"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="20dp"
-                android:adjustViewBounds="true"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                android:background="@drawable/ic_plus"
-                android:clickable="true"
-                android:focusable="true"
-                android:padding="8dp"
-                android:scaleType="fitCenter"
-                app:iconGravity="textStart"
-                app:layout_constraintBottom_toBottomOf="@+id/txtView_Quantity_Value"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/txtView_Quantity_Value" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_remove_from_cart"
@@ -307,7 +305,7 @@
                 android:layout_marginBottom="24dp"
                 android:layout_height="@dimen/button_primary_68"
                 android:layout_marginTop="29dp"
-                app:icon="@drawable/ic_add_to_cart"
+                app:icon="@drawable/svg_add_to_cart"
                 android:background="@drawable/button_primary"
                 android:text="@string/text_add_to_cart"
                 app:layout_constraintBottom_toBottomOf="parent"
