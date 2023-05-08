@@ -49,7 +49,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         init()
     }
 
-
     private fun init() {
 
         if (FirestoreHelper().getCurrentUserID() != "") {
@@ -152,6 +151,13 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
+    private fun refreshActivity() {
+        if (FirestoreHelper().getCurrentUserID() != "") {
+            FirestoreHelper().getUserDetails(this@MainActivity)
+            FirestoreHelper().getCartItemsList(this@MainActivity)
+        }
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         binding.apply {
@@ -205,4 +211,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             createBadge(this@MainActivity, binding.toolbar.imageButtonMyCart, cartItems.size)
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+
+        refreshActivity()
+    }
+
 }

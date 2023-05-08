@@ -674,7 +674,7 @@ class FirestoreHelper {
             .get() // Will get the documents snapshots.
             .addOnSuccessListener { document ->
                 // Here we get the list of boards in the form of documents.
-                Log.e(context.javaClass.simpleName, document.documents.toString())
+                Log.d(context.javaClass.simpleName, document.documents.toString())
 
                 // Here we have created a new instance for cart items ArrayList.
                 val cartItemsList: ArrayList<Cart> = ArrayList()
@@ -717,7 +717,6 @@ class FirestoreHelper {
             // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
             .set(cartItem, SetOptions.merge())
             .addOnSuccessListener {
-
                 // Here call a function of base activity for transferring the result to it.
                 activity.successItemAddedToCart()
             }
@@ -837,7 +836,6 @@ class FirestoreHelper {
             .addOnFailureListener { e ->
                 when (context) {
                     is ProductDetailsActivity -> {
-                        context.hideProgressDialog()
                         Log.e(
                             context.javaClass.simpleName,
                             "Error while getting cart item while removal.",
@@ -845,7 +843,6 @@ class FirestoreHelper {
                         )
                     }
                     is ListCartItemsActivity -> {
-                        context.hideProgressDialog()
                         Log.e(
                             context.javaClass.simpleName,
                             "Error while getting cart item while removal.",
@@ -938,7 +935,7 @@ class FirestoreHelper {
             .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
             .get() // Will get the documents snapshots.
             .addOnSuccessListener { document ->
-                Log.e(context.javaClass.simpleName, document.documents.toString())
+                Log.d(context.javaClass.simpleName, document.documents.toString())
                 val list: ArrayList<Order> = ArrayList()
 
                 for (i in document.documents) {

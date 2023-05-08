@@ -21,6 +21,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
+        <include
+            android:id="@+id/progressBarLayout"
+            layout="@layout/progress_bar_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ScrollView
             android:id="@+id/scrollView_Body"
             android:layout_width="match_parent"
@@ -240,11 +247,10 @@
                 android:layout_height="30dp"
                 android:layout_marginEnd="9dp"
                 android:adjustViewBounds="true"
-                android:background="@drawable/ic_minus"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_minus"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
-                android:padding="8dp"
                 android:scaleType="fitCenter"
                 app:iconGravity="textStart"
                 app:layout_constraintEnd_toStartOf="@+id/txtView_Quantity_Value"
@@ -274,11 +280,10 @@
                 android:layout_height="30dp"
                 android:layout_marginEnd="20dp"
                 android:adjustViewBounds="true"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                android:background="@drawable/ic_plus"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_plus"
                 android:clickable="true"
                 android:focusable="true"
-                android:padding="8dp"
                 android:scaleType="fitCenter"
                 app:iconGravity="textStart"
                 app:layout_constraintBottom_toBottomOf="@+id/txtView_Quantity_Value"

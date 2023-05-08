@@ -29,6 +29,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <include
+                layout="@layout/progress_bar_horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/recycler_view_items"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_items"
                 android:layout_width="match_parent"

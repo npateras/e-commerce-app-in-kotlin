@@ -37,7 +37,7 @@ class ProductDetailsActivity : BaseActivity() {
     private var totalCartItems: Int = 0
     private var priceReduced: Double = 0.00
 
-    private lateinit var cartBadge: BadgeDrawable
+    private var cartBadge: BadgeDrawable? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -133,17 +133,9 @@ class ProductDetailsActivity : BaseActivity() {
     fun successUserTotalCartItems(cartItems: ArrayList<Cart>) {
 
         totalCartItems = cartItems.size
+        setCartBadge(totalCartItems)
 
-        if (cartItems.isNotEmpty()) {
-            cartBadge = createBadge(
-                this@ProductDetailsActivity,
-                binding.toolbar.imageButtonMyCart,
-                totalCartItems
-            )
-        } else
-            cartBadge.clearNumber()
-
-        val filteredCartItem = cartItems.filter { (key, value) -> key.contains(modelProduct.id) }
+        val filteredCartItem = cartItems.filter { (key, _) -> key.contains(modelProduct.id) }
 
         val productInCart = let {
             filteredCartItem.isNotEmpty()
@@ -152,7 +144,8 @@ class ProductDetailsActivity : BaseActivity() {
         if (productInCart) {
             modelCart = filteredCartItem[0]
 
-            cartBadge.number = totalCartItems
+            Toast.makeText(this@ProductDetailsActivity, "in cart", Toast.LENGTH_LONG).show()
+
             binding.txtViewQuantityValue.text = modelCart!!.cartQuantity.toString()
         }
 
@@ -161,6 +154,8 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     fun successCartItemUpdated() {
+        hideProgressBar()
+
         updateButtonsUI()
 
         binding.apply {
@@ -169,6 +164,8 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     fun successProductAddedToFavorites() {
+        hideProgressBar()
+
         snackBarSuccessClass(
             binding.root,
             getString(R.string.text_product_added_to_favorites),
@@ -177,6 +174,8 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     fun successProductRemovedFromFavorites() {
+        hideProgressBar()
+
         snackBarSuccessClass(
             binding.root,
             getString(R.string.text_product_removed_from_favorites),
@@ -185,6 +184,21 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     private fun addItemToCart() {
+        binding.apply {
+            if (modelProduct.stock == 0) {
+                // If product isn't in stock.
+                snackBarErrorClass(
+                    root,
+                    getString(R.string.text_error_out_of_stock),
+                    constraintLayoutAddToCart
+                )
+                return
+            }
+        }
+
+        // Start process
+        showProgressBar()
+
         modelCart = Cart(
             userId = FirestoreHelper().getCurrentUserID(),
             productId = modelProduct.id,
@@ -206,13 +220,29 @@ class ProductDetailsActivity : BaseActivity() {
         FirestoreHelper().addItemToCart(this, modelCart!!)
     }
 
+    private fun showProgressBar() {
+        binding.apply {
+            progressBarLayout.progressBarHorizontal.visibility = View.VISIBLE
+        }
+    }
+
+    private fun hideProgressBar() {
+        binding.apply {
+            progressBarLayout.progressBarHorizontal.visibility = View.INVISIBLE
+        }
+    }
+
     fun successItemAddedToCart() {
+        hideProgressBar()
+
         updateButtonsUI()
-        cartBadge.number = totalCartItems
+        setCartBadge(totalCartItems)
         binding.txtViewQuantityValue.text = modelCart!!.cartQuantity.toString()
     }
 
     private fun updateItemToCart() {
+        showProgressBar()
+
         modelCart = Cart(
             userId = FirestoreHelper().getCurrentUserID(),
             productId = modelProduct.id,
@@ -230,11 +260,17 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     private fun deleteItemFromCard() {
+        showProgressBar()
+
         totalCartItems--
+        setCartBadge(totalCartItems)
+
         FirestoreHelper().deleteItemFromCart(this, modelProduct.id)
     }
 
     fun successItemDeletedFromCart() {
+        hideProgressBar()
+
         snackBarSuccessClass(
             binding.root,
             getString(R.string.text_product_removed_from_cart),
@@ -259,31 +295,40 @@ class ProductDetailsActivity : BaseActivity() {
                 buttonRemoveFromCart.isEnabled = true
                 buttonAddToCart.visibility = View.VISIBLE
                 when {
-                    cartBadge.number - 1 == 0 -> cartBadge.clearNumber()
-                    cartBadge.number - 1 != 0 -> cartBadge.number--
+                    cartBadge?.number?.minus(1) == 0 -> cartBadge?.clearNumber()
+                    cartBadge?.number?.minus(1) != 0 -> cartBadge?.number = cartBadge?.number!! - 1
                 }
             } else if (modelCart != null && buttonAddToCart.isVisible) {
                 buttonAddToCart.visibility = View.INVISIBLE
                 buttonAddToCart.isEnabled = true
                 buttonRemoveFromCart.visibility = View.VISIBLE
-                cartBadge.number = modelCart!!.cartQuantity
+                setCartBadge(totalCartItems)
             }
         }
+    }
+
+    private fun setCartBadge(totalCartItems: Int) {
+        if (totalCartItems > 0) {
+            if (cartBadge == null) {
+                cartBadge = createBadge(
+                    this@ProductDetailsActivity,
+                    binding.toolbar.imageButtonMyCart,
+                    totalCartItems
+                )
+                return
+            }
+            cartBadge?.isVisible = true
+            cartBadge?.number = totalCartItems
+            return
+        }
+        cartBadge?.clearNumber()
+        cartBadge?.isVisible = false
     }
 
     private fun changeItemQuantity(view: View) {
         binding.apply {
             when (view) {
                 buttonAddToCart -> {
-                    if (modelProduct.stock == 0) {
-                        // If product isn't in stock.
-                        snackBarErrorClass(
-                            root,
-                            getString(R.string.text_error_out_of_stock),
-                            constraintLayoutAddToCart
-                        )
-                        return
-                    }
                     addItemToCart()
                 }
 
@@ -398,9 +443,7 @@ class ProductDetailsActivity : BaseActivity() {
             binding.apply {
                 listOf(buttonAddToCart, buttonRemoveFromCart, imgBtnPlus, imgBtnMinus)
                     .forEach { button ->
-                        button.setOnClickListener {
-                            changeItemQuantity(button)
-                        }
+                        button.setOnClickListener { changeItemQuantity(button) }
                     }
 
                 // ActionBar
@@ -409,44 +452,50 @@ class ProductDetailsActivity : BaseActivity() {
                         this@ProductDetailsActivity
                     )
                 }
-                toolbar.checkboxFavorite.setOnClickListener {
-                    if (!toolbar.checkboxFavorite.isChecked) {
-                        FirestoreHelper().removeProductFromUserFavorites(
-                            this@ProductDetailsActivity,
-                            modelProduct.id
-                        )
-                    } else {
-                        val favorite = Favorite(
-                            FirestoreHelper().getCurrentUserID(),
-                            modelProduct.id,
-                            modelProduct.iconUrl,
-                            modelProduct.name,
-                            modelProduct.price,
-                            modelProduct.sale
-                        )
-                        FirestoreHelper().addProductToUserFavorites(
-                            this@ProductDetailsActivity,
-                            favorite
-                        )
+                toolbar.checkboxFavorite.apply {
+                    setOnClickListener {
+                        showProgressBar()
+
+                        if (!isChecked)
+                            FirestoreHelper().removeProductFromUserFavorites(
+                                this@ProductDetailsActivity,
+                                modelProduct.id
+                            )
+                        else {
+                            val favorite = Favorite(
+                                FirestoreHelper().getCurrentUserID(),
+                                modelProduct.id,
+                                modelProduct.iconUrl,
+                                modelProduct.name,
+                                modelProduct.price,
+                                modelProduct.sale
+                            )
+
+                            FirestoreHelper().addProductToUserFavorites(
+                                this@ProductDetailsActivity,
+                                favorite
+                            )
+                        }
+
                     }
                 }
+            return
             }
-        else
-            binding.apply {
-                listOf(
-                    buttonAddToCart,
-                    imgBtnPlus,
-                    imgBtnMinus,
-                    toolbar.checkboxFavorite,
-                    toolbar.imageButtonMyCart
-                )
-                    .forEach {
-                        it.setOnClickListener {
-                            toolbar.checkboxFavorite.isChecked = false
-                            goToSignInActivity(this@ProductDetailsActivity)
-                        }
+        binding.apply {
+            listOf(
+                buttonAddToCart,
+                imgBtnPlus,
+                imgBtnMinus,
+                toolbar.checkboxFavorite,
+                toolbar.imageButtonMyCart
+            )
+                .forEach {
+                    it.setOnClickListener {
+                        toolbar.checkboxFavorite.isChecked = false
+                        goToSignInActivity(this@ProductDetailsActivity)
                     }
-            }
+                }
+        }
     }
 
     private fun setupActionBar() {
