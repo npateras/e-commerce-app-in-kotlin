@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:state_checked="true"
-        android:drawable="@drawable/ic_heart_filled"
+        android:drawable="@drawable/svg_heart_filled"
         android:color="@color/colorRedLight" />
     <item
         android:state_pressed="false"

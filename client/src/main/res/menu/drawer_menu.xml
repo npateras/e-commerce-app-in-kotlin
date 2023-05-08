@@ -42,7 +42,7 @@
                     android:title="@string/drawer_nav_bar_item_settings" />
                 <item
                     android:id="@+id/nav_drawer_item_exit"
-                    android:icon="@drawable/ic_exit"
+                    android:icon="@drawable/svg_exit"
                     android:title="@string/drawer_nav_bar_item_exit" />
             </group>
         </menu>

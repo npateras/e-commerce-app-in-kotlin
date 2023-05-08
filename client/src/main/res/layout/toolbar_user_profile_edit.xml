@@ -25,7 +25,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_check_mark"
+                    android:src="@drawable/svg_check_mark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/image_button_settings"
                     app:layout_constraintTop_toTopOf="parent"
