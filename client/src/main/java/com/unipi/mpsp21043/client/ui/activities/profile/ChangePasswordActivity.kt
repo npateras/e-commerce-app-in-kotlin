@@ -125,8 +125,8 @@ class ChangePasswordActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        binding.toolbar.apply {
-            setSupportActionBar(root)
+        binding.actionBarWithToolbar.apply {
+            setSupportActionBar(toolbar)
             imageButtonSave.setOnClickListener { saveNewPassword() }
             textViewActionLabel.text = ""
         }

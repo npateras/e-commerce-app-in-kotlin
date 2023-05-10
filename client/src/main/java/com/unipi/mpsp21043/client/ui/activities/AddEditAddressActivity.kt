@@ -142,11 +142,11 @@ class AddEditAddressActivity : BaseActivity() {
     }
 
     private fun setUpActionBar() {
-        setSupportActionBar(binding.toolbar.root)
+        setSupportActionBar(binding.actionBarWithToolbar.toolbar)
 
         val actionBar = supportActionBar
         binding.apply {
-            toolbar.apply {
+            actionBarWithToolbar.apply {
                 if (mUserAddress == null)
                     textViewActionLabel.text = getString(R.string.text_add_new_address)
                 else {
@@ -166,7 +166,7 @@ class AddEditAddressActivity : BaseActivity() {
 
     private fun setupClickListeners() {
         binding.apply {
-            listOf(buttonAddAddress, buttonEditAddress, toolbar.imageButtonSave)
+            listOf(buttonAddAddress, buttonEditAddress, actionBarWithToolbar.imageButtonSave)
                 .forEach {
                     it.setOnClickListener {
                         saveAddressToFirestore()

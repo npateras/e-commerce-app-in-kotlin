@@ -788,8 +788,6 @@ class FirestoreHelper {
                 if (task.isSuccessful) {
                     when (context) {
                         is ProductDetailsActivity -> {
-                            /*if (task.result!!.isEmpty)
-                                context.hideProgressDialog()*/
 
                             for (document in task.result!!) {
                                 dbFirestore.collection(Constants.COLLECTION_CART_ITEMS)

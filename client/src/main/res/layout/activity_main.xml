@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/toolbar"
+            android:id="@+id/action_bar_with_toolbar"
             layout="@layout/toolbar_activity_main" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout

@@ -57,13 +57,11 @@ class ListSettingsActivity : BaseActivity() {
     }
 
     private fun setUpActionBar() {
-        setSupportActionBar(binding.toolbar.root)
-
-        val actionBar = supportActionBar
-        binding.apply {
-            toolbar.textViewActionLabel.text =
-                getString(R.string.text_settings)
+        binding.actionBarWithToolbar.apply {
+            setSupportActionBar(toolbar)
+            textViewActionLabel.text = getString(R.string.text_settings)
         }
+        val actionBar = supportActionBar
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setDisplayHomeAsUpEnabled(true)

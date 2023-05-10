@@ -114,8 +114,8 @@ class AuthenticateActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        binding.toolbar.apply {
-            setSupportActionBar(root)
+        binding.actionBarWithToolbar.apply {
+            setSupportActionBar(toolbar)
             textViewActionLabel.text = ""
         }
 

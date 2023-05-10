@@ -144,8 +144,8 @@ class SignInActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        binding.toolbar.apply {
-            setSupportActionBar(root)
+        binding.actionBarWithToolbar.apply {
+            setSupportActionBar(toolbar)
             textViewActionLabel.text = getString(R.string.text_login)
         }
 

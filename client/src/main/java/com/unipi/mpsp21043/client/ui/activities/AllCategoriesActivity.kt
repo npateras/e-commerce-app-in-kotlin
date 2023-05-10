@@ -82,11 +82,11 @@ class AllCategoriesActivity : BaseActivity() {
     }
 
     private fun setUpActionBar() {
-        setSupportActionBar(binding.toolbar.root)
+        setSupportActionBar(binding.actionBarWithToolbar.toolbar)
 
         val actionBar = supportActionBar
-        binding.apply {
-            toolbar.textViewActionLabel.text = getString(R.string.text_all_categories)
+        binding.actionBarWithToolbar.apply {
+            textViewActionLabel.text = getString(R.string.text_all_categories)
         }
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)

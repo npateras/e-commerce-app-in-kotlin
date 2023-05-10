@@ -10,7 +10,7 @@
     tools:ignore="contentDescription">
 
     <include
-        android:id="@+id/toolbar"
+        android:id="@+id/action_bar_with_toolbar"
         layout="@layout/toolbar_title_only" />
 
     <androidx.recyclerview.widget.RecyclerView

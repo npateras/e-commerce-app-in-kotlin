@@ -3,6 +3,7 @@ package com.unipi.mpsp21043.client.ui.activities
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.TranslateAnimation
 import android.window.OnBackInvokedDispatcher
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unipi.mpsp21043.client.R
@@ -13,8 +14,10 @@ import com.unipi.mpsp21043.client.models.Cart
 import com.unipi.mpsp21043.client.models.Product
 import com.unipi.mpsp21043.client.utils.Constants
 import com.unipi.mpsp21043.client.utils.IntentUtils
+import com.unipi.mpsp21043.client.utils.animationSlideUp
 import com.unipi.mpsp21043.client.utils.showMustSignInUI
 import com.unipi.mpsp21043.client.utils.snackBarErrorClass
+
 
 class ListCartItemsActivity : BaseActivity() {
 
@@ -136,6 +139,7 @@ class ListCartItemsActivity : BaseActivity() {
 
     private fun showShimmerUI() {
         binding.apply {
+            constraintLayoutAddToCart.visibility = View.INVISIBLE
             layoutEmptyState.root.visibility = View.GONE
             recyclerViewItems.visibility = View.GONE
             shimmerViewContainer.visibility = View.VISIBLE
@@ -145,6 +149,13 @@ class ListCartItemsActivity : BaseActivity() {
 
     private fun hideShimmerUI() {
         binding.apply {
+            constraintLayoutAddToCart.apply {
+                if (visibility == View.INVISIBLE) {
+                    visibility = View.VISIBLE
+                    val animation = animationSlideUp(this)
+                    startAnimation(animation)
+                }
+            }
             layoutEmptyState.root.visibility = View.GONE
             recyclerViewItems.visibility = View.VISIBLE
             shimmerViewContainer.visibility = View.GONE
@@ -203,12 +214,13 @@ class ListCartItemsActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        setSupportActionBar(binding.toolbar.root)
+        setSupportActionBar(binding.actionBarWithToolbar.toolbar)
 
         val actionBar = supportActionBar
-        binding.apply {
-            toolbar.textViewActionLabel.text = getString(R.string.text_my_cart)
+        binding.actionBarWithToolbar.apply {
+            textViewActionLabel.text = getString(R.string.text_my_cart)
         }
+
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setDisplayHomeAsUpEnabled(true)

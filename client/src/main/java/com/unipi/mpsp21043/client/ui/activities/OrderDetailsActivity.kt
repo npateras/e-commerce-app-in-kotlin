@@ -123,13 +123,12 @@ class OrderDetailsActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        setSupportActionBar(binding.toolbar.root)
-
-        val actionBar = supportActionBar
-        binding.apply {
-            toolbar.textViewActionLabel.text = Constants.DATE_TIME_FORMAT.format(mOrderDetails.orderDate)
+        binding.actionBarWithToolbar.apply {
+            setSupportActionBar(toolbar)
+            textViewActionLabel.text = Constants.DATE_TIME_FORMAT.format(mOrderDetails.orderDate)
         }
 
+        val actionBar = supportActionBar
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setDisplayHomeAsUpEnabled(true)

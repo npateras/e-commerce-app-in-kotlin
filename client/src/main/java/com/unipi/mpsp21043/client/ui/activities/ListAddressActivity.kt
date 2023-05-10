@@ -186,12 +186,12 @@ class ListAddressActivity : BaseActivity() {
     }
 
     private fun setUpActionBar() {
-        setSupportActionBar(binding.toolbar.root)
+        binding.actionBarWithToolbar.apply {
+            setSupportActionBar(toolbar)
+            textViewActionLabel.text = getString(R.string.text_addresses)
+        }
 
         val actionBar = supportActionBar
-        binding.apply {
-            toolbar.textViewActionLabel.text = getString(R.string.text_addresses)
-        }
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setDisplayHomeAsUpEnabled(true)

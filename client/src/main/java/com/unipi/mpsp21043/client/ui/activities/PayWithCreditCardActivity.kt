@@ -247,12 +247,12 @@ class PayWithCreditCardActivity : BaseActivity() {
 
 
     private fun setupActionBar() {
-        setSupportActionBar(binding.toolbar.root)
+        binding.actionBarWithToolbar.apply {
+            setSupportActionBar(toolbar)
+            textViewActionLabel.text = getString(R.string.text_pay_invoice)
+        }
 
         val actionBar = supportActionBar
-        binding.apply {
-            toolbar.textViewActionLabel.text = getString(R.string.text_pay_invoice)
-        }
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setDisplayHomeAsUpEnabled(true)

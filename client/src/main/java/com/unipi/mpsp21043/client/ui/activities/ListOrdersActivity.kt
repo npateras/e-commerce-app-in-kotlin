@@ -104,12 +104,12 @@ class ListOrdersActivity : BaseActivity() {
     }
 
     private fun setUpActionBar() {
-        setSupportActionBar(binding.toolbar.root)
+        binding.actionBarWithToolbar.apply {
+            setSupportActionBar(toolbar)
+            textViewActionLabel.text = getString(R.string.text_my_orders)
+        }
 
         val actionBar = supportActionBar
-        binding.apply {
-            toolbar.textViewActionLabel.text = getString(R.string.text_my_orders)
-        }
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setDisplayHomeAsUpEnabled(true)

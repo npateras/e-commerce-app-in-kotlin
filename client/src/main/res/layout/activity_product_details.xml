@@ -11,7 +11,7 @@
     tools:ignore="contentDescription">
 
     <include
-        android:id="@+id/toolbar"
+        android:id="@+id/action_bar_with_toolbar"
         layout="@layout/toolbar_product_details" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -312,7 +312,7 @@
                 android:layout_marginBottom="24dp"
                 android:layout_height="@dimen/button_primary_68"
                 android:layout_marginTop="29dp"
-                app:icon="@drawable/ic_add_to_cart"
+                app:icon="@drawable/svg_add_to_cart"
                 android:background="@drawable/button_primary"
                 android:text="@string/text_add_to_cart"
                 app:layout_constraintBottom_toBottomOf="parent"

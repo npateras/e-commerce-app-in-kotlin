@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.TextUtils
+import androidx.appcompat.widget.Toolbar
 import com.unipi.mpsp21043.client.R
 import com.unipi.mpsp21043.client.database.FirestoreHelper
 import com.unipi.mpsp21043.client.databinding.ActivityEditProfileBinding
@@ -122,16 +123,13 @@ class EditProfileActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        setSupportActionBar(binding.toolbar.root)
-
-        val actionBar = supportActionBar
-        binding.apply {
-            toolbar.apply {
-                imageButtonSave.setOnClickListener { updateProfileToFirestore() }
-                imageButtonSettings.setOnClickListener { IntentUtils().goToListSettingsActivity(this@EditProfileActivity) }
-            }
+        binding.actionBarWithToolbar.apply {
+            setSupportActionBar(toolbar.rootView as Toolbar?)
+            imageButtonSave.setOnClickListener { updateProfileToFirestore() }
+            imageButtonSettings.setOnClickListener { IntentUtils().goToListSettingsActivity(this@EditProfileActivity) }
         }
 
+        val actionBar = supportActionBar
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setDisplayHomeAsUpEnabled(true)

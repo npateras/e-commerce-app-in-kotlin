@@ -15,9 +15,11 @@ import com.unipi.mpsp21043.client.models.Product
 import com.unipi.mpsp21043.client.utils.Constants
 import com.unipi.mpsp21043.client.utils.GlideLoader
 import com.unipi.mpsp21043.client.utils.IntentUtils
+import com.unipi.mpsp21043.client.utils.animationSlideUp
 import com.unipi.mpsp21043.client.utils.createBadge
 import com.unipi.mpsp21043.client.utils.snackBarErrorClass
 import com.unipi.mpsp21043.client.utils.snackBarSuccessClass
+import org.checkerframework.checker.units.qual.s
 
 class ProductDetailsActivity : BaseActivity() {
 
@@ -120,7 +122,7 @@ class ProductDetailsActivity : BaseActivity() {
         modelFavorite = favoriteProduct
 
         if (modelFavorite.productId != "")
-            binding.toolbar.checkboxFavorite.isChecked = true
+            binding.actionBarWithToolbar.checkboxFavorite.isChecked = true
 
         getTotalCartItems()
     }
@@ -135,16 +137,10 @@ class ProductDetailsActivity : BaseActivity() {
         totalCartItems = cartItems.size
         setCartBadge(totalCartItems)
 
-        val filteredCartItem = cartItems.filter { (key, _) -> key.contains(modelProduct.id) }
+        val filteredCartItem = cartItems.singleOrNull { it.productId == modelProduct.id }
 
-        val productInCart = let {
-            filteredCartItem.isNotEmpty()
-        }
-
-        if (productInCart) {
-            modelCart = filteredCartItem[0]
-
-            Toast.makeText(this@ProductDetailsActivity, "in cart", Toast.LENGTH_LONG).show()
+        if (filteredCartItem != null) {
+            modelCart = filteredCartItem
 
             binding.txtViewQuantityValue.text = modelCart!!.cartQuantity.toString()
         }
@@ -262,9 +258,6 @@ class ProductDetailsActivity : BaseActivity() {
     private fun deleteItemFromCard() {
         showProgressBar()
 
-        totalCartItems--
-        setCartBadge(totalCartItems)
-
         FirestoreHelper().deleteItemFromCart(this, modelProduct.id)
     }
 
@@ -277,8 +270,10 @@ class ProductDetailsActivity : BaseActivity() {
             binding.constraintLayoutAddToCart
         )
 
-        // Remove cart model
+        // Remove cart model & update UI
         modelCart = null
+        totalCartItems--
+        setCartBadge(totalCartItems)
 
         binding.apply {
             // Set text view's quantity to zero.
@@ -312,7 +307,7 @@ class ProductDetailsActivity : BaseActivity() {
             if (cartBadge == null) {
                 cartBadge = createBadge(
                     this@ProductDetailsActivity,
-                    binding.toolbar.imageButtonMyCart,
+                    binding.actionBarWithToolbar.imageButtonMyCart,
                     totalCartItems
                 )
                 return
@@ -354,7 +349,8 @@ class ProductDetailsActivity : BaseActivity() {
                             if (modelCart!!.cartQuantity + 1 <= modelProduct.stock) {
                                 modelCart!!.cartQuantity++
                                 updateItemToCart()
-                            } else {
+                            }
+                            else {
                                 // If it does, show a snackbar and explain the issue.
                                 snackBarErrorClass(
                                     root,
@@ -381,7 +377,7 @@ class ProductDetailsActivity : BaseActivity() {
                     if (modelCart != null) {
                         when {
                             modelCart!!.cartQuantity - 1 == 0 -> {
-                                modelCart!!.cartQuantity = 0
+                                // modelCart!!.cartQuantity = 0
                                 deleteItemFromCard()
                             }
 
@@ -415,6 +411,7 @@ class ProductDetailsActivity : BaseActivity() {
 
     private fun showShimmerUI() {
         binding.apply {
+            constraintLayoutAddToCart.visibility = View.INVISIBLE
             layoutErrorState.root.visibility = View.GONE
             constraintLayoutDetails.visibility = View.INVISIBLE
             shimmerLayout.visibility = View.VISIBLE
@@ -424,6 +421,11 @@ class ProductDetailsActivity : BaseActivity() {
 
     private fun hideShimmerUI() {
         binding.apply {
+            constraintLayoutAddToCart.apply {
+                visibility = View.VISIBLE
+                val animation = animationSlideUp(this)
+                startAnimation(animation)
+            }
             constraintLayoutDetails.visibility = View.VISIBLE
             shimmerLayout.visibility = View.GONE
             shimmerLayout.stopShimmer()
@@ -447,59 +449,63 @@ class ProductDetailsActivity : BaseActivity() {
                     }
 
                 // ActionBar
-                toolbar.imageButtonMyCart.setOnClickListener {
-                    IntentUtils().goToListCartItemsActivity(
-                        this@ProductDetailsActivity
-                    )
-                }
-                toolbar.checkboxFavorite.apply {
-                    setOnClickListener {
-                        showProgressBar()
+                actionBarWithToolbar.apply {
+                    imageButtonMyCart.setOnClickListener {
+                        IntentUtils().goToListCartItemsActivity(
+                            this@ProductDetailsActivity
+                        )
+                    }
+                    checkboxFavorite.apply {
+                        setOnClickListener {
+                            showProgressBar()
 
-                        if (!isChecked)
-                            FirestoreHelper().removeProductFromUserFavorites(
-                                this@ProductDetailsActivity,
-                                modelProduct.id
-                            )
-                        else {
-                            val favorite = Favorite(
-                                FirestoreHelper().getCurrentUserID(),
-                                modelProduct.id,
-                                modelProduct.iconUrl,
-                                modelProduct.name,
-                                modelProduct.price,
-                                modelProduct.sale
-                            )
+                            if (!isChecked)
+                                FirestoreHelper().removeProductFromUserFavorites(
+                                    this@ProductDetailsActivity,
+                                    modelProduct.id
+                                )
+                            else {
+                                val favorite = Favorite(
+                                    FirestoreHelper().getCurrentUserID(),
+                                    modelProduct.id,
+                                    modelProduct.iconUrl,
+                                    modelProduct.name,
+                                    modelProduct.price,
+                                    modelProduct.sale
+                                )
 
-                            FirestoreHelper().addProductToUserFavorites(
-                                this@ProductDetailsActivity,
-                                favorite
-                            )
+                                FirestoreHelper().addProductToUserFavorites(
+                                    this@ProductDetailsActivity,
+                                    favorite
+                                )
+                            }
+
                         }
-
                     }
                 }
-            return
+                return
             }
         binding.apply {
             listOf(
                 buttonAddToCart,
                 imgBtnPlus,
                 imgBtnMinus,
-                toolbar.checkboxFavorite,
-                toolbar.imageButtonMyCart
+                actionBarWithToolbar.checkboxFavorite,
+                actionBarWithToolbar.imageButtonMyCart
             )
-                .forEach {
-                    it.setOnClickListener {
-                        toolbar.checkboxFavorite.isChecked = false
-                        goToSignInActivity(this@ProductDetailsActivity)
-                    }
+            .forEach {
+                it.setOnClickListener {
+                    actionBarWithToolbar.checkboxFavorite.isChecked = false
+                    goToSignInActivity(this@ProductDetailsActivity)
                 }
+            }
         }
     }
 
     private fun setupActionBar() {
-        setSupportActionBar(binding.toolbar.root)
+        binding.actionBarWithToolbar.apply {
+            setSupportActionBar(toolbar)
+        }
 
         val actionBar = supportActionBar
         actionBar?.let {
