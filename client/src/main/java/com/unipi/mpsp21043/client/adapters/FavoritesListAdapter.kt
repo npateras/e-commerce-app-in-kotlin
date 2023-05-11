@@ -64,8 +64,8 @@ open class FavoritesListAdapter(
                         model.price
                     )
                 }
-                priceReduced = model.price - (model.price * model.sale)
             }
+            priceReduced = model.price - (model.price * model.sale)
             textViewProductPrice.text = String.format(
                 context.getString(R.string.text_format_price),
                 context.getString(R.string.curr_eur),

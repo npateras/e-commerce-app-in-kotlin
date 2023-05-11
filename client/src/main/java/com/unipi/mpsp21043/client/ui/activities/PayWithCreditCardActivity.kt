@@ -218,25 +218,25 @@ class PayWithCreditCardActivity : BaseActivity() {
             return when {
                 TextUtils.isEmpty(textInputEditTextCardNumber.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_card_number))
-                    textInputLayoutError(textInputLayoutCardNumber, getString(R.string.text_error_empty_card_number))
+                    textInputLayoutError(textInputLayoutCardNumber)
                     false
                 }
 
                 TextUtils.isEmpty(textInputEditTextCardholderName.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_card_full_name))
-                    textInputLayoutError(textInputLayoutCardholderName, getString(R.string.text_error_empty_card_full_name))
+                    textInputLayoutError(textInputLayoutCardholderName)
                     false
                 }
 
                 TextUtils.isEmpty(textInputEditTextExpirationDate.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_card_exp_date))
-                    textInputLayoutError(textInputLayoutExpirationDate, getString(R.string.text_error_empty_card_exp_date))
+                    textInputLayoutError(textInputLayoutExpirationDate)
                     false
                 }
 
                 TextUtils.isEmpty(textInputEditTextCvv.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_card_cvv))
-                    textInputLayoutError(textInputLayoutCvv, getString(R.string.text_error_empty_card_cvv))
+                    textInputLayoutError(textInputLayoutCvv)
                     false
                 }
 
@@ -247,7 +247,7 @@ class PayWithCreditCardActivity : BaseActivity() {
 
 
     private fun setupActionBar() {
-        binding.actionBarWithToolbar.apply {
+        binding.toolbar.apply {
             setSupportActionBar(toolbar)
             textViewActionLabel.text = getString(R.string.text_pay_invoice)
         }

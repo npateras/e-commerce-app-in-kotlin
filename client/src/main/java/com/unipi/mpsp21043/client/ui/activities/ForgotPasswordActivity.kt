@@ -80,7 +80,7 @@ class ForgotPasswordActivity : BaseActivity() {
             return when {
                 TextUtils.isEmpty(textInputEditTextEmail.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_email))
-                    textInputLayoutError(textInputLayoutEmail, getString(R.string.text_error_empty_email))
+                    textInputLayoutError(textInputLayoutEmail)
                     false
                 }
 
@@ -90,7 +90,7 @@ class ForgotPasswordActivity : BaseActivity() {
     }
 
     private fun setUpActionBar() {
-        binding.actionBarWithToolbar.apply {
+        binding.toolbar.apply {
             setSupportActionBar(toolbar)
             textViewActionLabel.text = getString(R.string.text_forgot_password)
         }

@@ -2,6 +2,7 @@ package com.unipi.mpsp21043.client.database
 
 import android.app.Activity
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
@@ -9,6 +10,8 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.unipi.mpsp21043.client.models.Address
 import com.unipi.mpsp21043.client.models.Cart
 import com.unipi.mpsp21043.client.models.Category
@@ -106,14 +109,14 @@ class FirestoreHelper {
      * A function to update the existing user details to the cloud firestore.
      *
      * @param activity Base class
-     * @param userInfo Which fields are to be updated.
+     * @param userHashMap Which fields are to be updated.
      */
-    fun updateProfile(activity: EditProfileActivity, userInfo: User) {
+    fun updateProfile(activity: EditProfileActivity, userHashMap: HashMap<String, Any>) {
 
-        dbFirestore.collection(Constants.COLLECTION_ADDRESSES)
+        dbFirestore.collection(Constants.COLLECTION_USERS)
             .document(getCurrentUserID())
             // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
-            .set(userInfo, SetOptions.merge())
+            .set(userHashMap, SetOptions.merge())
             .addOnSuccessListener {
 
                 // Here call a function of base activity for transferring the result to it.
@@ -1147,6 +1150,54 @@ class FirestoreHelper {
             }
     }
 
+    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?, imageType: String) {
 
+        // Getting the storage reference
+        val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
+            imageType + System.currentTimeMillis() + "."
+                    + Constants.getFileExtension(
+                activity,
+                imageFileURI
+            )
+        )
+
+        //adding the file to reference
+        sRef.putFile(imageFileURI!!)
+            .addOnSuccessListener { taskSnapshot ->
+                // The image upload is success
+                Log.e(
+                    "Firebase Image URL",
+                    taskSnapshot.metadata!!.reference!!.downloadUrl.toString()
+                )
+
+                // Get the downloadable url from the task snapshot
+                taskSnapshot.metadata!!.reference!!.downloadUrl
+                    .addOnSuccessListener { uri ->
+                        Log.e("Downloadable Image URL", uri.toString())
+
+                        // Here call a function of base activity for transferring the result to it.
+                        when (activity) {
+                            is EditProfileActivity -> {
+                                activity.imageUploadSuccess(uri.toString())
+                            }
+                        }
+                    }
+            }
+            .addOnFailureListener { exception ->
+
+                // Hide the progress dialog if there is any error. And print the error in log.
+                when (activity) {
+                    is EditProfileActivity -> {
+                        activity.showErrorUI()
+                    }
+                }
+
+                Log.e(
+                    activity.javaClass.simpleName,
+                    exception.message,
+                    exception
+                )
+            }
+    }
 
 }

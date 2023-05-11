@@ -57,7 +57,7 @@ class ListSettingsActivity : BaseActivity() {
     }
 
     private fun setUpActionBar() {
-        binding.actionBarWithToolbar.apply {
+        binding.toolbar.apply {
             setSupportActionBar(toolbar)
             textViewActionLabel.text = getString(R.string.text_settings)
         }

@@ -5,7 +5,6 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -76,12 +75,13 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             // Check if user has items in his cart
             FirestoreHelper().getCartItemsList(this@MainActivity)
 
-        binding.actionBarWithToolbar.imageButtonMyCart.setOnClickListener { IntentUtils().goToListCartItemsActivity(this) }
+        binding.toolbar.imageButtonMyCart.setOnClickListener { IntentUtils().goToListCartItemsActivity(this) }
     }
 
     private fun setupActionBar() {
-        binding.actionBarWithToolbar.apply {
-            setSupportActionBar(toolbar)
+        binding.toolbar.apply {
+            setSupportActionBar(root)
+            textViewActionLabel.text = getString(R.string.text_store)
         }
         val actionBar = supportActionBar
         actionBar?.let {
@@ -93,7 +93,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private fun setupNavDrawer() {
         binding.apply {
             val toggle = ActionBarDrawerToggle(
-                this@MainActivity, drawerLayout, actionBarWithToolbar.toolbar,
+                this@MainActivity, drawerLayout, toolbar.root,
                 R.string.nav_drawer_open_menu, R.string.nav_drawer_close_menu
             )
             drawerLayout.addDrawerListener(toggle)
@@ -115,6 +115,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 FirestoreHelper().getUserDetails(this@MainActivity)
             }
             navView.setNavigationItemSelectedListener(this@MainActivity)
+
             // Set home page as default
             navView.setCheckedItem(R.id.nav_drawer_item_products)
         }
@@ -134,7 +135,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 }
             }.attach()
 
-            actionBarWithToolbar.apply {
+            toolbar.apply {
                 tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                     override fun onTabSelected(tab: TabLayout.Tab) {
                         when (tab.position) {
@@ -216,7 +217,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     @androidx.annotation.OptIn(com.google.android.material.badge.ExperimentalBadgeUtils::class)
     fun userCartSuccess(cartItems: ArrayList<Cart>) {
         if (cartItems.isNotEmpty()) {
-            createBadge(this@MainActivity, binding.actionBarWithToolbar.imageButtonMyCart, cartItems.size)
+            createBadge(this@MainActivity, binding.toolbar.imageButtonMyCart, cartItems.size)
         }
     }
 

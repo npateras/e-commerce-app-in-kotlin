@@ -11,9 +11,7 @@ import com.unipi.mpsp21043.client.R
 import com.unipi.mpsp21043.client.database.FirestoreHelper
 import com.unipi.mpsp21043.client.databinding.ActivitySignUpBinding
 import com.unipi.mpsp21043.client.models.User
-import com.unipi.mpsp21043.client.utils.Constants
 import com.unipi.mpsp21043.client.utils.IntentUtils
-import com.unipi.mpsp21043.client.utils.SnackBarErrorClass
 import com.unipi.mpsp21043.client.utils.snackBarErrorClass
 import com.unipi.mpsp21043.client.utils.textInputLayoutError
 
@@ -85,19 +83,19 @@ class SignUpActivity : BaseActivity() {
             return when {
                 TextUtils.isEmpty(textInputEditTextFullName.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_name))
-                    textInputLayoutError(textInputLayoutFullName, getString(R.string.text_error_empty_name))
+                    textInputLayoutError(textInputLayoutFullName)
                     false
                 }
 
                 TextUtils.isEmpty(textInputEditTextEmail.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_email))
-                    textInputLayoutError(textInputLayoutEmail, getString(R.string.text_error_empty_email))
+                    textInputLayoutError(textInputLayoutEmail)
                     false
                 }
 
                 TextUtils.isEmpty(textInputEditTextPassword.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_password))
-                    textInputLayoutError(textInputLayoutPassword, getString(R.string.text_error_empty_password))
+                    textInputLayoutError(textInputLayoutPassword)
                     false
                 }
 
@@ -180,7 +178,7 @@ class SignUpActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        binding.actionBarWithToolbar.apply {
+        binding.toolbar.apply {
             setSupportActionBar(toolbar)
             textViewActionLabel.text = getString(R.string.text_sign_up)
         }

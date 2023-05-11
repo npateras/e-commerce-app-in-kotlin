@@ -10,23 +10,31 @@
     tools:context=".ui.activities.ProductDetailsActivity"
     tools:ignore="contentDescription">
 
-    <include
-        android:id="@+id/action_bar_with_toolbar"
-        layout="@layout/toolbar_product_details" />
+    <LinearLayout
+        android:id="@+id/linear_layout_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_product_details" />
+
+        <include
+            android:id="@+id/progressBarLayout"
+            layout="@layout/progress_bar_horizontal" />
+
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout_details"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <include
-            android:id="@+id/progressBarLayout"
-            layout="@layout/progress_bar_horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linear_layout_action_bar">
 
         <ScrollView
             android:id="@+id/scrollView_Body"
@@ -46,9 +54,9 @@
                     android:id="@+id/imgView_Picture"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:layout_gravity="top|center_vertical"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:layout_gravity="top|center_vertical"
                     android:scaleType="fitCenter"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -247,11 +255,11 @@
                 android:layout_height="30dp"
                 android:layout_marginEnd="9dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_minus"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
                 android:scaleType="fitCenter"
+                android:src="@drawable/ic_minus"
                 app:iconGravity="textStart"
                 app:layout_constraintEnd_toStartOf="@+id/txtView_Quantity_Value"
                 app:layout_constraintTop_toTopOf="@+id/txtView_Quantity" />
@@ -281,10 +289,10 @@
                 android:layout_marginEnd="20dp"
                 android:adjustViewBounds="true"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_plus"
                 android:clickable="true"
                 android:focusable="true"
                 android:scaleType="fitCenter"
+                android:src="@drawable/ic_plus"
                 app:iconGravity="textStart"
                 app:layout_constraintBottom_toBottomOf="@+id/txtView_Quantity_Value"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -294,13 +302,13 @@
                 android:id="@+id/button_remove_from_cart"
                 style="@style/ButtonStyle.PrimaryColor"
                 android:layout_width="0dp"
-                android:layout_marginBottom="24dp"
                 android:layout_height="@dimen/button_primary_68"
                 android:layout_marginTop="29dp"
-                android:visibility="gone"
-                app:icon="@drawable/ic_remove_from_cart"
+                android:layout_marginBottom="24dp"
                 android:background="@drawable/button_negative"
                 android:text="@string/text_remove_from_cart"
+                android:visibility="gone"
+                app:icon="@drawable/ic_remove_from_cart"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/imgBtn_Plus"
                 app:layout_constraintStart_toStartOf="@+id/txtView_Quantity" />
@@ -309,12 +317,12 @@
                 android:id="@+id/button_add_to_cart"
                 style="@style/ButtonStyle.PrimaryColor"
                 android:layout_width="0dp"
-                android:layout_marginBottom="24dp"
                 android:layout_height="@dimen/button_primary_68"
                 android:layout_marginTop="29dp"
-                app:icon="@drawable/svg_add_to_cart"
+                android:layout_marginBottom="24dp"
                 android:background="@drawable/button_primary"
                 android:text="@string/text_add_to_cart"
+                app:icon="@drawable/svg_add_to_cart"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/imgBtn_Plus"
                 app:layout_constraintStart_toStartOf="@+id/txtView_Quantity" />
@@ -331,7 +339,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/constraint_layout_details"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/linear_layout_action_bar"
         app:shimmer_auto_start="false">
 
         <include layout="@layout/shimmer_product_details" />

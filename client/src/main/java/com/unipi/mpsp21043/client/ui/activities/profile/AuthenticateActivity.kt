@@ -85,7 +85,7 @@ class AuthenticateActivity : BaseActivity() {
                                 }
                                 task.exception is FirebaseAuthInvalidCredentialsException -> {
                                     snackBarErrorClass(root, getString(R.string.text_error_invalid_password))
-                                    textInputLayoutError(textInputLayoutPassword, getString(R.string.text_error_invalid_password))
+                                    textInputLayoutError(textInputLayoutPassword)
                                 }
                                 else -> {
                                     snackBarErrorClass(root, task.exception?.message!!)
@@ -104,7 +104,7 @@ class AuthenticateActivity : BaseActivity() {
             return when {
                 TextUtils.isEmpty(textInputEditTextPassword.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_password))
-                    textInputLayoutError(textInputLayoutPassword, getString(R.string.text_error_empty_password))
+                    textInputLayoutError(textInputLayoutPassword)
                     false
                 }
 
@@ -114,7 +114,7 @@ class AuthenticateActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        binding.actionBarWithToolbar.apply {
+        binding.toolbar.apply {
             setSupportActionBar(toolbar)
             textViewActionLabel.text = ""
         }

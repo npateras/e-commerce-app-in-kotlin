@@ -82,10 +82,10 @@ class AllCategoriesActivity : BaseActivity() {
     }
 
     private fun setUpActionBar() {
-        setSupportActionBar(binding.actionBarWithToolbar.toolbar)
+        setSupportActionBar(binding.toolbar.root)
 
         val actionBar = supportActionBar
-        binding.actionBarWithToolbar.apply {
+        binding.toolbar.apply {
             textViewActionLabel.text = getString(R.string.text_all_categories)
         }
         actionBar?.let {

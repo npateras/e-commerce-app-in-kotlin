@@ -182,7 +182,6 @@ class EditProfileActivity : BaseActivity() {
                     == PackageManager.PERMISSION_GRANTED
                 ) {
                     Constants.showImageChooserV2(activityResultLauncherGetImage)
-                    //Constants.showImageChooser(this@EditProfileActivity)
                 }
                 else {
                     /*Requests permissions to be granted to this application. These permissions

@@ -1,5 +1,11 @@
 package com.unipi.mpsp21043.client.utils
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
+import android.provider.MediaStore
+import android.webkit.MimeTypeMap
+import androidx.activity.result.ActivityResultLauncher
 import com.google.android.material.behavior.SwipeDismissBehavior
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import java.text.SimpleDateFormat
@@ -58,6 +64,13 @@ object Constants {
     const val FIELD_CART_QUANTITY: String = "cartQuantity"
     const val FIELD_TOKENS: String = "tokens"
     const val FIELD_STOCK: String = "stock"
+    const val FIELD_FULL_NAME: String = "fullName"
+    const val FIELD_EMAIL: String = "email"
+    const val FIELD_NOTIFICATIONS: String = "notifications"
+    const val FIELD_PHONE_CODE: String = "phoneCode"
+    const val FIELD_PHONE_NUMBER: String = "phoneNumber"
+    const val FIELD_PROF_IMG_URL: String = "profImgUrl"
+    const val FIELD_COMPLETE_PROFILE: String = "profileCompleted"
 
     // Intent Extras
     const val EXTRA_PRODUCT_ID: String = "extraProductId"
@@ -81,6 +94,47 @@ object Constants {
     const val PAYLOAD_PRODUCT_IMG_URL: String = "PRODUCT_IMG_URL"
     const val PAYLOAD_PRODUCT_NAME: String = "PRODUCT_NAME"
 
+    // Request Codes
+    //A unique code for asking the Read Storage Permission using this we will be check and identify in the method onRequestPermissionsResult in the Base Activity.
+    const val READ_STORAGE_PERMISSION_CODE = 2
+    // A unique code of image selection from Phone Storage.
+    const val PICK_IMAGE_REQUEST_CODE = 2
     const val ADD_ADDRESS_REQUEST_CODE: Int = 121
+
+    // Storage Paths
+    const val STORAGE_PATH_USERS: String = "Users/"
+
+    /**
+     * A function for user profile image selection from phone storage.
+     */
+    fun showImageChooserV2(activityResultLauncher: ActivityResultLauncher<Intent>) {
+        // An intent for launching the image selection of phone storage.
+        val galleryIntent = Intent(
+            Intent.ACTION_PICK,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        )
+        // galleryIntent.type = "image/*"
+        activityResultLauncher.launch(galleryIntent)
+    }
+
+    /**
+     * A function to get the image file extension of the selected image.
+     *
+     * @param activity Activity reference.
+     * @param uri Image file uri.
+     */
+    fun getFileExtension(activity: Activity, uri: Uri?): String? {
+        /*
+         * MimeTypeMap: Two-way map that maps MIME-types to file extensions and vice versa.
+         *
+         * getSingleton(): Get the singleton instance of MimeTypeMap.
+         *
+         * getExtensionFromMimeType: Return the registered extension for the given MIME type.
+         *
+         * contentResolver.getType: Return the MIME type of the given content URL.
+         */
+        return MimeTypeMap.getSingleton()
+            .getExtensionFromMimeType(activity.contentResolver.getType(uri!!))
+    }
 }
 // END

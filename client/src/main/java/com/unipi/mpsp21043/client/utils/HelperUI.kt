@@ -10,9 +10,12 @@ import com.google.android.material.behavior.SwipeDismissBehavior.SWIPE_DIRECTION
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.textfield.TextInputLayout
 import com.unipi.mpsp21043.client.R
+import com.unipi.mpsp21043.client.databinding.ActivityEditProfileBinding
 import com.unipi.mpsp21043.client.databinding.ActivityListCartItemsBinding
 import com.unipi.mpsp21043.client.databinding.ActivityListOrdersBinding
 import com.unipi.mpsp21043.client.databinding.ActivityListSettingsBinding
+import com.unipi.mpsp21043.client.databinding.ActivityOrderDetailsBinding
+import com.unipi.mpsp21043.client.databinding.ActivityProductDetailsBinding
 import com.unipi.mpsp21043.client.databinding.FragmentFavoritesBinding
 import com.unipi.mpsp21043.client.databinding.FragmentMyAccountBinding
 
@@ -53,6 +56,42 @@ fun showMustSignInUI(context: Context,binding: ViewBinding) =
                     buttonSignIn.setOnClickListener { IntentUtils().goToSignInActivity(context) }
                     buttonSignUp.setOnClickListener { IntentUtils().goToSignInActivity(context) }
                 }
+            }
+        }
+    }
+
+fun showProgressBarHorizontalTop(context: Context,binding: ViewBinding) =
+    binding.apply {
+        when (binding) {
+            is ActivityProductDetailsBinding -> {
+                binding.progressBarLayout.progressBarHorizontal.visibility = View.VISIBLE
+            }
+            is ActivityListCartItemsBinding -> {
+                binding.progressBarLayout.progressBarHorizontal.visibility = View.VISIBLE
+            }
+            is ActivityOrderDetailsBinding -> {
+                binding.progressBarLayout.progressBarHorizontal.visibility = View.VISIBLE
+            }
+            is ActivityEditProfileBinding -> {
+                binding.progressBarLayout.progressBarHorizontal.visibility = View.VISIBLE
+            }
+        }
+    }
+
+fun hideProgressBarHorizontalTop(context: Context,binding: ViewBinding) =
+    binding.apply {
+        when (binding) {
+            is ActivityProductDetailsBinding -> {
+                binding.progressBarLayout.progressBarHorizontal.visibility = View.INVISIBLE
+            }
+            is ActivityListCartItemsBinding -> {
+                binding.progressBarLayout.progressBarHorizontal.visibility = View.INVISIBLE
+            }
+            is ActivityOrderDetailsBinding -> {
+                binding.progressBarLayout.progressBarHorizontal.visibility = View.INVISIBLE
+            }
+            is ActivityEditProfileBinding -> {
+                binding.progressBarLayout.progressBarHorizontal.visibility = View.INVISIBLE
             }
         }
     }

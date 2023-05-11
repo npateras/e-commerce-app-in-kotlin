@@ -136,7 +136,7 @@ class ListProductsActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        binding.actionBarWithToolbar.apply {
+        binding.toolbar.apply {
             setSupportActionBar(toolbar)
             textViewActionLabel.text = getFilterTranslated(filter)
         }

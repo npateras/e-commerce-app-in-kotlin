@@ -123,7 +123,7 @@ class OrderDetailsActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        binding.actionBarWithToolbar.apply {
+        binding.toolbar.apply {
             setSupportActionBar(toolbar)
             textViewActionLabel.text = Constants.DATE_TIME_FORMAT.format(mOrderDetails.orderDate)
         }

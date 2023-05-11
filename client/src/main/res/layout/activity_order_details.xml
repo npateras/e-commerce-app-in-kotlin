@@ -10,12 +10,24 @@
     tools:context=".ui.activities.OrderDetailsActivity"
     tools:ignore="contentDescription">
 
-    <include
-        android:id="@+id/action_bar_with_toolbar"
-        layout="@layout/toolbar_title_only"
+    <LinearLayout
+        android:id="@+id/linear_layout_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_title_only" />
+
+        <include
+            android:id="@+id/progressBarLayout"
+            layout="@layout/progress_bar_horizontal" />
+
+    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
@@ -24,7 +36,7 @@
         android:fillViewport="true"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/linear_layout_action_bar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

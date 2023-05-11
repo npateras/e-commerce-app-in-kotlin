@@ -128,13 +128,13 @@ class SignInActivity : BaseActivity() {
             return when {
                 TextUtils.isEmpty(textInputEditTextEmail.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_email))
-                    textInputLayoutError(textInputLayoutEmail, getString(R.string.text_error_empty_email))
+                    textInputLayoutError(textInputLayoutEmail)
                     false
                 }
 
                 TextUtils.isEmpty(textInputEditTextPassword.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_password))
-                    textInputLayoutError(textInputLayoutPassword, getString(R.string.text_error_empty_password))
+                    textInputLayoutError(textInputLayoutPassword)
                     false
                 }
 
@@ -144,7 +144,7 @@ class SignInActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        binding.actionBarWithToolbar.apply {
+        binding.toolbar.apply {
             setSupportActionBar(toolbar)
             textViewActionLabel.text = getString(R.string.text_login)
         }

@@ -81,7 +81,7 @@ open class OrderCartProductListAdapter(
         }
         // Click listener on list item click
         holder.itemView.setOnClickListener {
-            IntentUtils().goToProductDetailsActivity(context, model.id)
+            IntentUtils().goToProductDetailsActivity(context, model.productId)
         }
     }
 

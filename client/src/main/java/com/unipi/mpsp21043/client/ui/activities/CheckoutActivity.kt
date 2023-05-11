@@ -254,10 +254,10 @@ class CheckoutActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        setSupportActionBar(binding.actionBarWithToolbar.toolbar)
+        setSupportActionBar(binding.toolbar.root)
 
         val actionBar = supportActionBar
-        binding.actionBarWithToolbar.apply {
+        binding.toolbar.apply {
             textViewActionLabel.text = getString(R.string.text_checkout)
         }
 

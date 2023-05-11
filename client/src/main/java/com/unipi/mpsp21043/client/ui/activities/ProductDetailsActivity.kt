@@ -17,6 +17,8 @@ import com.unipi.mpsp21043.client.utils.GlideLoader
 import com.unipi.mpsp21043.client.utils.IntentUtils
 import com.unipi.mpsp21043.client.utils.animationSlideUp
 import com.unipi.mpsp21043.client.utils.createBadge
+import com.unipi.mpsp21043.client.utils.hideProgressBarHorizontalTop
+import com.unipi.mpsp21043.client.utils.showProgressBarHorizontalTop
 import com.unipi.mpsp21043.client.utils.snackBarErrorClass
 import com.unipi.mpsp21043.client.utils.snackBarSuccessClass
 import org.checkerframework.checker.units.qual.s
@@ -122,7 +124,7 @@ class ProductDetailsActivity : BaseActivity() {
         modelFavorite = favoriteProduct
 
         if (modelFavorite.productId != "")
-            binding.actionBarWithToolbar.checkboxFavorite.isChecked = true
+            binding.toolbar.checkboxFavorite.isChecked = true
 
         getTotalCartItems()
     }
@@ -150,7 +152,7 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     fun successCartItemUpdated() {
-        hideProgressBar()
+        hideProgressBarHorizontalTop(this@ProductDetailsActivity, binding)
 
         updateButtonsUI()
 
@@ -160,7 +162,7 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     fun successProductAddedToFavorites() {
-        hideProgressBar()
+        hideProgressBarHorizontalTop(this@ProductDetailsActivity, binding)
 
         snackBarSuccessClass(
             binding.root,
@@ -170,7 +172,7 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     fun successProductRemovedFromFavorites() {
-        hideProgressBar()
+        hideProgressBarHorizontalTop(this@ProductDetailsActivity, binding)
 
         snackBarSuccessClass(
             binding.root,
@@ -193,7 +195,7 @@ class ProductDetailsActivity : BaseActivity() {
         }
 
         // Start process
-        showProgressBar()
+        showProgressBarHorizontalTop(this@ProductDetailsActivity, binding)
 
         modelCart = Cart(
             userId = FirestoreHelper().getCurrentUserID(),
@@ -216,20 +218,8 @@ class ProductDetailsActivity : BaseActivity() {
         FirestoreHelper().addItemToCart(this, modelCart!!)
     }
 
-    private fun showProgressBar() {
-        binding.apply {
-            progressBarLayout.progressBarHorizontal.visibility = View.VISIBLE
-        }
-    }
-
-    private fun hideProgressBar() {
-        binding.apply {
-            progressBarLayout.progressBarHorizontal.visibility = View.INVISIBLE
-        }
-    }
-
     fun successItemAddedToCart() {
-        hideProgressBar()
+        hideProgressBarHorizontalTop(this@ProductDetailsActivity, binding)
 
         updateButtonsUI()
         setCartBadge(totalCartItems)
@@ -237,7 +227,7 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     private fun updateItemToCart() {
-        showProgressBar()
+        showProgressBarHorizontalTop(this@ProductDetailsActivity, binding)
 
         modelCart = Cart(
             userId = FirestoreHelper().getCurrentUserID(),
@@ -256,13 +246,13 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     private fun deleteItemFromCard() {
-        showProgressBar()
+        showProgressBarHorizontalTop(this@ProductDetailsActivity, binding)
 
         FirestoreHelper().deleteItemFromCart(this, modelProduct.id)
     }
 
     fun successItemDeletedFromCart() {
-        hideProgressBar()
+        hideProgressBarHorizontalTop(this@ProductDetailsActivity, binding)
 
         snackBarSuccessClass(
             binding.root,
@@ -307,7 +297,7 @@ class ProductDetailsActivity : BaseActivity() {
             if (cartBadge == null) {
                 cartBadge = createBadge(
                     this@ProductDetailsActivity,
-                    binding.actionBarWithToolbar.imageButtonMyCart,
+                    binding.toolbar.imageButtonMyCart,
                     totalCartItems
                 )
                 return
@@ -449,7 +439,7 @@ class ProductDetailsActivity : BaseActivity() {
                     }
 
                 // ActionBar
-                actionBarWithToolbar.apply {
+                toolbar.apply {
                     imageButtonMyCart.setOnClickListener {
                         IntentUtils().goToListCartItemsActivity(
                             this@ProductDetailsActivity
@@ -457,7 +447,7 @@ class ProductDetailsActivity : BaseActivity() {
                     }
                     checkboxFavorite.apply {
                         setOnClickListener {
-                            showProgressBar()
+                            showProgressBarHorizontalTop(this@ProductDetailsActivity, binding)
 
                             if (!isChecked)
                                 FirestoreHelper().removeProductFromUserFavorites(
@@ -490,12 +480,12 @@ class ProductDetailsActivity : BaseActivity() {
                 buttonAddToCart,
                 imgBtnPlus,
                 imgBtnMinus,
-                actionBarWithToolbar.checkboxFavorite,
-                actionBarWithToolbar.imageButtonMyCart
+                toolbar.checkboxFavorite,
+                toolbar.imageButtonMyCart
             )
             .forEach {
                 it.setOnClickListener {
-                    actionBarWithToolbar.checkboxFavorite.isChecked = false
+                    toolbar.checkboxFavorite.isChecked = false
                     goToSignInActivity(this@ProductDetailsActivity)
                 }
             }
@@ -503,8 +493,8 @@ class ProductDetailsActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        binding.actionBarWithToolbar.apply {
-            setSupportActionBar(toolbar)
+        binding.toolbar.apply {
+            setSupportActionBar(root)
         }
 
         val actionBar = supportActionBar

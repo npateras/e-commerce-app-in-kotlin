@@ -103,19 +103,19 @@ class ChangePasswordActivity : BaseActivity() {
             return when {
                 TextUtils.isEmpty(newPassword) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_new_password))
-                    textInputLayoutError(textInputLayoutNewPassword, getString(R.string.text_error_empty_new_password))
+                    textInputLayoutError(textInputLayoutNewPassword)
                     false
                 }
 
                 TextUtils.isEmpty(confirmNewPassword) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_confirm_new_password))
-                    textInputLayoutError(textInputLayoutConfirmNewPassword, getString(R.string.text_error_empty_confirm_new_password))
+                    textInputLayoutError(textInputLayoutConfirmNewPassword)
                     false
                 }
 
                 (newPassword != confirmNewPassword) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_new_password_does_not_match))
-                    textInputLayoutError(textInputLayoutConfirmNewPassword, getString(R.string.text_error_new_password_does_not_match))
+                    textInputLayoutError(textInputLayoutConfirmNewPassword)
                     false
                 }
 
@@ -125,7 +125,7 @@ class ChangePasswordActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        binding.actionBarWithToolbar.apply {
+        binding.toolbar.apply {
             setSupportActionBar(toolbar)
             imageButtonSave.setOnClickListener { saveNewPassword() }
             textViewActionLabel.text = ""

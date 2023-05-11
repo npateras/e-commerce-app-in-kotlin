@@ -11,7 +11,7 @@
     tools:ignore="contentDescription">
 
     <include
-        android:id="@+id/action_bar_with_toolbar"
+        android:id="@+id/toolbar"
         layout="@layout/toolbar_tick_check"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,7 @@
         android:fillViewport="true"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/action_bar_with_toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
