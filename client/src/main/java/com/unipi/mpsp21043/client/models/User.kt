@@ -20,11 +20,12 @@ data class User(
     val phoneNumber: String = "",
     val phoneCode: Int = 0,
 
-    val registrationTokens: MutableList<String> = mutableListOf(),
+    val tokens: MutableList<String> = mutableListOf(),
 
     @ServerTimestamp
     val dateRegistered: Date = Date(),
     val profImgUrl: String = "",
     val profileCompleted: Boolean = false,
+    val notifications: Boolean = false,
     val role: String = "user",
 ) : Parcelable

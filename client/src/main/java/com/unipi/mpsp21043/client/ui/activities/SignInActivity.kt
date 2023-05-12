@@ -111,7 +111,8 @@ class SignInActivity : BaseActivity() {
         // Hide the progress dialog.
         hideProgressDialog()
 
-        if (!user.profileCompleted) {
+        IntentUtils().createNewMainActivity(this@SignInActivity)
+        /*if (!user.profileCompleted) {
             goToMainActivity(this@SignInActivity, true)
             finish()
         }
@@ -119,7 +120,7 @@ class SignInActivity : BaseActivity() {
             // Redirect the user to Dashboard Screen after log in.
             goToMainActivity(this@SignInActivity)
             finish()
-        }
+        }*/
         finish()
     }
 

@@ -21,9 +21,9 @@ import com.unipi.mpsp21043.client.ui.activities.PayWithCreditCardActivity
 import com.unipi.mpsp21043.client.ui.activities.ProductDetailsActivity
 import com.unipi.mpsp21043.client.ui.activities.SignInActivity
 import com.unipi.mpsp21043.client.ui.activities.SignUpActivity
-import com.unipi.mpsp21043.client.ui.activities.profile.AuthenticateActivity
-import com.unipi.mpsp21043.client.ui.activities.profile.ChangePasswordActivity
-import com.unipi.mpsp21043.client.ui.activities.profile.EditProfileActivity
+import com.unipi.mpsp21043.client.ui.activities.AuthenticateActivity
+import com.unipi.mpsp21043.client.ui.activities.ChangePasswordActivity
+import com.unipi.mpsp21043.client.ui.activities.EditProfileActivity
 
 class IntentUtils {
 

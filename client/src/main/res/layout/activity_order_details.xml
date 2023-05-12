@@ -23,10 +23,6 @@
             android:id="@+id/toolbar"
             layout="@layout/toolbar_title_only" />
 
-        <include
-            android:id="@+id/progressBarLayout"
-            layout="@layout/progress_bar_horizontal" />
-
     </LinearLayout>
 
     <androidx.core.widget.NestedScrollView

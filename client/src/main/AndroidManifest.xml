@@ -120,7 +120,7 @@
 
         <!-- Authenticate activity -->
         <activity
-            android:name=".ui.activities.profile.AuthenticateActivity"
+            android:name=".ui.activities.AuthenticateActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.EMarket.NoActionBar3"
@@ -134,7 +134,7 @@
 
         <!-- Change Password activity -->
         <activity
-            android:name=".ui.activities.profile.ChangePasswordActivity"
+            android:name=".ui.activities.ChangePasswordActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.EMarket.NoActionBar3"
@@ -148,7 +148,7 @@
 
         <!-- Update Profile activity -->
         <activity
-            android:name=".ui.activities.profile.EditProfileActivity"
+            android:name=".ui.activities.EditProfileActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.EMarket.NoActionBar3"

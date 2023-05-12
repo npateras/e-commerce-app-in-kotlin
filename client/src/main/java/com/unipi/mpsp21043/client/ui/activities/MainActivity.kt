@@ -1,5 +1,6 @@
 package com.unipi.mpsp21043.client.ui.activities
 
+import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
@@ -52,8 +53,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private fun init() {
 
         if (FirestoreHelper().getCurrentUserID() != "") {
-            FirebaseMessaging.getInstance().token.addOnSuccessListener { token ->
-                FirebaseService.token = token
+            FirebaseService.sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+            FirebaseMessaging.getInstance().token.addOnSuccessListener {
+                FirebaseService.token = it
             }
         }
 

@@ -1,4 +1,4 @@
-package com.unipi.mpsp21043.client.ui.activities.profile
+package com.unipi.mpsp21043.client.ui.activities
 
 import android.os.Bundle
 import android.text.Editable
@@ -10,7 +10,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.unipi.mpsp21043.client.R
 import com.unipi.mpsp21043.client.databinding.ActivityAuthenticateBinding
-import com.unipi.mpsp21043.client.ui.activities.BaseActivity
 import com.unipi.mpsp21043.client.utils.Constants
 import com.unipi.mpsp21043.client.utils.IntentUtils
 import com.unipi.mpsp21043.client.utils.snackBarErrorClass

@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.net.Uri
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.gms.tasks.Tasks.await
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,6 +21,7 @@ import com.unipi.mpsp21043.client.models.Favorite
 import com.unipi.mpsp21043.client.models.Order
 import com.unipi.mpsp21043.client.models.Product
 import com.unipi.mpsp21043.client.models.User
+import com.unipi.mpsp21043.client.service.FirebaseService.Companion.token
 import com.unipi.mpsp21043.client.ui.activities.AddEditAddressActivity
 import com.unipi.mpsp21043.client.ui.activities.AllCategoriesActivity
 import com.unipi.mpsp21043.client.ui.activities.CheckoutActivity
@@ -31,11 +34,12 @@ import com.unipi.mpsp21043.client.ui.activities.PayWithCreditCardActivity
 import com.unipi.mpsp21043.client.ui.activities.ProductDetailsActivity
 import com.unipi.mpsp21043.client.ui.activities.SignInActivity
 import com.unipi.mpsp21043.client.ui.activities.SignUpActivity
-import com.unipi.mpsp21043.client.ui.activities.profile.EditProfileActivity
+import com.unipi.mpsp21043.client.ui.activities.EditProfileActivity
 import com.unipi.mpsp21043.client.ui.fragments.FavoritesFragment
 import com.unipi.mpsp21043.client.ui.fragments.HomeFragment
 import com.unipi.mpsp21043.client.ui.fragments.MyAccountFragment
 import com.unipi.mpsp21043.client.utils.Constants
+import com.unipi.mpsp21043.client.utils.snackBarErrorClass
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -67,42 +71,54 @@ class FirestoreHelper {
     }
 
     fun setUserToken(token: String) = CoroutineScope(Dispatchers.IO).launch {
-        try {
-            dbFirestore.collection(Constants.COLLECTION_USERS)
-                .document(getCurrentUserID())
-                .get()
-                .addOnSuccessListener {
-                    val user = it.toObject(User::class.java)!!
-
-                    if (!user.registrationTokens.contains(token)) {
-                        dbFirestore.collection(Constants.COLLECTION_USERS)
-                            .document(getCurrentUserID())
-                            .update(Constants.FIELD_TOKENS, (FieldValue.arrayUnion(token)))
-                            .addOnFailureListener { e ->
-                                Log.e(
-                                    Constants.TAG,
-                                    "Update of FCM registration tokens failed.",
-                                    e
-                                )
-                            }
-                    }
-                }
-                .addOnFailureListener { e ->
-                    Log.e(
-                        javaClass.simpleName,
-                        "Fetching FCM registration token failed.",
-                        e
-                    )
-                }.await()
-        } catch(e: Exception) {
-            withContext(Dispatchers.Main) {
+        val usersCollection = dbFirestore.collection(Constants.COLLECTION_USERS)
+        val userQuery = usersCollection
+            .whereEqualTo(Constants.FIELD_ID, getCurrentUserID())
+            .limit(1)
+            .get()
+            .addOnFailureListener { e ->
                 Log.e(
-                    javaClass.simpleName,
-                    "Updating FCM registration token failed.",
+                    Constants.TAG,
+                    "Update of FCM registration tokens failed.",
                     e
                 )
             }
+            .await()
+
+
+        for (document in userQuery) {
+            try {
+                val user = document.toObject(User::class.java)
+
+                if (user.tokens.contains(token))
+                    break
+
+                val userTokenHashMap = HashMap<String, Any>()
+                userTokenHashMap[Constants.FIELD_TOKENS] =
+                    FieldValue.arrayUnion(token);
+
+                usersCollection.document(document.id).set(
+                    userTokenHashMap,
+                    SetOptions.merge()
+                ).await()
+
+                Log.e(
+                    Constants.TAG,
+                    "New token: ${userTokenHashMap.entries}"
+                )
+            }
+            catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e(
+                        Constants.TAG,
+                        "Updating FCM registration token failed.",
+                        e
+                    )
+                }
+            }
         }
+
+        return@launch
     }
 
     /**

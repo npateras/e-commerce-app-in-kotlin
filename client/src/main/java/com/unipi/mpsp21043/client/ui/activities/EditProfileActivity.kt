@@ -1,4 +1,4 @@
-package com.unipi.mpsp21043.client.ui.activities.profile
+package com.unipi.mpsp21043.client.ui.activities
 
 import android.Manifest
 import android.app.Activity
@@ -18,7 +18,6 @@ import com.unipi.mpsp21043.client.R
 import com.unipi.mpsp21043.client.database.FirestoreHelper
 import com.unipi.mpsp21043.client.databinding.ActivityEditProfileBinding
 import com.unipi.mpsp21043.client.models.User
-import com.unipi.mpsp21043.client.ui.activities.BaseActivity
 import com.unipi.mpsp21043.client.utils.Constants
 import com.unipi.mpsp21043.client.utils.Constants.STORAGE_PATH_USERS
 import com.unipi.mpsp21043.client.utils.GlideLoader

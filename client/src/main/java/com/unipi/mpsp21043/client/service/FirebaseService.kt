@@ -10,7 +10,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat.getSystemService
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.unipi.mpsp21043.client.R
@@ -33,20 +35,6 @@ class FirebaseService : FirebaseMessagingService() {
 
                 FirestoreHelper().setUserToken(token.toString())
             }
-
-        /*fun addTokenToFirestore(newRegistrationToken: String) {
-            if (newRegistrationToken.isEmpty()) throw NullPointerException("FCM token is null.")
-
-            FirestoreHelper().getFCMRegistrationTokenDB { tokens ->
-                // Checking if current token already exists
-                if (tokens.contains(newRegistrationToken))
-                    return@getFCMRegistrationTokenDB
-
-                tokens.add(newRegistrationToken)
-
-                FirestoreHelper().setFCMRegistrationToken(tokens)
-            }
-        }*/
     }
 
     override fun onNewToken(newToken: String) {

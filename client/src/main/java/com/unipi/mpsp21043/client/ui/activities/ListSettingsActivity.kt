@@ -3,6 +3,7 @@ package com.unipi.mpsp21043.client.ui.activities
 import android.os.Bundle
 import android.view.View
 import android.window.OnBackInvokedDispatcher
+import com.google.firebase.auth.FirebaseAuth
 import com.unipi.mpsp21043.client.R
 import com.unipi.mpsp21043.client.database.FirestoreHelper
 import com.unipi.mpsp21043.client.databinding.ActivityListSettingsBinding
@@ -52,6 +53,10 @@ class ListSettingsActivity : BaseActivity() {
             }
             switchButtonOrders.setOnClickListener {
 
+            }
+            buttonSignOut.setOnClickListener {
+                FirebaseAuth.getInstance().signOut()
+                IntentUtils().createNewMainActivity(this@ListSettingsActivity)
             }
         }
     }

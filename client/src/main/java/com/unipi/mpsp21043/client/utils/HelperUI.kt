@@ -69,9 +69,6 @@ fun showProgressBarHorizontalTop(context: Context,binding: ViewBinding) =
             is ActivityListCartItemsBinding -> {
                 binding.progressBarLayout.progressBarHorizontal.visibility = View.VISIBLE
             }
-            is ActivityOrderDetailsBinding -> {
-                binding.progressBarLayout.progressBarHorizontal.visibility = View.VISIBLE
-            }
             is ActivityEditProfileBinding -> {
                 binding.progressBarLayout.progressBarHorizontal.visibility = View.VISIBLE
             }
@@ -85,9 +82,6 @@ fun hideProgressBarHorizontalTop(context: Context,binding: ViewBinding) =
                 binding.progressBarLayout.progressBarHorizontal.visibility = View.INVISIBLE
             }
             is ActivityListCartItemsBinding -> {
-                binding.progressBarLayout.progressBarHorizontal.visibility = View.INVISIBLE
-            }
-            is ActivityOrderDetailsBinding -> {
                 binding.progressBarLayout.progressBarHorizontal.visibility = View.INVISIBLE
             }
             is ActivityEditProfileBinding -> {
