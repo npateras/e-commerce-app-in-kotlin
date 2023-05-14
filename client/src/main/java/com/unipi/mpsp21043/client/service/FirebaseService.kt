@@ -15,10 +15,16 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.google.gson.Gson
 import com.unipi.mpsp21043.client.R
 import com.unipi.mpsp21043.client.database.FirestoreHelper
+import com.unipi.mpsp21043.client.notifications.PushNotification
+import com.unipi.mpsp21043.client.notifications.RetrofitInstance
 import com.unipi.mpsp21043.client.ui.activities.MainActivity
 import com.unipi.mpsp21043.client.utils.Constants
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class FirebaseService : FirebaseMessagingService() {
@@ -68,6 +74,20 @@ class FirebaseService : FirebaseMessagingService() {
             .build()
 
         notificationManager.notify(notificationID, notification)
+    }
+
+    fun sendNotification(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
+        try {
+            val response = RetrofitInstance.api.postNotification(notification)
+            if(response.isSuccessful) {
+                Log.d(javaClass.simpleName, "Response: ${Gson().toJson(response)}")
+            }
+            else {
+                Log.e(javaClass.simpleName, response.errorBody().toString())
+            }
+        } catch(e: Exception) {
+            Log.e(javaClass.simpleName, e.toString())
+        }
     }
 
     /*private fun sendNotification(data: Map<String, String>) {
@@ -151,7 +171,7 @@ class FirebaseService : FirebaseMessagingService() {
     private fun createNotificationChannel(notificationManager: NotificationManager) {
         val channelName = "channelName"
         val channel = NotificationChannel(Constants.NOTIFICATION_CHANNEL_ID, channelName, IMPORTANCE_DEFAULT).apply {
-            description = "Channel description"
+            description = "Used to send notifications!"
             enableLights(true)
             lightColor = Color.GREEN
         }

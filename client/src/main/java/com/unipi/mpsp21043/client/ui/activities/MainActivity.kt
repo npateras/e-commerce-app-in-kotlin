@@ -22,6 +22,8 @@ import com.unipi.mpsp21043.client.database.FirestoreHelper
 import com.unipi.mpsp21043.client.databinding.ActivityMainBinding
 import com.unipi.mpsp21043.client.models.Cart
 import com.unipi.mpsp21043.client.models.User
+import com.unipi.mpsp21043.client.notifications.NotificationData
+import com.unipi.mpsp21043.client.notifications.PushNotification
 import com.unipi.mpsp21043.client.service.FirebaseService
 import com.unipi.mpsp21043.client.utils.*
 
@@ -54,8 +56,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         if (FirestoreHelper().getCurrentUserID() != "") {
             FirebaseService.sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
-            FirebaseMessaging.getInstance().token.addOnSuccessListener {
-                FirebaseService.token = it
+            FirebaseMessaging.getInstance().token.addOnSuccessListener { token ->
+                FirebaseService.token = token
+                PushNotification(
+                    NotificationData("test", "test"),
+                    token
+                ).also {
+                    FirebaseService().sendNotification(it)
+                }
             }
         }
 

@@ -101,11 +101,6 @@ class FirestoreHelper {
                     userTokenHashMap,
                     SetOptions.merge()
                 ).await()
-
-                Log.e(
-                    Constants.TAG,
-                    "New token: ${userTokenHashMap.entries}"
-                )
             }
             catch (e: Exception) {
                 withContext(Dispatchers.Main) {
