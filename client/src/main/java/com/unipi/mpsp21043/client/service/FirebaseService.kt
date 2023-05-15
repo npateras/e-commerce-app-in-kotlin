@@ -79,10 +79,8 @@ class FirebaseService : FirebaseMessagingService() {
     fun sendNotification(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
         try {
             val response = RetrofitInstance.api.postNotification(notification)
-            if(response.isSuccessful) {
-                Log.d(javaClass.simpleName, "Response: ${Gson().toJson(response)}")
-            }
-            else {
+
+            if (!response.isSuccessful) {
                 Log.e(javaClass.simpleName, response.errorBody().toString())
             }
         } catch(e: Exception) {
