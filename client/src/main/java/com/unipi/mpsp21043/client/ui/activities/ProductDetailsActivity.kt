@@ -107,6 +107,8 @@ class ProductDetailsActivity : BaseActivity() {
 
             if (modelProduct.stock > 0)
                 txtViewStock.text = getString(R.string.text_available)
+
+            toolbar.textViewActionLabel.text = modelProduct.name
         }
 
         if (FirestoreHelper().getCurrentUserID() != "")
@@ -449,11 +451,12 @@ class ProductDetailsActivity : BaseActivity() {
                         setOnClickListener {
                             showProgressBarHorizontalTop(this@ProductDetailsActivity, binding)
 
-                            if (!isChecked)
+                            if (!isChecked) {
                                 FirestoreHelper().removeProductFromUserFavorites(
                                     this@ProductDetailsActivity,
                                     modelProduct.id
                                 )
+                            }
                             else {
                                 val favorite = Favorite(
                                     FirestoreHelper().getCurrentUserID(),

@@ -12,6 +12,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.unipi.mpsp21043.client.models.Address
@@ -1038,9 +1039,9 @@ class FirestoreHelper {
             }
     }
 
-    fun addProductToUserFavorites(activity: Activity, favorite: Favorite) {
-        dbFirestore.collection(Constants.COLLECTION_FAVORITES)
-            .document()
+    fun addProductToUserFavorites(activity: Activity, favorite: Favorite) = CoroutineScope(Dispatchers.IO).launch {
+        val favoritesCollection = dbFirestore.collection(Constants.COLLECTION_FAVORITES)
+        favoritesCollection.document()
             .set(favorite, SetOptions.merge())
             .addOnCompleteListener {
                 when (activity) {
@@ -1055,52 +1056,57 @@ class FirestoreHelper {
                         activity.showErrorUI()
                     }
                 }
-
                 Log.e(
                     activity.javaClass.simpleName,
                     "Error while adding a product to user's favorites.", e
                 )
-            }
+            }.await()
+
+        FirebaseMessaging.getInstance().subscribeToTopic(favorite.productId).await()
     }
 
-    fun removeProductFromUserFavorites(activity: Activity, productId: String) {
-        dbFirestore.collection(Constants.COLLECTION_FAVORITES)
+    fun removeProductFromUserFavorites(activity: Activity, productId: String) = CoroutineScope(Dispatchers.IO).launch {
+        val favoritesCollection = dbFirestore.collection(Constants.COLLECTION_FAVORITES)
+        val favoritesQuery = favoritesCollection
             .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
             .whereEqualTo(Constants.FIELD_PRODUCT_ID, productId)
             .get()
-            .addOnCompleteListener{ task ->
-                if (task.isSuccessful) {
-                    for (document in task.result!!) {
-                        dbFirestore
-                            .collection(Constants.COLLECTION_FAVORITES)
-                            .document(document.id)
-                            .delete()
-                            .addOnCompleteListener {
-                                when (activity) {
-                                    is ProductDetailsActivity -> {
-                                        activity.successProductRemovedFromFavorites()
-                                    }
-                                }
-                            }
-                    }
-                }
-                else {
-                    Log.d(activity.javaClass.simpleName, "Error getting product for deletion from user favorites: ", task.exception)
-                }
-            }
             .addOnFailureListener { e ->
-                when (activity) {
-                    is ProductDetailsActivity -> {
-                        activity.showErrorUI()
-                    }
-                }
-
                 Log.e(
-                    activity.javaClass.simpleName,
-                    "Error while getting product from user's favorites.",
+                    Constants.TAG,
+                    "Update of FCM registration tokens failed.",
                     e
                 )
             }
+            .await()
+
+        for (document in favoritesQuery) {
+            try {
+                val favorite = document.toObject(Favorite::class.java)
+
+                favoritesCollection
+                    .document(document.id)
+                    .delete()
+                    .addOnCompleteListener {
+                        when (activity) {
+                            is ProductDetailsActivity -> {
+                                activity.successProductRemovedFromFavorites()
+                            }
+                        }
+                    }.await()
+
+                FirebaseMessaging.getInstance().unsubscribeFromTopic(favorite.productId).await()
+            }
+            catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e(
+                        Constants.TAG,
+                        "Error deleting product from user favorites:",
+                        e
+                    )
+                }
+            }
+        }
     }
     // endregion
 

@@ -58,12 +58,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             FirebaseService.sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
             FirebaseMessaging.getInstance().token.addOnSuccessListener { token ->
                 FirebaseService.token = token
-                PushNotification(
+                /*PushNotification(
                     NotificationData("test", "test"),
                     token
                 ).also {
                     FirebaseService().sendNotification(it)
-                }
+                }*/
             }
         }
 

@@ -155,7 +155,7 @@ dependencies {
     // implementation 'com.github.andremion:counterfab:1.2.2'
     // Country Code Picker
     implementation 'com.hbb20:ccp:2.7.2'
-    implementation 'androidx.core:core-ktx:1.10.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
 
     /**
      * Annotations

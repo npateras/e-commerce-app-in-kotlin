@@ -6,6 +6,7 @@ import android.app.NotificationManager.IMPORTANCE_DEFAULT
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.PendingIntent.FLAG_ONE_SHOT
+import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -13,14 +14,17 @@ import android.graphics.Color
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
+import com.bumptech.glide.Glide
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.google.gson.Gson
 import com.unipi.mpsp21043.client.R
 import com.unipi.mpsp21043.client.database.FirestoreHelper
+import com.unipi.mpsp21043.client.notifications.NotificationReceiver
 import com.unipi.mpsp21043.client.notifications.PushNotification
 import com.unipi.mpsp21043.client.notifications.RetrofitInstance
 import com.unipi.mpsp21043.client.ui.activities.MainActivity
+import com.unipi.mpsp21043.client.ui.activities.ProductDetailsActivity
 import com.unipi.mpsp21043.client.utils.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -51,12 +55,13 @@ class FirebaseService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
 
-        val intent = Intent(this, MainActivity::class.java)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationID = Random.nextInt()
 
         createNotificationChannel(notificationManager)
 
+
+        val intent = Intent(this, ProductDetailsActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(
             this,
@@ -65,12 +70,47 @@ class FirebaseService : FirebaseMessagingService() {
             FLAG_ONE_SHOT or FLAG_IMMUTABLE
         )
 
+        val resultIntent = Intent(this@FirebaseService, ProductDetailsActivity::class.java).run {
+            putExtra(Constants.EXTRA_PRODUCT_ID, message.data["product_id"])
+        }
+
+        // Create the TaskStackBuilder
+        val resultPendingIntent: PendingIntent? = TaskStackBuilder.create(this).run {
+            // Add the intent, which inflates the back stack
+            addNextIntentWithParentStack(resultIntent)
+            // Get the PendingIntent containing the entire back stack
+            getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
+
+        // Action broadcasters
+        val cancelIntent = Intent(this, NotificationReceiver::class.java).run {
+            putExtra(Constants.EXTRA_NOTIFICATION_ID, Constants.NOTIFICATION_ID)
+        }
+        val cancelPendingIntent =
+            PendingIntent.getBroadcast(
+                this,
+                Constants.NOTIFICATION_ID,
+                cancelIntent,
+                PendingIntent.FLAG_CANCEL_CURRENT or FLAG_IMMUTABLE
+            )
+
+        val productImg = Glide.with(this@FirebaseService)
+            .asBitmap()
+            .load(message.data["image"])
+            .fitCenter()
+            .submit()
+
+        val imgBitmap = productImg.get()
+
         val notification = NotificationCompat.Builder(this, Constants.NOTIFICATION_CHANNEL_ID)
             .setContentTitle(message.data["title"])
             .setContentText(message.data["message"])
             .setSmallIcon(getNotificationIcon())
+            .setLargeIcon(imgBitmap)
             .setAutoCancel(true)
-            .setContentIntent(pendingIntent)
+            .setContentIntent(resultPendingIntent)
+            .addAction(R.drawable.svg_mark_as_read, getString(R.string.notification_mark_as_read), cancelPendingIntent)
+            .setColor(getColor(R.color.colorPrimary))
             .build()
 
         notificationManager.notify(notificationID, notification)
