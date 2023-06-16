@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.DiffUtil.DiffResult
 import androidx.recyclerview.widget.RecyclerView
 import com.unipi.mpsp21043.admin.R
 import com.unipi.mpsp21043.admin.databinding.ItemProductBinding
@@ -16,6 +14,7 @@ import com.unipi.mpsp21043.admin.models.Product
 import com.unipi.mpsp21043.admin.utils.GlideLoader
 import com.unipi.mpsp21043.admin.utils.IntentUtils
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 /**
@@ -23,10 +22,17 @@ import java.util.*
  */
 open class ProductsListAdapter(
     private val context: Context,
-    private var list: ArrayList<Product>
+    list: ArrayList<Product>
 ) : RecyclerView.Adapter<ProductsListAdapter.ProductsViewHolder>(), Filterable {
 
-    var listFiltered: ArrayList<Product> = list
+    var productsList: ArrayList<Product> = ArrayList()
+    var productsListAll: ArrayList<Product> = ArrayList()
+
+    init {
+        this.productsList = list
+        productsListAll = ArrayList()
+        productsListAll.addAll(productsList)
+    }
 
     /**
      * Inflates the item views which is designed in xml layout file
@@ -44,27 +50,6 @@ open class ProductsListAdapter(
         )
     }
 
-    open fun setList(context: Context?, productList: ArrayList<Product>){
-        val  result: DiffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback(){
-            override fun getOldListSize(): Int{
-                return this@ProductsListAdapter.list.size
-            }
-            override fun getNewListSize(): Int{
-                return list.size
-            }
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean{
-                return this@ProductsListAdapter.list[oldItemPosition].name === list[newItemPosition].name
-            }
-            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean{
-                val newProduct: Product = this@ProductsListAdapter .list[oldItemPosition]
-                val oldProduct: Product = list[newItemPosition]
-                return newProduct.name === oldProduct.name
-            }
-        })
-        this.listFiltered = list
-        result.dispatchUpdatesTo(this)
-    }
-    
     /**
      * Binds each item in the ArrayList to a view
      *
@@ -76,7 +61,7 @@ open class ProductsListAdapter(
      * layout file.
      */
     override fun onBindViewHolder(holder: ProductsViewHolder, position: Int) {
-        val model = list[position]
+        val model = productsList[position]
         var priceReduced = model.price
 
         holder.binding.apply {
@@ -123,7 +108,7 @@ open class ProductsListAdapter(
      * Gets the number of items in the list
      */
     override fun getItemCount(): Int {
-        return listFiltered.size
+        return productsList.size
     }
 
     /**
@@ -132,69 +117,37 @@ open class ProductsListAdapter(
     class ProductsViewHolder(val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val charString: String = constraint.toString()
-                listFiltered = if (charString.isEmpty()) {
-                    list
-                } else {
-                    val filteredList: ArrayList<Product> = ArrayList()
-                    for (item in list) {
-                        if (item.name.lowercase()
-                                .contains(charString.lowercase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(item)
-                        }
-                        else if (item.addedByUser.lowercase()
-                                .contains(charString.lowercase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(item)
-                        }
-                        else if (item.category.lowercase()
-                                .contains(charString.lowercase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(item)
-                        }
-                        else if (item.dateAdded.toString().lowercase()
-                                .contains(charString.lowercase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(item)
-                        }
-                        else if (item.description.lowercase()
-                                .contains(charString.lowercase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(item)
-                        }
-                        else if (item.id.lowercase()
-                                .contains(charString.lowercase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(item)
-                        }
-                        else if (item.weightUnit.lowercase()
-                                .contains(charString.lowercase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(item)
-                        }
-                        else if (item.price.toString().lowercase()
-                                .contains(charString.lowercase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(item)
-                        }
+        return searchFilter
+    }
+
+    private var searchFilter: Filter = object : Filter() {
+        //Automatic on background thread
+        override fun performFiltering(charSequence: CharSequence): FilterResults {
+            val filteredList: ArrayList<Product> = ArrayList()
+            if (charSequence.isEmpty()) {
+                filteredList.addAll(productsListAll)
+            }
+            else {
+                val text = charSequence.toString().lowercase(Locale.getDefault())
+                for (item in productsListAll) {
+                    if ((item.name.lowercase(Locale.getDefault()).contains(text))
+                        || (item.category.lowercase(Locale.getDefault()).contains(text))
+                        || (item.id.lowercase(Locale.getDefault()).contains(text))
+                    ) {
+                        filteredList.add(item)
                     }
-                    filteredList
                 }
-
-                val filterResults = FilterResults()
-                filterResults.values = listFiltered
-                return filterResults
             }
+            val filterResults = FilterResults()
+            filterResults.values = filteredList
+            return filterResults
+        }
 
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-
-                listFiltered = results?.values as ArrayList<Product>
-
-                notifyDataSetChanged()
-            }
+        //Automatic on UI thread
+        override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
+            productsList.clear()
+            productsList.addAll(filterResults.values as Collection<Product>)
+            notifyDataSetChanged()
         }
     }
 

@@ -2,6 +2,7 @@ package com.unipi.mpsp21043.admin.ui.activities
 
 import android.app.SearchManager
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -13,6 +14,7 @@ import android.widget.ProgressBar
 import android.widget.RadioButton
 import android.widget.SearchView.OnQueryTextListener
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.SearchView
@@ -29,9 +31,11 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.firestore.Query
 import com.unipi.mpsp21043.admin.R
+import com.unipi.mpsp21043.admin.adapters.ProductsListAdapter
 import com.unipi.mpsp21043.admin.adapters.ViewPagerMainAdapter
 import com.unipi.mpsp21043.admin.database.FirestoreHelper
 import com.unipi.mpsp21043.admin.databinding.ActivityMainBinding
+import com.unipi.mpsp21043.admin.models.Product
 import com.unipi.mpsp21043.admin.models.User
 import com.unipi.mpsp21043.admin.ui.fragments.OrdersFragment
 import com.unipi.mpsp21043.admin.ui.fragments.ProductsFragment
@@ -71,9 +75,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private fun setupActionBar() {
         setSupportActionBar(binding.toolbar.root)
         val actionBar = supportActionBar
-        actionBar?.let {
-            it.setDisplayShowCustomEnabled(true)
-        }
+        actionBar?.setDisplayShowCustomEnabled(true)
     }
 
     private fun setupNavDrawer() {
@@ -457,27 +459,24 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                         when (it) {
                             0 -> {
                                 val fragment: ProductsFragment = getVisibleFragment() as ProductsFragment
-
                                 fragment.productsListAdapter.filter.filter(newText)
                             }
                             1 -> {
                                 val fragment: OrdersFragment = getVisibleFragment() as OrdersFragment
-
                                 fragment.ordersListAdapter.filter.filter(newText)
                             }
                             2 -> {
                                 val fragment: UsersFragment = getVisibleFragment() as UsersFragment
-
                                 fragment.usersListAdapter.filter.filter(newText)
                             }
                         }
                     }
                 }
-                return false
+                return true
             }
         })
 
-        return true
+        return false
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {

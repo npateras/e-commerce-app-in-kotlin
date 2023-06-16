@@ -58,7 +58,7 @@ class OrdersFragment : Fragment() {
                     requireActivity(),
                     ordersList
                 )
-                ordersListAdapter.setList(this@OrdersFragment.requireContext(), ordersList)
+
                 // Sets RecyclerView's properties
                 recyclerViewItems.run {
                     adapter = ordersListAdapter

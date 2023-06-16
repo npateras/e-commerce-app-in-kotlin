@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.animation.AnimationUtils
+import androidx.appcompat.content.res.AppCompatResources
 import com.google.firebase.auth.FirebaseAuth
 import com.unipi.mpsp21043.admin.R
 import com.unipi.mpsp21043.admin.databinding.ActivityForgotPasswordBinding
@@ -32,24 +33,25 @@ class ForgotPasswordActivity : BaseActivity() {
 
     private fun setupUI() {
         binding.apply {
-            inputTxtEmail.addTextChangedListener(object: TextWatcher {
+            textInputEditTextEmail.addTextChangedListener(object: TextWatcher {
+                override fun afterTextChanged(s: Editable?) {}
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    inputTxtLayoutEmail.isErrorEnabled = false
+                    textInputLayoutEmail.apply {
+                        isErrorEnabled = false
+                        background = AppCompatResources.getDrawable(this@ForgotPasswordActivity, R.drawable.text_input_background)
+                    }
                 }
-
-                override fun afterTextChanged(s: Editable?) {}
             })
         }
     }
 
     private fun setUpClickListeners() {
         binding.apply {
-            btnSend.setOnClickListener{ resetPassword() }
+            buttonSend.setOnClickListener{ resetPassword() }
         }
     }
-
 
     private fun resetPassword() {
         binding.apply {
@@ -58,7 +60,7 @@ class ForgotPasswordActivity : BaseActivity() {
                 showProgressDialog()
 
                 // This piece of code is used to send the reset password link to the user's email id if the user is registered.
-                FirebaseAuth.getInstance().sendPasswordResetEmail(inputTxtEmail.text.toString())
+                FirebaseAuth.getInstance().sendPasswordResetEmail(textInputEditTextEmail.text.toString())
                     .addOnCompleteListener { task ->
 
                         // Hide the progress dialog
@@ -78,19 +80,22 @@ class ForgotPasswordActivity : BaseActivity() {
                     }
             }
             else
-                btnSend.startAnimation(AnimationUtils.loadAnimation(this@ForgotPasswordActivity, R.anim.shake))
+                buttonSend.startAnimation(AnimationUtils.loadAnimation(this@ForgotPasswordActivity, R.anim.shake))
         }
     }
 
     private fun validateFields(): Boolean {
         binding.apply {
             return when {
-                TextUtils.isEmpty(inputTxtEmail.text.toString().trim { it <= ' ' }) -> {
+                TextUtils.isEmpty(textInputEditTextEmail.text.toString().trim { it <= ' ' }) -> {
                     SnackBarErrorClass
                         .make(root, getString(R.string.text_error_empty_email))
                         .show()
-                    inputTxtLayoutEmail.requestFocus()
-                    inputTxtLayoutEmail.error = getString(R.string.text_error_empty_email)
+                    textInputLayoutEmail.apply {
+                        requestFocus()
+                        error = getString(R.string.text_error_empty_email)
+                        background = AppCompatResources.getDrawable(this@ForgotPasswordActivity, R.drawable.text_input_background_error)
+                    }
                     false
                 }
 

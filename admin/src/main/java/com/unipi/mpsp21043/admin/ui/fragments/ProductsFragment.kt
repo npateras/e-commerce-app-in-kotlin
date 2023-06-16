@@ -66,7 +66,8 @@ class ProductsFragment : Fragment() {
                 requireActivity(),
                 productsList
             )
-            productsListAdapter.setList(this@ProductsFragment.requireContext(), productsList)
+
+            // productsListAdapter.setList(this@ProductsFragment.requireContext(), productsList)
             // Sets RecyclerView's properties
             binding.recyclerViewItems.run {
                 adapter = productsListAdapter

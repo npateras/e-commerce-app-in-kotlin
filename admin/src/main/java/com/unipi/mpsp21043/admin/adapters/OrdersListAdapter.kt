@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.unipi.mpsp21043.admin.R
 import com.unipi.mpsp21043.admin.databinding.ItemOrderBinding
@@ -20,16 +19,23 @@ import java.util.*
  */
 open class OrdersListAdapter(
     private val context: Context,
-    private var list: ArrayList<Order>
+    list: ArrayList<Order>
 ) : RecyclerView.Adapter<OrdersListAdapter.OrdersViewHolder>(), Filterable {
 
-    var listFiltered: ArrayList<Order> = list
+    var ordersList: ArrayList<Order> = ArrayList()
+    var ordersListAll: ArrayList<Order> = ArrayList()
+
+    init {
+        this.ordersList = list
+        ordersListAll = ArrayList()
+        ordersListAll.addAll(ordersList)
+    }
 
     /**
      * Inflates the item views which is designed in xml layout file
      *
      * create a new
-     * {@link ProductsViewHolder} and initializes some private fields to be used by RecyclerView.
+     * {@link OrdersViewHolder} and initializes some private fields to be used by RecyclerView.
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrdersViewHolder {
         return OrdersViewHolder(
@@ -39,30 +45,6 @@ open class OrdersListAdapter(
                 false
             )
         )
-    }
-
-    open fun setList(context: Context?, ordersList: ArrayList<Order>){
-        val  result: DiffUtil.DiffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback(){
-            override fun getOldListSize(): Int{
-                return this@OrdersListAdapter.list.size
-            }
-
-            override fun getNewListSize(): Int{
-                return list.size
-            }
-
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean{
-                return this@OrdersListAdapter.list[oldItemPosition].title === list[newItemPosition].title
-            }
-
-            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean{
-                val newOrder: Order = this@OrdersListAdapter.list[oldItemPosition]
-                val oldOrder: Order = list[newItemPosition]
-                return newOrder.title === oldOrder.title
-            }
-        })
-        this.listFiltered = list
-        result.dispatchUpdatesTo(this)
     }
 
     /**
@@ -76,7 +58,7 @@ open class OrdersListAdapter(
      * layout file.
      */
     override fun onBindViewHolder(holder: OrdersViewHolder, position: Int) {
-        val model = list[position]
+        val model = ordersList[position]
 
         holder.binding.apply {
             txtViewName.text = model.title
@@ -114,7 +96,7 @@ open class OrdersListAdapter(
      * Gets the number of items in the list
      */
     override fun getItemCount(): Int {
-        return listFiltered.size
+        return ordersList.size
     }
 
     /**
@@ -123,81 +105,49 @@ open class OrdersListAdapter(
     class OrdersViewHolder(val binding: ItemOrderBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val charString: String = constraint.toString()
-                listFiltered = if (charString.isEmpty()) {
-                    list
-                } else {
-                    val filteredList: ArrayList<Order> = ArrayList()
-                    for (item in list) {
-                        if (item.title.lowercase()
-                                .contains(charString.lowercase(Locale.getDefault()))
+        return searchFilter
+    }
+
+    private var searchFilter: Filter = object : Filter() {
+        //Automatic on background thread
+        override fun performFiltering(charSequence: CharSequence): FilterResults {
+            val filteredList: ArrayList<Order> = ArrayList()
+            if (charSequence.isEmpty()) {
+                filteredList.addAll(ordersListAll)
+            }
+            else {
+                val text = charSequence.toString().lowercase(Locale.getDefault())
+                for (item in ordersListAll) {
+                    if ((item.userId.lowercase(Locale.getDefault()).contains(text))
+                        || (item.title.lowercase(Locale.getDefault()).contains(text))
+                        || (item.address.fullName.lowercase(Locale.getDefault()).contains(text))
+                        || (item.address.phoneNumber.lowercase(Locale.getDefault()).contains(text))
+                        || (item.address.zipCode.lowercase(Locale.getDefault()).contains(text))
+                        || (item.paymentMethod.lowercase(Locale.getDefault()).contains(text))
+                        || (item.orderDate.toString().lowercase(Locale.getDefault()).contains(text))
+                        || (item.id.lowercase(Locale.getDefault()).contains(text))
+                    ) {
+                        filteredList.add(item)
+                    }
+                    else for (product in item.cartItems) {
+                        if (product.name.lowercase()
+                                .contains(text)
                         ) {
                             filteredList.add(item)
-                        }
-                        else if (item.orderDate.toString().lowercase()
-                                .contains(charString.lowercase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(item)
-                        }
-                        else if (item.address.fullName.lowercase()
-                                .contains(charString.lowercase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(item)
-                        }
-                        else if (item.address.phoneNumber.lowercase()
-                                .contains(charString.lowercase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(item)
-                        }
-                        else if (item.address.zipCode.lowercase()
-                                .contains(charString.lowercase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(item)
-                        }
-                        else if (item.paymentMethod.lowercase()
-                                .contains(charString.lowercase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(item)
-                        }
-                        else if (item.id.lowercase()
-                                .contains(charString.lowercase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(item)
-                        }
-                        else if (item.userId.lowercase()
-                                .contains(charString.lowercase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(item)
-                        }
-                        else if (item.totalAmount.toString().lowercase()
-                                .contains(charString.lowercase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(item)
-                        }
-                        else for (product in item.cartItems) {
-                            if (product.name.lowercase()
-                                   .contains(charString.lowercase(Locale.getDefault()))
-                            ) {
-                                filteredList.add(item)
-                            }
                         }
                     }
-                    filteredList
                 }
-
-                val filterResults = FilterResults()
-                filterResults.values = listFiltered
-                return filterResults
             }
+            val filterResults = FilterResults()
+            filterResults.values = filteredList
+            return filterResults
+        }
 
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-
-                listFiltered = results?.values as ArrayList<Order>
-
-                notifyDataSetChanged()
-            }
+        //Automatic on UI thread
+        override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
+            ordersList.clear()
+            ordersList.addAll(filterResults.values as Collection<Order>)
+            notifyDataSetChanged()
         }
     }
 

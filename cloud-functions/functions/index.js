@@ -3,20 +3,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
-// // Take the text parameter passed to this HTTP endpoint and insert it into the
-// // Realtime Database under the path /messages/:pushId/original
-// exports.addMessage = functions.https.onRequest((request, response) => {
-//   // Grab the text parameter.
-//   const title = request.query.title;
-//   const message = request.query.message;
-//   // Push it into the Realtime Database then send a response
-//   admin.database().ref('/messages').push({title: title, message: message}).then(snapshot => {
-//     // Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
-//     response.redirect(303, snapshot.ref);
-//   });
-// });
-
-exports.pushNotification = functions.firestore.document('Products/{product}').onUpdate(async(snap, context) => {
+exports.productStockUpdate = functions.firestore.document('Products/{product}').onUpdate(async(snap, context) => {
     console.log('Push notification event triggered');
 
     // We are getting the changed document and we are using data method
@@ -60,7 +47,7 @@ exports.pushNotification = functions.firestore.document('Products/{product}').on
 
     const options = {
         priority: "high",
-        timeToLive: 60 * 60 * 24 // 24 hours
+        timeToLive: 60 * 60 * 24
     };
 
     await admin.messaging().sendToTopic(pID, payload, options);

@@ -11,7 +11,7 @@
     tools:ignore="contentDescription">
 
     <include
-        android:id="@+id/action_bar_with_toolbar"
+        android:id="@+id/toolbar"
         layout="@layout/toolbar_tick_check"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
