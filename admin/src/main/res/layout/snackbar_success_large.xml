@@ -9,6 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="4dp"
         android:background="@drawable/shape_container_dialog_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/core_sans_cr_45_regular"
-            android:text="@string/text_account_created"
+            android:text="@string/text_loading"
             android:textAlignment="textStart"
             android:textColor="@color/colorText2"
             android:textSize="@dimen/text_font_size_header_16"
@@ -67,8 +68,9 @@
             android:layout_marginTop="32dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_success"
+            app:srcCompat="@drawable/svg_success"
             android:contentDescription="@string/text_cd_tick_image" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

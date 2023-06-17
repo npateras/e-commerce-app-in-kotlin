@@ -14,6 +14,12 @@ fun snackBarSuccessClass(view: View, message: String) =
         .setBehavior(BaseTransientBottomBar.Behavior().apply { setSwipeDirection(SWIPE_DIRECTION_ANY) })
         .show()
 
+fun snackBarSuccessLargeClass(view: View, message: String) =
+    SnackBarSuccessLargeClass
+        .make(view, message)
+        .setBehavior(BaseTransientBottomBar.Behavior().apply { setSwipeDirection(SWIPE_DIRECTION_ANY) })
+        .show()
+
 fun snackBarErrorClass(view: View, message: String) =
     SnackBarErrorClass
         .make(view, message)

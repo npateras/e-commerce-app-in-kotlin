@@ -33,7 +33,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="36dp"
                 android:background="@drawable/shape_container_top"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -60,10 +62,10 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="16dp"
-                    app:boxBackgroundMode="none"
                     android:background="@drawable/text_input_background"
-                    app:errorTextColor="@color/colorRedLight"
+                    app:boxBackgroundMode="none"
                     app:boxStrokeErrorColor="@color/colorRedLight"
+                    app:errorTextColor="@color/colorRedLight"
                     app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -76,8 +78,8 @@
                         android:layout_height="match_parent"
                         android:gravity="start|center_vertical"
                         android:hint="@string/input_text_hint_full_name"
-                        android:textColor="@color/colorText"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:textColor="@color/colorText" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -143,13 +145,13 @@
                     style="@style/TextInputLayoutStyle_2"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/text_input_68"
-                    app:errorTextColor="@color/colorRedLight"
-                    app:boxStrokeErrorColor="@color/colorRedLight"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="5dp"
-                    app:hintEnabled="false"
-                    app:boxBackgroundMode="none"
                     android:background="@drawable/text_input_background"
+                    app:boxBackgroundMode="none"
+                    app:boxStrokeErrorColor="@color/colorRedLight"
+                    app:errorTextColor="@color/colorRedLight"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="@+id/text_input_layout_full_name"
                     app:layout_constraintStart_toEndOf="@+id/country_code_picker"
                     app:layout_constraintTop_toBottomOf="@+id/text_view_phone_number">
@@ -301,8 +303,8 @@
                     android:layout_marginTop="29dp"
                     android:layout_marginBottom="36dp"
                     android:background="@drawable/button_primary"
-                    app:icon="@drawable/svg_tick_check"
                     android:text="@string/add_address"
+                    app:icon="@drawable/svg_tick_check"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/text_input_layout_additional_notes"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -317,9 +319,9 @@
                     android:layout_marginTop="29dp"
                     android:layout_marginBottom="36dp"
                     android:background="@drawable/button_primary"
-                    app:icon="@drawable/svg_edit_pencil"
-                    android:visibility="gone"
                     android:text="@string/text_update_address"
+                    android:visibility="gone"
+                    app:icon="@drawable/svg_edit_pencil"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/text_input_layout_additional_notes"
                     app:layout_constraintHorizontal_bias="0.0"

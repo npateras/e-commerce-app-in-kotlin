@@ -7,6 +7,8 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -22,6 +24,7 @@ import com.google.android.material.button.MaterialButton
 import com.unipi.mpsp21043.admin.R
 import com.unipi.mpsp21043.admin.database.FirestoreHelper
 import com.unipi.mpsp21043.admin.databinding.ActivityAddEditProductBinding
+import com.unipi.mpsp21043.admin.databinding.SnackbarSuccessLargeBinding
 import com.unipi.mpsp21043.admin.models.Product
 import com.unipi.mpsp21043.admin.utils.*
 import java.io.IOException
@@ -416,13 +419,17 @@ class AddEditProductActivity : BaseActivity() {
             String.format(getString(R.string.text_product_added_successfully), mProduct?.name)
         }
 
-        SnackBarSuccessClass
-            .make(binding.root, notifySuccessMessage)
-            .setBehavior(Constants.SNACKBAR_BEHAVIOR)
-            .show()
+        snackBarSuccessLargeClass(binding.root, notifySuccessMessage)
+        val snackBarSuccessLargeBinding = SnackbarSuccessLargeBinding.inflate(layoutInflater)
+        snackBarSuccessLargeBinding.buttonSnackbarSuccessLargeDismiss.setOnClickListener {
+            setResult(RESULT_OK)
+            finish()
+        }
 
-        /*setResult(RESULT_OK)
-        finish()*/
+        Handler(Looper.getMainLooper()).postDelayed({
+            setResult(RESULT_OK)
+            finish()
+        }, 3000)
     }
 
     private fun checkIfImageWasUploaded() {

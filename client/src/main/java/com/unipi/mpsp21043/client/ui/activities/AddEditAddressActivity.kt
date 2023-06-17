@@ -2,10 +2,13 @@ package com.unipi.mpsp21043.client.ui.activities
 
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.TextUtils
 import com.unipi.mpsp21043.client.R
 import com.unipi.mpsp21043.client.database.FirestoreHelper
 import com.unipi.mpsp21043.client.databinding.ActivityAddEditAddressBinding
+import com.unipi.mpsp21043.client.databinding.SnackbarSuccessLargeBinding
 import com.unipi.mpsp21043.client.models.Address
 import com.unipi.mpsp21043.client.utils.*
 
@@ -63,13 +66,13 @@ class AddEditAddressActivity : BaseActivity() {
             showProgressDialog()
 
             val addressModel = Address(
-                FirestoreHelper().getCurrentUserID(),
-                fullName,
-                phoneNumber,
-                phoneCode,
-                address,
-                zipCode,
-                additionalNotes
+                userId = FirestoreHelper().getCurrentUserID(),
+                fullName = fullName,
+                phoneNumber = phoneNumber,
+                phoneCode = phoneCode,
+                address = address,
+                zipCode = zipCode,
+                additionalNote = additionalNotes
             )
 
             if (mUserAddress != null && mUserAddress!!.id.isNotEmpty()) {
@@ -94,9 +97,16 @@ class AddEditAddressActivity : BaseActivity() {
             resources.getString(R.string.text_your_address_added_successfully)
 
         snackBarSuccessLargeClass(binding.root, notifySuccessMessage)
+        val snackBarSuccessLargeBinding = SnackbarSuccessLargeBinding.inflate(layoutInflater)
+        snackBarSuccessLargeBinding.buttonSnackbarSuccessLargeDismiss.setOnClickListener {
+            setResult(RESULT_OK)
+            finish()
+        }
 
-        setResult(RESULT_OK)
-        finish()
+        Handler(Looper.getMainLooper()).postDelayed({
+            setResult(RESULT_OK)
+            finish()
+        }, 3000)
     }
 
     private fun validateFields(): Boolean {
@@ -135,6 +145,7 @@ class AddEditAddressActivity : BaseActivity() {
         binding.apply {
             textInputEditTextFullName.setText(mUserAddress?.fullName)
             mUserAddress?.phoneCode?.let { countryCodePicker.setCountryForPhoneCode(it) }
+            textInputEditTextPhoneNumber.setText(mUserAddress?.phoneNumber)
             textInputEditTextAddress.setText(mUserAddress?.address)
             textInputEditTextZipCode.setText(mUserAddress?.zipCode)
             textInputEditTextAdditionalNotes.setText(mUserAddress?.additionalNote)

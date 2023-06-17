@@ -17,6 +17,7 @@ import com.google.android.material.button.MaterialButton
 import com.unipi.mpsp21043.client.R
 import com.unipi.mpsp21043.client.database.FirestoreHelper
 import com.unipi.mpsp21043.client.databinding.ActivityEditProfileBinding
+import com.unipi.mpsp21043.client.databinding.SnackbarSuccessLargeBinding
 import com.unipi.mpsp21043.client.models.User
 import com.unipi.mpsp21043.client.utils.Constants
 import com.unipi.mpsp21043.client.utils.Constants.STORAGE_PATH_USERS
@@ -117,8 +118,8 @@ class EditProfileActivity : BaseActivity() {
         hideProgressBarHorizontalTop(this@EditProfileActivity, binding)
 
         snackBarSuccessLargeClass(binding.root, getString(R.string.text_profile_updated))
-        val buttonSnackBarDismiss = findViewById<MaterialButton>(R.id.button_snackbar_success_large_dismiss)
-        buttonSnackBarDismiss.setOnClickListener {
+        val snackBarSuccessLargeBinding = SnackbarSuccessLargeBinding.inflate(layoutInflater)
+        snackBarSuccessLargeBinding.buttonSnackbarSuccessLargeDismiss.setOnClickListener {
             setResult(RESULT_OK)
             finish()
         }
