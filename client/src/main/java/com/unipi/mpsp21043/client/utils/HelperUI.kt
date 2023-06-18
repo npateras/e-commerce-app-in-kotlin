@@ -26,35 +26,35 @@ fun showMustSignInUI(context: Context,binding: ViewBinding) =
                 binding.layoutErrorStateMustSignIn.apply {
                     root.visibility = View.VISIBLE
                     buttonSignIn.setOnClickListener { IntentUtils().goToSignInActivity(context) }
-                    buttonSignUp.setOnClickListener { IntentUtils().goToSignInActivity(context) }
+                    buttonSignUp.setOnClickListener { IntentUtils().goToSignUpActivity(context) }
                 }
             }
             is FragmentFavoritesBinding -> {
                 binding.layoutErrorStateMustSignIn.apply {
                     root.visibility = View.VISIBLE
                     buttonSignIn.setOnClickListener { IntentUtils().goToSignInActivity(context) }
-                    buttonSignUp.setOnClickListener { IntentUtils().goToSignInActivity(context) }
+                    buttonSignUp.setOnClickListener { IntentUtils().goToSignUpActivity(context) }
                 }
             }
             is ActivityListOrdersBinding -> {
                 binding.layoutErrorStateMustSignIn.apply {
                     root.visibility = View.VISIBLE
                     buttonSignIn.setOnClickListener { IntentUtils().goToSignInActivity(context) }
-                    buttonSignUp.setOnClickListener { IntentUtils().goToSignInActivity(context) }
+                    buttonSignUp.setOnClickListener { IntentUtils().goToSignUpActivity(context) }
                 }
             }
             is ActivityListCartItemsBinding -> {
                 binding.layoutErrorStateMustSignIn.apply {
                     root.visibility = View.VISIBLE
                     buttonSignIn.setOnClickListener { IntentUtils().goToSignInActivity(context) }
-                    buttonSignUp.setOnClickListener { IntentUtils().goToSignInActivity(context) }
+                    buttonSignUp.setOnClickListener { IntentUtils().goToSignUpActivity(context) }
                 }
             }
             is ActivityListSettingsBinding -> {
                 binding.layoutErrorStateMustSignIn.apply {
                     root.visibility = View.VISIBLE
                     buttonSignIn.setOnClickListener { IntentUtils().goToSignInActivity(context) }
-                    buttonSignUp.setOnClickListener { IntentUtils().goToSignInActivity(context) }
+                    buttonSignUp.setOnClickListener { IntentUtils().goToSignUpActivity(context) }
                 }
             }
         }

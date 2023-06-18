@@ -41,6 +41,28 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_NavView_Sign_In"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/button_secondary_small"
+            android:fontFamily="@font/core_sans_cr_65_bold"
+            android:gravity="center"
+            android:text="@string/text_sign_in"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_font_size_header_12"
+            app:backgroundTint="@null"
+            app:icon="@drawable/svg_enter"
+            app:iconGravity="textStart"
+            app:iconSize="17dp"
+            app:iconTint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_Header_2"/>
+
+        <!--<com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_NavView_Sign_In"
             style="@style/ButtonStyle.White"
             android:layout_width="wrap_content"
             android:layout_height="42dp"
@@ -55,7 +77,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_Header_2"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
