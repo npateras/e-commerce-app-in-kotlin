@@ -116,9 +116,6 @@ class UserDetailsActivity : BaseActivity() {
             else
                 textViewNotificationsValue.text = getString(R.string.text_no)
 
-            if (mUserDetails.registrationTokens.isNotEmpty())
-                textViewActiveDevicesValue.text = mUserDetails.registrationTokens.size.toString()
-
             if (mUserDetails.profileCompleted)
                 textViewProfileCompletedValue.text = getString(R.string.text_yes)
             else

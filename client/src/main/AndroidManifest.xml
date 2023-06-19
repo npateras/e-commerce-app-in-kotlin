@@ -161,6 +161,20 @@
                 android:value=".ui.activities.SignInActivity" />
         </activity>
 
+        <!-- Pay with credit card activity -->
+        <activity
+            android:name=".ui.activities.PayWithCreditCardActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:parentActivityName=".ui.activities.CheckoutActivity"
+            android:exported="true">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.CheckoutActivity" />
+        </activity>
+
         <!-- All Categories activity -->
         <activity
             android:name=".ui.activities.AllCategoriesActivity"

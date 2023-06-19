@@ -144,8 +144,10 @@ class IntentUtils {
         context.applicationContext.startActivity(intent)
     }
 
-    fun goToPayWithCreditCardActivity(context: Context) {
+    fun goToPayWithCreditCardActivity(context: Context, mAddress: Address) {
         val intent = Intent(context, PayWithCreditCardActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.putExtra(Constants.EXTRA_ADDRESS_DETAILS, mAddress)
         context.applicationContext.startActivity(intent)
     }
 

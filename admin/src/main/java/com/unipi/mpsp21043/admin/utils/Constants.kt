@@ -72,6 +72,7 @@ object Constants {
     const val EXTRA_USER_ID: String = "extraUserId"
     const val EXTRA_PRODUCT_MODEL: String = "extra_product_model"
     const val EXTRA_REG_USERS_SNACKBAR: String = "extraShowRegisteredUserSnackbar"
+    const val EXTRA_AUTHENTICATE_CHANGE_PASSWORD: String = "extraAuthenticateChangePassword"
     const val EXTRA_SNACKBAR_MESSAGE: String = "extraSnackbarMessage"
     const val EXTRA_SNACKBAR_TYPE: String = "extraSnackbarType"
     const val EXTRA_USER_EMAIL: String = "extraUserEmail"

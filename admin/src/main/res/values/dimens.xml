@@ -32,5 +32,7 @@
 
     <!-- SnackBar Sizes -->
     <dimen name="snack_bar_error_height_56">56dp</dimen>
+    <dimen name="text_input_68">68dp</dimen>
+    <dimen name="button_primary_68">68dp</dimen>
 
 </resources>

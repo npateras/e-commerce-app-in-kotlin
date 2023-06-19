@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?colorControlHighlight">
+
+    <item>
+        <selector>
+            <item android:state_selected="true">
+                <shape android:shape="rectangle">
+                    <gradient android:startColor="@color/colorRed" android:endColor="@color/colorRedLight"/>
+                    <corners android:radius="13dp"/>
+                </shape>
+            </item>
+
+            <item android:state_activated="true">
+                <shape android:shape="rectangle">
+                    <gradient android:startColor="@color/colorRedDark" android:endColor="@color/colorRed"/>
+                    <corners android:radius="13dp"/>
+                </shape>
+            </item>
+
+            <item>
+                <shape android:shape="rectangle">
+                    <gradient android:startColor="@color/colorRed" android:endColor="@color/colorRedLight"/>
+                    <corners android:radius="13dp"/>
+                </shape>
+            </item>
+        </selector>
+    </item>
+</ripple>

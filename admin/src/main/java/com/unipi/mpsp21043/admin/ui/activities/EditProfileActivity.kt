@@ -6,20 +6,26 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.TextUtils
-import android.window.OnBackInvokedDispatcher
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.unipi.mpsp21043.admin.R
 import com.unipi.mpsp21043.admin.database.FirestoreHelper
 import com.unipi.mpsp21043.admin.databinding.ActivityEditProfileBinding
+import com.unipi.mpsp21043.admin.databinding.SnackbarSuccessLargeBinding
 import com.unipi.mpsp21043.admin.models.User
 import com.unipi.mpsp21043.admin.utils.Constants
 import com.unipi.mpsp21043.admin.utils.Constants.STORAGE_PATH_USERS
 import com.unipi.mpsp21043.admin.utils.GlideLoader
+import com.unipi.mpsp21043.admin.utils.IntentUtils
+import com.unipi.mpsp21043.admin.utils.hideProgressBarHorizontalTop
+import com.unipi.mpsp21043.admin.utils.showProgressBarHorizontalTop
 import com.unipi.mpsp21043.admin.utils.snackBarErrorClass
-import com.unipi.mpsp21043.admin.utils.snackBarSuccessClass
+import com.unipi.mpsp21043.admin.utils.snackBarSuccessLargeClass
 import com.unipi.mpsp21043.admin.utils.textInputLayoutError
 import java.io.IOException
 
@@ -45,6 +51,7 @@ class EditProfileActivity : BaseActivity() {
 
     private fun init() {
         setupUI()
+        setupClickListeners()
 
         if (intent.hasExtra(Constants.EXTRA_USER_DETAILS)) {
             // Get the user details from intent as a ParcelableExtra.
@@ -60,40 +67,12 @@ class EditProfileActivity : BaseActivity() {
                 countryCodePicker.setCountryForPhoneCode(mUserDetails.phoneCode)
                 textInputEditTextPhoneNumber.setText(mUserDetails.phoneNumber)
 
-                // Set notifications value in radio group.
-                if (mUserDetails.notifications)
-                    radioButtonNotificationsYes.isChecked = true
-                else
-                    radioButtonNotificationsNo.isChecked = true
-
                 if (mUserDetails.profImgUrl.isNotEmpty()) {
                     GlideLoader(this@EditProfileActivity).loadUserPicture(
                         mUserDetails.profImgUrl,
-                        binding.circleImageViewUserPicture
+                        circleImageViewUserPicture
                     )
                 }
-            }
-        }
-    }
-
-    private fun setupUI() {
-        setupClickListeners()
-        setupActionBar()
-    }
-
-    private fun uploadPicture() {
-        if (validateFields()) {
-            showProgressDialog()
-
-            if (mSelectedImageFileUri != null) {
-
-                FirestoreHelper().uploadImageToCloudStorage(
-                    this@EditProfileActivity,
-                    mSelectedImageFileUri,
-                    STORAGE_PATH_USERS + FirestoreHelper().getCurrentUserID() + "/" + Constants.FIELD_PROF_IMG_URL
-                )
-            } else {
-                updateProfileToFirestore()
             }
         }
     }
@@ -111,20 +90,12 @@ class EditProfileActivity : BaseActivity() {
                 userHashMap[Constants.FIELD_FULL_NAME] = inputFullName
             }
 
-            var notifications = true
-            if (!radioButtonNotificationsYes.isChecked)
-                notifications = false
-
             if (mUserProfileImageURL.isNotEmpty()) {
                 userHashMap[Constants.FIELD_PROF_IMG_URL] = mUserProfileImageURL
             }
 
             if (inputPhoneNumber.isNotEmpty() && inputPhoneNumber != mUserDetails.phoneNumber) {
                 userHashMap[Constants.FIELD_PHONE_NUMBER] = inputPhoneNumber
-            }
-
-            if (notifications != mUserDetails.notifications) {
-                userHashMap[Constants.FIELD_NOTIFICATIONS] = notifications
             }
 
             if (inputPhoneCode != 0) {
@@ -143,13 +114,19 @@ class EditProfileActivity : BaseActivity() {
     }
 
     fun successUpdateProfileToFirestore() {
-        // Hide progress dialog
-        hideProgressDialog()
+        hideProgressBarHorizontalTop(this@EditProfileActivity, binding)
 
-        snackBarSuccessClass(binding.root, getString(R.string.text_profile_updated))
+        snackBarSuccessLargeClass(binding.root, getString(R.string.text_profile_updated))
+        val snackBarSuccessLargeBinding = SnackbarSuccessLargeBinding.inflate(layoutInflater)
+        snackBarSuccessLargeBinding.buttonSnackbarSuccessLargeDismiss.setOnClickListener {
+            setResult(RESULT_OK)
+            finish()
+        }
 
-        setResult(RESULT_OK)
-        finish()
+        Handler(Looper.getMainLooper()).postDelayed({
+            setResult(RESULT_OK)
+            finish()
+        }, 3000)
     }
 
     private fun validateFields(): Boolean {
@@ -172,29 +149,27 @@ class EditProfileActivity : BaseActivity() {
         }
     }
 
-    private fun setupClickListeners() {
-        binding.apply {
-            imgViewUserPicture.setOnClickListener {
-                if (ContextCompat.checkSelfPermission(
-                        this@EditProfileActivity,
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    )
-                    == PackageManager.PERMISSION_GRANTED
-                ) {
-                    Constants.showImageChooserV2(activityResultLauncherGetImage)
-                }
-                else {
-                    /*Requests permissions to be granted to this application. These permissions
-                     must be requested in your manifest, they should not be granted to your app,
-                     and they should have protection level*/
-                    ActivityCompat.requestPermissions(
-                        this@EditProfileActivity,
-                        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                        Constants.READ_STORAGE_PERMISSION_CODE
-                    )
-                }
+    private fun uploadPicture() {
+        if (validateFields()) {
+            showProgressBarHorizontalTop(this@EditProfileActivity, binding)
+
+            if (mSelectedImageFileUri != null) {
+
+                FirestoreHelper().uploadImageToCloudStorage(
+                    this@EditProfileActivity,
+                    mSelectedImageFileUri,
+                    STORAGE_PATH_USERS + FirestoreHelper().getCurrentUserID() + "/" + Constants.FIELD_PROF_IMG_URL
+                )
+            }
+            else {
+                updateProfileToFirestore()
             }
         }
+    }
+
+    fun showErrorUI() {
+        hideProgressBarHorizontalTop(this@EditProfileActivity, binding)
+        binding.layoutErrorState.root.visibility = View.VISIBLE
     }
 
     private val activityResultLauncherGetImage = registerForActivityResult(
@@ -258,31 +233,54 @@ class EditProfileActivity : BaseActivity() {
         updateProfileToFirestore()
     }
 
+    private fun setupUI() {
+        setupActionBar()
+    }
+
+    private fun setupClickListeners() {
+        binding.apply {
+            buttonSave.setOnClickListener { uploadPicture() }
+            listOf(circleImageViewCamera, circleImageViewCamera)
+                .forEach {
+                    it.setOnClickListener {
+                        if (ContextCompat.checkSelfPermission(
+                                this@EditProfileActivity,
+                                Manifest.permission.READ_EXTERNAL_STORAGE
+                            )
+                            == PackageManager.PERMISSION_GRANTED
+                        ) {
+                            Constants.showImageChooserV2(activityResultLauncherGetImage)
+                            //Constants.showImageChooser(this@EditProfileActivity)
+                        }
+                        else {
+                            /*Requests permissions to be granted to this application. These permissions
+                             must be requested in your manifest, they should not be granted to your app,
+                             and they should have protection level*/
+                            ActivityCompat.requestPermissions(
+                                this@EditProfileActivity,
+                                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                                Constants.READ_STORAGE_PERMISSION_CODE
+                            )
+                        }
+                    }
+                }
+        }
+    }
+
     private fun setupActionBar() {
-        setSupportActionBar(binding.toolbar.root)
+        binding.toolbar.apply {
+            setSupportActionBar(root)
+            textViewActionLabel.text = getString(R.string.text_edit_profile)
+            imageButtonSave.setOnClickListener { uploadPicture() }
+            imageButtonSettings.setOnClickListener { IntentUtils().goToListSettingsActivity(this@EditProfileActivity) }
+        }
 
         val actionBar = supportActionBar
-        binding.apply {
-            toolbar.textViewActionLabel.text = getString(R.string.text_edit_profile)
-            toolbar.imageButtonSave.setOnClickListener {
-                uploadPicture()
-            }
-        }
         actionBar?.let {
             it.setDisplayShowCustomEnabled(true)
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.drawable.svg_chevron_left)
             it.setHomeActionContentDescription(getString(R.string.text_go_back))
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressedDispatcher.onBackPressed()
-        return true
-    }
-
-    override fun getOnBackInvokedDispatcher(): OnBackInvokedDispatcher {
-        finish()
-        return super.getOnBackInvokedDispatcher()
     }
 }

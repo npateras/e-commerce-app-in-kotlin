@@ -83,19 +83,19 @@ class SignUpActivity : BaseActivity() {
             return when {
                 TextUtils.isEmpty(textInputEditTextFullName.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_name))
-                    textInputLayoutError(textInputLayoutFullName)
+                    textInputLayoutError(textInputLayoutFullName, getString(R.string.text_error_empty_name))
                     false
                 }
 
                 TextUtils.isEmpty(textInputEditTextEmail.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_email))
-                    textInputLayoutError(textInputLayoutEmail)
+                    textInputLayoutError(textInputLayoutEmail, getString(R.string.text_error_empty_email))
                     false
                 }
 
                 TextUtils.isEmpty(textInputEditTextPassword.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_password))
-                    textInputLayoutError(textInputLayoutPassword)
+                    textInputLayoutError(textInputLayoutPassword, getString(R.string.text_error_empty_password))
                     false
                 }
 

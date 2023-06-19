@@ -209,4 +209,9 @@ class ListAddressActivity : BaseActivity() {
         finish()
         return super.getOnBackInvokedDispatcher()
     }
+
+    override fun onResume() {
+        super.onResume()
+        getUserAddresses()
+    }
 }

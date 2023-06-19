@@ -80,7 +80,7 @@ class ForgotPasswordActivity : BaseActivity() {
             return when {
                 TextUtils.isEmpty(textInputEditTextEmail.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_email))
-                    textInputLayoutError(textInputLayoutEmail)
+                    textInputLayoutError(textInputLayoutEmail, getString(R.string.text_error_empty_email))
                     false
                 }
 

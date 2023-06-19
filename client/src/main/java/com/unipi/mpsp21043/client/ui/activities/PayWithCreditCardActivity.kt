@@ -1,5 +1,6 @@
 package com.unipi.mpsp21043.client.ui.activities
 
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -55,6 +56,15 @@ class PayWithCreditCardActivity : BaseActivity() {
     }
 
     private fun init() {
+        if (intent.hasExtra(Constants.EXTRA_ADDRESS_DETAILS)) {
+            mAddressDetails = if (Build.VERSION.SDK_INT >= 33) {
+                intent.getParcelableExtra(Constants.EXTRA_ADDRESS_DETAILS, Address::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                intent.getParcelableExtra(Constants.EXTRA_ADDRESS_DETAILS)
+            }
+        }
+
         getProductList()
     }
 
@@ -123,12 +133,14 @@ class PayWithCreditCardActivity : BaseActivity() {
             }
         }
 
+        mTotalAmount = mSubTotal + Constants.DEFAULT_DELIVERY_COST
+
         binding.apply {
             buttonAuthorize.text =
                 String.format(
                     getString(R.string.text_format_price_button_authorize),
                     getString(R.string.curr_eur),
-                    mSubTotal + Constants.DEFAULT_DELIVERY_COST
+                    mTotalAmount
                 )
         }
     }
@@ -218,25 +230,25 @@ class PayWithCreditCardActivity : BaseActivity() {
             return when {
                 TextUtils.isEmpty(textInputEditTextCardNumber.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_card_number))
-                    textInputLayoutError(textInputLayoutCardNumber)
+                    textInputLayoutError(textInputLayoutCardNumber, getString(R.string.text_error_empty_card_number))
                     false
                 }
 
                 TextUtils.isEmpty(textInputEditTextCardholderName.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_card_full_name))
-                    textInputLayoutError(textInputLayoutCardholderName)
+                    textInputLayoutError(textInputLayoutCardholderName, getString(R.string.text_error_empty_card_full_name))
                     false
                 }
 
                 TextUtils.isEmpty(textInputEditTextExpirationDate.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_card_exp_date))
-                    textInputLayoutError(textInputLayoutExpirationDate)
+                    textInputLayoutError(textInputLayoutExpirationDate, getString(R.string.text_error_empty_card_exp_date))
                     false
                 }
 
                 TextUtils.isEmpty(textInputEditTextCvv.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_card_cvv))
-                    textInputLayoutError(textInputLayoutCvv)
+                    textInputLayoutError(textInputLayoutCvv, getString(R.string.text_error_empty_card_cvv))
                     false
                 }
 

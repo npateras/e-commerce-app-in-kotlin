@@ -1,4 +1,4 @@
-package com.unipi.mpsp21043.client.ui.activities
+package com.unipi.mpsp21043.admin.ui.activities
 
 import android.os.Bundle
 import android.text.Editable
@@ -8,13 +8,13 @@ import android.view.animation.AnimationUtils
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.unipi.mpsp21043.client.R
-import com.unipi.mpsp21043.client.databinding.ActivityAuthenticateBinding
-import com.unipi.mpsp21043.client.utils.Constants
-import com.unipi.mpsp21043.client.utils.IntentUtils
-import com.unipi.mpsp21043.client.utils.snackBarErrorClass
-import com.unipi.mpsp21043.client.utils.textInputLayoutError
-import com.unipi.mpsp21043.client.utils.textInputLayoutNormal
+import com.unipi.mpsp21043.admin.R
+import com.unipi.mpsp21043.admin.databinding.ActivityAuthenticateBinding
+import com.unipi.mpsp21043.admin.utils.Constants
+import com.unipi.mpsp21043.admin.utils.IntentUtils
+import com.unipi.mpsp21043.admin.utils.snackBarErrorClass
+import com.unipi.mpsp21043.admin.utils.textInputLayoutError
+import com.unipi.mpsp21043.admin.utils.textInputLayoutNormal
 
 
 class AuthenticateActivity : BaseActivity() {
@@ -114,7 +114,7 @@ class AuthenticateActivity : BaseActivity() {
 
     private fun setupActionBar() {
         binding.toolbar.apply {
-            setSupportActionBar(toolbar)
+            setSupportActionBar(root)
             textViewActionLabel.text = ""
         }
 

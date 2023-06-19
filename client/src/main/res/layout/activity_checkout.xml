@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorBackground"
     android:fillViewport="true"
     tools:context=".ui.activities.CheckoutActivity"
@@ -15,12 +15,11 @@
         layout="@layout/toolbar_title_only" />
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollView_Body"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_below="@+id/toolbar"
         android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@id/constraint_layout_add_to_cart"
+        app:layout_constraintBottom_toTopOf="@id/constraint_layout_bottom"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <LinearLayout
@@ -41,7 +40,7 @@
                 app:veilLayout_veiled="false">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout_Categories"
+                    android:id="@+id/constraint_layout_body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_container_top"
@@ -51,7 +50,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:id="@+id/textView_Header_Selected_Address"
+                        android:id="@+id/text_view_header_selected_address"
                         style="@style/TextView_14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -64,7 +63,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/txtView_Selected_Address_Name"
+                        android:id="@+id/text_view_selected_address_name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -74,11 +73,11 @@
                         android:textAlignment="textStart"
                         android:textColor="@color/colorText2"
                         android:textSize="16sp"
-                        app:layout_constraintStart_toStartOf="@+id/textView_Header_Selected_Address"
-                        app:layout_constraintTop_toBottomOf="@+id/textView_Header_Selected_Address" />
+                        app:layout_constraintStart_toStartOf="@+id/text_view_header_selected_address"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_header_selected_address" />
 
                     <TextView
-                        android:id="@+id/txtView_Selected_Address_Name_Value"
+                        android:id="@+id/text_view_selected_address_name_value"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -90,11 +89,11 @@
                         android:textColor="@color/colorText2"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/txtView_Selected_Address_Name"
-                        app:layout_constraintTop_toTopOf="@+id/txtView_Selected_Address_Name" />
+                        app:layout_constraintStart_toEndOf="@+id/text_view_selected_address_name"
+                        app:layout_constraintTop_toTopOf="@+id/text_view_selected_address_name" />
 
                     <TextView
-                        android:id="@+id/txtView_Selected_Address_Phone"
+                        android:id="@+id/text_view_selected_address_phone"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -104,11 +103,11 @@
                         android:textAlignment="textStart"
                         android:textColor="@color/colorText2"
                         android:textSize="16sp"
-                        app:layout_constraintStart_toStartOf="@+id/textView_Header_Selected_Address"
-                        app:layout_constraintTop_toBottomOf="@+id/txtView_Selected_Address_Name" />
+                        app:layout_constraintStart_toStartOf="@+id/text_view_header_selected_address"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_selected_address_name" />
 
                     <TextView
-                        android:id="@+id/txtView_Selected_Address_Phone_Value"
+                        android:id="@+id/text_view_selected_address_phone_value"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -120,11 +119,11 @@
                         android:textColor="@color/colorText2"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/txtView_Selected_Address_Phone"
-                        app:layout_constraintTop_toTopOf="@+id/txtView_Selected_Address_Phone" />
+                        app:layout_constraintStart_toEndOf="@+id/text_view_selected_address_phone"
+                        app:layout_constraintTop_toTopOf="@+id/text_view_selected_address_phone" />
 
                     <TextView
-                        android:id="@+id/txtView_Selected_Address"
+                        android:id="@+id/text_view_selected_address"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -134,11 +133,11 @@
                         android:textAlignment="textStart"
                         android:textColor="@color/colorText2"
                         android:textSize="16sp"
-                        app:layout_constraintStart_toStartOf="@+id/textView_Header_Selected_Address"
-                        app:layout_constraintTop_toBottomOf="@+id/txtView_Selected_Address_Phone" />
+                        app:layout_constraintStart_toStartOf="@+id/text_view_header_selected_address"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_selected_address_phone" />
 
                     <TextView
-                        android:id="@+id/txtView_Selected_Address_Value"
+                        android:id="@+id/text_view_selected_address_value"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -150,11 +149,11 @@
                         android:textColor="@color/colorText2"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/txtView_Selected_Address"
-                        app:layout_constraintTop_toTopOf="@+id/txtView_Selected_Address" />
+                        app:layout_constraintStart_toEndOf="@+id/text_view_selected_address"
+                        app:layout_constraintTop_toTopOf="@+id/text_view_selected_address" />
 
                     <TextView
-                        android:id="@+id/txtView_Header_Items_Receipt"
+                        android:id="@+id/text_view_header_items_receipt"
                         style="@style/TextView_14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -162,11 +161,11 @@
                         android:text="@string/text_items_receipt"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/txtView_Selected_Address_Name"
-                        app:layout_constraintTop_toBottomOf="@+id/txtView_Selected_Address" />
+                        app:layout_constraintStart_toStartOf="@+id/text_view_selected_address_name"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_selected_address" />
 
                     <TextView
-                        android:id="@+id/txtView_Sub_Total"
+                        android:id="@+id/text_view_sub_total"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -176,11 +175,11 @@
                         android:textAlignment="textStart"
                         android:textColor="@color/colorText2"
                         android:textSize="@dimen/text_font_size_header_16"
-                        app:layout_constraintStart_toStartOf="@+id/txtView_Header_Items_Receipt"
-                        app:layout_constraintTop_toBottomOf="@+id/txtView_Header_Items_Receipt" />
+                        app:layout_constraintStart_toStartOf="@+id/text_view_header_items_receipt"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_header_items_receipt" />
 
                     <TextView
-                        android:id="@+id/txtView_Sub_Total_Value"
+                        android:id="@+id/text_view_sub_total_value"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -191,12 +190,12 @@
                         android:textColor="@color/colorText2"
                         android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/txtView_Selected_Address_Name_Value"
-                        app:layout_constraintStart_toEndOf="@+id/txtView_Sub_Total"
-                        app:layout_constraintTop_toTopOf="@+id/txtView_Sub_Total" />
+                        app:layout_constraintEnd_toEndOf="@+id/text_view_selected_address_name_value"
+                        app:layout_constraintStart_toEndOf="@+id/text_view_sub_total"
+                        app:layout_constraintTop_toTopOf="@+id/text_view_sub_total" />
 
                     <TextView
-                        android:id="@+id/txtView_Delivery_Charge"
+                        android:id="@+id/text_view_delivery_charge"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -206,11 +205,11 @@
                         android:textAlignment="textStart"
                         android:textColor="@color/colorText2"
                         android:textSize="@dimen/text_font_size_header_16"
-                        app:layout_constraintStart_toStartOf="@+id/txtView_Header_Items_Receipt"
-                        app:layout_constraintTop_toBottomOf="@+id/txtView_Sub_Total" />
+                        app:layout_constraintStart_toStartOf="@+id/text_view_header_items_receipt"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_sub_total" />
 
                     <TextView
-                        android:id="@+id/txtView_Delivery_Charge_Value"
+                        android:id="@+id/text_view_delivery_charge_Value"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -221,12 +220,12 @@
                         android:textColor="@color/colorText2"
                         android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/txtView_Sub_Total_Value"
-                        app:layout_constraintStart_toEndOf="@+id/txtView_Delivery_Charge"
-                        app:layout_constraintTop_toTopOf="@+id/txtView_Delivery_Charge" />
+                        app:layout_constraintEnd_toEndOf="@+id/text_view_sub_total_value"
+                        app:layout_constraintStart_toEndOf="@+id/text_view_delivery_charge"
+                        app:layout_constraintTop_toTopOf="@+id/text_view_delivery_charge" />
 
                     <TextView
-                        android:id="@+id/txtView_Total_Amount"
+                        android:id="@+id/text_view_total_amount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -239,12 +238,12 @@
                         android:textColor="@color/colorText2"
                         android:textSize="@dimen/text_font_size_header_16"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/txtView_Header_Items_Receipt"
-                        app:layout_constraintTop_toBottomOf="@+id/txtView_Delivery_Charge"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_header_items_receipt"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_delivery_charge"
                         app:layout_constraintVertical_bias="0.0" />
 
                     <TextView
-                        android:id="@+id/txtView_Total_Amount_Value"
+                        android:id="@+id/text_view_total_amount_value"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -255,12 +254,12 @@
                         android:textColor="@color/colorText2"
                         android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/txtView_Sub_Total_Value"
-                        app:layout_constraintStart_toEndOf="@+id/txtView_Total_Amount"
-                        app:layout_constraintTop_toTopOf="@+id/txtView_Total_Amount" />
+                        app:layout_constraintEnd_toEndOf="@+id/text_view_sub_total_value"
+                        app:layout_constraintStart_toEndOf="@+id/text_view_total_amount"
+                        app:layout_constraintTop_toTopOf="@+id/text_view_total_amount" />
 
                     <TextView
-                        android:id="@+id/txtView_Header_Payment_Method"
+                        android:id="@+id/text_view_header_payment_method"
                         style="@style/TextView_14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -268,8 +267,8 @@
                         android:text="@string/text_payment_method"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/textView_Header_Selected_Address"
-                        app:layout_constraintTop_toBottomOf="@+id/txtView_Total_Amount" />
+                        app:layout_constraintStart_toStartOf="@+id/text_view_header_selected_address"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_total_amount" />
 
                     <RadioGroup
                         android:id="@+id/radioGroup_Payment_Method"
@@ -279,9 +278,9 @@
                         android:layout_marginBottom="32dp"
                         android:orientation="vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/txtView_Total_Amount_Value"
-                        app:layout_constraintStart_toStartOf="@+id/txtView_Header_Payment_Method"
-                        app:layout_constraintTop_toBottomOf="@+id/txtView_Header_Payment_Method"
+                        app:layout_constraintEnd_toEndOf="@+id/text_view_total_amount_value"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_header_payment_method"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_header_payment_method"
                         app:layout_constraintVertical_bias="0.0">
 
                         <RadioButton
@@ -318,16 +317,17 @@
     </androidx.core.widget.NestedScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_layout_add_to_cart"
+        android:id="@+id/constraint_layout_bottom"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/colorContainer"
+        android:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-        <!-- todo: container bg -->
 
         <TextView
-            android:id="@+id/txtView_Payment_Method"
+            android:id="@+id/text_view_payment_method"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -339,50 +339,42 @@
             android:textAlignment="textStart"
             android:textColor="@color/colorText"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_Continue"
+            app:layout_constraintBottom_toTopOf="@+id/button_continue"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txtView_Payment_Method_Value"
+            android:id="@+id/text_view_payment_method_value"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/core_sans_cr_55_medium"
             android:gravity="end"
-            android:text="@string/text_cash_on_delivery"
+            android:text="@string/text_not_selected"
             android:textAlignment="textEnd"
             android:textColor="@color/colorText"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/txtView_Payment_Method"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_payment_method"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/txtView_Payment_Method"
-            app:layout_constraintTop_toTopOf="@+id/txtView_Payment_Method" />
+            app:layout_constraintStart_toEndOf="@+id/text_view_payment_method"
+            app:layout_constraintTop_toTopOf="@+id/text_view_payment_method" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_Continue"
-            style="@style/Widget.AppCompat.Button"
+            android:id="@+id/button_continue"
+            style="@style/ButtonStyle.PrimaryColor"
             android:layout_width="0dp"
-            android:layout_height="@dimen/btn_height_medium_45"
+            android:layout_height="@dimen/button_primary_68"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/ripple_btn_primary_color_selector"
-            android:fontFamily="@font/core_sans_cr_65_bold"
-            android:gravity="center"
+            android:background="@drawable/button_primary"
             android:text="@string/text_continue"
-            android:textAlignment="center"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/btn_font_size_small_14"
-            app:backgroundTint="@null"
             app:icon="@drawable/ic_outline_wallet"
-            app:iconGravity="textStart"
-            app:iconPadding="10dp"
-            app:iconSize="24dp"
             app:iconTint="@color/colorWhite"
+            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/txtView_Payment_Method_Value"
-            app:layout_constraintStart_toStartOf="@+id/txtView_Payment_Method" />
+            app:layout_constraintEnd_toEndOf="@+id/text_view_payment_method_value"
+            app:layout_constraintStart_toStartOf="@+id/text_view_payment_method"  />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

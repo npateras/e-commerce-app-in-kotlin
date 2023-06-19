@@ -431,11 +431,11 @@ class FirestoreHelper {
 
                 // Hide the progress dialog if there is any error. And print the error in log.
                 when (activity) {
-                    is AddEditProductActivity -> {
-                        activity.hideProgressDialog()
-                    }
-
                     is EditProfileActivity -> {
+                        activity.showErrorUI()
+                    }
+                    is AddEditProductActivity -> {
+                        // todo change
                         activity.hideProgressDialog()
                     }
                 }
@@ -445,6 +445,7 @@ class FirestoreHelper {
                     exception.message,
                     exception
                 )
+
             }
     }
 

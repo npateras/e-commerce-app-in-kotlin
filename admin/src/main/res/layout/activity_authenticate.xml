@@ -75,7 +75,6 @@
                 app:counterMaxLength="256"
                 app:errorTextColor="@color/colorRedLight"
                 app:hintEnabled="false"
-                android:elevation="4dp"
                 app:layout_constraintEnd_toEndOf="@+id/text_view_header_2"
                 app:layout_constraintStart_toStartOf="@+id/text_view_header_2"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_header_2"

@@ -114,25 +114,25 @@ class AddEditAddressActivity : BaseActivity() {
             return when {
                 TextUtils.isEmpty(textInputEditTextFullName.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_name))
-                    textInputLayoutError(textInputLayoutFullName)
+                    textInputLayoutError(textInputLayoutFullName, getString(R.string.text_error_empty_name))
                     false
                 }
 
                 TextUtils.isEmpty(textInputEditTextPhoneNumber.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_phone))
-                    textInputLayoutError(textInputLayoutPhoneNumber)
+                    textInputLayoutError(textInputLayoutPhoneNumber, getString(R.string.text_error_empty_phone))
                     false
                 }
 
                 TextUtils.isEmpty(textInputEditTextAddress.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_address))
-                    textInputLayoutError(textInputLayoutAddress)
+                    textInputLayoutError(textInputLayoutAddress, getString(R.string.text_error_empty_address))
                     false
                 }
 
                 TextUtils.isEmpty(textInputEditTextZipCode.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_zip_code))
-                    textInputLayoutError(textInputLayoutZipCode)
+                    textInputLayoutError(textInputLayoutZipCode, getString(R.string.text_error_empty_zip_code))
                     false
                 }
 

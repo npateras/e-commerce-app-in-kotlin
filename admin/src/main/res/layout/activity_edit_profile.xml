@@ -2,260 +2,302 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorBackground"
     android:fillViewport="true"
     tools:context=".ui.activities.EditProfileActivity"
     tools:ignore="contentDescription">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar_tick_check"
+    <LinearLayout
+        android:id="@+id/linear_layout_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_user_profile_edit" />
+
+        <include
+            android:id="@+id/progressBarLayout"
+            layout="@layout/progress_bar_horizontal" />
+
+    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+        android:id="@+id/scrollView_Body"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/linear_layout_action_bar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_layout_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_container_top"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <FrameLayout
-                    android:id="@+id/frameLayout_User_Picture"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/text_input_layout_full_name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/text_input_layout_full_name">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/circleImageViewUserPicture"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:background="@drawable/svg_picture_user_sample" />
-
-                    <ImageView
-                        android:id="@+id/imgViewUserPicture"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/shape_user_profile_frame" />
-
-                </FrameLayout>
-
-                <TextView
-                    android:id="@+id/text_view_full_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:fontFamily="@font/core_sans_cr_55_medium"
-                    android:text="@string/text_full_name"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/text_font_size_header_16"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/text_input_layout_full_name"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/text_input_layout_full_name"
-                    style="@style/TextInputLayoutStyle_2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="16dp"
-                    app:hintEnabled="false"
-                    app:errorTextColor="@color/colorRedLight"
-                    app:boxStrokeErrorColor="@color/colorRedLight"
-                    app:layout_constraintEnd_toStartOf="@+id/frameLayout_User_Picture"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_full_name">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/text_input_edit_text_full_name"
-                        style="@style/TextEditInputStyle"
-                        android:layout_width="match_parent"
-                        android:textColor="@color/colorText"
-                        android:layout_height="match_parent"
-                        android:hint="@string/input_text_hint_full_name"
-                        android:inputType="textPersonName" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.hbb20.CountryCodePicker
-                    android:id="@+id/country_code_picker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/spinner_country_picker_height_55"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/shape_input_spinner"
-                    android:gravity="center"
-                    app:ccpDialog_allowSearch="true"
-                    app:ccpDialog_backgroundColor="@color/colorContainer"
-                    app:ccpDialog_cornerRadius="15dp"
-                    app:ccpDialog_initialScrollToSelection="true"
-                    app:ccpDialog_keyboardAutoPopup="false"
-                    app:ccpDialog_showCloseIcon="true"
-                    app:ccpDialog_showFastScroller="true"
-                    app:ccpDialog_showFlag="true"
-                    app:ccpDialog_showPhoneCode="true"
-                    app:ccpDialog_showTitle="false"
-                    app:ccpDialog_textColor="@color/colorText"
-                    app:ccp_arrowColor="@color/colorText"
-                    app:ccp_arrowSize="20dp"
-                    app:ccp_autoDetectCountry="true"
-                    app:ccp_autoDetectLanguage="true"
-                    app:ccp_autoFormatNumber="false"
-                    app:ccp_clickable="true"
-                    app:ccp_contentColor="@color/colorText"
-                    app:ccp_countryAutoDetectionPref="SIM_NETWORK_LOCALE"
-                    app:ccp_countryPreference="GR,CY"
-                    app:ccp_defaultNameCode="GR"
-                    app:ccp_defaultPhoneCode="30"
-                    app:ccp_hintExampleNumber="true"
-                    app:ccp_hintExampleNumberType="FIXED_LINE"
-                    app:ccp_rememberLastSelection="true"
-                    app:ccp_selectionMemoryTag="signupCCP"
-                    app:ccp_showArrow="true"
-                    app:ccp_showFlag="true"
-                    app:ccp_showFullName="false"
-                    app:ccp_showNameCode="true"
-                    app:ccp_showPhoneCode="true"
-                    app:ccp_textGravity="LEFT"
-                    app:ccp_textSize="@dimen/text_font_size_header_16"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_phone_number" />
-
-                <TextView
-                    android:id="@+id/text_view_phone_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/core_sans_cr_55_medium"
-                    android:text="@string/text_phone_number"
-                    android:layout_marginTop="29dp"
-                    android:textColor="@color/colorText"
-                    android:textSize="@dimen/text_font_size_header_16"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/country_code_picker"
-                    app:layout_constraintTop_toBottomOf="@+id/text_input_layout_full_name" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/text_input_layout_phone_number"
-                    style="@style/TextInputLayoutStyle_2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    app:hintEnabled="false"
-                    app:errorTextColor="@color/colorRedLight"
-                    app:boxStrokeErrorColor="@color/colorRedLight"
-                    app:layout_constraintEnd_toEndOf="@+id/frameLayout_User_Picture"
-                    app:layout_constraintStart_toEndOf="@+id/country_code_picker"
-                    app:layout_constraintTop_toTopOf="@+id/country_code_picker">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/text_input_edit_text_phone_number"
-                        style="@style/TextEditInputStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/input_text_hint_phone_number"
-                        android:inputType="number"
-                        android:textColor="@color/colorText" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <TextView
-                    android:id="@+id/text_view_notifications"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/core_sans_cr_55_medium"
-                    android:text="@string/notifications"
-                    android:textColor="@color/colorText"
-                    android:textSize="16sp"
-                    android:layout_marginTop="29dp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/country_code_picker"
-                    app:layout_constraintTop_toBottomOf="@+id/text_input_layout_phone_number" />
-
-                <RadioGroup
-                    android:id="@+id/radio_group_notifications"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_layout_head_container"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="16dp"
-                    android:orientation="horizontal"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <FrameLayout
+                        android:id="@+id/frameLayout_User_Picture"
+                        android:layout_width="185dp"
+                        android:layout_height="170dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="35dp"
+                        android:layout_marginBottom="35dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/circle_image_view_user_picture"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_gravity="center"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:elevation="3dp"
+                            android:focusable="true"
+                            android:src="@drawable/svg_picture_user_sample" />
+
+                        <View
+                            android:id="@+id/view_user_picture_border"
+                            android:layout_width="156dp"
+                            android:layout_height="156dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/shape_user_profile_frame" />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/circle_image_view_camera"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_vertical|end"
+                            android:clickable="true"
+                            android:elevation="3dp"
+                            android:focusable="true"
+                            android:src="@drawable/svg_camera_circle"
+                            android:tint="@color/colorPrimary"
+
+                            />
+                    </FrameLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_layout_bottom_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_container_dialog_bottom"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_notifications">
+                    app:layout_constraintTop_toBottomOf="@+id/constraint_layout_head_container">
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/radio_button_notifications_yes"
-                        style="@style/TextViewMedium"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/selector_radio_button"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:text="@string/text_yes"
-                        android:textAlignment="center"
-                        android:textColor="@drawable/selector_radio_button_text_color"
-                        android:textStyle="bold" />
-
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/radio_button_notifications_no"
-                        style="@style/TextViewMedium"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                    <TextView
+                        android:id="@+id/text_view_personal_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/selector_radio_button"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:text="@string/text_no"
-                        android:textAlignment="center"
-                        android:textColor="@drawable/selector_radio_button_text_color"
-                        android:textStyle="bold" />
+                        android:layout_marginTop="24dp"
+                        android:fontFamily="@font/core_sans_cr_55_medium"
+                        android:text="@string/text_personal_details"
+                        android:textColor="@color/colorText"
+                        android:textSize="@dimen/text_font_size_header_24"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                </RadioGroup>
+                    <TextView
+                        android:id="@+id/text_view_full_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="38dp"
+                        android:fontFamily="@font/core_sans_cr_55_medium"
+                        android:text="@string/text_full_name"
+                        android:textColor="@color/colorText"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/text_input_layout_full_name"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_personal_details" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="32dp"
-                    android:fontFamily="@font/core_sans_cr_45_regular"
-                    android:text="@string/notifications_must_be_enabled"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/colorText2"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/radio_group_notifications"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/radio_group_notifications"
-                    app:layout_constraintTop_toBottomOf="@+id/radio_group_notifications" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_input_layout_full_name"
+                        style="@style/TextInputLayoutStyle_2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/text_input_68"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/text_input_background"
+                        app:boxBackgroundMode="none"
+                        app:boxStrokeErrorColor="@color/colorRedLight"
+                        app:errorTextColor="@color/colorRedLight"
+                        app:hintEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_full_name">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/text_input_edit_text_full_name"
+                            style="@style/TextEditInputStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="start|center_vertical"
+                            android:hint="@string/input_text_hint_full_name"
+                            android:inputType="textPersonName"
+                            android:textColor="@color/colorText" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/text_view_phone_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:fontFamily="@font/core_sans_cr_55_medium"
+                        android:text="@string/text_phone_number"
+                        android:textColor="@color/colorText"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_full_name"
+                        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_full_name" />
+
+                    <com.hbb20.CountryCodePicker
+                        android:id="@+id/country_code_picker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/text_input_68"
+                        android:background="@drawable/text_input_background"
+                        android:gravity="start|center_vertical"
+                        app:ccpDialog_allowSearch="true"
+                        app:ccpDialog_backgroundColor="@color/colorContainer"
+                        app:ccpDialog_cornerRadius="15dp"
+                        app:ccpDialog_initialScrollToSelection="true"
+                        app:ccpDialog_keyboardAutoPopup="false"
+                        app:ccpDialog_showCloseIcon="true"
+                        app:ccpDialog_showFastScroller="true"
+                        app:ccpDialog_showFlag="true"
+                        app:ccpDialog_showPhoneCode="true"
+                        app:ccpDialog_showTitle="false"
+                        app:ccpDialog_textColor="@color/colorText"
+                        app:ccp_arrowColor="@color/colorText"
+                        app:ccp_arrowSize="20dp"
+                        app:ccp_autoDetectCountry="true"
+                        app:ccp_autoDetectLanguage="true"
+                        app:ccp_autoFormatNumber="false"
+                        app:ccp_clickable="true"
+                        app:ccp_contentColor="@color/colorText"
+                        app:ccp_countryAutoDetectionPref="SIM_NETWORK_LOCALE"
+                        app:ccp_countryPreference="GR,CY"
+                        app:ccp_defaultNameCode="GR"
+                        app:ccp_defaultPhoneCode="30"
+                        app:ccp_hintExampleNumber="true"
+                        app:ccp_hintExampleNumberType="FIXED_LINE"
+                        app:ccp_rememberLastSelection="true"
+                        app:ccp_selectionMemoryTag="signupCCP"
+                        app:ccp_showArrow="true"
+                        app:ccp_showFlag="true"
+                        app:ccp_showFullName="false"
+                        app:ccp_showNameCode="true"
+                        app:ccp_showPhoneCode="true"
+                        app:ccp_textGravity="LEFT"
+                        app:ccp_textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/text_input_layout_full_name"
+                        app:layout_constraintTop_toTopOf="@+id/text_input_layout_phone_number">
+
+                    </com.hbb20.CountryCodePicker>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_input_layout_phone_number"
+                        style="@style/TextInputLayoutStyle_2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/text_input_68"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/text_input_background"
+                        app:boxBackgroundMode="none"
+                        app:boxStrokeErrorColor="@color/colorRedLight"
+                        app:errorTextColor="@color/colorRedLight"
+                        app:hintEnabled="false"
+                        app:layout_constraintEnd_toEndOf="@+id/text_input_layout_full_name"
+                        app:layout_constraintStart_toEndOf="@+id/country_code_picker"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_phone_number">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/text_input_edit_text_phone_number"
+                            style="@style/TextEditInputStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="start|center_vertical"
+                            android:hint="@string/input_text_hint_phone_number"
+                            android:inputType="number"
+                            android:textColor="@color/colorText" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_save"
+                        style="@style/ButtonStyle.PrimaryColor"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/button_primary_68"
+                        android:layout_marginTop="29dp"
+                        android:layout_marginBottom="36dp"
+                        android:background="@drawable/button_primary"
+                        android:text="@string/text_save"
+                        app:icon="@drawable/svg_tick_check"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/text_input_layout_phone_number"
+                        app:layout_constraintStart_toStartOf="@+id/country_code_picker"
+                        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_phone_number" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shimmer_auto_start="false">
+
+                <include layout="@layout/shimmer_my_account" />
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <include
+                android:id="@+id/layout_error_state"
+                layout="@layout/layout_error_state"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/constraint_layout_container" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

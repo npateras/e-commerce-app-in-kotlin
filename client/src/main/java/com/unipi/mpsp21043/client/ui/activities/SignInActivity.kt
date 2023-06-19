@@ -129,13 +129,13 @@ class SignInActivity : BaseActivity() {
             return when {
                 TextUtils.isEmpty(textInputEditTextEmail.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_email))
-                    textInputLayoutError(textInputLayoutEmail)
+                    textInputLayoutError(textInputLayoutEmail, getString(R.string.text_error_empty_email))
                     false
                 }
 
                 TextUtils.isEmpty(textInputEditTextPassword.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_password))
-                    textInputLayoutError(textInputLayoutPassword)
+                    textInputLayoutError(textInputLayoutPassword, getString(R.string.text_error_empty_password))
                     false
                 }
 

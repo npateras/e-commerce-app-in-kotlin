@@ -25,7 +25,7 @@ class CheckoutActivity : BaseActivity() {
      * */
     private lateinit var binding: ActivityCheckoutBinding
     // A global variable for the selected address details.
-    private var mAddressDetails: Address? = null
+    private lateinit var mAddressDetails: Address
 
     // A global variable for the product list.
     private lateinit var mProductsList: ArrayList<Product>
@@ -55,32 +55,30 @@ class CheckoutActivity : BaseActivity() {
     private fun init() {
         if (intent.hasExtra(Constants.EXTRA_SELECTED_ADDRESS)) {
             mAddressDetails = if (Build.VERSION.SDK_INT >= 33) {
-                intent.getParcelableExtra(Constants.EXTRA_SELECTED_ADDRESS, Address::class.java)
+                intent.getParcelableExtra(Constants.EXTRA_SELECTED_ADDRESS, Address::class.java)!!
             } else {
                 @Suppress("DEPRECATION")
-                intent.getParcelableExtra(Constants.EXTRA_SELECTED_ADDRESS)
+                intent.getParcelableExtra(Constants.EXTRA_SELECTED_ADDRESS)!!
             }
         }
 
-        if (mAddressDetails != null) {
-            binding.apply {
-                txtViewSelectedAddressNameValue.text = mAddressDetails?.fullName
-                if (mAddressDetails?.phoneCode != 0)
-                    txtViewSelectedAddressPhoneValue.text =
-                        String.format(
-                            getString(R.string.text_format_phone),
-                            mAddressDetails?.phoneCode,
-                            mAddressDetails?.phoneNumber
-                        )
-                else
-                    txtViewSelectedAddressPhoneValue.text = mAddressDetails?.phoneNumber
-                txtViewSelectedAddressValue.text =
+        binding.apply {
+            textViewSelectedAddressNameValue.text = mAddressDetails.fullName
+            if (mAddressDetails.phoneCode != 0)
+                textViewSelectedAddressPhoneValue.text =
                     String.format(
-                        getString(R.string.text_format_address),
-                        mAddressDetails!!.address,
-                        mAddressDetails!!.zipCode
+                        getString(R.string.text_format_phone),
+                        mAddressDetails.phoneCode,
+                        mAddressDetails.phoneNumber
                     )
-            }
+            else
+                textViewSelectedAddressPhoneValue.text = mAddressDetails.phoneNumber
+            textViewSelectedAddressValue.text =
+                String.format(
+                    getString(R.string.text_format_address),
+                    mAddressDetails.address,
+                    mAddressDetails.zipCode
+                )
         }
 
         getProductList()
@@ -151,21 +149,23 @@ class CheckoutActivity : BaseActivity() {
             }
         }
 
+        mTotalAmount = mSubTotal + Constants.DEFAULT_DELIVERY_COST
+
         binding.apply {
-            txtViewSubTotalValue.text =
+            textViewSubTotalValue.text =
                 String.format(getString(R.string.text_format_price),
                     getString(R.string.curr_eur),
                     mSubTotal
                 )
-            txtViewDeliveryChargeValue.text =
+            textViewDeliveryChargeValue.text =
                 String.format(getString(R.string.text_format_price),
                     getString(R.string.curr_eur),
                     Constants.DEFAULT_DELIVERY_COST
                 )
-            txtViewTotalAmountValue.text =
+            textViewTotalAmountValue.text =
                 String.format(getString(R.string.text_format_price),
                     getString(R.string.curr_eur),
-                    mSubTotal + Constants.DEFAULT_DELIVERY_COST
+                    mTotalAmount
                 )
         }
     }
@@ -180,7 +180,7 @@ class CheckoutActivity : BaseActivity() {
 
         mOrderDetails = Order(
             FirestoreHelper().getCurrentUserID(),
-            mAddressDetails!!,
+            mAddressDetails,
             mCartItemsList,
             "Order# ${System.currentTimeMillis()}",
             mSubTotal,
@@ -220,23 +220,16 @@ class CheckoutActivity : BaseActivity() {
 
     private fun setupClickListeners() {
         binding.apply {
-            /*radioGroupPaymentMethod.setOnCheckedChangeListener { group, checkedId ->
-                // val rb = findViewById<View>(checkedId) as RadioButton
-                paymentMethod = if (checkedId == 0)
-                    getString(R.string.text_cash_on_delivery)
-                else {
-                    getString(R.string.text_credit_card)
-                }
-            }*/
-            btnContinue.setOnClickListener{
-                if (validateFields()) {
-                    if (radioBtnCreditCard.isChecked) {
-                        IntentUtils().goToPayWithCreditCardActivity(this@CheckoutActivity)
-                    }
-                    else if (radioBtnCashOnDelivery.isChecked) {
+            buttonContinue.setOnClickListener {
+                /*if (!buttonContinue.isEnabled) {
+                    snackBarErrorClass(root, getString(R.string.text_error_payment_method_not_selected), constraintLayoutBottom)
+                    return@setOnClickListener
+                }*/
+                if (validateFields())
+                    if (radioBtnCreditCard.isChecked)
+                        IntentUtils().goToPayWithCreditCardActivity(this@CheckoutActivity, mAddressDetails)
+                    else if (radioBtnCashOnDelivery.isChecked)
                         placeAnOrder()
-                    }
-                }
             }
         }
     }
@@ -244,11 +237,10 @@ class CheckoutActivity : BaseActivity() {
     private fun validateFields(): Boolean {
         binding.apply {
             if (!radioBtnCashOnDelivery.isChecked && !radioBtnCreditCard.isChecked) {
-                snackBarErrorClass(root, getString(R.string.text_error_payment_method_not_selected), constraintLayoutAddToCart)
+                snackBarErrorClass(root, getString(R.string.text_error_payment_method_not_selected), constraintLayoutBottom)
                 radioGroupPaymentMethod.requestFocus()
                 return false
             }
-
             return true
         }
     }
@@ -288,11 +280,13 @@ class CheckoutActivity : BaseActivity() {
             when (view.getId()) {
                 R.id.radioBtn_Cash_On_Delivery ->
                     if (checked) {
-                        binding.txtViewPaymentMethodValue.text = getString(R.string.text_cash_on_delivery)
+                        binding.buttonContinue.isEnabled = true
+                        binding.textViewPaymentMethodValue.text = getString(R.string.text_cash_on_delivery)
                     }
                 R.id.radioBtn_Credit_Card ->
                     if (checked) {
-                        binding.txtViewPaymentMethodValue.text = getString(R.string.text_credit_card)
+                        binding.buttonContinue.isEnabled = true
+                        binding.textViewPaymentMethodValue.text = getString(R.string.text_credit_card)
                     }
             }
         }

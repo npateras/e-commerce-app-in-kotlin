@@ -13,7 +13,6 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.material.button.MaterialButton
 import com.unipi.mpsp21043.client.R
 import com.unipi.mpsp21043.client.database.FirestoreHelper
 import com.unipi.mpsp21043.client.databinding.ActivityEditProfileBinding
@@ -135,13 +134,13 @@ class EditProfileActivity : BaseActivity() {
             return when {
                 TextUtils.isEmpty(textInputEditTextFullName.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_name))
-                    textInputLayoutError(textInputLayoutFullName)
+                    textInputLayoutError(textInputLayoutFullName, getString(R.string.text_error_empty_name))
                     false
                 }
 
                 TextUtils.isEmpty(textInputEditTextPhoneNumber.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_phone))
-                    textInputLayoutError(textInputLayoutFullName)
+                    textInputLayoutError(textInputLayoutPhoneNumber, getString(R.string.text_error_empty_phone))
                     false
                 }
 

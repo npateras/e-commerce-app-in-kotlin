@@ -320,35 +320,50 @@ class AddEditProductActivity : BaseActivity() {
                 /* Product Category */
                 TextUtils.isEmpty(autoCompleteTextViewProductCategory.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_product_category))
-                    textInputLayoutError(textInputLayoutProductCategory, getString(R.string.text_error_empty_product_category))
+                    textInputLayoutError(
+                        textInputLayoutProductCategory,
+                        getString(R.string.text_error_empty_product_category)
+                    )
                     false
                 }
 
                 /* Product Name */
                 TextUtils.isEmpty(textInputEditTextProductName.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_product_name))
-                    textInputLayoutError(textInputLayoutProductName, getString(R.string.text_error_empty_product_name))
+                    textInputLayoutError(
+                        textInputLayoutProductName,
+                        getString(R.string.text_error_empty_product_name)
+                    )
                     false
                 }
 
                 /* Product Price */
                 TextUtils.isEmpty(textInputEditTextProductPrice.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_product_price))
-                    textInputLayoutError(textInputLayoutProductPrice, getString(R.string.text_error_empty_product_price))
+                    textInputLayoutError(
+                        textInputLayoutProductPrice,
+                        getString(R.string.text_error_empty_product_price)
+                    )
                     false
                 }
 
                 /* Product Stock */
                 TextUtils.isEmpty(textInputEditTextProductStock.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_product_stock))
-                    textInputLayoutError(textInputLayoutProductStock, getString(R.string.text_error_empty_product_stock))
+                    textInputLayoutError(
+                        textInputLayoutProductStock,
+                        getString(R.string.text_error_empty_product_stock)
+                    )
                     false
                 }
 
                 /* Product Description */
                 TextUtils.isEmpty(textInputEditTextProductDescription.text.toString().trim { it <= ' ' }) -> {
                     snackBarErrorClass(root, getString(R.string.text_error_empty_product_description))
-                    textInputLayoutError(textInputLayoutProductDescription, getString(R.string.text_error_empty_product_description))
+                    textInputLayoutError(
+                        textInputLayoutProductDescription,
+                        getString(R.string.text_error_empty_product_description)
+                    )
                     false
                 }
 

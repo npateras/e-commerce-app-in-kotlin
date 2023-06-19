@@ -42,10 +42,10 @@ fun snackBarErrorClass(view: View, message: String, anchor: View) =
         .setAnchorView(anchor)
         .show()
 
-fun Context.textInputLayoutError(view: TextInputLayout) =
+fun textInputLayoutError(view: TextInputLayout, message: String) =
     view.apply {
         requestFocus()
-        error = getString(R.string.text_error_empty_email)
+        error = message
         background = AppCompatResources.getDrawable(this.context, R.drawable.text_input_background_error)
     }
 

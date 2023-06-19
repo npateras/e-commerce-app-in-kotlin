@@ -48,14 +48,21 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_input_layout_sort_products_order"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_height="68dp"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
                     app:boxStrokeColor="@color/colorPrimary"
                     android:layout_marginTop="16dp"
+                    android:elevation="4dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxCornerRadiusBottomEnd="19dp"
+                    app:boxCornerRadiusBottomStart="19dp"
+                    app:boxCornerRadiusTopEnd="19dp"
+                    app:boxCornerRadiusTopStart="19dp"
+                    android:background="@drawable/text_input_background"
                     app:boxStrokeErrorColor="@color/colorRedLight"
                     app:counterMaxLength="40"
                     app:errorTextColor="@color/colorRedLight"
-                    app:hintEnabled="true"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="@+id/text_view_header"
                     app:layout_constraintStart_toStartOf="@+id/text_view_header"
                     app:layout_constraintTop_toBottomOf="@+id/text_view_header">
@@ -63,9 +70,9 @@
                     <AutoCompleteTextView
                         android:id="@+id/auto_complete_text_view_sort_products_order"
                         android:layout_width="match_parent"
-                        android:layout_height="55dp"
+                        android:layout_height="match_parent"
                         android:fontFamily="@font/core_sans_cr_55_medium"
-                        android:gravity="center_vertical"
+                        android:gravity="start|center_vertical"
                         android:hint="@string/input_text_hint_sort_type"
                         android:inputType="none"
                         android:textColor="@color/colorText"
@@ -173,16 +180,17 @@
                     android:id="@+id/button_dialog_select_sort_products"
                     style="@style/ButtonStyle.PrimaryColor"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/btn_height_small_37"
+                    android:layout_height="68dp"
                     android:layout_marginBottom="36dp"
                     android:layout_marginTop="24dp"
+                    app:icon="@drawable/svg_tick_check"
+                    app:iconTint="@color/colorWhite"
+                    android:background="@drawable/button_primary"
                     android:text="@string/text_select"
-                    app:backgroundTint="@null"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/radio_group"
                     app:layout_constraintStart_toStartOf="@+id/radio_group"
                     app:layout_constraintTop_toBottomOf="@+id/radio_group" />
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </RelativeLayout>

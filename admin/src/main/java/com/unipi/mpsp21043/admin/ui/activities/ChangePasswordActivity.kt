@@ -1,4 +1,4 @@
-package com.unipi.mpsp21043.client.ui.activities
+package com.unipi.mpsp21043.admin.ui.activities
 
 import android.os.Bundle
 import android.os.Handler
@@ -9,13 +9,13 @@ import android.text.TextWatcher
 import android.view.animation.AnimationUtils
 import android.window.OnBackInvokedDispatcher
 import com.google.firebase.auth.FirebaseAuth
-import com.unipi.mpsp21043.client.R
-import com.unipi.mpsp21043.client.databinding.ActivityChangePasswordBinding
-import com.unipi.mpsp21043.client.utils.IntentUtils
-import com.unipi.mpsp21043.client.utils.snackBarErrorClass
-import com.unipi.mpsp21043.client.utils.snackBarSuccessLargeClass
-import com.unipi.mpsp21043.client.utils.textInputLayoutError
-import com.unipi.mpsp21043.client.utils.textInputLayoutNormal
+import com.unipi.mpsp21043.admin.R
+import com.unipi.mpsp21043.admin.databinding.ActivityChangePasswordBinding
+import com.unipi.mpsp21043.admin.utils.IntentUtils
+import com.unipi.mpsp21043.admin.utils.snackBarErrorClass
+import com.unipi.mpsp21043.admin.utils.snackBarSuccessLargeClass
+import com.unipi.mpsp21043.admin.utils.textInputLayoutError
+import com.unipi.mpsp21043.admin.utils.textInputLayoutNormal
 
 
 class ChangePasswordActivity : BaseActivity() {
@@ -125,7 +125,7 @@ class ChangePasswordActivity : BaseActivity() {
 
     private fun setupActionBar() {
         binding.toolbar.apply {
-            setSupportActionBar(toolbar)
+            setSupportActionBar(root)
             imageButtonSave.setOnClickListener { saveNewPassword() }
             textViewActionLabel.text = ""
         }

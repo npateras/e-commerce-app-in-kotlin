@@ -17,6 +17,29 @@ class IntentUtils {
         (context as Activity).finish()
     }
 
+    fun goToAuthenticateActivity(context: Context) {
+        val intent = Intent(context, AuthenticateActivity::class.java)
+        context.startActivity(intent)
+    }
+
+    fun goToChangePasswordActivity(context: Context) {
+        val intent = Intent(context, ChangePasswordActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        context.applicationContext.startActivity(intent)
+    }
+
+    fun goToForgotPasswordActivity(context: Context) {
+        // Launch the forgot password screen when the user clicks on the forgot password text.
+        val intent = Intent(context, ForgotPasswordActivity::class.java)
+        context.startActivity(intent)
+    }
+
+    fun goToListSettingsActivity(context: Context) {
+        val intent = Intent(context, ListSettingsActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        context.applicationContext.startActivity(intent)
+    }
+
     fun goToMyAccountActivity(context: Context) {
         val intent = Intent(context, MyAccountActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK

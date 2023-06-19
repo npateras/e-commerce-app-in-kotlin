@@ -219,28 +219,6 @@
                         android:textSize="@dimen/text_font_size_header_16"
                         android:textStyle="bold" />
 
-                    <!-- Active Devices -->
-                    <TextView
-                        android:id="@+id/text_view_active_devices"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:fontFamily="@font/core_sans_cr_55_medium"
-                        android:text="@string/active_devices"
-                        android:textColor="@color/colorText"
-                        android:textSize="@dimen/text_font_size_header_16"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/text_view_active_devices_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/core_sans_cr_55_medium"
-                        android:textColor="@color/colorText2"
-                        android:textSize="@dimen/text_font_size_header_16"
-                        android:textStyle="bold" />
-
                     <!-- Profile Completed -->
                     <TextView
                         android:id="@+id/text_view_profile_completed"

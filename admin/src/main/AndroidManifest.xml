@@ -81,12 +81,12 @@
                 android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustResize"
                 android:theme="@style/Theme.EMarket.NoActionBar3"
-                android:parentActivityName=".ui.activities.MainActivity"
+                android:parentActivityName=".ui.activities.MyAccountActivity"
                 android:exported="true">
 
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.activities.MainActivity" />
+                    android:value=".ui.activities.MyAccountActivity" />
             </activity>
 
             <!-- Add/Edit Products activity -->
@@ -144,6 +144,40 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ui.activities.MainActivity" />
             </activity>
+
+        <!-- List Settings Activity -->
+        <activity
+            android:name=".ui.activities.ListSettingsActivity"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:exported="true"/>
+
+        <!-- Authenticate activity -->
+        <activity
+            android:name=".ui.activities.AuthenticateActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:parentActivityName=".ui.activities.ListSettingsActivity"
+            android:exported="true">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.ListSettingsActivity" />
+        </activity>
+
+        <!-- Change Password activity -->
+        <activity
+            android:name=".ui.activities.ChangePasswordActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.EMarket.NoActionBar3"
+            android:parentActivityName=".ui.activities.ListSettingsActivity"
+            android:exported="true">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.ListSettingsActivity" />
+        </activity>
         <!-- endregion [END Activities] -->
 
     </application>
