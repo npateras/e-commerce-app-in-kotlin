@@ -1063,7 +1063,6 @@ class FirestoreHelper {
                 )
             }.await()
 
-        Log.e("", favorite.productId)
         FirebaseMessaging.getInstance().subscribeToTopic(favorite.productId).await()
     }
 
