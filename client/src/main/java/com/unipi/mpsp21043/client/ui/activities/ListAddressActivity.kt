@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.window.OnBackInvokedDispatcher
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -181,7 +182,7 @@ class ListAddressActivity : BaseActivity() {
 
     private fun setupClickListeners() {
         binding.apply {
-            buttonAddAddress.setOnClickListener{ IntentUtils().goToAddNewAddressActivity(this@ListAddressActivity)}
+            buttonAddAddress.setOnClickListener { IntentUtils().goToAddNewAddressActivity(this@ListAddressActivity) }
         }
     }
 

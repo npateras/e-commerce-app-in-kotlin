@@ -946,6 +946,7 @@ class FirestoreHelper {
     fun getMyOrdersList(context: Context) {
         dbFirestore.collection(Constants.COLLECTION_ORDERS)
             .whereEqualTo(Constants.FIELD_USER_ID, getCurrentUserID())
+            .orderBy(Constants.FIELD_ORDER_DATE, Query.Direction.DESCENDING)
             .get() // Will get the documents snapshots.
             .addOnSuccessListener { document ->
                 Log.d(context.javaClass.simpleName, document.documents.toString())
@@ -1062,6 +1063,7 @@ class FirestoreHelper {
                 )
             }.await()
 
+        Log.e("", favorite.productId)
         FirebaseMessaging.getInstance().subscribeToTopic(favorite.productId).await()
     }
 

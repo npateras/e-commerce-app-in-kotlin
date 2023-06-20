@@ -179,14 +179,14 @@ class CheckoutActivity : BaseActivity() {
         showProgressDialog()
 
         mOrderDetails = Order(
-            FirestoreHelper().getCurrentUserID(),
-            mAddressDetails,
-            mCartItemsList,
-            "Order# ${System.currentTimeMillis()}",
-            mSubTotal,
-            Constants.DEFAULT_DELIVERY_COST, // The Shipping Charge is fixed as $10 for now in our case.
-            mTotalAmount,
-            getString(R.string.text_cash_on_delivery)
+            userId = FirestoreHelper().getCurrentUserID(),
+            address = mAddressDetails,
+            cartItems = mCartItemsList,
+            title = "Order# ${System.currentTimeMillis()}",
+            subTotalAmount =  mSubTotal,
+            deliveryCharge = Constants.DEFAULT_DELIVERY_COST, // The Shipping Charge is fixed as $10 for now in our case.
+            totalAmount = mTotalAmount,
+            paymentMethod = getString(R.string.text_cash_on_delivery)
         )
 
         FirestoreHelper().placeOrder(this@CheckoutActivity, mOrderDetails)

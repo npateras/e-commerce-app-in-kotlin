@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.TextUtils
+import android.view.View
 import com.unipi.mpsp21043.client.R
 import com.unipi.mpsp21043.client.database.FirestoreHelper
 import com.unipi.mpsp21043.client.databinding.ActivityAddEditAddressBinding
@@ -163,6 +164,8 @@ class AddEditAddressActivity : BaseActivity() {
                 else {
                     loadInputTextDetails()
                     textViewActionLabel.text = getString(R.string.text_edit_address)
+                    buttonAddAddress.visibility = View.INVISIBLE
+                    buttonEditAddress.visibility = View.VISIBLE
                 }
             }
         }

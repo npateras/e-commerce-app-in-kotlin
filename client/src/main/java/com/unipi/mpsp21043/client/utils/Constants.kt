@@ -57,6 +57,7 @@ object Constants {
     const val FIELD_POPULARITY: String = "popularity"
     const val FIELD_CATEGORY: String = "category"
     const val FIELD_DATE_ADDED: String = "dateAdded"
+    const val FIELD_ORDER_DATE: String = "orderDate"
     const val FIELD_NAME: String = "name"
     const val FIELD_SALE: String = "sale"
     const val FIELD_ID: String = "id"

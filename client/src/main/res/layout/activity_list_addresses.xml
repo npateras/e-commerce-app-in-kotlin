@@ -91,12 +91,12 @@
             android:layout_marginBottom="24dp"
             android:background="@drawable/button_primary"
             app:icon="@drawable/svg_home_location_outline"
-            app:iconGravity="textStart"
             android:text="@string/add_address"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
