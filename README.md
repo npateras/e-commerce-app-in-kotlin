@@ -1,2 +1,2 @@
-# E-Commerce-app-in-Kotlin
+# E-Commerce application in Kotlin
 Master's thesis involved creating an Android e-commerce app in Kotlin, utilizing Firestore, Cloud Functions, and FCM. Focus was on timely user notifications for favorited product restocking.
